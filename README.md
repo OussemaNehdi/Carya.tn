@@ -17,6 +17,14 @@ To get started with the Mini PHP Project, follow these steps:
 2. Set up a local development environment with PHP and a web server (e.g., XAMPP).
 3. Run the website and explore its features.
 
-## Contributing
+## To make Changes
 
-We welcome contributions to enhance the Mini PHP Project. If you have any suggestions, bug reports, or feature requests, please feel free to open an issue or submit a pull request.
+1. Cloning the Repository:
+    Each collaborator needs to clone the repository to their local machine using Git. They can do this by running the command `git clone <repository_url>` in their terminal.
+
+2. Making Changes and Pushing:
+    Collaborators can make changes to the code, create new files, or modify existing ones within the cloned repository on their local machine.
+    After making changes, they need to commit those changes using Git and then push them to the remote repository on GitHub using `git push`.
+
+3. Pulling Changes:
+    If one collaborator *pushes changes to the repository*, others need to **pull those changes** to their local repository **before** *making their own changes* to ensure they're working with the latest version. They can do this using `git pull`.
