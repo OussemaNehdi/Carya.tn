@@ -153,17 +153,16 @@ button[type="submit"]:hover {
 /* End of Contact.php */
 
 /* about.php */
-/* Container styles */
+
 .about-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* Heading styles */
 .about-container h2 {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 /* Author styles */
@@ -173,9 +172,9 @@ button[type="submit"]:hover {
 }
 
 .author img {
-    width: 100px; /* Adjust as needed */
-    height: 100px; /* Adjust as needed */
-    border-radius: 50%; /* Make images round */
+    width: 100px; 
+    height: 100px;
+    border-radius: 50%;
     margin-right: 20px;
 }
 
@@ -188,7 +187,15 @@ button[type="submit"]:hover {
 }
 
 /* About paragraph styles */
-.about-paragraph {
+.about-paragraph1 {
+    margin-top: 0;
+    text-align: justify;
+    line-height: 1.4;
+    margin-bottom: 30px;
+
+}
+
+.about-paragraph2 {
     margin-top: 50px;
     text-align: justify;
     line-height: 1.6;
