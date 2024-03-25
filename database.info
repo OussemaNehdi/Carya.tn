@@ -11,7 +11,7 @@ Table: users
   - creation_date: DATE - Date when the user account was created.
   - role: VARCHAR(30) - Role of the user in the system.
   - command_id: INT (Foreign Key) - ID of the rental command associated with the user.
-  - listings_id: INT (Foreign Key) - ID of the listing associated with the user.
+
 
 Table: cars
 - Description: Stores information about cars available for rental.
