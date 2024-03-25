@@ -26,20 +26,14 @@ CREATE TABLE cars (
 CREATE TABLE command (
     command_id INT PRIMARY KEY,
     car_id INT,
+    user_id INT,
     rental_date DATE,
     start_date DATE,
     end_date DATE,
     rental_period INT
 );
 
--- Create user_command table
-CREATE TABLE user_command (
-    user_id INT,
-    command_id INT
-);
-
 -- Add foreign keys
 ALTER TABLE cars ADD FOREIGN KEY (owner_id) REFERENCES users(id);
 ALTER TABLE command ADD FOREIGN KEY (car_id) REFERENCES cars(id);
-ALTER TABLE user_command ADD FOREIGN KEY (user_id) REFERENCES users(id);
-ALTER TABLE user_command ADD FOREIGN KEY (command_id) REFERENCES command(command_id);
+ALTER TABLE command ADD FOREIGN KEY (user_id) REFERENCES users(id);

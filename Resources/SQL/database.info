@@ -24,12 +24,9 @@ Description: Stores information about rental commands made by users.
 Columns:
     command_id: INT (Primary Key) - Unique identifier for each rental command.
     car_id: INT (Foreign Key) - ID of the car rented in the command.
+    user_id: INT (Foreign Key) - ID of the user renting in the command.
     rental_date: DATE - Date when the rental command was made.
     start_date: DATE - Start date of the rental period.
     end_date: DATE - End date of the rental period.
     rental_period: INT - Duration of the rental period in days.
 
-Description: Intermediate table representing the many-to-many relationship between users and commands.
-Columns:
-    user_id: INT (Foreign Key) - ID of the user associated with the command.
-    command_id: INT (Foreign Key) - ID of the rental command associated with the user.
