@@ -1,14 +1,11 @@
-/* Adding something to the navigation bar */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Roboto, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: yellow;
+
 }
 
-h1 {
-    background-color: red;
-}
+
 /* Navigation bar */
 .navbar {
     background-color: black;
@@ -23,7 +20,8 @@ h1 {
 }
 
 .navbar-brand a {
-    color: #fff;
+    margin-left: 15px;
+    color: lightblue;
     font-size: 24px;
     text-decoration: none;
 }
@@ -32,6 +30,7 @@ h1 {
     list-style-type: none;
     margin: 0;
     padding: 0;
+    margin-right: 15px;
 }
 
 .navbar-menu ul li {
@@ -48,3 +47,65 @@ h1 {
     background-color: #555;
 }
 /* End of navigation bar */
+
+/* Contact.php */
+.contact_container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    margin-top: 0;
+    color: red;
+}
+
+p {
+    color: #666;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+textarea {
+    height: 100px;
+}
+
+button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+.error {
+    color: red;
+    font-style: italic;
+}
+/* End of Contact.php */
