@@ -4,7 +4,7 @@
     <title>Signup Form</title>
 </head>
 <body>
-    <form action="/submit_signup" method="post">
+    <form action="signup.php" method="post">
         <label for="fname">First Name:</label><br>
         <input type="text" id="fname" name="fname"><br>
         <label for="lname">Last Name:</label><br>
