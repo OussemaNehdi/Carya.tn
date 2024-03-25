@@ -25,6 +25,7 @@ h1{
 }
 
 .navbar-brand a {
+    flex: 1;
     margin-left: 15px;
     color: lightblue;
     font-size: 24px;
@@ -40,7 +41,6 @@ h1{
     align-items: center; 
 }
 
-
 .navbar-menu ul li {
     display: inline;
     margin-left: 10px; 
@@ -52,8 +52,37 @@ h1{
     padding: 10px;
 }
 
-.navbar-menu ul li a:hover {
+.basics {
+    flex: 1;
+}
+
+.navbar-menu ul .basics li a:hover {
     background-color: #555;
+}
+
+.navbar-menu .login-button {
+    margin-left: 60px;
+    background-color: #4caf4fc3;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-menu .signup-button {
+    background-color: #4caf4fc3;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-menu .login-button:hover {
+    background-color: #48ac43;
+}
+
+.navbar-menu .signup-button:hover {
+    background-color: #48ac43;
 }
 
 /* Dropdown menu */
@@ -153,15 +182,13 @@ button[type="submit"]:hover {
 /* End of Contact.php */
 
 /* about.php */
-
 .about-container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
 }
 
 .about-container h2 {
-    text-align: center;
     margin-bottom: 20px;
 }
 
@@ -204,12 +231,13 @@ button[type="submit"]:hover {
 /* Responsive styles */
 @media (max-width: 768px) {
     .author {
-        flex-direction: column;
+        display: inline-flex;
         align-items: center;
     }
 
     .author img {
-        margin-right: 0;
-        margin-bottom: 10px;
+        margin-right: 10px;
+        margin-bottom: 0;
     }
 }
+/* End of about.php */
