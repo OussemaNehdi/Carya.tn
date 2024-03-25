@@ -22,11 +22,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Send email
     if (mail($to, $subject, $email_content, $headers)) {
         // Email sent successfully
-        header("Location: contact.php?success=true");
+        header("Location: http://localhost/Mini-PHP-Project/HTML/contact.php?success=true");
         exit();
     } else {
         // Error sending email
-        header("Location: contact.php?success=false");
+        header("Location: http://localhost/Mini-PHP-Project/HTML/contact.php?success=false");
         exit();
     }
 }

@@ -2,13 +2,20 @@
 <nav class="navbar">
     <div class="container">
         <div class="navbar-brand">
-            <a href="#">Your Logo</a>
+            <a href="http://localhost/Mini-PHP-Project/">Carya.tn Logo</a>
         </div>
         <div class="navbar-menu">
             <ul>
                 <li><a href="http://localhost/Mini-PHP-Project/">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
+                <li><a href="http://localhost/Mini-PHP-Project/HTML/about.php">About</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle">Services</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Rent a Car</a></li>
+                        <li><a href="#">List Your Car for Rent</a></li>
+                        <li><a href="#">Export Rent History</a></li>
+                    </ul>
+                </li>
                 <li><a href="http://localhost/Mini-PHP-Project/HTML/contact.php">Contact</a></li>
             </ul>
         </div>

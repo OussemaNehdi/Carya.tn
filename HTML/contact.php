@@ -23,7 +23,7 @@
         ?>
         <p>We'd love to hear from you! Please fill out the form below to get in touch with us.</p>
         
-        <form action="submit_contact.php" method="POST">
+        <form action="http://localhost/Mini-PHP-Project/PHP/submit_contact.php" method="POST">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
             

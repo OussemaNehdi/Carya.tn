@@ -2,9 +2,14 @@ body {
     font-family: Roboto, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: rgba(245, 245, 245, 0.649);
 
 }
-
+h1{
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
 
 /* Navigation bar */
 .navbar {
@@ -31,10 +36,14 @@ body {
     margin: 0;
     padding: 0;
     margin-right: 15px;
+    display: flex; 
+    align-items: center; 
 }
+
 
 .navbar-menu ul li {
     display: inline;
+    margin-left: 10px; 
 }
 
 .navbar-menu ul li a {
@@ -46,6 +55,33 @@ body {
 .navbar-menu ul li a:hover {
     background-color: #555;
 }
+
+/* Dropdown menu */
+.navbar-menu ul .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.navbar-menu ul .dropdown .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: black;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.navbar-menu ul .dropdown .dropdown-menu li {
+    color: white;
+    padding: 16px 5px;
+    display: block;
+    font-size: 15px;
+}
+
+.navbar-menu ul .dropdown:hover .dropdown-menu {
+    display: block;
+}
+/* End of dropdown menu */
 /* End of navigation bar */
 
 /* Contact.php */
@@ -60,7 +96,8 @@ body {
 
 h2 {
     margin-top: 0;
-    color: red;
+    font-size: 45px;
+    color: black;
 }
 
 p {
@@ -104,8 +141,68 @@ button[type="submit"]:hover {
     background-color: #45a049;
 }
 
+.success {
+    color: green;
+    font-style: italic;
+}
+
 .error {
     color: red;
     font-style: italic;
 }
 /* End of Contact.php */
+
+/* about.php */
+/* Container styles */
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Heading styles */
+.about-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Author styles */
+.author {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.author img {
+    width: 100px; /* Adjust as needed */
+    height: 100px; /* Adjust as needed */
+    border-radius: 50%; /* Make images round */
+    margin-right: 20px;
+}
+
+.author-info {
+    flex: 1;
+}
+
+.author-info h3 {
+    margin-top: 0;
+}
+
+/* About paragraph styles */
+.about-paragraph {
+    margin-top: 50px;
+    text-align: justify;
+    line-height: 1.6;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .author {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .author img {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
