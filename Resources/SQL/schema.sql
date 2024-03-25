@@ -1,4 +1,4 @@
--- Create the users table
+-- Create users table
 CREATE TABLE users (
     id INT PRIMARY KEY,
     firstName VARCHAR(30),
@@ -6,11 +6,10 @@ CREATE TABLE users (
     password CHAR(255),
     email VARCHAR(50),
     creation_date DATE,
-    role VARCHAR(30),
-    command_id INT
-) ENGINE=InnoDB;
+    role VARCHAR(30)
+);
 
--- Create the cars table
+-- Create cars table
 CREATE TABLE cars (
     id INT PRIMARY KEY,
     brand VARCHAR(50),
@@ -20,38 +19,27 @@ CREATE TABLE cars (
     km INT,
     price DECIMAL,
     owner_id INT,
-    availability BOOLEAN,
-    command_id INT
-) ENGINE=InnoDB;
+    availability BOOLEAN
+);
 
--- Create the command table
+-- Create command table
 CREATE TABLE command (
     command_id INT PRIMARY KEY,
-    user_id INT,
     car_id INT,
     rental_date DATE,
     start_date DATE,
     end_date DATE,
     rental_period INT
-) ENGINE=InnoDB;
+);
 
--- Add foreign key constraints
-ALTER TABLE users ADD CONSTRAINT fk_user_command
-    FOREIGN KEY (command_id)
-    REFERENCES command(command_id);
+-- Create user_command table
+CREATE TABLE user_command (
+    user_id INT,
+    command_id INT
+);
 
-ALTER TABLE cars ADD CONSTRAINT fk_car_owner
-    FOREIGN KEY (owner_id)
-    REFERENCES users(id);
-
-ALTER TABLE cars ADD CONSTRAINT fk_car_command
-    FOREIGN KEY (command_id)
-    REFERENCES command(command_id);
-
-ALTER TABLE command ADD CONSTRAINT fk_command_user
-    FOREIGN KEY (user_id)
-    REFERENCES users(id);
-
-ALTER TABLE command ADD CONSTRAINT fk_command_car
-    FOREIGN KEY (car_id)
-    REFERENCES cars(id);
+-- Add foreign keys
+ALTER TABLE cars ADD FOREIGN KEY (owner_id) REFERENCES users(id);
+ALTER TABLE command ADD FOREIGN KEY (car_id) REFERENCES cars(id);
+ALTER TABLE user_command ADD FOREIGN KEY (user_id) REFERENCES users(id);
+ALTER TABLE user_command ADD FOREIGN KEY (command_id) REFERENCES command(command_id);

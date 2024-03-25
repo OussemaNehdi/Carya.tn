@@ -1,39 +1,35 @@
-Table: users
+Description: Stores information about users of the car rental system.
+Columns:
+    id: INT (Primary Key) - Unique identifier for each user.
+    firstName: VARCHAR(30) - First name of the user.
+    lastName: VARCHAR(30) - Last name of the user.
+    password: CHAR(255) - Encrypted password of the user.
+    email: VARCHAR(50) - Email address of the user.
+    creation_date: DATE - Date when the user account was created.
+    role: VARCHAR(30) - Role of the user in the system.
 
-    Description: Stores information about users of the car rental system.
-    Columns:
-        id: INT (Primary Key) - Unique identifier for each user.
-        firstName: VARCHAR(30) - First name of the user.
-        lastName: VARCHAR(30) - Last name of the user.
-        password: CHAR(255) - Encrypted password of the user.
-        email: VARCHAR(50) - Email address of the user.
-        creation_date: DATE - Date when the user account was created.
-        role: VARCHAR(30) - Role of the user in the system.
-        command_id: INT (Foreign Key) - ID of the rental command associated with the user.
+Description: Stores information about cars available for rental.
+Columns:
+    id: INT (Primary Key) - Unique identifier for each car.
+    brand: VARCHAR(50) - Brand of the car.
+    model: VARCHAR(50) - Model of the car.
+    color: VARCHAR(20) - Color of the car.
+    image: CHAR(255) - Path to the image of the car.
+    km: INT - Kilometers driven by the car.
+    price: DECIMAL - Rental price per unit time for the car.
+    owner_id: INT (Foreign Key) - ID of the user who owns the car.
+    availability: BOOLEAN - Indicates whether the car is available for rental.
 
-Table: cars
+Description: Stores information about rental commands made by users.
+Columns:
+    command_id: INT (Primary Key) - Unique identifier for each rental command.
+    car_id: INT (Foreign Key) - ID of the car rented in the command.
+    rental_date: DATE - Date when the rental command was made.
+    start_date: DATE - Start date of the rental period.
+    end_date: DATE - End date of the rental period.
+    rental_period: INT - Duration of the rental period in days.
 
-    Description: Stores information about cars available for rental.
-    Columns:
-        id: INT (Primary Key) - Unique identifier for each car.
-        brand: VARCHAR(50) - Brand of the car.
-        model: VARCHAR(50) - Model of the car.
-        color: VARCHAR(20) - Color of the car.
-        image: CHAR(255) - Path to the image of the car.
-        km: INT - Kilometers driven by the car.
-        price: DECIMAL - Rental price per unit time for the car.
-        owner_id: INT (Foreign Key) - ID of the user who owns the car.
-        availability: BOOLEAN - Indicates whether the car is available for rental.
-        command_id: INT (Foreign Key) - ID of the rental command associated with the car.
-
-Table: command
-
-    Description: Stores information about rental commands made by users.
-    Columns:
-        command_id: INT (Primary Key) - Unique identifier for each rental command.
-        user_id: INT (Foreign Key) - ID of the user who made the rental command.
-        car_id: INT (Foreign Key) - ID of the car rented in the command.
-        rental_date: DATE - Date when the rental command was made.
-        start_date: DATE - Start date of the rental period.
-        end_date: DATE - End date of the rental period.
-        rental_period: INT - Duration of the rental period in days.
+Description: Intermediate table representing the many-to-many relationship between users and commands.
+Columns:
+    user_id: INT (Foreign Key) - ID of the user associated with the command.
+    command_id: INT (Foreign Key) - ID of the rental command associated with the user.
