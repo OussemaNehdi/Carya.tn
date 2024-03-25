@@ -3,29 +3,48 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: yellow;
+}
+
+h1 {
     background-color: red;
 }
-nav {
+/* Navigation bar */
+.navbar {
+    background-color: black;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.navbar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #f2f2f2;
-    padding: 10px;
 }
 
-nav ul {
+.navbar-brand a {
+    color: #fff;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.navbar-menu ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    display: flex;
 }
 
-nav ul li {
-    margin-right: 10px;
+.navbar-menu ul li {
+    display: inline;
 }
 
-nav ul li a {
+.navbar-menu ul li a {
+    color: #fff;
     text-decoration: none;
-    color: #333;
-    padding: 5px;
+    padding: 10px;
 }
+
+.navbar-menu ul li a:hover {
+    background-color: #555;
+}
+/* End of navigation bar */

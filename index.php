@@ -7,12 +7,10 @@
     <link rel="stylesheet" href="./CSS/style.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
-    </nav>
+    <?php include 'HTML/navbar.php'; ?>
+    <h1>Welcome to our Car Rental Website</h1>
+    <!-- Other content of your website -->
+
     <script src="./JS/script.js"></script>
 </body>
 </html>
