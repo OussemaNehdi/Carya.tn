@@ -1,4 +1,10 @@
 /* Adding something to the navigation bar */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: red;
+}
 nav {
     display: flex;
     justify-content: space-between;
