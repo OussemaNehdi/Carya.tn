@@ -18,8 +18,7 @@
                     </li>
                     <li><a href="http://localhost/Mini-PHP-Project/HTML/contact.php">Contact</a></li>
                 </div>
-                <li class="login-button"><a href="#">Login</a></li>
-                <li class="signup-button"><a href="#">Sign Up</a></li>
+                <li class="login-button"><a href="http://localhost/Mini-PHP-Project/HTML/login.php">Login</a></li>
             </ul>
         </div>
     </div>
