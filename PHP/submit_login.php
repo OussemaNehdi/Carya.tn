@@ -7,11 +7,9 @@ if ($con->connect_error) {
     die ("Failed to connect : " . $con->connect_error);
 }
 
-$email = $_POST['email'];
-$password = $_POST['password'];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset ($email) && isset ($password)) {
+    if (isset ($_POST['email']) && isset ($_POST['password'])) {
 
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $password = $_POST['password'];
@@ -21,10 +19,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = mysqli_prepare($con, $sql);
         $stmt->bind_param("s", $email);
         $stmt->execute();
-        $stmt_result = $stmt->get_result();
+        $result = $stmt->get_result();
 
-        if ($stmt_result->num_rows > 0) {
-            $data = $stmt_result->fetch_assoc();
+        if ($result->num_rows > 0) {
+            $data = $result->fetch_assoc();
+
+            //if (password_verify($password, $data['password'])) {     (we can use this method too)
             if ($data['password'] === $password) {
                 header('Location: home.php');
                 exit();
@@ -34,9 +34,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "User not found";
         }
+        $stmt->close();
     } else {
         echo "Email or password not provided";
     }
     $stmt->close();
+} else {
+    echo "Invalid request";
 }
+
+mysqli_close($con);
+
 ?>
