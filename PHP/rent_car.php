@@ -1,4 +1,5 @@
 <?php 
+    //this file will include the menu only and the fetching operation will be included from fetch_cars
     require_once('connect.php');
     include 'C:\xampp\htdocs\Mini-PHP-Project\HTML\navbar.php';
     // Fetch distinct values for brands, models, colors, maximum kilometers, and price ranges from the cars table

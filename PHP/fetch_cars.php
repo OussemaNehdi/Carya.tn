@@ -9,7 +9,7 @@
     require_once('connect.php');
     $sql = "SELECT * FROM cars";
     $result = $conn->query($sql);
-    $cars=  $result->fetch_assoc();
+    
 ?>
 <h1>Rent a Car</h1>
 <p>Choose a car to rent:</p> 
