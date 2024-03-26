@@ -14,7 +14,7 @@
         </ul>
     </nav>
     <div>
-        <form method="post" action="login.php">
+        <form method="post" action="login">
             <input type="email" name="email" placeholder="Email" required>
             <br>
             <input type="password" name="password" placeholder="Password" required>
