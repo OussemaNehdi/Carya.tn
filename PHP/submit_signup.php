@@ -9,14 +9,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
 
-    if (isset($first_name, $last_name, $email, $password)) {
+    if (isset ($first_name, $last_name, $email, $password)) {
         $con = mysqli_connect('localhost', 'root', '', 'carrental');
         if ($con->connect_error) {
             die ("Failed to connect: " . $con->connect_error);
         } else {
 
+            //checking if user already exists
+            $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+            $email = trim($email);
+            $sql = "SELECT * FROM users WHERE email = ?";
+            $stmt = mysqli_prepare($con, $sql);
+            $stmt->bind_param("s", $email);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                echo "User already exists";
+                exit();
+            }
+            $stmt->close();
+
+            //checking if password is at least 8 characters
+            if (strlen($password) < 8) {
+                echo "Password must have at least 8 characters";
+                exit();
+            } else {
+                $password = trim($password);
+            }
+
+            //hashing the password
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
+
+            //inserting user into database
             $sql = "INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
             $stmt = mysqli_prepare($con, $sql);
 
