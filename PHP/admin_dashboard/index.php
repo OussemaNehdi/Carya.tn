@@ -13,6 +13,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="http://localhost/Mini-PHP-Project/CSS/style.css">
+    <script src="http://localhost/Mini-PHP-Project/JS/script.js" defer></script>
+    <style>
+        .car-image {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <h1>Admin Dashboard - Car Rental</h1>
@@ -73,7 +79,7 @@
                 $sql = "SELECT * FROM cars";
                 $cars = mysqli_query($conn, $sql);
                 foreach ($cars as $car) {
-                    echo "<tr>";
+                    echo "<tr onclick=\"toggleCarImage({$car['id']})\">"; // Call JavaScript function when clicking on a row
                     echo "<td>{$car['id']}</td>";
                     echo "<td>{$car['brand']}</td>";
                     echo "<td>{$car['model']}</td>";
@@ -83,25 +89,18 @@
                     echo "<td>{$car['price']}</td>";
                     echo "<td><a href=\"delete_car.php?id={$car['id']}\">Delete</a> | <a href=\"update_car.php?id={$car['id']}\">Update</a></td>";
                     echo "</tr>";
+                    echo "<tr class=\"car-image-row\">"; // Add a row for the image
+                    echo "<td colspan=\"8\">"; // Span the entire row
+                    echo "<img id=\"car-image-{$car['id']}\" class=\"car-image\" src=\"http://localhost/Mini-PHP-Project/Resources/Images/car_images{$car['image']}\" alt=\"Car Image\">"; // Image element with unique ID
+                    echo "</td>";
+                    echo "</tr>";
                 }
                 ?>
             </tbody>
         </table>
     </section>
-
-    <!-- Add Car Form -->
-    <section>
-        <h2>Add Car</h2>
-        <form action="add_car.php" method="post">
-            <label for="carModel">Car Model:</label>
-            <input type="text" id="carModel" name="carModel" required><br>
-
-            <label for="carType">Car Type:</label>
-            <input type="text" id="carType" name="carType" required><br>
-
-            <button type="submit">Add Car</button>
-        </form>
-    </section>
+         
+    <button><a href="add_car.php">Add Car</a></button>
 </body>
 </html>
 
