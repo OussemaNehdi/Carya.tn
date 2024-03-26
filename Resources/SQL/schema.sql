@@ -1,6 +1,6 @@
 -- Create users table
 CREATE TABLE users (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     firstName VARCHAR(30),
     lastName VARCHAR(30),
     password CHAR(255),
@@ -11,7 +11,7 @@ CREATE TABLE users (
 
 -- Create cars table
 CREATE TABLE cars (
-    id INT PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     brand VARCHAR(50),
     model VARCHAR(50),
     color VARCHAR(20),
@@ -24,7 +24,7 @@ CREATE TABLE cars (
 
 -- Create command table
 CREATE TABLE command (
-    command_id INT PRIMARY KEY,
+    command_id INT AUTO_INCREMENT PRIMARY KEY,
     car_id INT,
     user_id INT,
     rental_date DATE,

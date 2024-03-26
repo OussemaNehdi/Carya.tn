@@ -1,13 +1,9 @@
-
 <?php
-//TODO : edit front-end
-
 // Include the database connection file
 require_once('connect.php');
 
 // SQL query to select car name and type
-//TODO : change names
-$sql = "SELECT car_name, car_type FROM cars";
+$sql = "SELECT brand, model, color, image, km, price, owner_id, availability FROM cars";
 
 // Execute query
 $result = $conn->query($sql);
@@ -16,7 +12,7 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
     // Output data of each row using a while loop
     while($row = $result->fetch_assoc()) {
-        echo "Car Name: " . $row["car_name"]. " - Car Type: " . $row["car_type"]. "<br>";
+        echo "Brand: " . $row["brand"]. " - Model: " . $row["model"]. " - Color: " . $row["color"]. " - Image: " . $row["image"]. " - KM: " . $row["km"]. " - Price: " . $row["price"]. " - Owner ID: " . $row["owner_id"]. " - Availability: " . $row["availability"]. "<br>";
     }
 } else {
     echo "0 results";
