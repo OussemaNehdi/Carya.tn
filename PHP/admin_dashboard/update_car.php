@@ -1,10 +1,18 @@
 <?php 
     include '../connect.php';
+    session_start();
+
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $car_id = $_GET['id'];
         $sql = "SELECT * FROM cars WHERE id=$car_id";
         $car = mysqli_query($conn, $sql);
         $car = mysqli_fetch_assoc($car);
+
+        $owner_id = $car['owner_id'];
+
+        if ($owner_id != $_SESSION['user_id']) {
+            header('Location: http://localhost/Mini-PHP-Project/');
+        }
     }
 ?>
 
@@ -36,11 +44,22 @@
 
 <?php 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        $car_id = $_POST['car_id'];
+        $sql = "SELECT * FROM cars WHERE id=$car_id";
+        $car = mysqli_query($conn, $sql);
+        $car = mysqli_fetch_assoc($car);
+
+        $owner_id = $car['owner_id'];
+
+        if ($owner_id != $_SESSION['user_id']) {
+            header('Location: http://localhost/Mini-PHP-Project/');
+        }
+
         $brand = $_POST['brand'];
         $model = $_POST['model'];
         $color = $_POST['color'];
         $price = $_POST['price'];
-        $car_id = $_POST['car_id'];
         $km = $_POST['km'];
         $sql = "UPDATE cars SET brand='$brand', model='$model', color='$color', price='$price', km='$km' WHERE id=$car_id";
         if (mysqli_query($conn, $sql)) {
