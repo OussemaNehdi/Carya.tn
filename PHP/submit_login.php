@@ -23,9 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($result->num_rows > 0) {
             $data = $result->fetch_assoc();
-
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             //if (password_verify($password, $data['password'])) {     (we can use this method too)
-            if ($data['password'] === $password) {
+            if ($data['password'] === $hashed_password) {
                 header('Location: home.php');
                 exit();
             } else {
