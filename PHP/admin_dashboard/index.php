@@ -1,3 +1,5 @@
+
+
 <?php 
     include '../../HTML/navbar.php';
 ?>
@@ -50,7 +52,12 @@
                     echo "<td>{$user['email']}</td>";
                     echo "<td>{$user['creation_date']}</td>";
                     echo "<td>{$user['role']}</td>";
-                    echo "<td><a href=\"ban_user.php?id={$user['id']}\">Ban</a></td>";
+                    if ($user['role'] == 'banned') {
+                        echo "<td><a href=\"unban_user.php?id={$user['id']}\">Unban</a></td>";
+                    }
+                    else {
+                        echo "<td><a href=\"ban_user.php?id={$user['id']}\">Ban</a></td>";
+                    }
                     echo "</tr>";
                 }
                 ?>
@@ -89,9 +96,9 @@
                     echo "<td>{$car['price']}</td>";
                     echo "<td><a href=\"delete_car.php?id={$car['id']}\">Delete</a> | <a href=\"update_car.php?id={$car['id']}\">Update</a></td>";
                     echo "</tr>";
-                    echo "<tr class=\"car-image-row\">"; // Add a row for the image
-                    echo "<td colspan=\"8\">"; // Span the entire row
-                    echo "<img id=\"car-image-{$car['id']}\" class=\"car-image\" src=\"http://localhost/Mini-PHP-Project/Resources/Images/car_images{$car['image']}\" alt=\"Car Image\">"; // Image element with unique ID
+                    echo "<tr class=\"car-image-row\">";
+                    echo "<td colspan=\"8\">";
+                    echo "<img id=\"car-image-{$car['id']}\" class=\"car-image\" src=\"http://localhost/Mini-PHP-Project/Resources/Images/car_images/{$car['image']}\" alt=\"Car Image\">"; // Image element with unique ID
                     echo "</td>";
                     echo "</tr>";
                 }
@@ -100,7 +107,7 @@
         </table>
     </section>
          
-    <button><a href="add_car.php">Add Car</a></button>
+    <button><a href="http://localhost/Mini-PHP-Project/PHP/add_car.php">Add Car</a></button>
 </body>
 </html>
 
