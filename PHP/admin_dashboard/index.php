@@ -1,9 +1,9 @@
 <?php 
-    include '../HTML/navbar.php';
+    include '../../HTML/navbar.php';
 ?>
 
 <?php 
-    include('connect.php');
+    include('../connect.php');
 ?>
 
 <!DOCTYPE html>
