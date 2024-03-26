@@ -1,3 +1,5 @@
+
+
 <?php 
     include '../../HTML/navbar.php';
 ?>
@@ -50,7 +52,12 @@
                     echo "<td>{$user['email']}</td>";
                     echo "<td>{$user['creation_date']}</td>";
                     echo "<td>{$user['role']}</td>";
-                    echo "<td><a href=\"ban_user.php?id={$user['id']}\">Ban</a></td>";
+                    if ($user['role'] == 'banned') {
+                        echo "<td><a href=\"unban_user.php?id={$user['id']}\">Unban</a></td>";
+                    }
+                    else {
+                        echo "<td><a href=\"ban_user.php?id={$user['id']}\">Ban</a></td>";
+                    }
                     echo "</tr>";
                 }
                 ?>
