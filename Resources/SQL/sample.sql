@@ -11,13 +11,13 @@ VALUES
 -- Cars table
 INSERT INTO cars (brand, model, color, image, km, price, owner_id, availability)
 VALUES
-('Toyota', 'Corolla', 'Red', '/images/corolla.jpg', 50000, 15000.00, 1, true),
-('Honda', 'Civic', 'Blue', '/images/civic.jpg', 60000, 17000.00, 1, false),
-('Ford', 'Fiesta', 'Silver', '/images/fiesta.jpg', 40000, 12000.00, 3, true),
-('Tesla', 'Model S', 'Black', '/images/model_s.jpg', 20000, 60000.00, 4, true),
-('Chevrolet', 'Camaro', 'Yellow', '/images/camaro.jpg', 30000, 35000.00, 4, false),
-('BMW', '3 Series', 'White', '/images/3_series.jpg', 45000, 25000.00, 2, true),
-('Mercedes-Benz', 'E-Class', 'Gray', '/images/e_class.jpg', 55000, 30000.00, 2, true);
+('Toyota', 'Corolla', 'Red', 'corolla.jpg', 50000, 15000.00, 1, true),
+('Honda', 'Civic', 'Blue', 'civic.jpg', 60000, 17000.00, 1, false),
+('Ford', 'Fiesta', 'Silver', 'fiesta.jpg', 40000, 12000.00, 3, true),
+('Tesla', 'Model S', 'Black', 'model_s.jpg', 20000, 60000.00, 4, true),
+('Chevrolet', 'Camaro', 'Yellow', 'camaro.jpg', 30000, 35000.00, 4, false),
+('BMW', '3 Series', 'White', '3_series.jpg', 45000, 25000.00, 2, true),
+('Mercedes-Benz', 'E-Class', 'Gray', 'e_class.jpg', 55000, 30000.00, 2, true);
 
 -- Commands table
 INSERT INTO command (car_id, user_id, rental_date, start_date, end_date, rental_period)

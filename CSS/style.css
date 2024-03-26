@@ -11,7 +11,7 @@ h1{
     margin-top: 20px;
 }
 
-/* Navigation bar */
+/* ------------------ Navigation bar ------------------*/
 .navbar {
     background-color: black;
     color: #fff;
@@ -61,15 +61,7 @@ h1{
 }
 
 .navbar-menu .login-button {
-    margin-left: 60px;
-    background-color: #4caf4fc3;
-    border-radius: 5px;
-    padding: 10px 20px;
-    color: white;
-    text-decoration: none;
-}
-
-.navbar-menu .signup-button {
+    margin-left: 120px;
     background-color: #4caf4fc3;
     border-radius: 5px;
     padding: 10px 20px;
@@ -81,9 +73,6 @@ h1{
     background-color: #48ac43;
 }
 
-.navbar-menu .signup-button:hover {
-    background-color: #48ac43;
-}
 
 /* Dropdown menu */
 .navbar-menu ul .dropdown {
@@ -113,7 +102,7 @@ h1{
 /* End of dropdown menu */
 /* End of navigation bar */
 
-/* Contact.php */
+/* ---------------- Contact.php --------------------*/
 .contact_container {
     max-width: 800px;
     margin: 50px auto;
@@ -123,29 +112,29 @@ h1{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
+.contact_container h2 {
     margin-top: 0;
     font-size: 45px;
     color: black;
 }
 
-p {
+.contact_container p {
     color: #666;
 }
 
-form {
+.contact_container form {
     margin-top: 20px;
 }
 
-label {
+.contact_container label {
     display: block;
     margin-bottom: 5px;
     color: #333;
 }
 
-input[type="text"],
-input[type="email"],
-textarea {
+.contact_container input[type="text"],
+.contact_container input[type="email"],
+.contact_container textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -153,11 +142,11 @@ textarea {
     border-radius: 5px;
 }
 
-textarea {
+.contact_container textarea {
     height: 100px;
 }
 
-button[type="submit"] {
+.contact_container button[type="submit"] {
     background-color: #4CAF50;
     color: white;
     padding: 12px 20px;
@@ -166,7 +155,7 @@ button[type="submit"] {
     cursor: pointer;
 }
 
-button[type="submit"]:hover {
+.contact_container button[type="submit"]:hover {
     background-color: #45a049;
 }
 
@@ -181,7 +170,7 @@ button[type="submit"]:hover {
 }
 /* End of Contact.php */
 
-/* about.php */
+/* -------------- about.php -----------------*/
 .about-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -241,3 +230,198 @@ button[type="submit"]:hover {
     }
 }
 /* End of about.php */
+
+/* -------------- login.php && signup.php -----------------*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins%3Awght%40400%3B500&display=swap%27%29%3B');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins',sans-serif;
+}
+
+.login-body {
+    background-image: url(http://localhost/Mini-PHP-Project/Resources/images/wallpaper-login.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.box{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    padding: 60px 20px 30px 20px;
+    height: 620px;
+    width: 350px;
+    border-radius: 30px;
+    background-color: rgba(255, 220, 220, 0.4);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+}
+.box-login{
+    position: absolute;
+    width: 85%;
+    left: 27px;
+    transition: .5s ease-in-out;
+}
+.box-register{
+    position: absolute;
+    width: 85%;
+    right: -350px;
+    transition: .5s ease-in-out;
+}
+.top-header{
+    text-align: center;
+    margin: 30px 0;
+}
+.top-header h3{
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.input-group{
+     width: 100%;
+    
+}
+.input-field{
+    margin: 12px 0;
+    position: relative;
+}
+.input-box{
+    width: 100%;
+    height: 50px;
+    font-size: 15px;
+    color: #040404;
+    border: none;
+    border-radius: 10px;
+    padding: 7px 45px 0 20px;
+    background: rgba(224, 223, 223, 0.6);
+    backdrop-filter: blur(2px);
+    outline: none;
+}
+.input-field label{
+    position: absolute;
+    left: 20px;
+    top: 15px;
+    font-size: 15px;
+    transition: .3s ease-in-out;
+}
+.input-box:focus ~ label,.input-box:valid ~ label{
+    top: 2px;
+    font-size: 10px;
+    color: #c12828;
+    font-weight: 500;
+}
+
+.eye-area{
+    position: absolute;
+    right: 25px;
+    top: 25px;
+}
+
+.eye-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+i{
+    position: absolute;
+    color: #444444;
+    cursor: pointer;
+}
+
+#eye, #eye-2{
+    opacity: 1;
+}
+#eye-slash, #eye-slash-2{
+    opacity: 0;
+}
+.remember{
+    display: flex;
+    font-size: 14px;
+    margin: 12px 0 30px 0;
+    color: #000000;
+}
+.check{
+    margin-right: 8px;
+    width: 14px;
+}
+.input-submit{
+    width: 100%;
+    height: 50px;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    background: #bc6202;
+    color: #fff;
+    box-shadow: 0px 4px 20px rgba(62, 9, 9, 0.144);
+    cursor: pointer;
+    transition: .4s;
+}
+.input-submit:hover{
+    background:  #ee622be3;
+    box-shadow: 0px 4px 20px rgba(62, 9, 9, 0.32);
+}
+.forgot{
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 40px;
+}
+.forgot a{
+    text-decoration: none;
+    color: #000;
+}
+
+.switch{
+    display: flex;
+    position: absolute;
+    bottom: 20px;  
+    left: 25px;
+    width: 85%;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+
+    overflow: hidden;
+}
+.switch a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    text-decoration: none;
+    width: 50%;
+    border-radius: 10px;
+    z-index: 10;
+}
+
+.btn-active{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 145px;
+    height: 50px;
+    background: #cccccd;
+    border-radius: 10px;
+    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
+    transition: .5s ease-in-out;
+}
+/* End of login.php */

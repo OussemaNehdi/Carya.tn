@@ -58,5 +58,7 @@
             At carya.tn, we are a team of passionate individuals dedicated to delivering excellence in every aspect of our work. With a diverse range of skills and backgrounds, we come together to create innovative solutions and provide exceptional service to our clients. Our collaborative approach, coupled with a relentless pursuit of quality, drives us to exceed expectations and achieve success. We take pride in our commitment to integrity, professionalism, and continuous improvement, ensuring that we always strive for excellence in everything we do.
         </p>
     </div>
+    <script src="http://localhost/Mini-PHP-Project/JS/script.js"></script>
+
 </body>
 </html>

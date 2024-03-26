@@ -1,3 +1,7 @@
+<?php
+    include 'is_admin.php';
+?>
+
 <?php 
     include '../connect.php';
     $user_id = $_GET['id'];

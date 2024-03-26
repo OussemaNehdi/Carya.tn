@@ -36,5 +36,7 @@
             <button type="submit">Send Message</button>
         </form>
     </div>
+    <script src="http://localhost/Mini-PHP-Project/JS/script.js"></script>
+
 </body>
 </html>
