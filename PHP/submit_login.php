@@ -1,9 +1,11 @@
-
 <?php
 
 session_start();
 
-include_once ('connect.php');
+$con = mysqli_connect('localhost', 'root', '', 'carrental');
+if ($con->connect_error) {
+    die ("Failed to connect : " . $con->connect_error);
+}
 
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -15,11 +17,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = $_POST['password'];
 
 
-        $sql = "SELECT * FROM users WHERE email = '$email'";
-        $users = mysqli_query($conn, $sql);
+        $sql = "SELECT * FROM users WHERE email = ?";
+        $stmt = mysqli_prepare($con, $sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $stmt_result = $stmt->get_result();
 
-        if (mysqli_num_rows($users) > 0) {
-            if (password_verify($password, $user['password'])) {
+
+        if ($stmt_result->num_rows > 0) {
+            $data = $stmt_result->fetch_assoc();
+            if ($data['password'] === $password) {
                 header('Location: home.php');
                 exit();
             } else {
