@@ -1,27 +1,35 @@
+
 <?php
 
 session_start();
 
-//make connection
 include_once ('connect.php');
 
-// Check if form is submitted
-if($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+$email = $_POST['email'];
+$password = $_POST['password'];
 
-    // TODO: Add your own code here to check the username and password against your database.
-    // This is just a placeholder for demonstration purposes.
-    if($email == '' && $password == 'password') {
-        // Store data in session variables
-        $_SESSION["loggedin"] = true;
-        $_SESSION["username"] = $username; 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset ($email) && isset ($password)) {
 
-        // Redirect user to welcome page
-        header("location: home.php");
+        $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+        $password = $_POST['password'];
+
+
+        $sql = "SELECT * FROM users WHERE email = '$email'";
+        $users = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($users) > 0) {
+            if (password_verify($password, $user['password'])) {
+                header('Location: home.php');
+                exit();
+            } else {
+                echo "Incorrect password";
+            }
+        } else {
+            echo "User not found";
+        }
     } else {
-        // Display an error message if username doesn't exist
-        echo "Invalid username or password.";
+        echo "Email or password not provided";
     }
 }
 ?>
