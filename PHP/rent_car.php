@@ -120,7 +120,7 @@
     </div>
 
     <div class="car-display">
-        <h2>Available Cars</h2>
+        
         <?php require 'fetch_cars.php'; mysqli_close($conn); ?>
         
     </div>
