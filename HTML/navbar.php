@@ -11,7 +11,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle">Services</a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Rent a Car</a></li>
+                            <li><a href="http://localhost/Mini-PHP-Project/php/rent_car.php">Rent a Car</a></li>
                             <li><a href="#">List Your Car for Rent</a></li>
                             <li><a href="#">Export Rent History</a></li>
                         </ul>
