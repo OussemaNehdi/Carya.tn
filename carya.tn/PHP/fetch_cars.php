@@ -1,4 +1,3 @@
-<!-- TODO : change the design to fit with the website theme-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rent a Car</title>
     <link rel="stylesheet" href="http://localhost/Mini-PHP-Project/CSS/style.css">
+    <style>
+        /* Style for the popup */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 9999;
+        }
+        .popup-content {
+            background-color: white;
+            width: 50%;
+            margin: 100px auto;
+            padding: 20px;
+            border-radius: 5px;
+            position: relative; /* Ensure position relative for absolute positioning of the close button */
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <h1>Rent a Car</h1>
@@ -62,15 +88,40 @@
                     <p><strong>Kilometers:</strong> <?php echo $car['km']; ?></p>
                     <p><strong>Price:</strong> $<?php echo $car['price']; ?></p>
                 </div>
-                <button class="rent-button">Rent</button>
+                <button class="rent-button" onclick="showPopup(<?php echo $car['id']; ?>)">Rent</button>
             </div>
         </div>
         <?php endwhile; ?>
     </div>
 
+    <!-- Popup for renting form -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-button" onclick="closePopup()">X</span>
+            <!-- TODO: Add your renting form here -->
+            <h2>Renting Form</h2>
+            <p>This is where the renting form will be.</p>
+        </div>
+    </div>
+
     <script>
-        // JavaScript code for renting button functionality (if needed)
-        // You can add JavaScript code here for handling the renting functionality
+        // Function to show popup
+        function showPopup(carId) {
+            // You can modify this function to load different forms based on carId if needed
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        // Function to close popup
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+
+        // Close popup when ESC key is pressed
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closePopup();
+            }
+        });
     </script>
 </body>
 </html>

@@ -1,15 +1,23 @@
 <?php
     include 'is_admin.php';
-?>
 
-<?php 
-    // unbans a banned user
-    include '../../connect.php';
-    $user_id = $_GET['id'];
-    $sql = "UPDATE users SET role='customer' WHERE id=$user_id";
-    if (mysqli_query($conn, $sql)) {
-        header('Location: http://localhost/Mini-PHP-Project/PHP/admin_dashboard/');
+    if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['id'])) {
+        include '../../connect.php';
+        
+        $user_id = $_GET['id'];
+        
+        try {
+            $sql = "UPDATE users SET role='customer' WHERE id=:id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':id', $user_id);
+            $stmt->execute();
+            
+            header('Location: http://localhost/Mini-PHP-Project/PHP/admin_dashboard/');
+            exit(); // Ensure script execution stops after redirect
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        echo "Invalid request";
     }
 ?>
