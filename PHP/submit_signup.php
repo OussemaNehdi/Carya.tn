@@ -9,13 +9,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
 
-    if (isset ($first_name, $last_name, $email, $password)) {
+
+    if (isset($first_name, $last_name, $email, $password)) {
         $con = mysqli_connect('localhost', 'root', '', 'carrental');
         if ($con->connect_error) {
-            die ("Failed to connect: " . $con->connect_error);
+            die("Failed to connect: " . $con->connect_error);
         } else {
 
-            //checking if user already exists
+
             $email = filter_var($email, FILTER_SANITIZE_EMAIL);
             $email = trim($email);
             $sql = "SELECT * FROM users WHERE email = ?";
@@ -29,7 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
             $stmt->close();
 
-            //checking if password is at least 8 characters
             if (strlen($password) < 8) {
                 header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=Password must be at least 8 characters&slide=register');
                 exit();
@@ -37,16 +37,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $password = trim($password);
             }
 
-            //hashing the password
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 
-            //inserting user into database
-            $sql = "INSERT INTO users (firstName, lastName, email, password) VALUES (?, ?, ?, ?)";
+            if (isset($_POST['check1'])) {
+                $customer = $_POST['check1'];
+                $role = $customer;
+            } 
+
+            if (isset($_POST['check2'])) {
+                $seller = $_POST['check2'];
+                $role = $seller;
+            } 
+
+
+
+            $sql = "INSERT INTO users (firstName, lastName, email, password, role) VALUES (?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($con, $sql);
 
             if ($stmt) {
-                mysqli_stmt_bind_param($stmt, "ssss", $first_name, $last_name, $email, $password);
+                mysqli_stmt_bind_param($stmt, "sssss", $first_name, $last_name, $email, $password, $role);
                 if (mysqli_stmt_execute($stmt)) {
                     header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=Account created successfully');
                 } else {
