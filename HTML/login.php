@@ -89,10 +89,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         </div>
                     </div>
                     <div class="remember">
-                        <input type="checkbox" id="formCheck1" name="check1" value="customer">
-                        <label for="formCheck1">Customer</label> &nbsp; &nbsp;
-                        <input type="checkbox" id="formCheck2" name="check2" value="seller">
-                        <label for="formCheck2">Seller</label>
+                        <input type="radio" id="formCheck1" name="check1" value="customer" checked>
+                        <label for="formCheck1">customer</label> &nbsp; &nbsp;
+                        <input type="radio" id="formCheck2" name="check1" value="seller">
+                        <label for="formCheck2">seller</label>
                     </div>
                     <div class="input-field">
                         <input type="submit" class="input-submit" value="Sign Up">

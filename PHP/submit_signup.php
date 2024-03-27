@@ -40,17 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
 
-            if (isset($_POST['check1'])) {
-                $customer = $_POST['check1'];
-                $role = $customer;
-            } 
-
-            if (isset($_POST['check2'])) {
-                $seller = $_POST['check2'];
-                $role = $seller;
-            } 
-
-
+            $customer = $_POST['check1'];
+            $role = $customer;
+            
 
             $sql = "INSERT INTO users (firstName, lastName, email, password, role) VALUES (?, ?, ?, ?, ?)";
             $stmt = mysqli_prepare($con, $sql);
