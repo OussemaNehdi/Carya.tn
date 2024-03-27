@@ -106,19 +106,31 @@
         </div>
     </div>
     <script>
-        var x = document.getElementById('login');
-        var y = document.getElementById('register');
-        var z = document.getElementById('btn');
-        function login(){
-            x.style.left = "27px";
-            y.style.right = "-350px";
-            z.style.left = "0px";
-        }
-        function register(){
-            x.style.left = "-350px";
-            y.style.right = "25px";
-            z.style.left = "150px";
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var slide = '<?php echo isset($_GET["slide"]) ? $_GET["slide"] : "login"; ?>';
+            // Set the initial slide based on the query parameter
+            if (slide === 'register') {
+                register(); // If the query parameter is "register", show the register slide
+            } else {
+                login(); // Otherwise, show the login slide (default)
+            }
+        });
+
+            var x = document.getElementById('login');
+            var y = document.getElementById('register');
+            var z = document.getElementById('btn');
+            
+            function login(){
+                x.style.left = "27px";
+                y.style.right = "-350px";
+                z.style.left = "0px";
+            }
+            
+            function register(){
+                x.style.left = "-350px";
+                y.style.right = "25px";
+                z.style.left = "150px";
+            }
 
         // View Password codes for login and register
         function myLogPassword(){

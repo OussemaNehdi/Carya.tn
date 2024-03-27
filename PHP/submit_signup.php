@@ -24,14 +24,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
-                header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=User already exists');
+                header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=User already exists&slide=register');
                 exit();
             }
             $stmt->close();
 
             //checking if password is at least 8 characters
             if (strlen($password) < 8) {
-                header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=Password must be at least 8 characters');
+                header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=Password must be at least 8 characters&slide=register');
                 exit();
             } else {
                 $password = trim($password);
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_close($con);
         }
     } else {
-        header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=All fields are required');
+        header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=All fields are required&slide=register');
     }
 } else {
     echo "Invalid request";

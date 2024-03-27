@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //if (password_verify($password, $data['password'])) {     (we can use this method too)
             if ($data['password'] === $password) {
                 if ($data['role'] === 'banned') {
-                    header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=You are banned');
+                    header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=You are banned&slide=login');
                     exit();
                 }
                 
@@ -40,11 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header('Location: http://localhost/Mini-PHP-Project/');
                 exit();
             } else {
-                header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=Incorrect password');
+                header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=Incorrect password&slide=login');
             }
         } else {
             echo "User not found";
-            header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=User not found');
+            header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=User not found&slide=login');
         }
         $stmt->close();
     } else {

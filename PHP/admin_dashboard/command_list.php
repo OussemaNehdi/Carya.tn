@@ -9,6 +9,7 @@
                 <th>Start Date</th>
                 <th>End Date</th>
                 <th>Price Paid</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -36,6 +37,7 @@
                 // Calculate price paid based on price per day and duration
                 $price_paid = $price * $duration;
                 echo "<td>{$price_paid}</td>";
+                echo "<td><a href=\"http://localhost/Mini-PHP-Project/PHP/admin_dashboard/requests/cancel_command.php?id={$command['command_id']}\">Cancel Command</a></td>";
                 echo "</tr>";
             }
             ?>
