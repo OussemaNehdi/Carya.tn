@@ -1,4 +1,3 @@
-<!-- TODO : the css design is integrated here inside the brackets <style> transfer them to the style.css file  -->
 <!-- TODO : change the design to fit with the website theme-->
 <!DOCTYPE html>
 <html lang="en">
@@ -7,47 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rent a Car</title>
     <link rel="stylesheet" href="http://localhost/Mini-PHP-Project/CSS/style.css">
-    <style>
-        .car-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .car {
-            border: 1px solid #ccc;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .car img {
-            width: 100%;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        .car-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .rent-button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        .rent-button:hover {
-            background-color: #0056b3;
-        }
-    </style>
 </head>
 <body>
     <h1>Rent a Car</h1>

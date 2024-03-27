@@ -425,3 +425,46 @@ i{
     transition: .5s ease-in-out;
 }
 /* End of login.php & signup */
+
+/* -------------- fetch_cars.php -----------------*/
+/* Still need to change the style to fit the theme of the website */
+.car-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.car {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.car img {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.car-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rent-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.rent-button:hover {
+    background-color: #0056b3;
+}
+/* ------------------ End of fetch_cars.php ------------------*/
