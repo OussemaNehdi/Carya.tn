@@ -1,5 +1,5 @@
 <?php 
-    include '../connect.php';
+    include 'connect.php';
     session_start();
 
     if ($_SERVER["REQUEST_METHOD"] == "GET") {
@@ -63,7 +63,7 @@
         $km = $_POST['km'];
         $sql = "UPDATE cars SET brand='$brand', model='$model', color='$color', price='$price', km='$km' WHERE id=$car_id";
         if (mysqli_query($conn, $sql)) {
-            header('Location: index.php');
+            header('Location: http://localhost/Mini-PHP-Project?message=Car updated successfully!');
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }

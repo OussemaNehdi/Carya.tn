@@ -18,7 +18,6 @@ Columns:
     km: INT - Kilometers driven by the car.
     price: DECIMAL - Rental price per unit time for the car.
     owner_id: INT (Foreign Key) - ID of the user who owns the car.
-    availability: BOOLEAN - Indicates whether the car is available for rental.
 
 Description: Stores information about rental commands made by users.
 Columns:

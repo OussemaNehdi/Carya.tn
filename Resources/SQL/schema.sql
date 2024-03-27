@@ -18,8 +18,7 @@ CREATE TABLE cars (
     image CHAR(255),
     km INT,
     price DECIMAL,
-    owner_id INT,
-    availability BOOLEAN
+    owner_id INT
 );
 
 -- Create command table
@@ -34,6 +33,6 @@ CREATE TABLE command (
 );
 
 -- Add foreign keys
-ALTER TABLE cars ADD FOREIGN KEY (owner_id) REFERENCES users(id);
-ALTER TABLE command ADD FOREIGN KEY (car_id) REFERENCES cars(id);
-ALTER TABLE command ADD FOREIGN KEY (user_id) REFERENCES users(id);
+ALTER TABLE cars ADD FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE CASCADE;
+ALTER TABLE command ADD FOREIGN KEY (car_id) REFERENCES cars(id) ON DELETE CASCADE;
+ALTER TABLE command ADD FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE;
