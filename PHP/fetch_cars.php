@@ -1,3 +1,5 @@
+<!-- TODO : the css design is integrated here inside the brackets <style> transfer them to the style.css file  -->
+<!-- TODO : change the design to fit with the website theme-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
