@@ -1,6 +1,8 @@
 <?php 
     // deletes a car
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
     include 'connect.php';
 
     $car_id = $_GET['id'];

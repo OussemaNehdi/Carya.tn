@@ -1,5 +1,3 @@
-
-
 <section>
     <h2>List of Users</h2>
     <table>

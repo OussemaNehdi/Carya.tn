@@ -1,7 +1,13 @@
 <?php 
+    include 'is_admin.php';
+?>
+
+<?php 
     // Bans a user
     include '../../connect.php';
-    session_start();
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
     // Get user ID from GET parameter
     $user_id = $_GET['id'];
 

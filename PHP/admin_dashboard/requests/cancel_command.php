@@ -1,4 +1,8 @@
 <?php 
+    include 'is_admin.php';
+?>
+
+<?php 
     if(isset($_GET['id'])) {
         include '../../connect.php';
         $id = $_GET['id'];

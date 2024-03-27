@@ -1,14 +1,10 @@
 <?php
     // Include file to check if the user is an admin
     include 'requests/is_admin.php';
-?>
 
-<?php 
     // Include navbar
     include '../../HTML/navbar.php';
-?>
 
-<?php 
     // Include database connection
     include('../connect.php');
 ?>
