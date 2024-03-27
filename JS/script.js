@@ -22,10 +22,10 @@ function displayInfo(type, id) {
 }
 
 // Event listener for hovering over user ID or car ID
-document.querySelectorAll('.user-info, .car-info').forEach(item => {
+document.querySelectorAll('.user-info, .car-info, .car-image').forEach(item => {
     item.addEventListener('mouseover', event => {
-        const type = event.target.classList.contains('user-info') ? 'user' : 'car';
-        const id = event.target.innerHTML;
+        const type = event.target.classList.contains('user-info') ? 'user' : event.target.classList.contains('car-image') ? 'image' : 'car';
+        const id = event.target.getAttribute('data-id');
         displayInfo(type, id);
         document.getElementById('info-popup').style.display = 'block';
         document.getElementById('info-popup').style.left = event.pageX + 'px';

@@ -10,15 +10,21 @@
         $type = $_GET['type'];
         $output = '';
 
-        if ($type == 'car') {
+        if ($type == 'car' || $type == 'image') {
             $sql = "SELECT * FROM cars WHERE id = $id";
             $result = mysqli_query($conn, $sql);
             if (mysqli_num_rows($result) > 0) {
                 $car = mysqli_fetch_assoc($result);
-                $output .= "<h3>Car Information</h3>";
-                $output .= "<p>ID: " . $car['id'] . "</p>";
-                $output .= "<p>Brand: " . $car['brand'] . "</p>";
-                $output .= "<p>Model: " . $car['model'] . "</p>";
+                if ($type == 'car') {
+                    $output .= "<h3>Car Information</h3>";
+                    $output .= "<p>ID: " . $car['id'] . "</p>";
+                    $output .= "<p>Brand: " . $car['brand'] . "</p>";
+                    $output .= "<p>Model: " . $car['model'] . "</p>";
+                }
+                else if ($type == 'image') {
+                    $output = "<img id=\"car-image-{$id}\" class=\"car-image\" src=\"http://localhost/Mini-PHP-Project/Resources/Images/car_images/{$car['image']}\" alt=\"Car Image\">";
+                }
+                
             } else {
                 $output = "Car not found!";
             }
@@ -35,7 +41,6 @@
                 $output = "User not found!";
             }
         }
-
         echo $output;
     }
 ?>

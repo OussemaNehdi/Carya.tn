@@ -21,12 +21,6 @@
     <title>Admin Dashboard</title>
     <!-- Include CSS file -->
     <link rel="stylesheet" href="http://localhost/Mini-PHP-Project/CSS/style.css">
-    <style>
-        /* Hide car images by default */
-        .car-image {
-            display: none;
-        }
-    </style>
 </head>
 <body>
     <h1>Admin Dashboard</h1>

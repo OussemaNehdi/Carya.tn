@@ -29,8 +29,8 @@
                 // Display car command information
                 echo "<tr>";
                 echo "<td>{$command['command_id']}</td>";
-                echo "<td class='car-info' data-car-id='{$command['car_id']}'>{$command['car_id']}</td>";
-                echo "<td class='user-info' data-user-id='{$command['user_id']}'>{$command['user_id']}</td>";
+                echo "<td class='car-info' data-id='{$command['car_id']}'>{$command['car_id']}</td>";
+                echo "<td class='user-info' data-id='{$command['user_id']}'>{$command['user_id']}</td>";
                 echo "<td>{$start_date}</td>";
                 echo "<td>{$end_date}</td>";
                 // Calculate price paid based on price per day and duration

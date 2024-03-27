@@ -26,12 +26,15 @@
 
 <?php 
     include './connect.php';
+    session_start();
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $brand = $_POST['brand'];
         $model = $_POST['model'];
         $color = $_POST['color'];
         $price = $_POST['price'];
         $km = $_POST['km'];
+        $owner_id = $_SESSION['user_id'];
 
         $target_directory = "../Resources/Images/car_images/";
         $target_file = $target_directory . basename($_FILES["car_image"]["name"]);
@@ -59,7 +62,7 @@
         } else {
             if (move_uploaded_file($_FILES["car_image"]["tmp_name"], $target_file)) {
                 $target_file = basename($_FILES["car_image"]["name"]);
-                $sql = "INSERT INTO cars (brand, model, color, price, km, image) VALUES ('$brand', '$model', '$color', '$price', '$km', '$target_file')";
+                $sql = "INSERT INTO cars (brand, model, color, price, km, image, owner_id) VALUES ('$brand', '$model', '$color', '$price', '$km', '$target_file', '$owner_id')";
                 if (mysqli_query($conn, $sql)) {
                     header('Location: http://localhost/Mini-PHP-Project/PHP/admin_dashboard/');
                 } else {
