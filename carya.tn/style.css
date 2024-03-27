@@ -468,3 +468,43 @@ i{
     background-color: #0056b3;
 }
 /* ------------------ End of fetch_cars.php ------------------*/
+
+/* ------------------ rent_car.php ------------------*/
+.rent-body .container {
+    display: flex;
+}
+
+.rent-body .filter-menu {
+    flex: 2;
+    width: 30%;
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+
+.rent-body .car-display {
+    flex: 2;
+    width: 70%;
+    padding: 20px;
+}
+
+.rent-body h2 {
+    margin-top: 0;
+}
+
+.rent-body h3 {
+    margin-bottom: 5px;
+}
+
+.rent-body input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.rent-body input[type="range"] {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.rent-body span.value {
+    font-weight: bold;
+}
+/* ------------------ End of rent_car.php ------------------*/

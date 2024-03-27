@@ -40,11 +40,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header('Location: http://localhost/Mini-PHP-Project/');
                 exit();
             } else {
-                header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=Incorrect password&slide=login');
+                header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=Incorrect_password&slide=login');
             }
         } else {
             echo "User not found";
-            header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=User not found&slide=login');
+            header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=User_not_found&slide=login');
         }
         $stmt->close();
     } else {

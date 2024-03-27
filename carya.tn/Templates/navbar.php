@@ -22,7 +22,7 @@
                     if(isset($_SESSION['user_id'])){
                         echo '<li class="user">';
                         echo '<li class="login-button"><a href="http://localhost/Mini-PHP-Project/PHP/logout.php">Logout</a></li>';
-                        echo '<li><a href="http://localhost/Mini-PHP-Project/php/profile.php">Profile</a></li>';
+                        echo '<li class="profile-button"><a href="http://localhost/Mini-PHP-Project/php/profile.php">Profile</a></li>';
                         echo '</li>';
                     }else{
                         echo '<li class="login-button"><a href="http://localhost/Mini-PHP-Project/HTML/login.php">Login</a></li>';
