@@ -11,8 +11,8 @@ VALUES
 -- Cars table
 INSERT INTO cars (brand, model, color, image, km, price, owner_id)
 VALUES
-('Toyota', 'Corolla', 'Red', 'corolla.jpg', 50000, 15000.00, 1),
-('Honda', 'Civic', 'Blue', 'civic.jpg', 60000, 17000.00, 1),
+('Toyota', 'Corolla', 'Blue', 'corolla.jpg', 50000, 15000.00, 1),
+('Honda', 'Civic', 'Red', 'civic.jpg', 60000, 17000.00, 1),
 ('Ford', 'Fiesta', 'Silver', 'fiesta.jpg', 40000, 12000.00, 3),
 ('Tesla', 'Model S', 'Black', 'model_s.jpg', 20000, 60000.00, 4),
 ('Chevrolet', 'Camaro', 'Yellow', 'camaro.jpg', 30000, 35000.00, 4),
