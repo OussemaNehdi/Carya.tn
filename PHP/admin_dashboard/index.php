@@ -110,46 +110,90 @@
 
     <!-- List of Car Commands -->
     <section>
-        <h2>List of Car Commands</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Command ID</th>
-                    <th>Car ID</th>
-                    <th>User ID</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Price Paid</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $sql = "SELECT * FROM command";
-                $car_commands = mysqli_query($conn, $sql);
-                foreach ($car_commands as $command) {
-                    // Calculate end date based on start date and duration
-                    $start_date = $command['start_date'];
-                    $duration = $command['rental_period']; // Duration in days
-                    $end_date = date('Y-m-d', strtotime($start_date . ' + ' . $duration . ' days'));
-                    $sql = "SELECT * FROM cars WHERE id={$command['car_id']}";
-                    $car = mysqli_query($conn, $sql);
-                    $car = mysqli_fetch_assoc($car);
-                    $price = $car['price'];
-                    echo "<tr>";
-                    echo "<td>{$command['command_id']}</td>";
-                    echo "<td>{$command['car_id']}</td>";
-                    echo "<td>{$command['user_id']}</td>";
-                    echo "<td>{$start_date}</td>";
-                    echo "<td>{$end_date}</td>";
-                    // Calculate price paid based on price per day and duration
-                    $price_paid = $price * $duration;
-                    echo "<td>{$price_paid}</td>";
-                    echo "</tr>";
-                }
-                ?>
-            </tbody>
-        </table>
-    </section>
+    <h2>List of Car Commands</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Command ID</th>
+                <th>Car ID</th>
+                <th>User ID</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Price Paid</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $sql = "SELECT * FROM command";
+            $car_commands = mysqli_query($conn, $sql);
+            foreach ($car_commands as $command) {
+                // Calculate end date based on start date and duration
+                $start_date = $command['start_date'];
+                $duration = $command['rental_period']; // Duration in days
+                $end_date = date('Y-m-d', strtotime($start_date . ' + ' . $duration . ' days'));
+                $sql_car = "SELECT * FROM cars WHERE id={$command['car_id']}";
+                $car = mysqli_query($conn, $sql_car);
+                $car = mysqli_fetch_assoc($car);
+                $price = $car['price'];
+                echo "<tr>";
+                echo "<td>{$command['command_id']}</td>";
+                echo "<td class='car-info' data-car-id='{$command['car_id']}'>{$command['car_id']}</td>";
+                echo "<td class='user-info' data-user-id='{$command['user_id']}'>{$command['user_id']}</td>";
+                echo "<td>{$start_date}</td>";
+                echo "<td>{$end_date}</td>";
+                // Calculate price paid based on price per day and duration
+                $price_paid = $price * $duration;
+                echo "<td>{$price_paid}</td>";
+                echo "</tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+</section>
+
+<!-- User Info and Car Info Display -->
+<div id="info-popup" class="info-popup"></div>
+
+<script>
+    // Function to fetch and display user or car information
+    function displayInfo(type, id) {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("info-popup").innerHTML = this.responseText;
+            }
+        };
+        xmlhttp.open("GET", "fetch_info.php?type=" + type + "&id=" + id, true);
+        xmlhttp.send();
+    }
+
+    // Event listener for hovering over user ID or car ID
+    document.querySelectorAll('.user-info, .car-info').forEach(item => {
+        item.addEventListener('mouseover', event => {
+            const type = event.target.classList.contains('user-info') ? 'user' : 'car';
+            const id = event.target.innerHTML;
+            displayInfo(type, id);
+            document.getElementById('info-popup').style.display = 'block';
+            document.getElementById('info-popup').style.left = event.pageX + 'px';
+            document.getElementById('info-popup').style.top = (event.pageY + 20) + 'px';
+        });
+        item.addEventListener('mouseout', () => {
+            document.getElementById('info-popup').style.display = 'none';
+        });
+    });
+</script>
+
+<style>
+    /* Styling for info popups */
+    .info-popup {
+        position: absolute;
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        display: none;
+    }
+</style>
+
 
          
     <button><a href="http://localhost/Mini-PHP-Project/PHP/add_car.php">Add Car</a></button>
