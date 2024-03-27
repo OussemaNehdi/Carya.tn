@@ -5,8 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $message = $_POST["message"];
     
-    // Email address where you want to receive the message
-    $to = "website@gmail.com";
+    $to = "website@gmail.com"; //this email needs to change to the email you want to receive the contact form submissions
     
     // Subject of the email
     $subject = "New Contact Form Submission";
@@ -16,7 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email_content .= "Email: $email\n\n";
     $email_content .= "Message:\n$message\n";
     
-    // Additional headers
     $headers = "From: $name <$email>";
     
     // Send email
