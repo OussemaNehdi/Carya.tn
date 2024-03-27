@@ -5,7 +5,7 @@ CREATE TABLE users (
     lastName VARCHAR(30),
     password CHAR(255),
     email VARCHAR(50),
-    creation_date DATE,
+    creation_date DATE DEFAULT CURRENT_DATE,
     role VARCHAR(30)
 );
 

@@ -1,18 +1,27 @@
+<?php 
+    if ($_SERVER["REQUEST_METHOD"] == "GET") {
+        if (isset($_GET['message'])) {
+            $_message = $_GET['message'];
+            echo "<script>alert('$_message')</script>";
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="http://localhost/Mini-PHP-Project/CSS/style.css">
-
 </head>
 <body class="login-body">
     <?php include 'navbar.php'; ?>
     <div class="login-container">
         <div class="box">
             <!------------- Login box ------------->
+            <form action="http://localhost/Mini-PHP-Project/PHP/submit_login.php" method="POST">
             <div class="box-login" id="login">
                 <div class="top-header">
                     <h3>Hello, Again</h3>
@@ -20,11 +29,11 @@
                 </div>
                 <div class="input-group">
                     <div class="input-field">
-                        <input type="text" class="input-box" id="logEmail" required>
+                        <input type="text" class="input-box" id="logEmail" name="email" required>
                         <label for="logEmail">Email address</label>
                     </div>
                     <div class="input-field">
-                        <input type="password" class="input-box" id="logPassword" required>
+                        <input type="password" class="input-box" id="logPassword" name="password" required>
                         <label for="logPassword">Password</label>
                         <div class="eye-area">
                             <div class="eye-box" onclick="myLogPassword()">
@@ -44,25 +53,31 @@
                         <a href="#">Forgot password?</a>
                     </div>
                 </div>
-            </div>
+            </form>
+        </div>
 
             <!------------- Sign up box ------------->
             <div class="box-register" id="register">
+                <form action="http://localhost/Mini-PHP-Project/PHP/submit_signup.php" method="POST">
                 <div class="top-header">
                     <h3>Sign Up, Now</h3>
                     <small>We are happy to have you with us.</small>
                 </div>
                 <div class="input-group">
                     <div class="input-field">
-                        <input type="text" class="input-box" id="regUser" required>
-                        <label for="regUser">Username</label>
+                        <input type="text" class="input-box" id="regFname" name="fname" required>
+                        <label for="regFname">First Name</label>
                     </div>
                     <div class="input-field">
-                        <input type="text" class="input-box" id="regEmail" required>
+                        <input type="text" class="input-box" id="regLname" name="lname" required>
+                        <label for="regLname">Last Name</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="text" class="input-box" id="regEmail" name="email" required>
                         <label for="regEmail">Email address</label>
                     </div>
                     <div class="input-field">
-                        <input type="password" class="input-box" id="regPassword" required>
+                        <input type="password" class="input-box" id="regPassword" name="password" required>
                         <label for="regPassword">Password</label>
                         <div class="eye-area">
                             <div class="eye-box" onclick="myRegPassword()">
@@ -76,9 +91,10 @@
                         <label for="formCheck-2">Remember me</label>
                     </div>
                     <div class="input-field">
-                        <input type="submit" class="input-submit" value="Sign In">
+                        <input type="submit" class="input-submit" value="Sign Up">
                     </div>
                 </div>
+            </form>
             </div>
 
             <!------------- Switch slide ------------->

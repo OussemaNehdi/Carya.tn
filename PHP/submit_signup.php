@@ -24,14 +24,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
-                echo "User already exists";
+                header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=User already exists');
                 exit();
             }
             $stmt->close();
 
             //checking if password is at least 8 characters
             if (strlen($password) < 8) {
-                echo "Password must have at least 8 characters";
+                header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=Password must be at least 8 characters');
                 exit();
             } else {
                 $password = trim($password);
@@ -42,13 +42,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
             //inserting user into database
-            $sql = "INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO users (firstName, lastName, email, password) VALUES (?, ?, ?, ?)";
             $stmt = mysqli_prepare($con, $sql);
 
             if ($stmt) {
-                mysqli_stmt_bind_param($stmt, "ssss", $first_name, $last_name, $email, $hashed_password);
+                mysqli_stmt_bind_param($stmt, "ssss", $first_name, $last_name, $email, $password);
                 if (mysqli_stmt_execute($stmt)) {
-                    echo "Registration successful";
+                    header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=Account created successfully');
                 } else {
                     echo "Error: " . mysqli_stmt_error($stmt);
                 }
@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_close($con);
         }
     } else {
-        echo "All fields are required";
+        header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=All fields are required');
     }
 } else {
     echo "Invalid request";

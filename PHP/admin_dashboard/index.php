@@ -1,3 +1,6 @@
+<?php
+    include 'is_admin.php';
+?>
 
 <?php 
     include '../../HTML/navbar.php';

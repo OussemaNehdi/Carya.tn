@@ -27,16 +27,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
             //if (password_verify($password, $data['password'])) {     (we can use this method too)
-            if ($data['password'] === $hashed_password) {
+            if ($data['password'] === $password) {
+                if ($data['role'] === 'banned') {
+                    header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=You are banned');
+                    exit();
+                }
+                
                 $_SESSION['user'] = $data['firstName'];
                 $_SESSION['user_id'] = $data['id'];
-                header('Location: home.php');
+                $_SESSION['role'] = $data['role'];
+
+                header('Location: http://localhost/Mini-PHP-Project/');
                 exit();
             } else {
-                echo "Incorrect password";
+                header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=Incorrect password');
             }
         } else {
             echo "User not found";
+            header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=User not found');
         }
         $stmt->close();
     } else {
