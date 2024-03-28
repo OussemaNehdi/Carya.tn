@@ -37,12 +37,12 @@ class User {
     }
 
     // Method to add a user
-    public static function addUser($firstName, $lastName, $password, $email) {
+    public static function addUser($firstName, $lastName, $password, $email, $role) {
         global $pdo;
         try {
-            $sql = "INSERT INTO users (firstName, lastName, password, email) VALUES (?, ?, ?, ?)";
+            $sql = "INSERT INTO users (firstName, lastName, password, email, role) VALUES (?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
-            $stmt->execute([$firstName, $lastName, $password, $email]);
+            $stmt->execute([$firstName, $lastName, $password, $email, $role]);
             return $stmt->rowCount() > 0;
         } catch (PDOException $e) {
             // Log error and rethrow the exception
@@ -106,6 +106,32 @@ class User {
             throw $e;
         }
     }
+
+    public static function getUserByEmail($email) {
+        global $pdo;
+        try {
+            $sql = "SELECT * FROM users WHERE email = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$email]);
+            $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($userData) {
+                $user = User::getUserFromRow($userData);
+                return $user;
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching user by email: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+
+
+
+
 
     // Method to ban a user by ID
     public function banUserById() {

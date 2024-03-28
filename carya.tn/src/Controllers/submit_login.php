@@ -1,11 +1,15 @@
 <?php
+
+
 // Check if the session is not started
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
 // Include the database connection
-include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php'; // Include the file with database connection
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php';
+// Include the User model
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['email']) && isset($_POST['password'])) {
@@ -13,31 +17,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
         $password = $_POST['password'];
 
-        // Prepare and execute the query
-        $sql = "SELECT * FROM users WHERE email = ?";
-        $stmt = $pdo->prepare($sql);
-        try {
-            $stmt->execute([$email]);
-        } catch (PDOException $e) {
-            echo "Error executing query: " . $e->getMessage();
-            exit();
-        }
-        $data = $stmt->fetch();
-
+        // Get the user from the database
+        $user = User::getUserByEmail($email);
+        
         // If the user exists
-        if ($data) {
+        if ($user) {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             // Check if the password is correct
-            if ($data['password'] === $password) {
+            if ($user->password === $hashed_password) {
                 // Check if the user is banned
-                if ($data['role'] === 'banned') {
+                if ($user->role === 'banned') {
                     header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=You_are_banned&slide=login');
                     exit();
                 }
                 // Set the session variables
-                $_SESSION['user'] = $data['firstName'];
-                $_SESSION['user_id'] = $data['id'];
-                $_SESSION['role'] = $data['role'];
+                $_SESSION['user'] = $user->firstName;
+                $_SESSION['user_id'] = $user->id;
+                $_SESSION['role'] = $user->role;
 
                 header('Location: http://localhost/Mini-PHP-Project/carya.tn/index.php');
                 exit();
