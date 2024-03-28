@@ -1,3 +1,8 @@
+<?php 
+$title="Login";
+$class = "login-body"; 
+?>
+
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if (isset($_GET['message'])) {
@@ -7,19 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="http://localhost/Mini-PHP-Project/CSS/style.css">
-</head>
-
-<body class="login-body">
-    <?php include 'navbar.php'; ?>
+<?php ob_start(); ?>
     <div class="login-container">
         <div class="box">
             <!------------- Login box ------------->
@@ -108,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             <div class="btn-active" id="btn"></div>
         </div>
     </div>
-    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var slide = '<?php echo isset($_GET["slide"]) ? $_GET["slide"] : "login"; ?>';
@@ -168,6 +161,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             }
         }
     </script>
-</body>
+    
+<?php $content = ob_get_clean();?>
 
-</html>
+<?php require('layout.php')?>

@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us</title>
-    <link rel="stylesheet" href="http://localhost/Mini-PHP-Project/CSS/style.css">
-</head>
-<body>
-    <?php include 'navbar.php'; ?>
-    
+<?php 
+$title="Contact Us";
+$class="";
+?>
+
+<?php ob_start(); ?>
     <div class="contact_container">
         <h2>Contact Us</h2>
         <?php
@@ -23,7 +18,7 @@
         ?>
         <p>We'd love to hear from you! Please fill out the form below to get in touch with us.</p>
         
-        <form action="http://localhost/Mini-PHP-Project/PHP/submit_contact.php" method="POST">
+        <form action="http://localhost/Mini-PHP-Project/carya.tn/src/Controllers/submit_contact.php" method="POST">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
             
@@ -36,7 +31,6 @@
             <button type="submit">Send Message</button>
         </form>
     </div>
-    <script src="http://localhost/Mini-PHP-Project/JS/script.js"></script>
+<?php $content = ob_get_clean();?>
 
-</body>
-</html>
+<?php require('layout.php')?>
