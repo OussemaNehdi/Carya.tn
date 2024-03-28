@@ -1,3 +1,7 @@
+<?php
+    include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/controllers/is_admin.php';
+?>
+
 <?php 
 $title="Admin";
 $class=""
@@ -61,11 +65,11 @@ $class=""
                     // Display appropriate action based on user's role
                     echo "<td>";
                     if ($user->role== 'banned') {
-                        echo "<a href=\"requests/unban_user.php?id={$user->id}\">Unban</a>";
+                        echo "<a href=\"http://localhost/Mini-PHP-Project/carya.tn/src/controllers/unban_user.php?id={$user->id}\">Unban</a>";
                     } else if ($user->role == 'admin') {
                         echo "Admin";
                     } else {
-                        echo "<a href=\"requests/ban_user.php?id={$user->id}\">Ban</a>";
+                        echo "<a href=\"http://localhost/Mini-PHP-Project/carya.tn/src/controllers/ban_user.php?id={$user->id}\">Ban</a>";
                     }
                     echo "</td>";
                     echo "</tr>";
@@ -129,10 +133,10 @@ $class=""
                 // Display actions based on availability
                 echo "<td>";
                 if ($available) {
-                    echo "<a href='http://localhost/Mini-PHP-Project/PHP/delete_car.php?id={$car->id}'>Delete</a>";
+                    echo "<a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/delete_car.php?id={$car->id}'>Delete</a>";
                     // Add update option if the user is the owner of the car
                     if ($car->owner_id == $_SESSION['user_id']) {
-                        echo " | <a href='../update_car.php?id={$car->id}'>Update</a>";
+                        echo " | <a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/update_car.php?id={$car->id}'>Update</a>";
                     }
                 } else {
                     echo "Car is in use";
@@ -174,8 +178,6 @@ try {
         // Fetch user information for the command
         $user = User::getUserById($car_command->user_id);
         
-        // Calculate end date based on start date and duration
-        $end_date = date('Y-m-d', strtotime($car_command->start_date . ' + ' . $car_command->rental_period . ' days'));
         // Calculate price paid based on price per day and duration
         $price_paid = $car->price * $car_command->rental_period;
 
@@ -185,9 +187,9 @@ try {
         echo "<td class='car-info' data-id='{$car->id}'>{$car->id}</td>";
         echo "<td class='user-info' data-id='{$user->id}'>{$user->id}</td>";
         echo "<td>{$car_command->start_date}</td>";
-        echo "<td>{$end_date}</td>";
+        echo "<td>{$car_command->end_date}</td>";
         echo "<td>{$price_paid}</td>";
-        echo "<td><a href=\"http://localhost/Mini-PHP-Project/PHP/admin_dashboard/requests/cancel_command.php?id={$car_command->command_id}\">Cancel Command</a></td>";
+        echo "<td><a href=\"http://localhost/Mini-PHP-Project/carya.tn/src/controllers/cancel_command.php?id={$car_command->command_id}\">Cancel Command</a></td>";
         echo "</tr>";
     }
     echo "</tbody>";
@@ -203,7 +205,7 @@ try {
     <button><a href="http://localhost/Mini-PHP-Project/PHP/add_car.php">Add Car</a></button>
     
     <!-- Include JavaScript file -->
-    <script src="http://localhost/Mini-PHP-Project/JS/script.js"></script>
+    <script src="http://localhost/Mini-PHP-Project/carya.tn/script.js"></script>
 </body>
 </html>
 <?php $content = ob_get_clean();?>
