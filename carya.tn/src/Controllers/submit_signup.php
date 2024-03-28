@@ -36,13 +36,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $result = $stmt->fetch();
         if ($result) {
-            header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=User already exists&slide=register');
+            header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=User already exists&slide=register');
             exit();
         }
 
         // Validate the password
         if (strlen($password) < 8) {
-            header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=Password must be at least 8 characters&slide=register');
+            header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=Password must be at least 8 characters&slide=register');
             exit();
         } else {
             $password = trim($password);
@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($stmt) {
             if ($stmt->execute([$first_name, $last_name, $email, $hashed_password, $role])) {
-                header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=Account created successfully');
+                header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=Account created successfully');
                 exit();
             } else {
                 echo "Error: " . $stmt->errorInfo()[2];
@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Error in preparing SQL statement: " . $pdo->errorInfo()[2];
         }
     } else {
-        header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=All fields are required&slide=register');
+        header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=All fields are required&slide=register');
         exit();
     }
 } else {
