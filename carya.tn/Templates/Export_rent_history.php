@@ -30,7 +30,7 @@ $pdf->SetFont('helvetica', '', 12);
 $pdf->Cell(0, 10, 'Renting History', 0, 1, 'C');
 
 // Add a table with the renting history data
-$header = array('Rent ID', 'Car ID', 'Rental Date', 'Start Date', 'End Date');
+$header = array('Rent ID', 'Brand', 'Rental Date', 'Start Date', 'End Date');
 $pdf->SetFillColor(255, 255, 255);
 $pdf->SetTextColor(0);
 $pdf->SetDrawColor(0, 0, 0);
@@ -55,6 +55,65 @@ foreach ($rentingHistory as $row) {
     $fill = !$fill;
 }
 
-// Output the PDF
-$pdf->Output('renting_history.pdf', 'D');
-?>
+// Fetch the car names from the "cars" table
+$query = 'SELECT brand, model, price FROM cars WHERE id = :car_id';
+$stmt = $pdo->prepare($query);
+
+// Loop through the renting history and replace car ID with car details
+foreach ($rentingHistory as &$row) {
+    $stmt->bindParam(':car_id', $row['car_id']);
+    $stmt->execute();
+    $carDetails = $stmt->fetch(PDO::FETCH_ASSOC);
+    $row['car_id'] = $carDetails['brand'];
+    $row['car_model'] = $carDetails['model'];
+    $row['car_price'] = $carDetails['price'];
+}
+
+unset($row); // Unset the reference to the last element
+
+
+$html = '<style>';
+$html .= 'table {';
+$html .= '    width: 100%;';
+$html .= '    border-collapse: collapse;';
+$html .= '}';
+$html .= 'th, td {';
+$html .= '    padding: 8px;';
+$html .= '    text-align: left;';
+$html .= '    border-bottom: 1px solid #ddd;';
+$html .= '}';
+$html .= 'th {';
+$html .= '    background-color: #f2f2f2;';
+$html .= '}';
+$html .= '</style>';
+
+$html .= '<table>';
+$html .= '<tr>';
+$html .= '<th>Rent ID</th>';
+$html .= '<th>Brand</th>';
+$html .= '<th>Model</th>';
+$html .= '<th>Rental Date</th>';
+$html .= '<th>Start Date</th>';
+$html .= '<th>End Date</th>';
+$html .= '<th>Price</th>';
+$html .= '</tr>';
+
+foreach ($rentingHistory as $row) {
+    $html .= '<tr>';
+    $html .= '<td>' . $row['command_id'] . '</td>';
+    $html .= '<td>' . $row['car_id'] . '</td>';
+    $html .= '<td>' . $row['car_model'] . '</td>';  
+
+    $html .= '<td>' . $row['rental_date'] . '</td>';
+    $html .= '<td>' . $row['start_date'] . '</td>';
+    $html .= '<td>' . $row['end_date'] . '</td>';
+    $html .= '<td>' . $row['car_price'] . '</td>';
+    $html .= '</tr>';
+}
+
+$html .= '</table>';
+
+// Output the HTML table
+echo $html;
+
+

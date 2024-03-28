@@ -1,10 +1,11 @@
 <?php 
     //this file will include the menu only and the fetching operation will be included from fetch_cars
-    require_once('connect.php');
-    include 'C:\xampp\htdocs\Mini-PHP-Project\HTML\navbar.php';
+    require_once('../src/Lib/connect.php');
+    //include 'C:\xampp\htdocs\Mini-PHP-Project\HTML\navbar.php';
     // Fetch distinct values for brands, models, colors, maximum kilometers, and price ranges from the cars table
+    
     $sql_brands = "SELECT DISTINCT brand FROM cars";
-    $result_brands = mysqli_query($conn, $sql_brands);
+    $result_brands = $pdo->query($sql_brands);
     $brands = [];
     while ($row = mysqli_fetch_assoc($result_brands)) {
         $brands[] = $row['brand'];
