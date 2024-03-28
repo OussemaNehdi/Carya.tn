@@ -38,9 +38,13 @@
     <div class="car-container">
         <?php
         require_once('../src/Lib/connect.php');
+        include '../src/Model/Car.php';
+
+        $cars=Car::getAllCars();
+
 
         // Constructing the SQL query based on filter criteria
-        $sql = "SELECT * FROM cars WHERE 1";
+       
 /*
         // Filtering by brand
         if (!empty($_GET['brand'])) {
@@ -74,9 +78,9 @@
             $sql .= " AND price BETWEEN $price_min AND $price_max";
         }*/
 
-        $result = $pdo->query($sql);
+        
 
-        while ($car = $result->fetch(PDO::FETCH_ASSOC)) :
+        foreach ($cars as $car ) :
         ?>
         <div class="car">
             <img src="<?php echo '../Resources/car_images/' . $car['image']; ?>" alt="<?php echo $car['brand'] . ' ' . $car['model']; ?>">
@@ -91,7 +95,7 @@
                 <button class="rent-button" onclick="showPopup(<?php echo $car['id']; ?>)">Rent</button>
             </div>
         </div>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
     </div>
 
     <!-- Popup for renting form -->
