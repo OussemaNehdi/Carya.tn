@@ -1,12 +1,9 @@
 <?php
     // Include file to check if the user is an admin
-    include 'requests/is_admin.php';
-
+    
     // Include navbar
-    include '../../HTML/navbar.php';
+    include 'navbar.php';
 
-    // Include database connection
-    include('../connect.php');
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +19,54 @@
     <h1>Admin Dashboard</h1>
 
     <!-- Include user list -->
-    <?php include 'user_list.php'; ?>
+    <section>
+    <h2>List of Users</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Email</th>
+                <th>Created</th>
+                <th>Role</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+                // Include User class
+                include '../src/Model/User.php';
+
+                // Get all users
+                $users = User::getAllUsers();
+
+                foreach ($users as $user) {
+                    echo "<tr>";
+                    echo "<td>{$user['id']}</td>";
+                    echo "<td>{$user['firstName']}</td>";
+                    echo "<td>{$user['lastName']}</td>";
+                    echo "<td>{$user['email']}</td>";
+                    echo "<td>{$user['creation_date']}</td>";
+                    echo "<td>{$user['role']}</td>";
+
+                    // Display appropriate action based on user's role
+                    echo "<td>";
+                    if ($user['role'] == 'banned') {
+                        echo "<a href=\"requests/unban_user.php?id={$user['id']}\">Unban</a>";
+                    } else if ($user['role'] == 'admin') {
+                        echo "Admin";
+                    } else {
+                        echo "<a href=\"requests/ban_user.php?id={$user['id']}\">Ban</a>";
+                    }
+                    echo "</td>";
+                    echo "</tr>";
+                }
+            ?>
+        </tbody>
+    </table>
+</section>
+
 
     <!-- Include car list -->
     <?php include 'car_list.php'; ?>

@@ -1,4 +1,6 @@
 <?php
+include '../Lib/connect.php'; // Include the file with database connection
+
 class User {
     // Properties
     public $id;
@@ -20,11 +22,33 @@ class User {
         $this->role = $role;
     }
 
-    // Methods
+    // Method to get full name
     public function getFullName() {
         return $this->firstName . ' ' . $this->lastName;
     }
 
-    // Additional methods can be added as needed
+    // Method to get all users
+    public static function getAllUsers() {
+        global $pdo; // Use the database connection from connect.php
+        $sql = "SELECT * FROM users";
+        $stmt = $pdo->query($sql);
+        $users = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $users[] = new User($row['id'], $row['firstName'], $row['lastName'], $row['password'], $row['email'], $row['creation_date'], $row['role']);
+        }
+        return $users;
+    }
+
+    // Method to delete a user by ID
+    public static function deleteUserById($userId) {
+        global $pdo; // Use the database connection from connect.php
+        $sql = "DELETE FROM users WHERE id = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$userId]);
+        // Check if any rows were affected (user deleted)
+        return $stmt->rowCount() > 0;
+    }
+
 }
+
 ?>
