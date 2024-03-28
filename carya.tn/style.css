@@ -241,9 +241,10 @@ h1{
 }
 
 .login-body {
-    background-image: url(http://localhost/Mini-PHP-Project/Resources/images/wallpaper-login.jpg);
-    background-size: cover;
+    background-image: url("http://localhost/Mini-PHP-Project/carya.tn/Resources/wallpaper-login.jpg");
+    background-position: center;
     background-repeat: no-repeat;
+    background-size: cover;
     background-attachment: fixed;
 }
 
@@ -258,11 +259,11 @@ h1{
     display: flex;
     flex-direction: row;
     position: relative;
-    padding: 60px 20px 30px 20px;
+    padding: 0px 20px 30px 20px;
     height: 620px;
     width: 350px;
     border-radius: 30px;
-    background-color: rgba(255, 220, 220, 0.4);
+    background-color: rgba(255, 220, 220, 0.406);
     -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
     border: 3px solid rgba(255, 255, 255, 0.2);
@@ -322,41 +323,28 @@ h1{
     color: #c12828;
     font-weight: 500;
 }
-
-.eye-area{
-    position: absolute;
-    right: 25px;
-    top: 25px;
-}
-
-.eye-box{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-i{
-    position: absolute;
-    color: #444444;
-    cursor: pointer;
-}
-
-#eye, #eye-2{
-    opacity: 1;
-}
-#eye-slash, #eye-slash-2{
-    opacity: 0;
-}
 .remember{
     display: flex;
-    font-size: 14px;
-    margin: 12px 0 30px 0;
+    align-items: center;
+    font-size: 13px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     color: #000000;
+}
+.remember label{
+    margin-top: 11px;
 }
 .check{
     margin-right: 8px;
     width: 14px;
+}
+.radio-buttons{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.radio-buttons label{
+    margin-top: 11px;
 }
 .input-submit{
     width: 100%;
@@ -372,12 +360,12 @@ i{
     transition: .4s;
 }
 .input-submit:hover{
-    background:  #ee622be3;
+    background:  #db3e00;
     box-shadow: 0px 4px 20px rgba(62, 9, 9, 0.32);
 }
 .forgot{
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     margin-top: 40px;
 }
@@ -385,19 +373,17 @@ i{
     text-decoration: none;
     color: #000;
 }
-
 .switch{
     display: flex;
     position: absolute;
-    bottom: 20px;  
+    bottom: 30px;
     left: 25px;
     width: 85%;
     height: 50px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: 10px;
     border-radius: 10px;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
-
     overflow: hidden;
 }
 .switch a{
@@ -406,23 +392,54 @@ i{
     align-items: center;
     font-size: 14px;
     font-weight: 500;
-    color: #000000;
+    color: #000;
     text-decoration: none;
     width: 50%;
+    height: 50px;
     border-radius: 10px;
     z-index: 10;
 }
-
-.btn-active{
+#btn{
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 0px;   
+    left: 0px;
     width: 145px;
     height: 50px;
     background: #cccccd;
     border-radius: 10px;
-    box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 0px 12px rgba(0, 0, 0, 0.1);
     transition: .5s ease-in-out;
+}
+.eye-area{
+    position: absolute;
+    top: 25px;
+    right: 25px;
+}
+.eye-box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    
+}
+i{
+    position: absolute;
+    color: #444444;
+    cursor: pointer;
+}
+#eye,#eye-2{
+    opacity: 1;
+}
+#eye-slash,#eye-slash-2{
+    opacity: 0;}
+@media only screen and (max-width: 576px){
+    .box{
+        margin: 0 5px;
+    }
+    #btn{
+        position: absolute;
+        width: 153px;
+    }
 }
 /* End of login.php & signup */
 
