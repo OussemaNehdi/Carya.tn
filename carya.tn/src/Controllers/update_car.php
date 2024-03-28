@@ -4,15 +4,18 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Controllers/
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
-}
+
+}// The $refferer variable holds the URL of the page that referred the user to the current page. 
+// It is used to redirect the user back to the page they came from after the operation is complete.
+$refferer = isset($_POST['refferer']) ? parse_url($_POST['refferer'], PHP_URL_PATH) : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'http://localhost/Mini-PHP-Project/carya.tn/index.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check for required variables
     if (!isset($_POST['car_id']) || !isset($_POST['brand']) || !isset($_POST['model']) || 
         !isset($_POST['color']) || !isset($_POST['price']) || !isset($_POST['km']) || 
-        !isset($_FILES['image']) || !isset($_POST['refferer'])) {
+        !isset($_FILES['image'])) {
         // Redirect with an error message if any required variable is missing
-        header('Location: http://localhost/Mini-PHP-Project/carya.tn/index.php?message=Missing%20required%20variables%20for%20updating%20car.');
+        header("Location: $refferer?message=Missing%20required%20variables%20for%20updating%20car.");
         exit(); // Ensure script execution stops after redirect
     }
 
@@ -45,23 +48,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $car = Car::getCarById($car_id);
     $owner_id = $car->owner_id;
     if ($owner_id != $_SESSION['user_id']) {
-        header('Location: http://localhost/Mini-PHP-Project/?error=You%20do%20not%20have%20permission%20to%20update%20this%20car.');
+        header("Location: $refferer?message=You%20do%20not%20have%20permission%20to%20update%20this%20car.");
         exit(); // Ensure script execution stops after redirect
     }
 
     // Check if the car is available for update
     if (!$car->isCarAvailable()) {
-        header('Location: http://localhost/Mini-PHP-Project/?error=Car%20is%20currently%20in%20use%20and%20cannot%20be%20updated.');
+        header("Location: $refferer?error=Car%20is%20currently%20in%20use%20and%20cannot%20be%20updated.");
         exit(); // Ensure script execution stops after redirect
     }
 
     try {
         // Update car details
         $car->updateCar($brand, $model, $color, $file_name, $km, $price);
-        header('Location: http://localhost/Mini-PHP-Project/?message=Car%20updated%20successfully!');
+        header("Location: $refferer?message=Car%20updated%20successfully!");
         exit(); // Ensure script execution stops after redirect
     } catch (Exception $e) {
-        header('Location: http://localhost/Mini-PHP-Project/?error=' . urlencode($e->getMessage()));
+        header("Location: $refferer?message=" . urlencode($e->getMessage()));
         exit(); // Ensure script execution stops after redirect
     }
 }

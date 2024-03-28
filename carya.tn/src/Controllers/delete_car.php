@@ -9,10 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     exit("Method Not Allowed");
 }
 
+// The $refferer variable holds the URL of the page that referred the user to the current page. 
+// It is used to redirect the user back to the page they came from after the operation is complete.
+$refferer = isset($_SERVER['HTTP_REFERER']) ? parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH) : 'http://localhost/Mini-PHP-Project/carya.tn/temp.php';
+
 // Check if the 'id' parameter is set in the GET request
 if (!isset($_GET['id'])) {
     // Redirect with an error message if the car ID is not set
-    header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/admin_dashboard.php?error=Error:%20Car%20ID%20not%20set.');
+    header("Location: $refferer ?error=Error:%20Car%20ID%20not%20set.");
     exit(); // Ensure script execution stops after redirect
 }
 
@@ -28,7 +32,7 @@ try {
         // Check if the car is available
         if (!$car->isCarAvailable()) {
             // Redirect with an error message if the car is not available
-            header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/admin_dashboard.php?error=Error:%20Car%20is%20currently%20in%20use%20and%20cannot%20be%20deleted.');
+            header("Location: $refferer?message=Error:%20Car%20is%20currently%20in%20use%20and%20cannot%20be%20deleted.");
             exit(); // Ensure script execution stops after redirect
         }
 
@@ -45,20 +49,20 @@ try {
         unlink($image_path);
 
         // Redirect with a success message
-        header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/admin_dashboard.php?message=Car%20deleted%20successfully!');
+        header("Location: $refferer?message=Car%20deleted%20successfully!");
         exit(); // Ensure script execution stops after redirect
     } else {
         // Redirect with an error message if the car does not exist
-        header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/admin_dashboard.php?error=Error:%20Car%20not%20found.');
+        header("Location: $refferer?error=Error:%20Car%20not%20found.");
         exit(); // Ensure script execution stops after redirect
     }
 } catch (PDOException $e) {
     // Redirect with an error message if a PDO exception occurs
-    header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/admin_dashboard.php?error=Error:%20' . urlencode($e->getMessage()));
+    header("Location: $refferer?error=Error:%20" . urlencode($e->getMessage()));
     exit(); // Ensure script execution stops after redirect
 } catch (Exception $ex) {
     // Redirect with an error message if any other exception occurs
-    header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/admin_dashboard.php?error=Error:%20' . urlencode($ex->getMessage()));
+    header("Location: $refferer?error=Error:%20" . urlencode($ex->getMessage()));
     exit(); // Ensure script execution stops after redirect
 }
 ?>
