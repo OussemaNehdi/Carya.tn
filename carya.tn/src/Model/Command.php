@@ -29,10 +29,20 @@ class Command {
         $stmt = $pdo->query($sql);
         $commands = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $commands[] = $row; // Store each row as an associative array
+            $command = new Command(
+                $row['command_id'],
+                $row['car_id'],
+                $row['user_id'],
+                $row['rental_date'],
+                $row['start_date'],
+                $row['end_date'],
+                $row['rental_period']
+            );
+            $commands[] = $command; // Store each Command object
         }
         return $commands;
     }
+    
 
 
     // Method to delete a rental command by ID
@@ -43,6 +53,16 @@ class Command {
         $stmt->execute([$commandId]);
         // Check if any rows were affected (rental command deleted)
         return $stmt->rowCount() > 0;
+    }
+
+    public static function isCarAvailable($car_id, $current_date) {
+        global $pdo; // Use the database connection from connect.php
+        $car_commanded_sql = "SELECT * FROM command WHERE car_id=? AND start_date <= ? AND end_date >= ?";
+        $car_commanded_stmt = $pdo->prepare($car_commanded_sql);
+        $car_commanded_stmt->execute([$car_id, $current_date, $current_date]);
+        $car_commanded = $car_commanded_stmt->fetchAll(PDO::FETCH_ASSOC);
+        $available = count($car_commanded) == 0;
+        return $available;
     }
 
 }
