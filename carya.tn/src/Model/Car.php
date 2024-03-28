@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Lib/connect.php'; // Include the file with database connection
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php'; // Include the file with database connection
 
 class Car {
     // Properties
@@ -31,10 +31,11 @@ class Car {
         $stmt = $pdo->query($sql);
         $cars = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $cars[] = new Car($row['id'], $row['brand'], $row['model'], $row['color'], $row['image'], $row['km'], $row['price'], $row['owner_id']);
+            $cars[] = $row; // Store each row as an associative array
         }
         return $cars;
     }
+
 
     // Method to delete a car by ID
     public static function deleteCarById($carId) {

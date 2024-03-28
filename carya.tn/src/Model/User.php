@@ -1,5 +1,6 @@
 <?php
-include '../Lib/connect.php'; // Include the file with database connection
+
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php'; // Include the file with database connection
 
 class User {
     // Properties
@@ -34,10 +35,11 @@ class User {
         $stmt = $pdo->query($sql);
         $users = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $users[] = new User($row['id'], $row['firstName'], $row['lastName'], $row['password'], $row['email'], $row['creation_date'], $row['role']);
+            $users[] = $row; // Store each row as an associative array
         }
         return $users;
     }
+
 
     // Method to delete a user by ID
     public static function deleteUserById($userId) {

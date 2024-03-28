@@ -1,5 +1,5 @@
 <?php
-include '../Lib/connect.php'; // Include the file with database connection
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php'; // Include the file with database connection
 
 class Command {
     // Properties
@@ -25,14 +25,15 @@ class Command {
     // Method to get all rental commands
     public static function getAllRentalCommands() {
         global $pdo; // Use the database connection from connect.php
-        $sql = "SELECT * FROM rental_commands";
+        $sql = "SELECT * FROM command";
         $stmt = $pdo->query($sql);
         $commands = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $commands[] = new Command($row['command_id'], $row['car_id'], $row['user_id'], $row['rental_date'], $row['start_date'], $row['end_date'], $row['rental_period']);
+            $commands[] = $row; // Store each row as an associative array
         }
         return $commands;
     }
+
 
     // Method to delete a rental command by ID
     public static function deleteRentalCommandById($commandId) {
