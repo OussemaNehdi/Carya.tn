@@ -44,7 +44,7 @@ try {
         $user = new User($user_data['id'], $user_data['firstName'], $user_data['lastName'], $user_data['password'], $user_data['email'], $user_data['creation_date'], $user_data['role']);
 
         // Create object of RentalCommand class
-        $car_command = new RentalCommand($command_row['command_id'], $car, $user, $command_row['rental_date'], $command_row['start_date'], $command_row['end_date'], $command_row['rental_period']);
+        $car_command = new Command($command_row['command_id'], $car, $user, $command_row['rental_date'], $command_row['start_date'], $command_row['end_date'], $command_row['rental_period']);
 
         // Calculate end date based on start date and duration
         $end_date = date('Y-m-d', strtotime($car_command->start_date . ' + ' . $car_command->rental_period . ' days'));

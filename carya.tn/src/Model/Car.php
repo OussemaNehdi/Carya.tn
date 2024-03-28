@@ -31,11 +31,21 @@ class Car {
         $stmt = $pdo->query($sql);
         $cars = [];
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $cars[] = $row; // Store each row as an associative array
+            $car = new Car(
+                $row['id'],
+                $row['brand'],
+                $row['model'],
+                $row['color'],
+                $row['image'],
+                $row['km'],
+                $row['price'],
+                $row['owner_id']
+            );
+            $cars[] = $car; // Store each Car object
         }
         return $cars;
     }
-
+    
 
     // Method to delete a car by ID
     public static function deleteCarById($carId) {
@@ -47,6 +57,32 @@ class Car {
         return $stmt->rowCount() > 0;
     }
 
+    public static function getCarById($car_id) {
+        global $pdo;
+        $sql = "SELECT * FROM cars WHERE id = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$car_id]);
+        $car_data = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($car_data) {
+            $car = new Car(
+                $car_data['id'],
+                $car_data['brand'],
+                $car_data['model'],
+                $car_data['color'],
+                $car_data['image'],
+                $car_data['km'],
+                $car_data['price'],
+                $car_data['owner_id']
+            );
+            return $car;
+        } else {
+            return null; // Return null if no car found with the given ID
+        }
+    }
+    
+    
+    
 }
 
 ?>
