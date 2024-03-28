@@ -17,7 +17,7 @@ function displayInfo(type, id) {
             document.getElementById("info-popup").innerHTML = this.responseText;
         }
     };
-    xmlhttp.open("GET", "http://localhost/Mini-PHP-Project/PHP/admin_dashboard/requests/fetch_info.php?type=" + type + "&id=" + id, true);
+    xmlhttp.open("GET", "http://localhost/Mini-PHP-Project/carya.tn/src/controllers/fetch_info.php?type=" + type + "&id=" + id, true);
     xmlhttp.send();
 }
 
