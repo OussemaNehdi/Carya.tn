@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt = $pdo->prepare($sql);
 
         if ($stmt) {
-            if ($stmt->execute([$first_name, $last_name, $email, $hashed_password, $role])) {
+            if ($stmt->execute([$first_name, $last_name, $email, $password, $role])) {
                 header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=Account created successfully');
                 exit();
             } else {

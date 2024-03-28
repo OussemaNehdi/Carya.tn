@@ -48,7 +48,7 @@ class Command {
     // Method to delete a rental command by ID
     public static function deleteRentalCommandById($commandId) {
         global $pdo; // Use the database connection from connect.php
-        $sql = "DELETE FROM rental_commands WHERE command_id = ?";
+        $sql = "DELETE FROM command WHERE command_id = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$commandId]);
         // Check if any rows were affected (rental command deleted)

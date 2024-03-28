@@ -1,37 +1,29 @@
 <?php
+
+    include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php'; // Include the file with database connection
+    include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php'; // Include the file with the Car class
+
     // deletes a car
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    include 'connect.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php';
 
     $car_id = $_GET['id'];
-    $sql_select = "SELECT * FROM cars WHERE id=:car_id";
-    $stmt_select = $pdo->prepare($sql_select);
-    $stmt_select->bindParam(':car_id', $car_id);
-    $stmt_select->execute();
-    $car = $stmt_select->fetch(PDO::FETCH_ASSOC);
+    
+    $car = Car::getCarById($car_id);
 
-    $owner_id = $car['owner_id'];
+    $owner_id = $car->owner_id;
 
-    if ($_SESSION["role"] != "admin" && $owner_id != $_SESSION['user_id']) {
-        header('Location: http://localhost/Mini-PHP-Project/index.php?message=You are not allowed to delete this car!');
-        exit(); // Ensure script execution stops after redirect
-    }
-
-    $image_path = "../Resources/Images/car_images/{$car['image']}";
-
-    $sql_delete = "DELETE FROM cars WHERE id=:car_id";
-    $stmt_delete = $pdo->prepare($sql_delete);
-    $stmt_delete->bindParam(':car_id', $car_id);
+    $image_path =  $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/Resources/car_images/' . $car->image;
     
     try {
-        $stmt_delete->execute();
+        Car::deleteCarById($car_id);
         
         // deletes the image file from the server
         unlink($image_path);
         
-        header('Location: http://localhost/Mini-PHP-Project/index.php?message=Car deleted successfully!');
+        header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/admin_dashboard.php?message=Car_deleted');
         exit(); // Ensure script execution stops after redirect
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();

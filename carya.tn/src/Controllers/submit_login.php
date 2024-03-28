@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($data) {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
             // Check if the password is correct
-            if ($data['password'] === $hashed_password) {
+            if ($data['password'] === $password) {
                 // Check if the user is banned
                 if ($data['role'] === 'banned') {
                     header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=You_are_banned&slide=login');
