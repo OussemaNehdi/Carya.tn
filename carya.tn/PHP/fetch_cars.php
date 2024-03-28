@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rent a Car</title>
-    <link rel="stylesheet" href="http://localhost/Mini-PHP-Project/CSS/style.css">
+    <link rel="stylesheet" href="../Resources/style.css">
     <style>
         /* Style for the popup */
         .popup {
@@ -37,11 +37,11 @@
     <h1>Rent a Car</h1>
     <div class="car-container">
         <?php
-        require_once('connect.php');
+        require_once('../src/Lib/connect.php');
 
         // Constructing the SQL query based on filter criteria
         $sql = "SELECT * FROM cars WHERE 1";
-
+/*
         // Filtering by brand
         if (!empty($_GET['brand'])) {
             $brands = implode("','", $_GET['brand']);
@@ -53,7 +53,7 @@
             $models = implode("','", $_GET['model']);
             $sql .= " AND model IN ('$models')";
         }
-
+        
         // Filtering by color
         if (!empty($_GET['color'])) {
             $colors = implode("','", $_GET['color']);
@@ -72,14 +72,14 @@
             $price_min = $_GET['price_min'];
             $price_max = $_GET['price_max'];
             $sql .= " AND price BETWEEN $price_min AND $price_max";
-        }
+        }*/
 
-        $result = $conn->query($sql);
+        $result = $pdo->query($sql);
 
-        while ($car = $result->fetch_assoc()) :
+        while ($car = $result->fetch(PDO::FETCH_ASSOC)) :
         ?>
         <div class="car">
-            <img src="<?php echo 'http://localhost/Mini-PHP-Project/Resources/Images/car_images/' . $car['image']; ?>" alt="<?php echo $car['brand'] . ' ' . $car['model']; ?>">
+            <img src="<?php echo '../Resources/car_images/' . $car['image']; ?>" alt="<?php echo $car['brand'] . ' ' . $car['model']; ?>">
             <div class="car-info">
                 <div>
                     <p><strong>Brand:</strong> <?php echo $car['brand']; ?></p>
