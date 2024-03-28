@@ -1,6 +1,6 @@
 <?php
-
-include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php'; // Include the file with database connection
+// Include necessary files
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php';
 
 class User {
     // Properties
@@ -23,81 +23,147 @@ class User {
         $this->role = $role;
     }
 
-    // Method to get full name
-    public function getFullName() {
-        return $this->firstName . ' ' . $this->lastName;
+    // Method to get a user object from the sql result
+    public static function getUserFromRow($row) {
+        return new User(
+            $row['id'],
+            $row['firstName'],
+            $row['lastName'],
+            $row['password'],
+            $row['email'],
+            $row['creation_date'],
+            $row['role']
+        );
+    }
+
+    // Method to add a user
+    public static function addUser($firstName, $lastName, $password, $email) {
+        global $pdo;
+        try {
+            $sql = "INSERT INTO users (firstName, lastName, password, email) VALUES (?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$firstName, $lastName, $password, $email]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error adding user: " . $e->getMessage());
+            throw $e;
+        }
     }
 
     // Method to get all users
     public static function getAllUsers() {
-        global $pdo; // Use the database connection from connect.php
-        $sql = "SELECT * FROM users";
-        $stmt = $pdo->query($sql);
-        $users = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $user = new User(
-                $row['id'],
-                $row['firstName'],
-                $row['lastName'],
-                $row['password'],
-                $row['email'],
-                $row['creation_date'],
-                $row['role']
-            );
-            $users[] = $user; // Store each User object
+        global $pdo;
+        try {
+            $sql = "SELECT * FROM users";
+            $stmt = $pdo->query($sql);
+            $users = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $user = User::getUserFromRow($row);
+                $users[] = $user;
+            }
+            return $users;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching all users: " . $e->getMessage());
+            throw $e;
         }
-        return $users;
     }
-    
-
 
     // Method to delete a user by ID
     public static function deleteUserById($userId) {
-        global $pdo; // Use the database connection from connect.php
-        $sql = "DELETE FROM users WHERE id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$userId]);
-        // Check if any rows were affected (user deleted)
-        return $stmt->rowCount() > 0;
-    }
-
-    public static function getUserById($user_id) {
         global $pdo;
-        $sql = "SELECT * FROM users WHERE id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$user_id]);
-        $user_data = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        if ($user_data) {
-            $user = new User(
-                $user_data['id'],
-                $user_data['firstName'],
-                $user_data['lastName'],
-                $user_data['password'],
-                $user_data['email'],
-                $user_data['creation_date'],
-                $user_data['role']
-            );
-            return $user;
-        } else {
-            return null; // Return null if no user found with the given ID
+        try {
+            $sql = "DELETE FROM users WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$userId]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error deleting user by ID: " . $e->getMessage());
+            throw $e;
         }
     }
-    
-    public static function banUserById($user_id) {
-        global $pdo; // Use the database connection from connect.php
-        $sql = "UPDATE users SET role = 'banned' WHERE id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$user_id]);
-    }
-    
-    public static function unbanUserById($user_id) {
-        global $pdo; // Use the database connection from connect.php
-        $sql = "UPDATE users SET role = 'customer' WHERE id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$user_id]);
+
+    // Method to get a user by ID
+    public static function getUserById($userId) {
+        global $pdo;
+        try {
+            $sql = "SELECT * FROM users WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$userId]);
+            $userData = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($userData) {
+                $user = User::getUserFromRow($userData);
+                return $user;
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching user by ID: " . $e->getMessage());
+            throw $e;
+        }
     }
 
-}   
+    // Method to ban a user by ID
+    public function banUserById() {
+        global $pdo;
+        try {
+            $sql = "UPDATE users SET role = 'banned' WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$this->id]);
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error banning user by ID: " . $e->getMessage());
+            throw $e;
+        }
+    }
 
+    // Method to unban a user by ID
+    public function unbanUserById() {
+        global $pdo;
+        try {
+            $sql = "UPDATE users SET role = 'customer' WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$this->id]);
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error unbanning user by ID: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    // Method to display user actions
+    public function displayUserActions() {
+        if ($this->role == 'banned') {
+            echo "<a href=\"http://localhost/Mini-PHP-Project/carya.tn/src/controllers/unban_user.php?id={$this->id}\">Unban</a>";
+        } else if ($this->role == 'admin') {
+            echo "Admin";
+        } else {
+            echo "<a href=\"http://localhost/Mini-PHP-Project/carya.tn/src/controllers/ban_user.php?id={$this->id}\">Ban</a>";
+        }
+    }
+
+    // Method to get cars by owner ID
+    public function getCarsByOwnerId() {
+        global $pdo;
+        try {
+            $sql = "SELECT * FROM cars WHERE owner_id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$this->id]);
+            $cars = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $car = Car::getCarFromRow($row);
+                $cars[] = $car;
+            }
+            return $cars;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching cars by owner ID: " . $e->getMessage());
+            throw $e;
+        }
+    }
+}
 ?>

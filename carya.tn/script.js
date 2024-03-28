@@ -1,13 +1,4 @@
-function toggleCarImage(carId) {
-    var image = document.getElementById('car-image-' + carId);
-    if (image.style.display === 'none') {
-        image.style.display = 'block';
-    } else {
-        image.style.display = 'none';
-    }
-}
-
-// console.log('script.js loaded');
+// This script is for the admin dashboard page
 
 // Function to fetch and display user or car information
 function displayInfo(type, id) {
@@ -17,7 +8,7 @@ function displayInfo(type, id) {
             document.getElementById("info-popup").innerHTML = this.responseText;
         }
     };
-    xmlhttp.open("GET", "http://localhost/Mini-PHP-Project/PHP/admin_dashboard/requests/fetch_info.php?type=" + type + "&id=" + id, true);
+    xmlhttp.open("GET", "http://localhost/Mini-PHP-Project/carya.tn/src/controllers/fetch_info.php?type=" + type + "&id=" + id, true);
     xmlhttp.send();
 }
 
@@ -34,4 +25,19 @@ document.querySelectorAll('.user-info, .car-info, .car-image').forEach(item => {
     item.addEventListener('mouseout', () => {
         document.getElementById('info-popup').style.display = 'none';
     });
+});
+
+// ----------------------------------------------
+
+// The add car form popup script
+document.getElementById("addCarBtn").addEventListener("click", function() {
+    // Show the popup and overlay
+    document.getElementById("addCarPopup").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+});
+
+// Close the popup and overlay when clicking outside the popup
+document.getElementById("overlay").addEventListener("click", function() {
+    document.getElementById("addCarPopup").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
 });

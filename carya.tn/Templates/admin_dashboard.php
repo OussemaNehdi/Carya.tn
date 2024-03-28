@@ -1,27 +1,28 @@
 <?php
-    include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/controllers/is_admin.php';
+// Include necessary files
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/controllers/is_admin.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Command.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php';
+
+// Set title and class
+$title = "Admin Dashboard";
+$class = "";
+
+// Start output buffering
+ob_start();
+
+// Start or resume session
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 
-<?php 
-$title="Admin Dashboard";
-$class=""
-?>
+<h1>Admin Dashboard</h1>
+<script src="http://localhost/Mini-PHP-Project/carya.tn/script.js"></script>
 
-<?php ob_start(); ?>
-
-<?php
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Command.php';
-    include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
-    include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php';
-
-?>
-    <h1>Admin Dashboard</h1>
-
-    <!-- Include user list -->
-    <section>
+<!-- User list -->
+<section>
     <h2>List of Users</h2>
     <table>
         <thead>
@@ -36,46 +37,22 @@ $class=""
             </tr>
         </thead>
         <tbody>
-            <?php
-
-
-                // Get all users
-                $users = User::getAllUsers();
-
-                foreach ($users as $user) {
-                    echo "<tr>";
-                    echo "<td>{$user->id}</td>";
-                    echo "<td>{$user->firstName}</td>";
-                    echo "<td>{$user->lastName}</td>";
-                    echo "<td>{$user->email}</td>";
-                    echo "<td>{$user->creation_date}</td>";
-                    echo "<td>{$user->role}</td>";
-
-                    // Display appropriate action based on user's role
-                    echo "<td>";
-                    if ($user->role== 'banned') {
-                        echo "<a href=\"http://localhost/Mini-PHP-Project/carya.tn/src/controllers/unban_user.php?id={$user->id}\">Unban</a>";
-                    } else if ($user->role == 'admin') {
-                        echo "Admin";
-                    } else {
-                        echo "<a href=\"http://localhost/Mini-PHP-Project/carya.tn/src/controllers/ban_user.php?id={$user->id}\">Ban</a>";
-                    }
-                    echo "</td>";
-                    echo "</tr>";
-                }
-            ?>
+            <?php foreach (User::getAllUsers() as $user): ?>
+                <tr>
+                    <td><?= $user->id ?></td>
+                    <td><?= $user->firstName ?></td>
+                    <td><?= $user->lastName ?></td>
+                    <td><?= $user->email ?></td>
+                    <td><?= $user->creation_date ?></td>
+                    <td><?= $user->role ?></td>
+                    <td><?= $user->displayUserActions() ?></td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </section>
 
-
-<style>
-    .car-image {
-        cursor: pointer;
-        width: 100px;
-    }
-</style>
-
+<!-- Car list -->
 <section>
     <h2>List of Cars</h2>
     <table>
@@ -93,105 +70,110 @@ $class=""
             </tr>
         </thead>
         <tbody>
-            <?php
-
-            // Get all cars
-            $cars = Car::getAllCars();
-
-            foreach ($cars as $car) {
-                // Display car information and actions
-                echo "<tr>";
-                echo "<td class='car-image' data-id='{$car->id}'>{$car->id}</td>";
-                echo "<td class='car-image' data-id='{$car->id}'>{$car->brand}</td>";
-                echo "<td class='car-image' data-id='{$car->id}'>{$car->model}</td>";
-                echo "<td class='car-image' data-id='{$car->id}'>{$car->color}</td>";
-                echo "<td>{$car->km}</td>";
-                echo "<td class='user-info' data-id='{$car->owner_id}'>{$car->owner_id}</td>";
-                echo "<td>{$car->price}</td>";
-
-                // Check if the car is available
-                $available = Command::isCarAvailable($car->id, date('Y-m-d'));
-                
-                // Display availability status
-                echo "<td>";
-                if ($available) {
-                    echo "Yes";
-                } else {
-                    echo "No";
-                }   
-                // Display actions based on availability
-                echo "<td>";
-                if ($available) {
-                    echo "<a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/delete_car.php?id={$car->id}'>Delete</a>";
-                    // Add update option if the user is the owner of the car
-                    if ($car->owner_id == $_SESSION['user_id']) {
-                        echo " | <a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/update_car.php?id={$car->id}'>Update</a>";
-                    }
-                } else {
-                    echo "Car is in use";
-                }
-                echo "</td>";
-                echo "</tr>";
-            }
-            ?>
+            <?php foreach (Car::getAllCars() as $car): ?>
+                <tr>
+                    <td class='car-image' data-id='<?= $car->id ?>'><?= $car->id ?></td>
+                    <td class='car-image' data-id='<?= $car->id ?>'><?= $car->brand ?></td>
+                    <td class='car-image' data-id='<?= $car->id ?>'><?= $car->model ?></td>
+                    <td class='car-image' data-id='<?= $car->id ?>'><?= $car->color ?></td>
+                    <td><?= $car->km ?></td>
+                    <td class='user-info' data-id='<?= $car->owner_id ?>'><?= $car->owner_id ?></td>
+                    <td><?= $car->price ?></td>
+                    <td><?= $car->isCarAvailable() ? "Yes" : "No" ?></td>
+                    <td><?= $car->displayCarAvailabilityActions() ?></td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </section>
 
-    <?php
+<!-- Car commands list -->
+<section>
+    <h2>List of Car Commands</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Command ID</th>
+                <th>Car ID</th>
+                <th>User ID</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Price Paid</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach (Command::getAllRentalCommands() as $command): ?>
+                <?php
+                    // Get car and user information for the current command
+                    $car = Car::getCarById($command->car_id);
+                    $user = User::getUserById($command->user_id);
+                    $price_paid = $car->price * $command->rental_period;
+                ?>
+                <tr>
+                    <td><?= $command->command_id ?></td>
+                    <td class='car-info' data-id='<?= $car->id ?>'><?= $car->id ?></td>
+                    <td class='user-info' data-id='<?= $user->id ?>'><?= $user->id ?></td>
+                    <td><?= $command->start_date ?></td>
+                    <td><?= $command->end_date ?></td>
+                    <td><?= $price_paid ?></td>
+                    <td>
+                        <a href="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/cancel_command.php?id=<?= $command->command_id ?>">Cancel Command</a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</section>
 
-try {
-    // Get all rental commands
-    $car_commands_result = Command::getAllRentalCommands();
-    
-    // Display car commands
-    echo "<section>";
-    echo "<h2>List of Car Commands</h2>";
-    echo "<table>";
-    echo "<thead>";
-    echo "<tr>";
-    echo "<th>Command ID</th>";
-    echo "<th>Car ID</th>";
-    echo "<th>User ID</th>";
-    echo "<th>Start Date</th>";
-    echo "<th>End Date</th>";
-    echo "<th>Price Paid</th>";
-    echo "<th>Actions</th>";
-    echo "</tr>";
-    echo "</thead>";
-    echo "<tbody>";
-    foreach ($car_commands_result as $car_command) {
-        // Fetch car information for the command
-        $car = Car::getCarById($car_command->car_id);
-        
-        // Fetch user information for the command
-        $user = User::getUserById($car_command->user_id);
-        
-        // Calculate price paid based on price per day and duration
-        $price_paid = $car->price * $car_command->rental_period;
 
-        // Display car command information
-        echo "<tr>";
-        echo "<td>{$car_command->command_id}</td>";
-        echo "<td class='car-info' data-id='{$car->id}'>{$car->id}</td>";
-        echo "<td class='user-info' data-id='{$user->id}'>{$user->id}</td>";
-        echo "<td>{$car_command->start_date}</td>";
-        echo "<td>{$car_command->end_date}</td>";
-        echo "<td>{$price_paid}</td>";
-        echo "<td><a href=\"http://localhost/Mini-PHP-Project/carya.tn/src/controllers/cancel_command.php?id={$car_command->command_id}\">Cancel Command</a></td>";
-        echo "</tr>";
+<div id="info-popup" class="info-popup"></div>
+<style>
+    /* Styling for info popups */
+    .info-popup {
+        position: absolute;
+        background-color: white;
+        border: 1px solid #ccc;
+        padding: 10px;
+        display: none;
     }
-    echo "</tbody>";
-    echo "</table>";
-    echo "</section>";
-} catch (PDOException $e) {
-    // Handle database errors
-    echo "Error: " . $e->getMessage();
-}
-?>
+</style>
+<style>
+        /* Styles for the popup */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+<!-- Add Car Button -->
+<button id="addCarBtn">Add Car</button>
 
-    <!-- Add Car Button -->
-    <button><a href="http://localhost/Mini-PHP-Project/PHP/add_car.php">Add Car</a></button>
-<?php $content = ob_get_clean();?>
+    <!-- Popup content -->
+    <div class="popup" id="addCarPopup">
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/templates/add_car_form.php'; ?>
+    </div>
 
-<?php require('layout.php')?>
+    <!-- Overlay to cover the background -->
+    <div class="overlay" id="overlay"></div>
+
+<?php $content = ob_get_clean(); ?>
+
+<?php require('layout.php') ?>

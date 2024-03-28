@@ -1,5 +1,6 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php'; // Include the file with database connection
+// Include necessary files
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php';
 
 class Command {
     // Properties
@@ -22,49 +23,104 @@ class Command {
         $this->rental_period = $rental_period;
     }
 
+    // Method to get command object from the sql result
+    public static function getCommandFromRow($row) {
+        return new Command(
+            $row['command_id'],
+            $row['car_id'],
+            $row['user_id'],
+            $row['rental_date'],
+            $row['start_date'],
+            $row['end_date'],
+            $row['rental_period']
+        );
+    }
+
+    // Method to add a rental command
+    public static function addRentalCommand($car_id, $user_id, $rental_date, $start_date, $end_date, $rental_period) {
+        global $pdo;
+        try {
+            $sql = "INSERT INTO command (car_id, user_id, rental_date, start_date, end_date, rental_period) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$car_id, $user_id, $rental_date, $start_date, $end_date, $rental_period]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error adding rental command: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
     // Method to get all rental commands
     public static function getAllRentalCommands() {
-        global $pdo; // Use the database connection from connect.php
-        $sql = "SELECT * FROM command";
-        $stmt = $pdo->query($sql);
-        $commands = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $command = new Command(
-                $row['command_id'],
-                $row['car_id'],
-                $row['user_id'],
-                $row['rental_date'],
-                $row['start_date'],
-                $row['end_date'],
-                $row['rental_period']
-            );
-            $commands[] = $command; // Store each Command object
+        global $pdo;
+        try {
+            $sql = "SELECT * FROM command";
+            $stmt = $pdo->query($sql);
+            $commands = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $command = Command::getCommandFromRow($row);
+                $commands[] = $command;
+            }
+            return $commands;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching all rental commands: " . $e->getMessage());
+            throw $e;
         }
-        return $commands;
     }
-    
-
 
     // Method to delete a rental command by ID
-    public static function deleteRentalCommandById($commandId) {
-        global $pdo; // Use the database connection from connect.php
-        $sql = "DELETE FROM command WHERE command_id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$commandId]);
-        // Check if any rows were affected (rental command deleted)
-        return $stmt->rowCount() > 0;
+    public function deleteRentalCommandById() {
+        $commandId = $this->command_id;
+        global $pdo;
+        try {
+            $sql = "DELETE FROM command WHERE command_id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$commandId]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error deleting rental command by ID: " . $e->getMessage());
+            throw $e;
+        }
     }
 
-    public static function isCarAvailable($car_id, $current_date) {
-        global $pdo; // Use the database connection from connect.php
-        $car_commanded_sql = "SELECT * FROM command WHERE car_id=? AND start_date <= ? AND end_date >= ?";
-        $car_commanded_stmt = $pdo->prepare($car_commanded_sql);
-        $car_commanded_stmt->execute([$car_id, $current_date, $current_date]);
-        $car_commanded = $car_commanded_stmt->fetchAll(PDO::FETCH_ASSOC);
-        $available = count($car_commanded) == 0;
-        return $available;
+    // Method to delete a rental command by user ID
+    public static function deleteRentalCommandByUserId($userId) {
+        global $pdo;
+        try {
+            $sql = "DELETE FROM command WHERE user_id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$userId]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error deleting rental command by user ID: " . $e->getMessage());
+            throw $e;
+        }
     }
 
+    // Method to get a rental command by ID
+    public static function getRentalCommandById($command_id) {
+        global $pdo;
+        try {
+            $sql = "SELECT * FROM command WHERE command_id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$command_id]);
+            $commandData = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($commandData) {
+                $command = Command::getCommandFromRow($commandData);
+                return $command;
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching rental command by ID: " . $e->getMessage());
+            throw $e;
+        }
+    }
 }
-
 ?>

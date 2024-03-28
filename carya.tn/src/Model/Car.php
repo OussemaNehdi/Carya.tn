@@ -1,5 +1,6 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php'; // Include the file with database connection
+// Include necessary files
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php';
 
 class Car {
     // Properties
@@ -24,85 +25,138 @@ class Car {
         $this->owner_id = $owner_id;
     }
 
+    // Get a car object from the sql result
+    public static function getCarFromRow($row) {
+        return new Car(
+            $row['id'],
+            $row['brand'],
+            $row['model'],
+            $row['color'],
+            $row['image'],
+            $row['km'],
+            $row['price'],
+            $row['owner_id']
+        );
+    }
+
     // Method to get all cars
     public static function getAllCars() {
-        global $pdo; // Use the database connection from connect.php
-        $sql = "SELECT * FROM cars";
-        $stmt = $pdo->query($sql);
-        $cars = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $car = new Car(
-                $row['id'],
-                $row['brand'],
-                $row['model'],
-                $row['color'],
-                $row['image'],
-                $row['km'],
-                $row['price'],
-                $row['owner_id']
-            );
-            $cars[] = $car; // Store each Car object
+        global $pdo;
+        try {
+            $sql = "SELECT * FROM cars";
+            $stmt = $pdo->query($sql);
+            $cars = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $car = Car::getCarFromRow($row);
+                $cars[] = $car;
+            }
+            return $cars;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching cars: " . $e->getMessage());
+            throw $e;
         }
-        return $cars;
     }
     
-
     // Method to delete a car by ID
-    public static function deleteCarById($carId) {
-        global $pdo; // Use the database connection from connect.php
-        $sql = "DELETE FROM cars WHERE id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$carId]);
-        // Check if any rows were affected (car deleted)
-        return $stmt->rowCount() > 0;
+    public function deleteCarById() {
+        $carId = $this->id;
+        global $pdo;
+        try {
+            $sql = "DELETE FROM cars WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$carId]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error deleting car: " . $e->getMessage());
+            throw $e;
+        }
     }
 
+    // Method to get a car by ID
     public static function getCarById($car_id) {
         global $pdo;
-        $sql = "SELECT * FROM cars WHERE id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$car_id]);
-        $car_data = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-        if ($car_data) {
-            $car = new Car(
-                $car_data['id'],
-                $car_data['brand'],
-                $car_data['model'],
-                $car_data['color'],
-                $car_data['image'],
-                $car_data['km'],
-                $car_data['price'],
-                $car_data['owner_id']
-            );
-            return $car;
-        } else {
-            return null; // Return null if no car found with the given ID
+        try {
+            $sql = "SELECT * FROM cars WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$car_id]);
+            $car_data = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($car_data) {
+                $car = Car::getCarFromRow($car_data);
+                return $car;
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching car details: " . $e->getMessage());
+            throw $e;
         }
     }
-    public static function getCarsByOwnerId($owner_id) {
-        global $pdo; // Use the database connection from connect.php
-        $sql = "SELECT * FROM cars WHERE owner_id = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([$owner_id]);
-        $cars = [];
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $car = new Car(
-                $row['id'],
-                $row['brand'],
-                $row['model'],
-                $row['color'],
-                $row['image'],
-                $row['km'],
-                $row['price'],
-                $row['owner_id']
-            );
-            $cars[] = $car;
+    
+    // Method to update car details
+    public function updateCar($brand, $model, $color, $image, $km, $price) {
+        global $pdo;
+        try {
+            $sql = "UPDATE cars SET brand = ?, model = ?, color = ?, image = ?, km = ?, price = ? WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$brand, $model, $color, $image, $km, $price, $this->id]);
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error updating car details: " . $e->getMessage());
+            throw $e;
         }
-        return $cars;
     }
     
+    // Method to add a new car
+    public static function addCar($brand, $model, $color, $image, $km, $price, $owner_id) {
+        global $pdo;
+        try {
+            $sql = "INSERT INTO cars (brand, model, color, image, km, price, owner_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$brand, $model, $color, $image, $km, $price, $owner_id]);
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error adding new car: " . $e->getMessage());
+            throw $e;
+        }
+    }
     
-}
+    // Method to check if the car is available
+    public function isCarAvailable() {
+        global $pdo;
+        try {
+            $current_date = date('Y-m-d');
+            $car_id = $this->id;
+            $car_commanded_sql = "SELECT * FROM command WHERE car_id=? AND start_date <= ? AND end_date >= ?";
+            $car_commanded_stmt = $pdo->prepare($car_commanded_sql);
+            $car_commanded_stmt->execute([$car_id, $current_date, $current_date]);
+            $car_commanded = $car_commanded_stmt->fetchAll(PDO::FETCH_ASSOC);
+            return count($car_commanded) == 0;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error checking car availability: " . $e->getMessage());
+            throw $e;
+        }
+    }
 
+    // Method to display car availability actions
+    public function displayCarAvailabilityActions() {
+        try {
+            if ($this->isCarAvailable()) {
+                echo "<a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/delete_car.php?id={$this->id}'>Delete</a>";
+                if ($this->owner_id == $_SESSION['user_id']) {
+                    echo " | <a href='http://localhost/Mini-PHP-Project/carya.tn/templates/update_car_form.php?id={$this->id}'>Update</a>";
+                }
+            } else {
+                echo "Car is in use";
+            }
+        } catch (Exception $e) {
+            // Log error and rethrow the exception
+            error_log("Error displaying car availability actions: " . $e->getMessage());
+            throw $e;
+        }
+    }
+}
 ?>
