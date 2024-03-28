@@ -138,9 +138,41 @@ if (session_status() == PHP_SESSION_NONE) {
         display: none;
     }
 </style>
-
+<style>
+        /* Styles for the popup */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
 <!-- Add Car Button -->
-<button><a href="http://localhost/Mini-PHP-Project/carya.tn/templates/add_car_form.php">Add Car</a></button>
+<button id="addCarBtn">Add Car</button>
+
+    <!-- Popup content -->
+    <div class="popup" id="addCarPopup">
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/templates/add_car_form.php'; ?>
+    </div>
+
+    <!-- Overlay to cover the background -->
+    <div class="overlay" id="overlay"></div>
 
 <?php $content = ob_get_clean(); ?>
 
