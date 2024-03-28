@@ -21,6 +21,15 @@
                         <div class="basics">
                             <li><a href="http://localhost/Mini-PHP-Project/carya.tn/index.php">Home</a></li>
                             <li><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/about.php">About</a></li>
+                            <?php
+                                // check if the user is an admin
+                                if (session_status() == PHP_SESSION_NONE) {
+                                    session_start();
+                                }
+                                if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+                                    echo '<li><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/admin_dashboard.php">Admin Dashboard</a></li>';
+                                }
+                            ?>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle">Services</a>
                                 <ul class="dropdown-menu">
