@@ -26,7 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Check if the email exists
         $sql = "SELECT * FROM users WHERE email = ?";
         $stmt = $pdo->prepare($sql);
+        try {
+            $stmt->execute([$email]);
+        } catch (PDOException $e) {
+            echo "Error executing query: " . $e->getMessage();
+            exit();
+        }
         $stmt->execute([$email]);
+
         $result = $stmt->fetch();
         if ($result) {
             header('Location: http://localhost/Mini-PHP-Project/HTML/login.php?message=User already exists&slide=register');
