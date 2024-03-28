@@ -84,8 +84,20 @@ class User {
         }
     }
     
+    public static function banUserById($user_id) {
+        global $pdo; // Use the database connection from connect.php
+        $sql = "UPDATE users SET role = 'banned' WHERE id = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$user_id]);
+    }
     
+    public static function unbanUserById($user_id) {
+        global $pdo; // Use the database connection from connect.php
+        $sql = "UPDATE users SET role = 'customer' WHERE id = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$user_id]);
+    }
 
-}
+}   
 
 ?>

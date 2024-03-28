@@ -80,7 +80,27 @@ class Car {
             return null; // Return null if no car found with the given ID
         }
     }
-    
+    public static function getCarsByOwnerId($owner_id) {
+        global $pdo; // Use the database connection from connect.php
+        $sql = "SELECT * FROM cars WHERE owner_id = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$owner_id]);
+        $cars = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $car = new Car(
+                $row['id'],
+                $row['brand'],
+                $row['model'],
+                $row['color'],
+                $row['image'],
+                $row['km'],
+                $row['price'],
+                $row['owner_id']
+            );
+            $cars[] = $car;
+        }
+        return $cars;
+    }
     
     
 }
