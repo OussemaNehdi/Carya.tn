@@ -3,7 +3,7 @@
 ?>
 
 <?php 
-$title="Admin";
+$title="Admin Dashboard";
 $class=""
 ?>
 
@@ -18,17 +18,6 @@ $class=""
     include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php';
 
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <!-- Include CSS file -->
-    <link rel="stylesheet" href="http://localhost/Mini-PHP-Project/CSS/style.css">
-</head>
-<body>
     <h1>Admin Dashboard</h1>
 
     <!-- Include user list -->
@@ -203,11 +192,6 @@ try {
 
     <!-- Add Car Button -->
     <button><a href="http://localhost/Mini-PHP-Project/PHP/add_car.php">Add Car</a></button>
-    
-    <!-- Include JavaScript file -->
-    <script src="http://localhost/Mini-PHP-Project/carya.tn/script.js"></script>
-</body>
-</html>
 <?php $content = ob_get_clean();?>
 
 <?php require('layout.php')?>
