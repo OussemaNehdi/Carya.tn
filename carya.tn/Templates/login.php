@@ -103,6 +103,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 </div>
 <!-- Slide animation -->
 <script>
+    document.addEventListener('DOMContentLoaded', function () {
+            var slide = '<?php echo isset($_GET["slide"]) ? $_GET["slide"] : "login"; ?>';
+            // Set the initial slide based on the query parameter
+            if (slide === 'register') {
+                register(); // If the query parameter is "register", show the register slide
+            } else {
+                login(); // Otherwise, show the login slide (default)
+            }
+        });
+        
     var x = document.getElementById('login');
     var y = document.getElementById('register');
     var z = document.getElementById('btn');
