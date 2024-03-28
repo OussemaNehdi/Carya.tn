@@ -16,7 +16,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Prepare and execute the query
         $sql = "SELECT * FROM users WHERE email = ?";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute([$email]);
+        try {
+            $stmt->execute([$email]);
+        } catch (PDOException $e) {
+            echo "Error executing query: " . $e->getMessage();
+            exit();
+        }
         $data = $stmt->fetch();
 
         // If the user exists

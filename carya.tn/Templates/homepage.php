@@ -1,4 +1,7 @@
-<?php $title="Carya.tn";?>
+<?php 
+$title="Carya.tn";
+$class=""
+?>
 
 <?php ob_start(); ?>
 <h1>Welcome to carya.tn</h1>
