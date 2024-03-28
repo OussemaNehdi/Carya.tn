@@ -101,6 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         </form>
     </div>
 </div>
+<!-- Slide animation -->
 <script>
     var x = document.getElementById('login');
     var y = document.getElementById('register');
