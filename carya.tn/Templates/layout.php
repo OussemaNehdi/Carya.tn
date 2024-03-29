@@ -36,7 +36,7 @@ if (session_status() == PHP_SESSION_NONE) {
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle">Services</a>
                             <ul class="dropdown-menu">
-                                <li><a class="navbar-dropdown-link" href="http://localhost/Mini-PHP-Project/carya.tn/PHP/rent_car.php">Rent a Car</a></li>
+                                <li><a class="navbar-dropdown-link" href="http://localhost/Mini-PHP-Project/carya.tn/Templates/rent_car.php">Rent a Car</a></li>
                                 <li><a class="navbar-dropdown-link" href="http://localhost/Mini-PHP-Project/carya.tn/templates/listing.php">List Your Car for Rent</a></li>
                                 <li><a class="navbar-dropdown-link" href="#">Export Rent History</a></li>
                             </ul>

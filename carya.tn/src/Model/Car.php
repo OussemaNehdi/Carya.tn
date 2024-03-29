@@ -212,5 +212,77 @@ class Car {
             throw $e;
         }
     }
+    /////////// SERVICES : RENT A CAR SECTION
+
+    // Static method to get the maximum value of a column from the cars table
+    public static function getMaxValue($column) {
+        global $pdo;
+        try {
+            $sql = "SELECT MAX($column) AS max_value FROM cars";
+            $stmt = $pdo->query($sql);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $row['max_value'];
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching maximum value: " . $e->getMessage());
+            throw $e;
+        }
+    }
+    // Static method to get distinct values from the cars table
+    public static function getDistinctValues($column) {
+        global $pdo;
+        try {
+            $sql = "SELECT DISTINCT $column FROM cars";
+            $stmt = $pdo->query($sql);
+            $values = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $values[] = $row[$column];
+            }
+            return $values;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching distinct values: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    public static function getFilteredCars($whereClause) {
+        global $pdo;
+        try {
+            // Construct the SQL query to fetch cars with applied filters
+            $sql = "SELECT * FROM cars";
+            if (!empty($whereClause)) {
+                $sql .= " WHERE $whereClause";
+            }
+            $stmt = $pdo->query($sql);
+
+            // Fetch cars from the database
+            $cars = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $car = new Car(
+                    $row['id'],
+                    $row['brand'],
+                    $row['model'],
+                    $row['color'],
+                    $row['image'],
+                    $row['km'],
+                    $row['price'],
+                    $row['owner_id']
+                );
+                $cars[] = $car;
+            }
+            return $cars;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching filtered cars: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+
+
+
+
+    /////////////// END SERVICES RENT A CAR SECTION
 }
 ?>

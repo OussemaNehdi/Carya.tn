@@ -532,8 +532,10 @@ i{
 
 
 /* -------------- fetch_cars.php -----------------*/
+
 /* Still need to change the style to fit the theme of the website */
-.car-container {
+/*  DOING A RECONSTRUCTION
+    .car-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
@@ -575,7 +577,7 @@ i{
 /* ------------------ End of fetch_cars.php ------------------*/
 
 /* ------------------ rent_car.php ------------------*/
-.rent-body .container {
+/* .rent-body .container {
     display: flex;
 }
 
@@ -611,5 +613,4 @@ i{
 
 .rent-body span.value {
     font-weight: bold;
-}
-/* ------------------ End of rent_car.php ------------------*/
+} */
