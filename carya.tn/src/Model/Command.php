@@ -122,5 +122,32 @@ class Command {
             throw $e;
         }
     }
+
+    // Method to get rental commands by user ID
+    public static function getRentalCommandsByUserId($user_id) {
+        global $pdo;
+        try {
+            $sql = "SELECT * FROM command WHERE user_id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$user_id]);
+            $commands = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $command = Command::getCommandFromRow($row);
+                $commands[] = $command;
+            }
+            return $commands;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching rental commands by user ID: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+
+
+
+
+
+
 }
 ?>
