@@ -200,19 +200,16 @@ ul{
     max-width: 800px;
     margin: 50px auto;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: rgba(207, 180, 138, 0.738);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
 }
 
 .contact_container h2 {
     margin-top: 0;
     font-size: 45px;
     color: black;
-}
-
-.contact_container p {
-    color: #666;
 }
 
 .contact_container form {
@@ -253,14 +250,16 @@ ul{
 }
 
 .success {
-    color: green;
+    color: rgba(37, 120, 37, 0.885);
     font-style: italic;
 }
 
 .error {
-    color: red;
+    color: rgba(181, 40, 40, 0.833);
     font-style: italic;
 }
+
+
 /* End of Contact.php */
 
 
