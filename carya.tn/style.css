@@ -1,14 +1,39 @@
-body {
-    font-family: Roboto, sans-serif;
+/* ================== Variables ================== */
+:root{
+    --bg-color: #fff;
+    --primary-color: #000000;
+    --second-color: #196FE0;
+    --hover-bg-color: #efefef;
+    --shadow-1: 0px 2px 10px rgba(0, 0, 0, 0.3);
+    --shadow-2: 0px 2px 10px rgba(26, 112, 224, 0.4);
+}
+
+/* ================== Global Styles ================== */
+
+*{
     margin: 0;
     padding: 0;
-    background-color: rgba(245, 245, 245, 0.649);
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 
 }
-h1{
-    text-align: center;
-    color: #333;
-    margin-top: 20px;
+
+body{
+    background-image: url("http://localhost/Mini-PHP-Project/carya.tn/Resources/wallpaper-login2.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+a{
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+ul{
+    list-style-type: none;
 }
 
 /* ------------------ Navigation bar ------------------*/
@@ -16,15 +41,12 @@ h1{
     background-color: black;
     color: #fff;
     padding: 10px 0;
-}
-
-.navbar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.navbar-brand a {
+.navbar-logo a {
     flex: 1;
     margin-left: 15px;
     color: lightblue;
@@ -56,23 +78,24 @@ h1{
     flex: 1;
 }
 
-.navbar-menu ul .basics li a:hover {
-    background-color: #555;
-}
-
-.navbar-menu .login-button {
-    margin-left: 120px;
-    background-color: #4caf4fc3;
-    border-radius: 5px;
-    padding: 10px 20px;
-    color: white;
+.navbar-menu .navbar-link {
+    position: relative;
     text-decoration: none;
 }
-
-.navbar-menu .login-button:hover {
-    background-color: #48ac43;
+.navbar-menu .navbar-link::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: whitesmoke;
+    transition: width 0.3s ease-in-out;
 }
 
+.navbar-menu .navbar-link:hover::after {
+    width: 100%;
+}
 
 /* Dropdown menu */
 .navbar-menu ul .dropdown {
@@ -99,8 +122,78 @@ h1{
 .navbar-menu ul .dropdown:hover .dropdown-menu {
     display: block;
 }
+
+.navbar-menu .navbar-dropdown-link {
+    position: relative;
+    text-decoration: none;
+}
+.navbar-menu .navbar-dropdown-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2.5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: whitesmoke;
+    transition: width 0.3s ease-in-out;
+}
+
+.navbar-menu .navbar-dropdown-link:hover::after {
+    width: 100%;
+}
 /* End of dropdown menu */
+/* ------------------ User Nav Bar ------------------*/
+.nav-user ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin-right: 15px;
+    display: flex; 
+    align-items: center; 
+}
+.nav-user ul li {
+    display: inline;
+    margin-left: 10px; 
+}
+.nav-user ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+}
+.nav-user .login-button {
+    margin-left: 120px;
+    background-color: #4caf4fc3;
+    border-radius: 5px;
+    padding: 7px 20px;
+    color: white;
+    text-decoration: none;
+}
+.nav-user .login-button:hover {
+    background-color: #48ac43;
+}
+
+.nav-user .profile-button {
+    position: relative;
+    color: black;
+    text-decoration: none;
+}
+.nav-user .profile-button::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: whitesmoke;
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-user .profile-button:hover::after {
+    width: 100%;
+}
+/* End User Nav Bar */
 /* End of navigation bar */
+
 
 /* ---------------- Contact.php --------------------*/
 .contact_container {
@@ -170,6 +263,7 @@ h1{
 }
 /* End of Contact.php */
 
+
 /* -------------- about.php -----------------*/
 .about-container {
     max-width: 1200px;
@@ -231,6 +325,7 @@ h1{
 }
 /* End of about.php */
 
+
 /* -------------- login.php && signup.php -----------------*/
 @import url('https://fonts.googleapis.com/css2?family=Poppins%3Awght%40400%3B500&display=swap%27%29%3B');
 *{
@@ -238,14 +333,6 @@ h1{
     padding: 0;
     box-sizing: border-box;
     font-family: 'poppins',sans-serif;
-}
-
-.login-body {
-    background-image: url("http://localhost/Mini-PHP-Project/carya.tn/Resources/wallpaper-login.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
 }
 
 .login-container {
@@ -443,6 +530,7 @@ i{
     }
 }
 /* End of login.php & signup */
+
 
 /* -------------- fetch_cars.php -----------------*/
 /* Still need to change the style to fit the theme of the website */
