@@ -192,5 +192,24 @@ class User {
             throw $e;
         }
     }
+
+    // Method to update a user's first name and last name by ID
+    public static function updateUsernamesById($userId, $firstName, $lastName) {
+        global $pdo;
+        try {
+            $sql = "UPDATE users SET firstName = :firstName, lastName = :lastName WHERE id = :userId";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':firstName', $firstName);
+            $stmt->bindParam(':lastName', $lastName);
+            $stmt->bindParam(':userId', $userId);
+            $stmt->execute();
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error updating user names by ID: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
 }
 ?>
