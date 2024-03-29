@@ -6,8 +6,11 @@ include '../src/Model/Car.php';
 include '../src/Model/Command.php';
 include '../src/Model/User.php';
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 // Get the user ID from the URL
-$user_id = 1;
+$user_id = $_SESSION['user_id'];
 
 // Get the user information
 $userInfo = User::getUserById($user_id);
