@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rent a Car</title>
+    <title>Rent a Carsssss</title>
     <link rel="stylesheet" href="../Resources/style.css">
     <style>
         /* Style for the popup */

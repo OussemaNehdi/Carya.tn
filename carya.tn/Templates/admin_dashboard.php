@@ -7,7 +7,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/C
 
 // Set title and class
 $title = "Admin Dashboard";
-$class = "";
+$class = "admin-dashboard";
 
 // Start output buffering
 ob_start();
@@ -152,7 +152,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 
 <div id="info-popup" class="info-popup"></div>
-<style>
+<style>/*TODO : add css to style.css*/
     /* Styling for info popups */
     .info-popup {
         position: absolute;

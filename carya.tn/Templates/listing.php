@@ -1,33 +1,34 @@
 <?php
-    // Include necessary files
-    include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php';
-    include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
+// Include necessary files
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php';
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
 
-    // Set title and class
-    $title = "Admin Dashboard";
-    $class = "";
+// Set title and class
+$title = "List your cars";
+$class = "";
 
-    // Start output buffering
-    ob_start();
+// Start output buffering
+ob_start();
 
-    if (session_status() == PHP_SESSION_NONE) {
-        session_start();
-    }
-    // Fetch the user's owned cars
-    if (!isset($_SESSION['user_id'])) {
-        header("Location: http://localhost/Mini-PHP-Project/carya.tn/templates/login.php");
-        exit();
-    }
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+// Fetch the user's owned cars
+if (!isset($_SESSION['user_id'])) {
+    header("Location: http://localhost/Mini-PHP-Project/carya.tn/templates/login.php");
+    exit();
+}
 
-    $user_id = $_SESSION['user_id'];
-    $user = User::getUserById($user_id);
-    $owned_cars = $user->getCarsByOwnerId($user_id);
+$user_id = $_SESSION['user_id'];
+$user = User::getUserById($user_id);
+$owned_cars = $user->getCarsByOwnerId();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://localhost/Mini-PHP-Project/carya.tn/script.js"></script>
     <title>My Car Listings</title>
     <style>
         /* Style the car listing container */
@@ -59,46 +60,57 @@
             margin-right: 10px;
         }
 
-        /* Popup styling */
+        
         .popup {
             display: none;
             position: fixed;
-            left: 0;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
             top: 0;
+            left: 0;
+
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
-            z-index: 9999;
-            padding-top: 100px;
-        }
-
-        .popup-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 50%;
-            text-align: center;
-        }
-
-        /* Close button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
         }
     </style>
 </head>
 <body>
     <h1>My Car Listings</h1>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Add event listener to each "Update Listing" button
+            <?php foreach ($owned_cars as $car): ?>
+            document.getElementById("UpdateCarBtn<?php echo $car->id ?>").addEventListener("click", function() {
+                // Show the corresponding popup and overlay
+                document.getElementById("popup<?php echo $car->id ?>").style.display = "block";
+                document.getElementById("overlay").style.display = "block";
+            });
+            <?php endforeach; ?>
+
+            // Close all popups and overlay when clicking outside the popups
+            document.getElementById("overlay").addEventListener("click", function() {
+                // Hide all popups and overlay
+                <?php foreach ($owned_cars as $car): ?>
+                document.getElementById("popup<?php echo $car->id ?>").style.display = "none";
+                <?php endforeach; ?>
+                document.getElementById("overlay").style.display = "none";
+            });
+        });
+    </script>
 
     <?php foreach ($owned_cars as $car): ?>
     <div class="car-listing">
@@ -111,30 +123,27 @@
             <p>Color: <?php echo $car->color; ?></p>
             <p>Price: <?php echo $car->price; ?></p>
             <p>Kilometers: <?php echo $car->km; ?></p>
-            <!-- Add other attributes here -->
-            <?php
-            if ($car->isCarInUse()) {
-                echo "<p>This car is in use</p>";
-            } else {
-                echo '<div class="action-buttons">';
-                echo "<a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/delete_car.php?id={$car->id}'><button>Delete Listing</button></a>";
-                if ($car->isCarMarkedUnavailable()) {
-                    echo "<a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/mark_car_available.php?id={$car->id}'><button>Mark Available</button></a>";
-                } else {
-                    echo "<a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/mark_car_unavailable.php?id={$car->id}'><button>Mark Unavailable</button></a>";
-                }
-                // Button to trigger popup
-                echo "<button onclick=\"document.getElementById('popup{$car->id}').style.display='block'\">Update Listing</button>";
-                echo '</div>';
-            } 
-            ?>
+            <?php if ($car->isCarInUse()): ?>
+                <p>This car is in use</p>
+            <?php else: ?>
+                <div class="action-buttons">
+                    <a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/delete_car.php?id=<?php echo $car->id; ?>'><button>Delete Listing</button></a>
+                    <?php if ($car->isCarMarkedUnavailable()): ?>
+                        <a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/mark_car_available.php?id=<?php echo $car->id; ?>'><button>Mark Available</button></a>
+                    <?php else: ?>
+                        <a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/mark_car_unavailable.php?id=<?php echo $car->id; ?>'><button>Mark Unavailable</button></a>
+                    <?php endif; ?>
+                    <!-- Button to trigger popup -->
+                    <button id='UpdateCarBtn<?php echo $car->id; ?>'>Update Listing</button>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 
     <!-- Popup -->
     <div id="popup<?php echo $car->id ?>" class="popup">
         <div class="popup-content">
-            <span class="close" onclick="document.getElementById('popup<?php echo $car->id ?>').style.display='none'">&times;</span>
+
             <h2>Update Car Listing</h2>
             <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/update_car.php" method="POST" enctype="multipart/form-data">
                 <label for="brand">Car Brand:</label><br>
@@ -157,6 +166,16 @@
     <?php endforeach; ?>
 </body>
 </html>
+
+<button id="addCarBtn">Add Car</button>
+
+<!-- Popup content -->
+<div class="popup" id="addCarPopup">
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/templates/add_car_form.php'; ?>
+</div>
+
+<!-- Overlay to cover the background -->
+<div class="overlay" id="overlay"></div>
 
 <?php $content = ob_get_clean(); ?>
 
