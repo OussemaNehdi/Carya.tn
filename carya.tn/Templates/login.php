@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
     </div>
 </div>
 <!-- Slide animation -->
-<script>
+<script>//TODO : add js code to js file instead
     document.addEventListener('DOMContentLoaded', function () {
             var slide = '<?php echo isset($_GET["slide"]) ? $_GET["slide"] : "login"; ?>';
             // Set the initial slide based on the query parameter

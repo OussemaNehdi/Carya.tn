@@ -30,8 +30,7 @@ $owned_cars = $user->getCarsByOwnerId();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="http://localhost/Mini-PHP-Project/carya.tn/script.js"></script>
     <title>My Car Listings</title>
-    
-    <style>
+    <style>/* TODO : put this style in style.css instead */
         /* Style the car listing container */
         .car-listing {
             display: flex;

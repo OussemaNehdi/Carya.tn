@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rent a Car</title>
+    <title>Rent a Carsssss</title>
     <link rel="stylesheet" href="../Resources/style.css">
     <style>
         /* Style for the popup */
@@ -41,11 +41,16 @@
         include '../src/Model/Car.php';
 
         $cars=Car::getAllCars();
-
-
+        if (empty($cars)) {
+            echo '<p>No cars found.</p>';
+        }
+        else{
+            echo '<p>Found '.count($cars).' cars.</p>';
+        }
+   
+    
         // Constructing the SQL query based on filter criteria
-       
-/*
+      /*
         // Filtering by brand
         if (!empty($_GET['brand'])) {
             $brands = implode("','", $_GET['brand']);
@@ -78,21 +83,22 @@
             $sql .= " AND price BETWEEN $price_min AND $price_max";
         }*/
 
+       
         
+        foreach ($cars as $car) :
 
-        foreach ($cars as $car ) :
         ?>
         <div class="car">
-            <img src="<?php echo '../Resources/car_images/' . $car['image']; ?>" alt="<?php echo $car['brand'] . ' ' . $car['model']; ?>">
+            
             <div class="car-info">
                 <div>
-                    <p><strong>Brand:</strong> <?php echo $car['brand']; ?></p>
-                    <p><strong>Model:</strong> <?php echo $car['model']; ?></p>
-                    <p><strong>Color:</strong> <?php echo $car['color']; ?></p>
-                    <p><strong>Kilometers:</strong> <?php echo $car['km']; ?></p>
-                    <p><strong>Price:</strong> $<?php echo $car['price']; ?></p>
+                    <p><strong>Brand:</strong> <?php echo $car->brand; ?></p>
+                    <p><strong>Model:</strong> <?php echo $car->model; ?></p>
+                    <p><strong>Color:</strong> <?php echo $car->color; ?></p>
+                    <p><strong>Kilometers:</strong> <?php echo $car->km; ?></p>
+                    <p><strong>Price:</strong> $<?php echo $car->price; ?></p>
                 </div>
-                <button class="rent-button" onclick="showPopup(<?php echo $car['id']; ?>)">Rent</button>
+                <button class="rent-button" onclick="showPopup(<?php echo $car->id; ?>)">Rent</button>
             </div>
         </div>
         <?php endforeach; ?>

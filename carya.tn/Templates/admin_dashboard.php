@@ -152,7 +152,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 
 <div id="info-popup" class="info-popup"></div>
-<style>
+<style>/*TODO : add css to style.css*/
     /* Styling for info popups */
     .info-popup {
         position: absolute;
