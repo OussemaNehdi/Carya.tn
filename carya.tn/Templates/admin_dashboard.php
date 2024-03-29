@@ -101,7 +101,7 @@ if (session_status() == PHP_SESSION_NONE) {
                         <td class='car-image' data-id='<?= $car->id ?>'><?= $car->id ?></td>
                         <td class='car-image' data-id='<?= $car->id ?>'><?= $car->brand ?></td>
                         <td class='car-image' data-id='<?= $car->id ?>'><?= $car->model ?></td>
-                        <td class='car-image' data-id='<?= $car->id ?>'><?= $car->color ?></td>
+                        <td><?= $car->color ?></td>
                         <td><?= $car->km ?></td>
                         <td class='user-info' data-id='<?= $car->owner_id ?>'><?= $car->owner_id ?></td>
                         <td><?= $car->price ?></td>
@@ -255,18 +255,24 @@ if (session_status() == PHP_SESSION_NONE) {
 
         // Event listener for hovering over user ID or car ID
         document.querySelectorAll('.user-info, .car-info, .car-image').forEach(item => {
-            item.addEventListener('mouseover', event => {
-                const type = event.target.classList.contains('user-info') ? 'user' : event.target.classList.contains('car-image') ? 'image' : 'car';
-                const id = event.target.getAttribute('data-id');
-                displayInfo(type, id);
-                document.getElementById('info-popup').style.display = 'block';
-                document.getElementById('info-popup').style.left = event.pageX + 'px';
-                document.getElementById('info-popup').style.top = (event.pageY + 20) + 'px';
-            });
-            item.addEventListener('mouseout', () => {
-                document.getElementById('info-popup').style.display = 'none';
-            });
-        });
+    item.addEventListener('click', event => {
+        const type = event.target.classList.contains('user-info') ? 'user' : event.target.classList.contains('car-image') ? 'image' : 'car';
+        const id = event.target.getAttribute('data-id');
+        displayInfo(type, id);
+        document.getElementById('info-popup').style.display = 'block';
+        document.getElementById('info-popup').style.left = event.pageX + 'px';
+        document.getElementById('info-popup').style.top = (event.pageY + 20) + 'px';
+        event.stopPropagation(); // Prevent the click event from propagating to the document body
+    });
+});
+
+// Add event listener to the document body to close the popup when clicked outside
+document.body.addEventListener('click', event => {
+    const infoPopup = document.getElementById('info-popup');
+    if (infoPopup.style.display === 'block' && !infoPopup.contains(event.target)) {
+        infoPopup.style.display = 'none';
+    }
+});
 
         document.getElementById("addCarBtn").addEventListener("click", function() {
             // Show the popup and overlay
