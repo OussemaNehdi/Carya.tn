@@ -1,5 +1,5 @@
 <?php
-include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -37,7 +37,7 @@ if (session_status() == PHP_SESSION_NONE) {
                             <a href="#" class="dropdown-toggle">Services</a>
                             <ul class="dropdown-menu">
                                 <li><a class="navbar-dropdown-link" href="http://localhost/Mini-PHP-Project/carya.tn/PHP/rent_car.php">Rent a Car</a></li>
-                                <li><a class="navbar-dropdown-link" href="#">List Your Car for Rent</a></li>
+                                <li><a class="navbar-dropdown-link" href="http://localhost/Mini-PHP-Project/carya.tn/templates/listing.php">List Your Car for Rent</a></li>
                                 <li><a class="navbar-dropdown-link" href="#">Export Rent History</a></li>
                             </ul>
                         </li>

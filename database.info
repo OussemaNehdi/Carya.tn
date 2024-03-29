@@ -17,6 +17,7 @@ Columns:
     image: CHAR(255) - Path to the image of the car.
     km: INT - Kilometers driven by the car.
     price: DECIMAL - Rental price per unit time for the car.
+    available: Bool - The owner should be able to mark his car as unavailable for renting.
     owner_id: INT (Foreign Key) - ID of the user who owns the car.
 
 Description: Stores information about rental commands made by users.
