@@ -67,6 +67,10 @@ if (session_status() == PHP_SESSION_NONE) {
                 <th>Price</th>
                 <th>Available</th>
                 <th>Actions</th>
+                <th>
+                    <!-- Add Car Button -->
+                    <button id="addCarBtn">Add Car</button>
+                <th>
             </tr>
         </thead>
         <tbody>
@@ -81,6 +85,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     <td><?= $car->price ?></td>
                     <td><?= $car->isCarAvailable() ? "Yes" : "No" ?></td>
                     <td><?= $car->displayCarAvailabilityActions() ?></td>
+                    <td></td>
                 </tr>
 
                 <!-- Popup -->
@@ -187,8 +192,7 @@ if (session_status() == PHP_SESSION_NONE) {
             z-index: 999;
         }
     </style>
-<!-- Add Car Button -->
-<button id="addCarBtn">Add Car</button>
+
 
     <!-- Popup content -->
     <div class="popup" id="addCarPopup">

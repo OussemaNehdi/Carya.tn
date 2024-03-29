@@ -173,10 +173,16 @@ class User {
     }
 
     // Method to get cars by owner ID
-    public function getCarsByOwnerId() {
+    public function getCarsByOwnerId($filter = null) {
         global $pdo;
         try {
-            $sql = "SELECT * FROM cars WHERE owner_id = ?";
+            if ($filter) {
+                $filter = Car::constructFilterQuery($filter);
+                $cars = Car::getFilteredCars($filter, $this->id);
+                return $cars;
+            } else {
+                $sql = "SELECT * FROM cars WHERE owner_id = ?";
+            }
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$this->id]);
             $cars = [];

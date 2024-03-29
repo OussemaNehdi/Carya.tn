@@ -21,7 +21,12 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 $user = User::getUserById($user_id);
-$owned_cars = $user->getCarsByOwnerId();
+if (isset($_GET) && !empty($_GET)) {
+    $filters = Car::constructFilterQuery($_GET);
+    $owned_cars = $user->getCarsByOwnerId($filters);
+} else {
+    $owned_cars = $user->getCarsByOwnerId();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,6 +90,9 @@ $owned_cars = $user->getCarsByOwnerId();
             background-color: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
+        .container {
+            display: flex;
+        }
     </style>
 </head>
 <body>
@@ -111,7 +119,11 @@ $owned_cars = $user->getCarsByOwnerId();
             });
         });
     </script>
-
+    <div class="container">
+        <div class="filter-menu">
+                <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/Templates/filter_menu.php'; ?>
+            </div>
+        <div>
     <?php foreach ($owned_cars as $car): ?>
     <div class="car-listing">
         <div class="car-image">
@@ -164,6 +176,8 @@ $owned_cars = $user->getCarsByOwnerId();
         </div>
     </div>
     <?php endforeach; ?>
+        </div>
+    </div>
 </body>
 </html>
 

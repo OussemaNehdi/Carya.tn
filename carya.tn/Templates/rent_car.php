@@ -4,6 +4,13 @@
 
 //todo : edit alignment and style -->
 
+<?php 
+$title="Carya.tn";
+$class=""
+?>
+
+<?php ob_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,3 +47,6 @@
     </div>
 </body>
 </html>
+<?php $content = ob_get_clean();?>
+
+<?php require('layout.php')?>

@@ -1,46 +1,17 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php');
 
-// Initialize an empty array to store the conditions for filtering
-$conditions = [];
 
-// Check if brand filter is set
-if (!empty($_GET['brand'])) {
-    $brands = implode("','", $_GET['brand']);
-    $conditions[] = "brand IN ('$brands')";
+// Get the filter conditions from the URL
+if (isset($_GET) && !empty($_GET)) {
+    $filters = Car::constructFilterQuery($_GET);
+    $cars = Car::getFilteredCars($filters, availability:1);
+} else {
+
+    $cars = Car::getAllCars(availability:1);
 }
 
-// Check if model filter is set
-if (!empty($_GET['model'])) {
-    $models = implode("','", $_GET['model']);
-    $conditions[] = "model IN ('$models')";
-}
 
-// Check if color filter is set
-if (!empty($_GET['color'])) {
-    $colors = implode("','", $_GET['color']);
-    $conditions[] = "color IN ('$colors')";
-}
-
-// Check if kilometers range filter is set
-if (!empty($_GET['km_min']) && !empty($_GET['km_max'])) {
-    $km_min = $_GET['km_min'];
-    $km_max = $_GET['km_max'];
-    $conditions[] = "km BETWEEN $km_min AND $km_max";
-}
-
-// Check if price range filter is set
-if (!empty($_GET['price_min']) && !empty($_GET['price_max'])) {
-    $price_min = $_GET['price_min'];
-    $price_max = $_GET['price_max'];
-    $conditions[] = "price BETWEEN $price_min AND $price_max";
-}
-
-// Combine conditions into a single string
-$whereClause = implode(" AND ", $conditions);
-
-// Fetch cars based on the filter conditions
-$cars = Car::getFilteredCars($whereClause);
 
 ?>
 

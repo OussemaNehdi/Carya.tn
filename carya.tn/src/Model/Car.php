@@ -40,10 +40,14 @@ class Car {
     }
 
     // Method to get all cars
-    public static function getAllCars() {
+    public static function getAllCars($availability = null) {
         global $pdo;
         try {
-            $sql = "SELECT * FROM cars";
+            if ($availability === 1) {
+                $sql = "SELECT * FROM cars WHERE available = 1";
+            } else {
+                $sql = "SELECT * FROM cars";
+            }
             $stmt = $pdo->query($sql);
             $cars = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -246,31 +250,83 @@ class Car {
         }
     }
 
-    public static function getFilteredCars($whereClause) {
+    // Static method to construct filter query
+    public static function constructFilterQuery($filters) {
+        $params = [];
+    
+        foreach ($filters as $key => $value) {
+            if (!is_array($value)) {
+                // If the value is not an array, split it into an array using comma as delimiter
+                $params[$key] = explode(',', $value);
+            } else {
+                // If the value is already an array, keep it as is
+                $params[$key] = $value;
+            }
+        }
+    
+        return $params;
+    }
+    
+
+    public static function getFilteredCars($filters, $id = null, $availability = null) {
         global $pdo;
         try {
             // Construct the SQL query to fetch cars with applied filters
-            $sql = "SELECT * FROM cars";
-            if (!empty($whereClause)) {
-                $sql .= " WHERE $whereClause";
+            if ($id === null) {
+                $sql = "SELECT * FROM cars WHERE 1";
+            } else {
+                $sql = "SELECT * FROM cars WHERE owner_id = $id";
             }
-            $stmt = $pdo->query($sql);
 
+            if ($availability === 1) {
+                $sql .= " AND available = 1";
+            }
+    
+            $conditions = [];
+            $params = [];
+    
+            // Construct conditions for each filter parameter
+            if (isset($filters['brand'])) {
+                $conditions[] = "brand IN (" . rtrim(str_repeat("?,", count($filters['brand'])), ',') . ")";
+                $params = array_merge($params, $filters['brand']);
+            }
+            if (isset($filters['model'])) {
+                $conditions[] = "model IN (" . rtrim(str_repeat("?,", count($filters['model'])), ',') . ")";
+                $params = array_merge($params, $filters['model']);
+            }
+            if (isset($filters['color'])) {
+                $conditions[] = "color IN (" . rtrim(str_repeat("?,", count($filters['color'])), ',') . ")";
+                $params = array_merge($params, $filters['color']);
+            }
+            if (isset($filters['km_min']) && isset($filters['km_max'])) {
+                $conditions[] = "km BETWEEN ? AND ?";
+                $params[] = $filters['km_min'][0];
+                $params[] = $filters['km_max'][0];
+            }
+            if (isset($filters['price_min']) && isset($filters['price_max'])) {
+                $conditions[] = "price BETWEEN ? AND ?";
+                $params[] = $filters['price_min'][0];
+                $params[] = $filters['price_max'][0];
+            }
+    
+            // Append conditions to the query if any
+            if (!empty($conditions)) {
+                $sql .= " AND " . implode(" AND ", $conditions);
+            }
+    
+            // Prepare and execute the statement
+            $stmt = $pdo->prepare($sql);
+    
+            
+            $stmt->execute($params);
+    
             // Fetch cars from the database
             $cars = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $car = new Car(
-                    $row['id'],
-                    $row['brand'],
-                    $row['model'],
-                    $row['color'],
-                    $row['image'],
-                    $row['km'],
-                    $row['price'],
-                    $row['owner_id']
-                );
+                $car = Car::getCarFromRow($row);
                 $cars[] = $car;
             }
+    
             return $cars;
         } catch (PDOException $e) {
             // Log error and rethrow the exception
@@ -278,10 +334,8 @@ class Car {
             throw $e;
         }
     }
-
-
-
-
+    
+    
 
     /////////////// END SERVICES RENT A CAR SECTION
 }
