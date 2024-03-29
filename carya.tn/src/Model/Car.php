@@ -44,7 +44,7 @@ class Car {
         global $pdo;
         try {
             if ($availability === 1) {
-                $sql = "SELECT * FROM cars WHERE available = 1";
+                $sql = "SELECT * FROM cars WHERE availability = 1";
             } else {
                 $sql = "SELECT * FROM cars WHERE 1";
             }
@@ -136,7 +136,7 @@ class Car {
     public function isCarMarkedUnavailable() {
         global $pdo;
         try {
-            $sql = "SELECT * FROM cars WHERE id = ? AND available = 0";
+            $sql = "SELECT * FROM cars WHERE id = ? AND availability = 0";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$this->id]);
             $car = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -312,7 +312,7 @@ class Car {
             }
 
             if ($availability === 1) {
-                $sql .= " AND available = 1";
+                $sql .= " AND availability = 1";
             }
     
             $conditions = [];
