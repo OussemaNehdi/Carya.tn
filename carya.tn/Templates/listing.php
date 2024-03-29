@@ -29,7 +29,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Car Listings</title>
-    <style>/* TODO : put this style in style.css instead */
+    <style>
         /* Style the car listing container */
         .car-listing {
             display: flex;
