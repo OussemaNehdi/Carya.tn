@@ -41,3 +41,4 @@ document.getElementById("overlay").addEventListener("click", function() {
     document.getElementById("addCarPopup").style.display = "none";
     document.getElementById("overlay").style.display = "none";
 });
+
