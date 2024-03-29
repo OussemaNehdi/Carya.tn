@@ -26,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $color = $_POST['color'];
     $price = $_POST['price'];
     $km = $_POST['km'];
-    $refferer = parse_url($_POST['refferer'], PHP_URL_PATH);
 
     // Check if the image file is uploaded
     if (!empty($_FILES['image']['name'])) {
@@ -61,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         // Update car details
         $car->updateCar($brand, $model, $color, $file_name, $km, $price);
-        header("Location: $refferer?message=Car%20updated%20successfully!");
+        header("Location: $refferer?message=Car%20updated%20successfully.");
         exit(); // Ensure script execution stops after redirect
     } catch (Exception $e) {
         header("Location: $refferer?message=" . urlencode($e->getMessage()));

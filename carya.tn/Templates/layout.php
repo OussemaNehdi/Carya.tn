@@ -1,3 +1,10 @@
+<?php
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -12,49 +19,45 @@
     <body class=<?= $class ?>>
         <!-- Start of Navbar -->
         <nav class="navbar">
-            <div class="container">
-                <div class="navbar-brand">
-                    <a href="http://localhost/Mini-PHP-Project/carya.tn/index.php">Carya.tn Logo</a>
-                </div>
-                <div class="navbar-menu">
-                    <ul>
-                        <div class="basics">
-                            <li><a href="http://localhost/Mini-PHP-Project/carya.tn/index.php">Home</a></li>
-                            <li><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/about.php">About</a></li>
-                            <?php
-                                // check if the user is an admin
-                                if (session_status() == PHP_SESSION_NONE) {
-                                    session_start();
-                                }
-                                if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
-                                    echo '<li><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/admin_dashboard.php">Admin Dashboard</a></li>';
-                                }
-                            ?>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle">Services</a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="http://localhost/Mini-PHP-Project/carya.tn/PHP/rent_car.php">Rent a Car</a></li>
-                                    <li><a href="#">List Your Car for Rent</a></li>
-                                    <li><a href="#">Export Rent History</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php">Contact</a></li>
-                        </div>
+            <div class="navbar-logo">
+                <a href="http://localhost/Mini-PHP-Project/carya.tn/index.php">Carya.tn Logo</a>
+            </div>
+            <div class="navbar-menu">
+                <ul>
+                    <div class="basics">
+                        <li class="navbar-link"><a href="http://localhost/Mini-PHP-Project/carya.tn/index.php">Home</a></li>
+                        <li class="navbar-link"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/about.php">About</a></li>
                         <?php
-                            if (session_status() == PHP_SESSION_NONE) {
-                                session_start();
+                            // check if the user is an admin
+                            if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+                                echo '<li class="navbar-link"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/admin_dashboard.php">Admin Dashboard</a></li>';
                             }
-                            if(isset($_SESSION['user_id'])){
-                                echo '<li class="user">';
-                                echo '<li class="login-button"><a href="http://localhost/Mini-PHP-Project/carya.tn/src/Controllers/logout.php">Logout</a></li>';
-                                echo '<li class="profile-button"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/profile.php">Profile</a></li>';
-                                echo '</li>';
-                            }else{
-                                echo '<li class="login-button"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php">Login</a></li>';
-                            }                    
                         ?>
-                    </ul>
-                </div>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle">Services</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="navbar-dropdown-link" href="http://localhost/Mini-PHP-Project/carya.tn/PHP/rent_car.php">Rent a Car</a></li>
+                                <li><a class="navbar-dropdown-link" href="http://localhost/Mini-PHP-Project/carya.tn/templates/listing.php">List Your Car for Rent</a></li>
+                                <li><a class="navbar-dropdown-link" href="#">Export Rent History</a></li>
+                            </ul>
+                        </li>
+                        <li class="navbar-link"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php">Contact</a></li>
+                    </div>
+                </ul>
+            </div>
+            <div class="nav-user">
+                <ul>
+                    <?php
+                        if(isset($_SESSION['user_id'])){
+                            $user = User::getUserById($_SESSION['user_id']);
+                            echo '<li class="login-button"><a href="http://localhost/Mini-PHP-Project/carya.tn/src/Controllers/logout.php">Logout</a></li>';
+                            echo '<li class="profile-button"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/profile.php">'.$user->firstName.'</a></li>';
+                            echo '</li>';
+                        }else{
+                            echo '<li class="login-button"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php">Login</a></li>';
+                        }                    
+                    ?>
+                </ul>
             </div>
         </nav>
         <!-- End of Navbar -->

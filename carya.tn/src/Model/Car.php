@@ -122,18 +122,44 @@ class Car {
             throw $e;
         }
     }
-    
-    // Method to check if the car is available
-    public function isCarAvailable() {
+
+    // Method to check if car is marked unavailable by owner
+    public function isCarMarkedUnavailable() {
+        global $pdo;
+        try {
+            $sql = "SELECT * FROM cars WHERE id = ? AND available = 0";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$this->id]);
+            $car = $stmt->fetch(PDO::FETCH_ASSOC);
+            return $car ? true : false;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error checking if car is marked unavailable: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    // Method to check if car is in use
+    public function isCarInUse() {
         global $pdo;
         try {
             $current_date = date('Y-m-d');
-            $car_id = $this->id;
-            $car_commanded_sql = "SELECT * FROM command WHERE car_id=? AND start_date <= ? AND end_date >= ?";
-            $car_commanded_stmt = $pdo->prepare($car_commanded_sql);
-            $car_commanded_stmt->execute([$car_id, $current_date, $current_date]);
-            $car_commanded = $car_commanded_stmt->fetchAll(PDO::FETCH_ASSOC);
-            return count($car_commanded) == 0;
+            $sql = "SELECT * FROM command WHERE car_id = ? AND start_date <= ? AND end_date >= ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$this->id, $current_date, $current_date]);
+            $car_commanded = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return count($car_commanded) > 0;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error checking if car is in use: " . $e->getMessage());
+            throw $e;
+        }
+    }
+    
+    // Method to check if the car is available for renting
+    public function isCarAvailable() {
+        try {
+            return !$this->isCarMarkedUnavailable() && !$this->isCarInUse();
         } catch (PDOException $e) {
             // Log error and rethrow the exception
             error_log("Error checking car availability: " . $e->getMessage());
@@ -147,14 +173,42 @@ class Car {
             if ($this->isCarAvailable()) {
                 echo "<a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/delete_car.php?id={$this->id}'>Delete</a>";
                 if ($this->owner_id == $_SESSION['user_id']) {
-                    echo " | <a href='http://localhost/Mini-PHP-Project/carya.tn/templates/update_car_form.php?id={$this->id}'>Update</a>";
+                    echo " | <button onclick=\"document.getElementById('popup{$this->id}').style.display='block'\">Update Listing</button>";
                 }
             } else {
-                echo "Car is in use";
+                echo "Car unavailable";
             }
         } catch (Exception $e) {
             // Log error and rethrow the exception
             error_log("Error displaying car availability actions: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    // Mark the car as unavailable
+    public function markCarUnavailable() {
+        global $pdo;
+        try {
+            $sql = "UPDATE cars SET available = 0 WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$this->id]);
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error marking car as unavailable: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    // Mark the car as available
+    public function markCarAvailable() {
+        global $pdo;
+        try {
+            $sql = "UPDATE cars SET available = 1 WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$this->id]);
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error marking car as available: " . $e->getMessage());
             throw $e;
         }
     }

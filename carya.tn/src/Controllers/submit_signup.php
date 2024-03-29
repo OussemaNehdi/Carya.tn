@@ -6,6 +6,8 @@ if (session_status() == PHP_SESSION_NONE) {
 
 // Include the database connection
 include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php'; // Include the file with database connection
+// Include the User model
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get the form data
@@ -23,19 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = filter_var($email, FILTER_SANITIZE_EMAIL);
         $email = trim($email);
 
-        // Check if the email exists
-        $sql = "SELECT * FROM users WHERE email = ?";
-        $stmt = $pdo->prepare($sql);
-        try {
-            $stmt->execute([$email]);
-        } catch (PDOException $e) {
-            echo "Error executing query: " . $e->getMessage();
-            exit();
-        }
-        $stmt->execute([$email]);
+        $user = User::getUserByEmail($email);
 
-        $result = $stmt->fetch();
-        if ($result) {
+        if ($user) {
             header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=User already exists&slide=register');
             exit();
         }
@@ -51,20 +43,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Hash the password
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        // Insert the user into the database
-        $sql = "INSERT INTO users (firstName, lastName, email, password, role) VALUES (?, ?, ?, ?, ?)";
-        $stmt = $pdo->prepare($sql);
+        // Add the user
+        User::addUser($first_name, $last_name, $hashed_password, $email, $role);
+        header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=Account created successfully');
+        exit();
 
-        if ($stmt) {
-            if ($stmt->execute([$first_name, $last_name, $email, $password, $role])) {
-                header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=Account created successfully');
-                exit();
-            } else {
-                echo "Error: " . $stmt->errorInfo()[2];
-            }
-        } else {
-            echo "Error in preparing SQL statement: " . $pdo->errorInfo()[2];
-        }
     } else {
         header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=All fields are required&slide=register');
         exit();

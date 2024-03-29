@@ -18,6 +18,7 @@ CREATE TABLE cars (
     image CHAR(255),
     km INT,
     price DECIMAL,
+    available BOOLEAN,
     owner_id INT
 );
 

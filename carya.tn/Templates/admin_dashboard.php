@@ -1,9 +1,9 @@
 <?php
 // Include necessary files
-include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/controllers/is_admin.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Command.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
-include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/controllers/is_admin.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Command.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php';
 
 // Set title and class
 $title = "Admin Dashboard";
@@ -82,6 +82,30 @@ if (session_status() == PHP_SESSION_NONE) {
                     <td><?= $car->isCarAvailable() ? "Yes" : "No" ?></td>
                     <td><?= $car->displayCarAvailabilityActions() ?></td>
                 </tr>
+
+                <!-- Popup -->
+    <div id="popup<?php echo $car->id ?>" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="document.getElementById('popup<?php echo $car->id ?>').style.display='none'">&times;</span>
+            <h2>Update Car Listing</h2>
+            <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/update_car.php" method="POST" enctype="multipart/form-data">
+                <label for="brand">Car Brand:</label><br>
+                <input type="text" id="brand" name="brand" value="<?php echo $car->brand; ?>"><br>
+                <label for="model">Car Model:</label><br>
+                <input type="text" id="model" name="model" value="<?php echo $car->model; ?>"><br>
+                <label for="color">Car Color:</label><br>
+                <input type="text" id="color" name="color" value="<?php echo $car->color; ?>"><br>
+                <label for="price">Car Price:</label><br>
+                <input type="text" id="price" name="price" value="<?php echo $car->price; ?>"><br>
+                <label for="km">Car Kilometers:</label><br>
+                <input type="text" id="km" name="km" value="<?php echo $car->km; ?>"><br>
+                <label for="image">Upload New Car Image:</label><br>
+                <input type="file" id="image" name="image"><br>
+                <input type="hidden" id="car_id" name="car_id" value="<?php echo $car->id; ?>">
+                <input type="submit" value="Update Car">
+            </form>
+        </div>
+    </div>
             <?php endforeach; ?>
         </tbody>
     </table>
@@ -173,6 +197,30 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <!-- Overlay to cover the background -->
     <div class="overlay" id="overlay"></div>
+
+    <!-- Popup -->
+    <div id="popup<?php echo $car->id ?>" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="document.getElementById('popup<?php echo $car->id ?>').style.display='none'">&times;</span>
+            <h2>Update Car Listing</h2>
+            <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/update_car.php" method="POST" enctype="multipart/form-data">
+                <label for="brand">Car Brand:</label><br>
+                <input type="text" id="brand" name="brand" value="<?php echo $car->brand; ?>"><br>
+                <label for="model">Car Model:</label><br>
+                <input type="text" id="model" name="model" value="<?php echo $car->model; ?>"><br>
+                <label for="color">Car Color:</label><br>
+                <input type="text" id="color" name="color" value="<?php echo $car->color; ?>"><br>
+                <label for="price">Car Price:</label><br>
+                <input type="text" id="price" name="price" value="<?php echo $car->price; ?>"><br>
+                <label for="km">Car Kilometers:</label><br>
+                <input type="text" id="km" name="km" value="<?php echo $car->km; ?>"><br>
+                <label for="image">Upload New Car Image:</label><br>
+                <input type="file" id="image" name="image"><br>
+                <input type="hidden" id="car_id" name="car_id" value="<?php echo $car->id; ?>">
+                <input type="submit" value="Update Car">
+            </form>
+        </div>
+    </div>
 
 <?php $content = ob_get_clean(); ?>
 
