@@ -7,7 +7,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/C
 
 // Set title and class
 $title = "Admin Dashboard";
-$class = "";
+$class = "admin-dashboard";
 
 // Start output buffering
 ob_start();
