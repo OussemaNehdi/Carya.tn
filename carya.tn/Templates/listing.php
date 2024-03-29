@@ -14,6 +14,11 @@
         session_start();
     }
     // Fetch the user's owned cars
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: http://localhost/Mini-PHP-Project/carya.tn/templates/login.php");
+        exit();
+    }
+
     $user_id = $_SESSION['user_id'];
     $user = User::getUserById($user_id);
     $owned_cars = $user->getCarsByOwnerId($user_id);
