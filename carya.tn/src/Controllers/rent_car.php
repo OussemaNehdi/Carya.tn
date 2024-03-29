@@ -17,6 +17,11 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
+if (!isset($_SESSION['user_id'])) {
+    header('Location: /Mini-PHP-Project/carya.tn/Templates/login.php');
+    exit();
+}
+
 $refferrer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
 $user_id = $_SESSION['user_id'];
 $password = $_POST['password'];

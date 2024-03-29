@@ -10,8 +10,11 @@ if (isset($_GET) && !empty($_GET)) {
     $filters = Car::constructFilterQuery($_GET);
     $cars = Car::getFilteredCars($filters, availability:1);
 } else {
-    $cars = Car::getAllCars(availability:1, owner:$user_id);
-}
+    if ($user_id === null) {
+        $cars = Car::getAllCars(availability:1);
+    } else {
+        $cars = Car::getAllCars(availability:1, owner:$user_id);
+    }}
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +78,11 @@ if (isset($_GET) && !empty($_GET)) {
                     <p><strong>Color:</strong> <?php echo $car->color; ?></p>
                     <p><strong>Kilometers:</strong> <?php echo $car->km; ?> km</p>
                     <p><strong>Price:</strong> $<?php echo $car->price; ?></p>
-                    <button id="rentCarButton<?php echo $car->id; ?>">Rent</button>
+                    <?php 
+                    if ($user_id !== null) {
+                        echo '<button id="rentCarButton<?php echo $car->id; ?>">Rent</button>';
+                    }
+                    ?>
                 </div>
             <?php endforeach; ?>
         </div>
