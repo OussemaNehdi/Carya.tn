@@ -124,7 +124,7 @@ if (isset($_GET) && !empty($_GET)) {
                 <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/Templates/filter_menu.php'; ?>
             </div>
         <div>
-    <?php foreach ($owned_cars as $car): ?>
+    <?php foreach ($cars as $car): ?>
     <div class="car-listing">
         <div class="car-image">
             <img src="/Mini-PHP-Project/carya.tn/Resources/car_images/<?php echo $car->image; ?>" alt="Car Image">
