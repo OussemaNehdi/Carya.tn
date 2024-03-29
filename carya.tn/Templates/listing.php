@@ -23,7 +23,7 @@ $user_id = $_SESSION['user_id'];
 $user = User::getUserById($user_id);
 if (isset($_GET) && !empty($_GET)) {
     $filters = Car::constructFilterQuery($_GET);
-    $owned_cars = $user->getCarsByOwnerId($filters);
+    $owned = $user->getCarsByOwnerId($filters);
 } else {
     $cars = $user->getCarsByOwnerId();
 }
