@@ -29,13 +29,13 @@ if (!empty($_POST['color'])) {
 }
 
 // Check if kilometers range filter is set
-if (!empty($_POST['km_min']) && !empty($_POST['km_max'])) {
+if (!empty($_POST['km_min']) || !empty($_POST['km_max'])) {
     $filters['km_min'] = $_POST['km_min'];
     $filters['km_max'] = $_POST['km_max'];
 }
 
 // Check if price range filter is set
-if (!empty($_POST['price_min']) && !empty($_POST['price_max'])) {
+if (!empty($_POST['price_min']) || !empty($_POST['price_max'])) {
     $filters['price_min'] = $_POST['price_min'];
     $filters['price_max'] = $_POST['price_max'];
 }
