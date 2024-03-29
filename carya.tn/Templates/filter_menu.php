@@ -19,7 +19,7 @@ function generateInputCheckboxes($data, $filterData, $filterName) {
 function generateRangeInput($id, $name, $min, $max, $value, $filterData) {
     ?>
     <!-- Uses the range selected by the user and displays it -->
-    <input type="range" id="<?php echo $id; ?>" name="<?php echo $name; ?>" min="<?php echo $min; ?>" max="<?php echo $max; ?>" value="<?php echo isset($filterData[$name]) ? $filterData[$name][0] : $value; ?>"> 
+    <input type="range" id="<?php echo $id; ?>" name="<?php echo $name; ?>" min="<?php echo $min; ?>" max="<?php echo $max; ?>" value="<?php echo isset($filterData[$name]) ? $filterData[$name][0] : $value; ?>" oninput="updateRangeValue('<?php echo $id; ?>', '<?php echo $id; ?>_val', this.value)"> 
     <span id="<?php echo $id; ?>_val"><?php echo isset($filterData[$name]) ? $filterData[$name][0] : $value; ?></span>
     <?php
 }
@@ -66,5 +66,10 @@ function isChecked($value, $filterData, $filterName) {
             </form>
         </div>
     </div>
+    <script>
+        function updateRangeValue(rangeId, spanId, newValue) {
+            document.getElementById(spanId).innerText = newValue;
+        }
+    </script>
 </body>
 </html>

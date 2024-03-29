@@ -182,7 +182,7 @@ class Car {
             if ($this->isCarAvailable()) {
                 echo "<a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/delete_car.php?id={$this->id}'>Delete</a>";
                 if ($this->owner_id == $_SESSION['user_id']) {
-                    echo " | <button onclick=\"document.getElementById('popup{$this->id}').style.display='block'\">Update Listing</button>";
+                    echo " | <button id='UpdateCarBtn$this->id'>Update Listing</button>";
                 }
             } else {
                 echo "Car unavailable";

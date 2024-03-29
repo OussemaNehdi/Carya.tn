@@ -25,23 +25,6 @@ document.querySelectorAll('.user-info, .car-info, .car-image').forEach(item => {
         document.getElementById('info-popup').style.display = 'none';
     });
 });
-
-// ================================== End of Admin_Dashboard ==================================
-// ----------------------------------------------
-// The add car form popup script
-document.getElementById("addCarBtn").addEventListener("click", function() {
-    // Show the popup and overlay
-    document.getElementById("addCarPopup").style.display = "block";
-    document.getElementById("overlay").style.display = "block";
-});
-
-// Close the popup and overlay when clicking outside the popup
-document.getElementById("overlay").addEventListener("click", function() {
-    document.getElementById("addCarPopup").style.display = "none";
-    document.getElementById("overlay").style.display = "none";
-});
-// --------------------------------------------------
-
 // ================================== Profile.php ==================================
 function redirectToLink(url) {
     window.location.href = url;
