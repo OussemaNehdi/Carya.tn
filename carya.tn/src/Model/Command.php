@@ -37,12 +37,12 @@ class Command {
     }
 
     // Method to add a rental command
-    public static function addRentalCommand($car_id, $user_id, $rental_date, $start_date, $end_date, $rental_period) {
+    public static function addRentalCommand($car_id, $user_id, $start_date, $end_date, $rental_period) {
         global $pdo;
         try {
-            $sql = "INSERT INTO command (car_id, user_id, rental_date, start_date, end_date, rental_period) VALUES (?, ?, ?, ?, ?, ?)";
+            $sql = "INSERT INTO command (car_id, user_id, start_date, end_date, rental_period) VALUES (?, ?, ?, ?, ?)";
             $stmt = $pdo->prepare($sql);
-            $stmt->execute([$car_id, $user_id, $rental_date, $start_date, $end_date, $rental_period]);
+            $stmt->execute([$car_id, $user_id, $start_date, $end_date, $rental_period]);
             return $stmt->rowCount() > 0;
         } catch (PDOException $e) {
             // Log error and rethrow the exception

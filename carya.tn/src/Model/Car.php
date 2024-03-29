@@ -40,14 +40,19 @@ class Car {
     }
 
     // Method to get all cars
-    public static function getAllCars($availability = null) {
+    public static function getAllCars($availability = null, $owner = null) {
         global $pdo;
         try {
             if ($availability === 1) {
                 $sql = "SELECT * FROM cars WHERE available = 1";
             } else {
-                $sql = "SELECT * FROM cars";
+                $sql = "SELECT * FROM cars WHERE 1";
             }
+
+            if ($owner !== null) {
+                $sql .= " AND owner_id != $owner";
+            }
+
             $stmt = $pdo->query($sql);
             $cars = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -216,6 +221,29 @@ class Car {
             throw $e;
         }
     }
+
+    // Method to get the unavailable start and end dates of the car
+    public function getUnavailableDates() {
+        global $pdo;
+        try {
+            $sql = "SELECT start_date, end_date FROM command WHERE car_id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$this->id]);
+            $commands = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $unavailableDates = [];
+            foreach ($commands as $command) {
+                $start_date = $command['start_date'];
+                $end_date = $command['end_date'];
+                $current_date = $start_date;
+                $unavailableDates[] = $current_date . " --> " . $end_date;
+            }
+            return $unavailableDates;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching unavailable dates: " . $e->getMessage());
+            throw $e;
+        }
+    }
     /////////// SERVICES : RENT A CAR SECTION
 
     // Static method to get the maximum value of a column from the cars table
@@ -250,8 +278,12 @@ class Car {
         }
     }
 
-    // Static method to construct filter query
     public static function constructFilterQuery($filters) {
+        // Check if $filters is an array
+        if (!is_array($filters)) {
+            throw new InvalidArgumentException("Invalid filters provided. Expected an array.");
+        }
+    
         $params = [];
     
         foreach ($filters as $key => $value) {
@@ -266,6 +298,7 @@ class Car {
     
         return $params;
     }
+    
     
 
     public static function getFilteredCars($filters, $id = null, $availability = null) {

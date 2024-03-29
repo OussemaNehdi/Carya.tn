@@ -9,6 +9,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
         $_message = $_GET['message'];
         echo "<script>alert('$_message')</script>";
     }
+    if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+        session_unset();
+        session_destroy();
+    }
 }
 ?>
 

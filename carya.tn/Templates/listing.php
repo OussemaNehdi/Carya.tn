@@ -25,7 +25,7 @@ if (isset($_GET) && !empty($_GET)) {
     $filters = Car::constructFilterQuery($_GET);
     $owned_cars = $user->getCarsByOwnerId($filters);
 } else {
-    $owned_cars = $user->getCarsByOwnerId();
+    $cars = $user->getCarsByOwnerId();
 }
 ?>
 <!DOCTYPE html>

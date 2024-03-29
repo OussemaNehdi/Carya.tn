@@ -42,7 +42,7 @@ $class=""
         </div>
         <div class="cars-list">
             <!-- This is where the fetched cars will be displayed -->
-            <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/controllers/fetch_cars.php'; ?>
+            <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/Templates/fetch_cars.php'; ?>
         </div>
     </div>
 </body>

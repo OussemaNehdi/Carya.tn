@@ -128,11 +128,6 @@ class User {
         }
     }
 
-
-
-
-
-
     // Method to ban a user by ID
     public function banUserById() {
         global $pdo;
