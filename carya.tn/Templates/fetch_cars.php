@@ -78,11 +78,9 @@ if (isset($_GET) && !empty($_GET)) {
                     <p><strong>Color:</strong> <?php echo $car->color; ?></p>
                     <p><strong>Kilometers:</strong> <?php echo $car->km; ?> km</p>
                     <p><strong>Price:</strong> $<?php echo $car->price; ?></p>
-                    <?php 
-                    if ($user_id !== null) {
-                        echo '<button id="rentCarButton<?php echo $car->id; ?>">Rent</button>';
-                    }
-                    ?>
+                    <?php if ($user_id !== null): ?>
+                        <button id="rentCarButton<?php echo $car->id; ?>">Rent</button>
+                    <?php endif; ?>
                 </div>
             <?php endforeach; ?>
         </div>
