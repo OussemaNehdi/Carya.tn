@@ -200,9 +200,9 @@ ul{
     max-width: 800px;
     margin: 50px auto;
     padding: 20px;
-    background-color: rgba(207, 180, 138, 0.738);
+    background-color: rgba(245, 245, 245, 0.624);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(2px);
 }
 
@@ -232,12 +232,21 @@ ul{
     border-radius: 5px;
 }
 
+.contact_container input:focus, .contact_container textarea:focus{
+    box-shadow: none;
+    border-color: #c89568;
+}
+.contact_container input[type="email"]::placeholder {
+    color: rgba(170, 167, 167, 0.879);
+}
+
+
 .contact_container textarea {
     height: 100px;
 }
 
 .contact_container button[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #d48a48;
     color: white;
     padding: 12px 20px;
     border: none;
@@ -246,7 +255,8 @@ ul{
 }
 
 .contact_container button[type="submit"]:hover {
-    background-color: #45a049;
+    transition: background-color 0.3s ease-in-out;
+    background-color: #d37828;
 }
 
 .success {
@@ -618,6 +628,7 @@ i{
 
 /* ------------------ admin_dashboard.php ------------------*/
 /* CSS for admin dashboard */
+
 .admin-dashboard h1 {
     text-align: center;
     font-weight: bold;
@@ -634,7 +645,7 @@ i{
 .admin-dashboard section {
     margin: 20px auto;
     background-color: #ffffffce;
-    backdrop-filter: blur(10px);
+    
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 10px;
@@ -772,9 +783,48 @@ i{
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
+.info-popup {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: none;
+}
+
+/* Styles for the popup */
+.popup {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+/* bch ki ticklicki el bara yetsaker el popup taa add wala update car */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
 /* ------------------ End of admin_dashboard.php ------------------*/
 
 /* ------------------ User_Profile.php ------------------*/
+.profile-body .container{
+    background-color: rgba(245, 245, 245, 0.843);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 .profile-body .form-control:focus {
     box-shadow: none;
     border-color: #c89568

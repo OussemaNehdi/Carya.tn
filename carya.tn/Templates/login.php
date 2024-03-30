@@ -86,6 +86,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                     <div class="radio-buttons">
                         <input type="radio" id="formCheck1" name="check1" value="customer" checked>

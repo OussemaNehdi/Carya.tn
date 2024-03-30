@@ -39,7 +39,6 @@ if (isset($_GET) && !empty($_GET)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="http://localhost/Mini-PHP-Project/carya.tn/script.js"></script>
     <title>My Cars</title>
     <style>
         /* Style the car listing container */
@@ -231,7 +230,7 @@ if (isset($_GET) && !empty($_GET)) {
         </div>
     </div>
 
-    <button id="addCarBtn">Add Car</button>
+    
 
     <!-- Popup content -->
     <div class="popup" id="addCarPopup">

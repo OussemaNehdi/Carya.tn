@@ -7,8 +7,8 @@ CREATE TABLE users (
     email VARCHAR(50),
     creation_date DATE DEFAULT CURRENT_DATE,
     role VARCHAR(30),
-    country VARCHAR(30),
-    state VARCHAR(30)
+    country VARCHAR(30) DEFAULT '',
+    state VARCHAR(30) DEFAULT ''
 );
 
 -- Create cars table

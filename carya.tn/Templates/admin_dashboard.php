@@ -183,42 +183,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 
     <div id="info-popup" class="info-popup"></div>
-    <style>
-        /* Styling for info popups */
-        /* 3afsa taa el hover */
-        .info-popup {
-            position: absolute;
-            background-color: white;
-            border: 1px solid #ccc;
-            padding: 10px;
-            display: none;
-        }
 
-        /* Styles for the popup */
-        .popup {
-            display: none;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border: 1px solid #ccc;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-        }
-        /* bch ki ticklicki el bara yetsaker el popup taa add wala update car */
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-    </style>
     <!-- Overlay to cover the background -->
     <div class="overlay" id="overlay"></div>
 
@@ -270,6 +235,8 @@ document.body.addEventListener('click', event => {
         });
 
         <?php
+        $user_id = $_SESSION['user_id'];
+        $user = User::getUserById($user_id);
         $cars = $user->getCarsByOwnerId();
         ?>
         document.addEventListener("DOMContentLoaded", function() {
@@ -283,6 +250,7 @@ document.body.addEventListener('click', event => {
             <?php endforeach; ?>
 
             // Close all popups and overlay when clicking outside the popups
+                    
             document.getElementById("overlay").addEventListener("click", function() {
                 // Hide all popups and overlay
                 <?php foreach ($cars as $car) : ?>
