@@ -11,9 +11,11 @@ class User {
     public $email;
     public $creation_date;
     public $role;
+    public $country;
+    public $state;
 
     // Constructor
-    public function __construct($id, $firstName, $lastName, $password, $email, $creation_date, $role) {
+    public function __construct($id, $firstName, $lastName, $password, $email, $creation_date, $role, $country, $state) {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -21,6 +23,8 @@ class User {
         $this->email = $email;
         $this->creation_date = $creation_date;
         $this->role = $role;
+        $this->country = $country;
+        $this->state = $state;
     }
 
     // Method to get a user object from the sql result
@@ -32,7 +36,9 @@ class User {
             $row['password'],
             $row['email'],
             $row['creation_date'],
-            $row['role']
+            $row['role'],
+            $row['country'],
+            $row['state']
         );
     }
 
@@ -193,23 +199,49 @@ class User {
         }
     }
 
-    // Method to update a user's first name and last name by ID
-    public static function updateUsernamesById($userId, $firstName, $lastName) {
+    // Method to update a user's first name by ID
+    public static function updateFirstNameById($userId, $firstName) {
         global $pdo;
         try {
-            $sql = "UPDATE users SET firstName = :firstName, lastName = :lastName WHERE id = :userId";
+            $sql = "UPDATE users SET firstName = ? WHERE id = ?";
             $stmt = $pdo->prepare($sql);
-            $stmt->bindParam(':firstName', $firstName);
-            $stmt->bindParam(':lastName', $lastName);
-            $stmt->bindParam(':userId', $userId);
-            $stmt->execute();
+            $stmt->execute([$firstName, $userId]);
             return $stmt->rowCount() > 0;
         } catch (PDOException $e) {
             // Log error and rethrow the exception
-            error_log("Error updating user names by ID: " . $e->getMessage());
+            error_log("Error updating user's first name by ID: " . $e->getMessage());
             throw $e;
         }
     }
 
+    // Method to update a user's last name by ID
+    public static function updateLastNameById($userId, $lastName) {
+        global $pdo;
+        try {
+            $sql = "UPDATE users SET lastName = ? WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$lastName, $userId]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error updating user's last name by ID: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    // Method to update a user's country, state by ID
+    public static function updateUserLocationById($userId, $country, $state) {
+        global $pdo;
+        try {
+            $sql = "UPDATE users SET country = ?, state = ? WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$country, $state, $userId]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error updating user's country and state by ID: " . $e->getMessage());
+            throw $e;
+        }
+    }
 }
 ?>
