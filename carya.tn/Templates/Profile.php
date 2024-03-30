@@ -1,10 +1,10 @@
 <?php
 // Include database connection and any necessary libraries
-require_once('../src/Lib/connect.php');
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php';
 
-include '../src/Model/Car.php';
-include '../src/Model/Command.php';
-include '../src/Model/User.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Command.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -81,10 +81,10 @@ $class="profile-body"
             <div class="col-md-4">
                 <div class="p-3 py-5">
                     <div class="export">
-                        <div class="export-button" onclick="redirectToLink('http://localhost/Mini-PHP-Project/carya.tn/Templates/Export_rent_history.php')">
+                        <button class="export-button" id="export">
                             <i class="fas fa-file-export"></i>
                             <a class="link" href="#">Export Rent History</a>
-                        </div>
+                        </button>
                     </div>
                     <br>
                     <div class="col-md-12">
@@ -108,7 +108,27 @@ $class="profile-body"
     </div>
 </div>
 </div>
+<div class="popup" id="popup">
+    <?php include 'Export_rent_history.php'; ?>
+</div>
+<div class="overlay" id="overlay"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+        // Add event listener for "Update Listing" button
+        document.getElementById("export").addEventListener("click", function() {
+            document.getElementById("popup").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        });
+
+        // Add event listener to close popups and overlay when clicking outside popups
+        document.getElementById("overlay").addEventListener("click", function() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        });
+    });
+</script>
+
 <?php $content = ob_get_clean();?>
 
 <?php require('layout.php')?>

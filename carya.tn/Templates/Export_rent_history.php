@@ -1,97 +1,115 @@
 <?php
 
+require_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php';
 
-require_once('../src/Lib/connect.php');
-include '../src/Model/Car.php';
-include '../src/Model/Command.php';
-include '../src/Model/User.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Command.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
 
-
+// Start session if not already started
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
+// Redirect if user is not logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: http://localhost/Mini-PHP-Project/carya.tn/templates/login.php");
     exit();
 }
+
+// Get user ID from session
 $user_id = $_SESSION['user_id'];
-//$user_id=1; //todo : hhhhhhhh 4 rjel ylawjo nharin fin l erreur al star hetha
+
+// Get renting history for the user
 $rentingHistory = Command::getRentalCommandsByUserId($user_id);
 
+// Get user details
+$user = User::getUserById($user_id);
 
-
-$user=User::getUserById($user_id);   
-
-
+// Update car details in renting history
 foreach ($rentingHistory as &$row) {
-    
     $carDetails = Car::getCarById($row->car_id);
     $row->car_id = $carDetails->brand;
     $row->car_model = $carDetails->model;
     $row->car_price = $carDetails->price;
 }
-
 unset($row);
-
-
-
-
-
-
-
-
-$html = '<style>';
-$html .= 'table {';
-$html .= '    width: 100%;';
-$html .= '    border-collapse: collapse;';
-$html .= '}';
-$html .= 'th, td {';
-$html .= '    padding: 8px;';
-$html .= '    text-align: left;';
-$html .= '    border-bottom: 1px solid #ddd;';
-$html .= '}';
-$html .= 'th {';
-$html .= '    background-color: #f2f2f2;';
-$html .= '}';
-$html .= '</style>';
-
-$html .= '<table>';
-$html .= '<tr>';
-$html .= '<th>Rent ID</th>';
-$html .= '<th>Brand</th>';
-$html .= '<th>Model</th>';
-$html .= '<th>Rental Date</th>';
-$html .= '<th>Start Date</th>';
-$html .= '<th>End Date</th>';
-$html .= '<th>Price</th>';
-$html .= '</tr>';
-
-foreach ($rentingHistory as $row) {
-    $html .= '<tr>';
-    $html .= '<td>' . $row->command_id . '</td>';
-    $html .= '<td>' . $row->car_id . '</td>';
-    $html .= '<td>' . $row->car_model . '</td>';  
-
-    $html .= '<td>' . $row->rental_date . '</td>';
-    $html .= '<td>' . $row->start_date . '</td>';
-    $html .= '<td>' . $row->end_date . '</td>';
-    $html .= '<td>' . $row->car_price . '</td>';
-    $html .= '</tr>';
-}
-
-$html .= '</table>';
-
-
-echo $html;
 
 ?>
 
-<html>
-    <head>
-        <title>renting button</title>  
-    </head>
-    <body>
-        
-    <button > <a href="http://localhost/Mini-PHP-Project/carya.tn/src/Controllers/Download_Rent_History.php">Download</a></button>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renting History</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Rent ID</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Rental Date</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Price</th>
+        </tr>
+
+        <?php foreach ($rentingHistory as $row): ?>
+            <tr>
+                <td><?= $row->command_id ?></td>
+                <td><?= $row->car_id ?></td>
+                <td><?= $row->car_model ?></td>
+                <td><?= $row->rental_date ?></td>
+                <td><?= $row->start_date ?></td>
+                <td><?= $row->end_date ?></td>
+                <td><?= $row->car_price ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+
+    <!-- Download button for renting history -->
+    <button><a href="http://localhost/Mini-PHP-Project/carya.tn/src/Controllers/Download_Rent_History.php">Download</a></button>
+</body>
 </html>
