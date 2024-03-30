@@ -6,8 +6,19 @@ include '../src/Model/Car.php';
 include '../src/Model/Command.php';
 include '../src/Model/User.php';
 
-$user_id=1; //todo : hhhhhhhh 4 rjel ylawjo nharin fin l erreur al star hetha
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['user_id'])) {
+    header("Location: http://localhost/Mini-PHP-Project/carya.tn/templates/login.php");
+    exit();
+}
+$user_id = $_SESSION['user_id'];
+//$user_id=1; //todo : hhhhhhhh 4 rjel ylawjo nharin fin l erreur al star hetha
 $rentingHistory = Command::getRentalCommandsByUserId($user_id);
+
+
 
 $user=User::getUserById($user_id);   
 
