@@ -200,9 +200,9 @@ ul{
     max-width: 800px;
     margin: 50px auto;
     padding: 20px;
-    background-color: rgba(207, 180, 138, 0.738);
+    background-color: rgba(245, 245, 245, 0.624);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(2px);
 }
 
@@ -232,12 +232,21 @@ ul{
     border-radius: 5px;
 }
 
+.contact_container input:focus, .contact_container textarea:focus{
+    box-shadow: none;
+    border-color: #c89568;
+}
+.contact_container input[type="email"]::placeholder {
+    color: rgba(170, 167, 167, 0.879);
+}
+
+
 .contact_container textarea {
     height: 100px;
 }
 
 .contact_container button[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #d48a48;
     color: white;
     padding: 12px 20px;
     border: none;
@@ -246,7 +255,8 @@ ul{
 }
 
 .contact_container button[type="submit"]:hover {
-    background-color: #45a049;
+    transition: background-color 0.3s ease-in-out;
+    background-color: #d37828;
 }
 
 .success {
