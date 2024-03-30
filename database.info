@@ -31,4 +31,5 @@ Columns:
     start_date: DATE - Start date of the rental period.
     end_date: DATE - End date of the rental period.
     rental_period: INT - Duration of the rental period in days.
+    confirmed : BOOLEAN users will be able to accept their own cars commands and admins will be able to accept any user's command NULL for unreviewd True for confirmed and False for rejected
 

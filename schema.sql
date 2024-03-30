@@ -24,7 +24,7 @@ CREATE TABLE cars (
     owner_id INT
 );
 
--- Create command table
+-- Create command table (LAST UPDATE ADDED CONFIRMED TO COMMANDS)
 CREATE TABLE command (
     command_id INT AUTO_INCREMENT PRIMARY KEY,
     car_id INT,
@@ -32,7 +32,9 @@ CREATE TABLE command (
     rental_date DATE DEFAULT CURRENT_DATE,
     start_date DATE,
     end_date DATE,
-    rental_period INT
+    rental_period INT,
+    confirmed BOOLEAN
+
 );
 
 -- Add foreign keys

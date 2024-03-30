@@ -6,7 +6,7 @@ include '../src/Model/Car.php';
 include '../src/Model/Command.php';
 include '../src/Model/User.php';
 
-$user_id=1;
+$user_id=1; //todo : hhhhhhhh 4 rjel ylawjo nharin fin l erreur al star hetha
 $rentingHistory = Command::getRentalCommandsByUserId($user_id);
 
 $user=User::getUserById($user_id);   

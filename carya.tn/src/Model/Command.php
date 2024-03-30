@@ -11,6 +11,7 @@ class Command {
     public $start_date;
     public $end_date;
     public $rental_period;
+    public $confirmed; //new : Added by AgressivePug 
 
     // Constructor
     public function __construct($command_id, $car_id, $user_id, $rental_date, $start_date, $end_date, $rental_period) {
@@ -140,6 +141,76 @@ class Command {
             // Log error and rethrow the exception
             error_log("Error fetching rental commands by user ID: " . $e->getMessage());
             throw $e;
+        }
+    }
+    public static function getRentalCommandsByCarId($car_id) {
+        global $pdo;
+        try {
+            $sql = "SELECT * FROM command WHERE car_id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$car_id]);
+            $commands = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $command = Command::getCommandFromRow($row);
+                $commands[] = $command;
+            }
+            return $commands;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching rental commands by car ID: " . $e->getMessage());
+            throw $e;
+        }
+    }
+    public static function AcceptCommand($command_id)
+    {
+        
+        $command = self::getRentalCommandById($command_id);
+
+        if ($command) {
+            
+            $command->confirmed = true;
+            
+            
+            global $pdo;
+
+            // Prepare the SQL query
+            $sql = "UPDATE command SET confirmed = :confirmed WHERE command_id = :command_id";
+
+            // Prepare the statement
+            $stmt = $pdo->prepare($sql);
+
+            // Bind parameters
+            $stmt->bindParam(':confirmed', $command->confirmed, PDO::PARAM_BOOL);
+            $stmt->bindParam(':command_id', $command_id, PDO::PARAM_INT);
+
+            // Execute the statement
+            $stmt->execute();
+        }
+    }
+    public static function RefuseCommand($command_id)
+    {
+        
+        $command = self::getRentalCommandById($command_id);
+
+        if ($command) {
+            
+            $command->confirmed = false;
+            
+            
+            global $pdo;
+
+            // Prepare the SQL query
+            $sql = "UPDATE command SET confirmed = :confirmed WHERE command_id = :command_id";
+
+            // Prepare the statement
+            $stmt = $pdo->prepare($sql);
+
+            // Bind parameters
+            $stmt->bindParam(':confirmed', $command->confirmed, PDO::PARAM_BOOL);
+            $stmt->bindParam(':command_id', $command_id, PDO::PARAM_INT);
+
+            // Execute the statement
+            $stmt->execute();
         }
     }
 

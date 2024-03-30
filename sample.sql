@@ -20,8 +20,8 @@ VALUES
 ('Mercedes-Benz', 'E-Class', 'Gray', 'e_class.jpg', 55000, 30000.00, 2, True);
 
 -- Commands table
-INSERT INTO command (car_id, user_id, rental_date, start_date, end_date, rental_period)
+INSERT INTO command (car_id, user_id, rental_date, start_date, end_date, rental_period,confirmed)
 VALUES
-(1, 2, '2024-03-25', '2024-04-01', '2024-04-08', 7),
-(6, 1, '2024-03-25', '2024-04-05', '2024-04-10', 5),
-(3, 3, '2024-03-25', '2024-04-02', '2024-04-07', 5);
+(1, 2, '2024-03-25', '2024-04-01', '2024-04-08', 7, False),
+(6, 1, '2024-03-25', '2024-04-05', '2024-04-10', 5, True),
+(3, 3, '2024-03-25', '2024-04-02', '2024-04-07', 5 , True);
