@@ -12,7 +12,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/C
 $title = "Admin Dashboard";
 $class = "admin-dashboard";
 
-// Start output buffering
+
 ob_start();
 
 // Start or resume session
@@ -20,15 +20,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<body>
     <h1>Admin Dashboard</h1>
 
     <!-- User list -->
@@ -60,11 +51,11 @@ if (session_status() == PHP_SESSION_NONE) {
                             // Shows ban/unban or admin status based on the user's role
 
                             if ($user->role == 'banned') {
-                                echo "<a href=\"http://localhost/Mini-PHP-Project/carya.tn/src/controllers/unban_user.php?id={$user->id}\">Unban</a>";
+                                echo "<a href=\"http://localhost/Mini-PHP-Project/carya.tn/src/controllers/unban_user.php?id={$user->id}\" class='unban-link'>Unban</a>";
                             } else if ($user->role == 'admin') {
                                 echo "Admin";
                             } else {
-                                echo "<a href=\"http://localhost/Mini-PHP-Project/carya.tn/src/controllers/ban_user.php?id={$user->id}\">Ban</a>";
+                                echo "<a href=\"http://localhost/Mini-PHP-Project/carya.tn/src/controllers/ban_user.php?id={$user->id}\" class='ban-link'>Ban</a>";
                             }
                             ?>
                         </td>
@@ -89,10 +80,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     <th>Price</th>
                     <th>Available</th>
                     <th>Actions</th>
-                    <th>
-                        <!-- Add Car Button -->
-                        <button id="addCarBtn">Add Car</button>
-                    <th>
+                    <th><button id="addCarBtn">Add Car</button></th>
                 </tr>
             </thead>
             <tbody>
@@ -112,15 +100,16 @@ if (session_status() == PHP_SESSION_NONE) {
 
                             if ($car->isCarAvailable()) {
                                 echo "<a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/delete_car.php?id={$car->id}'>Delete</a>";
-                                if ($car->owner_id == $_SESSION['user_id']) {
-                                    echo " | <button id='UpdateCarBtn{$car->id}'>Update Listing</button>";
-                                }
-                            } else {
-                                echo "Car unavailable";
-                            }
+                                
                             ?>
                         </td>
                         <td>
+                            <?php
+                                if ($car->owner_id == $_SESSION['user_id']) {
+                                    echo "<button id='UpdateCarBtn{$car->id}'>Update Listing</button>";
+                                }
+                            }
+                            ?>
                             <!-- 3raftch chna3mel bech e tableau ykoun kemel khtr kn challa9t el add button hatitou f th donc lzm td zeyda uwu -->
                         </td>
                     </tr>
@@ -184,7 +173,7 @@ if (session_status() == PHP_SESSION_NONE) {
                         <td><?= $command->end_date ?></td>
                         <td><?= $price_paid ?></td>
                         <td>
-                            <a href="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/cancel_command.php?id=<?= $command->command_id ?>">Cancel Command</a>
+                            <a href="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/cancel_command.php?id=<?= $command->command_id ?>" class='unban-link'>Cancel Command</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -304,11 +293,5 @@ document.body.addEventListener('click', event => {
             });
         });
     </script>
-    
-    <?php $content = ob_get_clean(); ?>
-    
-    <?php require('layout.php') ?>
-
-</body>
-
-</html>
+<?php $content = ob_get_clean(); ?>
+<?php require('layout.php') ?>
