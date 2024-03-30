@@ -6,7 +6,9 @@ CREATE TABLE users (
     password CHAR(255),
     email VARCHAR(50),
     creation_date DATE DEFAULT CURRENT_DATE,
-    role VARCHAR(30)
+    role VARCHAR(30),
+    country VARCHAR(30),
+    state VARCHAR(30)
 );
 
 -- Create cars table
@@ -18,7 +20,7 @@ CREATE TABLE cars (
     image CHAR(255),
     km INT,
     price DECIMAL,
-    available BOOLEAN,
+    available BOOLEAN DEFAULT TRUE,
     owner_id INT
 );
 
