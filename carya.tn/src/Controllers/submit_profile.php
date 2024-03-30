@@ -15,14 +15,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the user ID from the session or any other source
     $userId = $_SESSION['user_id'];
 
-    // Check if the first name and last name are set in the form
-    if (isset($_POST['fname']) && isset($_POST['lname'])) {
-        // Get the first name and last name from the form
+    // Check if the first name is set in the form
+    if (isset($_POST['fname'])) {
+        // Get the first name from the form
         $firstName = htmlspecialchars($_POST['fname']);
-        $lastName = htmlspecialchars($_POST['lname']);
+        echo $firstName;
+        // Update the user's first name
+        User::updateFirstNameById($userId, $firstName);
+    }
 
-        // Update the user's first name and last name
-        User::updateUsernamesById($userId, $firstName, $lastName);
+    // Check if the last name is set in the form
+    if (isset($_POST['lname'])) {
+        // Get the last name from the form
+        $lastName = htmlspecialchars($_POST['lname']);
+        echo $lastName;
+
+        // Update the user's last name
+        User::updateLastNameById($userId, $lastName);
     }
 
     if (isset($_POST['country']) && isset($_POST['state'])) {
@@ -34,9 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         User::updateUserLocationById($userId, $country, $state);
     }
 
-    // Redirect back to profile.php after 3 seconds
-    header("refresh:0.2; url=http://localhost/Mini-PHP-Project/carya.tn/Templates/profile.php");
-    exit;
+    header("Location: http://localhost/Mini-PHP-Project/carya.tn/templates/profile.php");
 }
 
 

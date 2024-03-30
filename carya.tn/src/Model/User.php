@@ -199,17 +199,32 @@ class User {
         }
     }
 
-    // Method to update a user's first name, last name by ID
-    public static function updateUsernamesById($userId, $firstName, $lastName) {
+    // Method to update a user's first name by ID
+    public static function updateFirstNameById($userId, $firstName) {
         global $pdo;
         try {
-            $sql = "UPDATE users SET firstName = ?, lastName = ? WHERE id = ?";
+            $sql = "UPDATE users SET firstName = ? WHERE id = ?";
             $stmt = $pdo->prepare($sql);
-            $stmt->execute([$firstName, $lastName, $userId]);
+            $stmt->execute([$firstName, $userId]);
             return $stmt->rowCount() > 0;
         } catch (PDOException $e) {
             // Log error and rethrow the exception
-            error_log("Error updating user's first name and last name by ID: " . $e->getMessage());
+            error_log("Error updating user's first name by ID: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    // Method to update a user's last name by ID
+    public static function updateLastNameById($userId, $lastName) {
+        global $pdo;
+        try {
+            $sql = "UPDATE users SET lastName = ? WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$lastName, $userId]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error updating user's last name by ID: " . $e->getMessage());
             throw $e;
         }
     }
