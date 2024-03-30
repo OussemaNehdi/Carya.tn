@@ -775,6 +775,12 @@ i{
 /* ------------------ End of admin_dashboard.php ------------------*/
 
 /* ------------------ User_Profile.php ------------------*/
+.profile-body .container{
+    background-color: rgba(245, 245, 245, 0.843);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 .profile-body .form-control:focus {
     box-shadow: none;
     border-color: #c89568

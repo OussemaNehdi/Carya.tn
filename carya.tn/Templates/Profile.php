@@ -45,7 +45,7 @@ $class="profile-body"
 ?>
 
 <?php ob_start(); ?>
-    <div class="container rounded bg-white mt-5 mb-5">
+    <div class="container rounded mt-5 mb-5 container">
         <div class="row">
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5">
