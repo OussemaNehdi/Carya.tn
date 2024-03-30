@@ -7,6 +7,8 @@ Columns:
     email: VARCHAR(50) - Email address of the user.
     creation_date: DATE - Date when the user account was created.
     role: VARCHAR(30) - Role of the user in the system.
+    country: VARCHAR(30) - Country address of the user.
+    state: VARCHAR(30) - State address of the user.
 
 Description: Stores information about cars available for rental.
 Columns:
