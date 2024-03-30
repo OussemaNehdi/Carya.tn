@@ -115,8 +115,8 @@ if (isset($_GET) && !empty($_GET)) {
             // Close all popups and overlay when clicking outside the popups
             document.getElementById("overlay").addEventListener("click", function() {
                 // Hide all popups and overlay
-                <?php foreach ($cars as $car): ?>
                 document.getElementById("addCarPopup").style.display = "none";
+                <?php foreach ($cars as $car): ?>
                 document.getElementById("popup<?php echo $car->id ?>").style.display = "none";
                 <?php endforeach; ?>
                 document.getElementById("overlay").style.display = "none";

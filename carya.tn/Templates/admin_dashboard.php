@@ -270,6 +270,8 @@ document.body.addEventListener('click', event => {
         });
 
         <?php
+        $user_id = $_SESSION['user_id'];
+        $user = User::getUserById($user_id);
         $cars = $user->getCarsByOwnerId();
         ?>
         document.addEventListener("DOMContentLoaded", function() {
@@ -283,6 +285,7 @@ document.body.addEventListener('click', event => {
             <?php endforeach; ?>
 
             // Close all popups and overlay when clicking outside the popups
+                    
             document.getElementById("overlay").addEventListener("click", function() {
                 // Hide all popups and overlay
                 <?php foreach ($cars as $car) : ?>
