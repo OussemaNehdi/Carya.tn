@@ -52,6 +52,7 @@ $class="profile-body"
                     <img class="rounded-circle mt-5" width="150px" src="https://www.w3schools.com/howto/img_avatar2.png">
                     <span class="font-weight-bold"><?php echo $userInfo->firstName.' '.$userInfo->lastName;?></span>
                     <span class="text-black-50"><?php echo $userInfo->email;?></span>
+                    <span class="text-black-50"><?php echo $userInfo->country . "/" . $userInfo->state;?></span>
                 </div>
             </div>
             <div class="col-md-5 border-right">
@@ -62,14 +63,14 @@ $class="profile-body"
                     <form action="http://localhost/Mini-PHP-Project/carya.tn/src/Controllers/submit_profile.php" method="POST">
                         <div class="row mt-2">
                             <div class="col-md-6"><label class="labels">First name</label>
-                            <input type="text" class="form-control" placeholder="first name" value="" name="fname" required></div>
+                            <input type="text" class="form-control" placeholder="first name" value="" name="fname"></div>
                             
                             <div class="col-md-6"><label class="labels">Last name</label>
-                            <input type="text" class="form-control" value="" placeholder="last name" name="lname" required></div>
+                            <input type="text" class="form-control" value="" placeholder="last name" name="lname"></div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value=""></div>
-                            <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" placeholder="state"></div>
+                            <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" name="country" value=""></div>
+                            <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" name="state" value="" placeholder="state"></div>
                         </div>
                         <div class="mt-5 text-center">
                             <button class="btn btn-primary profile-save-button" type="submit">Save Profile</button>
