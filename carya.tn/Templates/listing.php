@@ -204,18 +204,18 @@ if (isset($_GET) && !empty($_GET)) {
                 //todo : backend fix this status thing
 
 
-                if ($command->confirmed === true) {
+                if ($command->confirmed == 1) { // todo : jozef you can add for confirmed a css of input green color
                     $status = "Confirmed";
                     echo "Confirmed";
-                } elseif ($command->confirmed === false) {
+                } elseif ($command->confirmed == 0) {
                     $status = "Refused";
                     echo "Refused";
-                } elseif ($command->confirmed === null) {
+                } elseif ($command->confirmed == null) {
                     $status = "Unreviewed";
                     echo "Unreviewed";
                 } else {
-                    $status = "Error";
-                    echo "Error";
+                    $status = "xxxx";
+                    echo "xxxx";
                 }
 
 
@@ -224,7 +224,7 @@ if (isset($_GET) && !empty($_GET)) {
                 // Display each command as list item
                 echo "<li>User: " . $command->user_id . " | Rental Date: " . $command->rental_date . 
                 " | Start Date: " . $command->start_date . " | End Date: " . $command->end_date . 
-                " | Duration: " . $command->rental_period . " days | Status:  .".$status  ."</li>";
+                " | Duration: " . $command->rental_period . " days | Status:  " .$status  ."</li>";
                             
                 // Add Accept and Refuse buttons
                 echo "<form method='post' action='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/accept_command.php'>";
