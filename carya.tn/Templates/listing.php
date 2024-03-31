@@ -125,10 +125,16 @@ if (isset($_GET) && !empty($_GET)) {
             document.getElementById("popup<?php echo $car->id ?>").style.display = "none";
             document.getElementById("commandsPopup<?php echo $car->id ?>").style.display = "none";
         <?php endforeach; ?>
+        document.getElementById("addCarPopup").style.display = "none";
         document.getElementById("overlay").style.display = "none";
+    });
+    document.getElementById("addCarBtn").addEventListener("click", function() {
+        document.getElementById("addCarPopup").style.display = "block";
+        document.getElementById("overlay").style.display = "block";
     });
 });
     </script>
+    <button id="addCarBtn">Add Car</button>
 
     <div class="container">
         <div class="filter-menu">
