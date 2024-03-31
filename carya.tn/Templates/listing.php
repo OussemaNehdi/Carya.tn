@@ -152,9 +152,7 @@ if (isset($_GET) && !empty($_GET)) {
                         <p>Color: <?php echo $car->color; ?></p>
                         <p>Price: <?php echo $car->price; ?></p>
                         <p>Kilometers: <?php echo $car->km; ?></p>
-                        <?php if ($car->isCarInUse()): ?>
-                            <p>This car is in use</p>
-                        <?php else: ?>
+                        
                             <div class="action-buttons">
                                 <a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/delete_car.php?id=<?php echo $car->id; ?>'><button>Delete Listing</button></a>
                                 <?php if ($car->isCarMarkedUnavailable()): ?>
@@ -169,7 +167,6 @@ if (isset($_GET) && !empty($_GET)) {
 
 
                             </div>
-                        <?php endif; ?>
                     </div>
                 </div>
 
