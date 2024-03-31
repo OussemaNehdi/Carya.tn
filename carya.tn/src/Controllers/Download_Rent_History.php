@@ -6,7 +6,12 @@ include '../Model/Car.php';
 include '../Model/Command.php';
 include '../Model/User.php';
 
-$user_id=1;
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+$user_id = $_SESSION['user_id'];
+
 $rentingHistory = Command::getRentalCommandsByUserId($user_id);
 
 $user=User::getUserById($user_id);   
