@@ -1,6 +1,6 @@
 <?php 
-function handleImageUpload($image) {
-    $target_dir = $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/Resources/car_images/';
+function handleImageUpload($image, $dir) {
+    $target_dir = $_SERVER['DOCUMENT_ROOT'] . $dir;
     $file_name = basename($image["name"]);
     $target_file = $target_dir . $file_name;
     $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));

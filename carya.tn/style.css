@@ -200,9 +200,9 @@ ul{
     max-width: 800px;
     margin: 50px auto;
     padding: 20px;
-    background-color: rgba(207, 180, 138, 0.738);
+    background-color: rgba(245, 245, 245, 0.624);
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(2px);
 }
 
@@ -232,12 +232,21 @@ ul{
     border-radius: 5px;
 }
 
+.contact_container input:focus, .contact_container textarea:focus{
+    box-shadow: none;
+    border-color: #c89568;
+}
+.contact_container input[type="email"]::placeholder {
+    color: rgba(170, 167, 167, 0.879);
+}
+
+
 .contact_container textarea {
     height: 100px;
 }
 
 .contact_container button[type="submit"] {
-    background-color: #4CAF50;
+    background-color: #d48a48;
     color: white;
     padding: 12px 20px;
     border: none;
@@ -246,7 +255,8 @@ ul{
 }
 
 .contact_container button[type="submit"]:hover {
-    background-color: #45a049;
+    transition: background-color 0.3s ease-in-out;
+    background-color: #d37828;
 }
 
 .success {
@@ -618,40 +628,45 @@ i{
 
 /* ------------------ admin_dashboard.php ------------------*/
 /* CSS for admin dashboard */
+
 .admin-dashboard h1 {
     text-align: center;
-    font-weight: 550;
-    margin-top: 10px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #333; /* Dark gray color */
 }
 
 .admin-dashboard h2 {
     text-align: center;
-    margin-bottom: 0;
-    font-weight: 500;
+    font-weight: bold;
+    color: #333;
 }
 
 .admin-dashboard section {
-    margin-top: 20px;
-    background-color: #f2f2f2;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    background-color: #ffffffce;
+    
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    max-width: 1010px;
 }
 
 .admin-dashboard table {
     width: 100%;
     border-collapse: collapse;
-    background-color: #fff;
 }
 
-.admin-dashboard th, td {
+.admin-dashboard th, .admin-dashboard td {
     padding: 12px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
 .admin-dashboard th {
-    background-color: #343a40;
+    background-color: #dd823ce4;
     color: #fff;
+    backdrop-filter: blur(10px);
 }
 
 .admin-dashboard td {
@@ -659,31 +674,77 @@ i{
 }
 
 .admin-dashboard tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #f8f9fa; /* Light gray background for even rows */
 }
 
-.admin-dashboard th:first-child, td:first-child {
+.admin-dashboard th:first-child, .admin-dashboard td:first-child {
     padding-left: 20px;
 }
 
-.admin-dashboard th:last-child, td:last-child {
+.admin-dashboard th:last-child, .admin-dashboard td:last-child {
     padding-right: 20px;
 }
 
 /* Styling for buttons */
 .admin-dashboard button {
-    background-color: #007bff;
+    background-color: rgb(173, 100, 12); /* Red color for buttons */
     color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.admin-dashboard th button {
+    width: 100%;
 }
 
 .admin-dashboard button:hover {
-    background-color: #0056b3;
+    background-color: rgba(202, 131, 45, 0.907);
 }
 
+.admin-dashboard td .ban-link{
+    color: rgb(201, 28, 28);
+    position: relative;
+    text-decoration: none;
+}
+
+.admin-dashboard td .ban-link::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: rgb(201, 28, 28);
+    transition: width 0.3s ease-in-out;
+}
+
+.admin-dashboard td .ban-link:hover::after {
+    width: 100%;
+}
+
+.admin-dashboard td .unban-link{
+    color: rgb(55, 94, 195);
+    position: relative;
+    text-decoration: none;
+}
+
+.admin-dashboard td .unban-link::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: rgb(55, 94, 195);
+    transition: width 0.3s ease-in-out;
+}
+
+.admin-dashboard td .unban-link:hover::after {
+    width: 100%;
+}
 /* Styling for popup */
 .admin-dashboard .popup {
     display: none;
@@ -696,6 +757,7 @@ i{
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
     z-index: 1000;
+    max-width: 400px;
 }
 
 .admin-dashboard .popup-content {
@@ -721,9 +783,48 @@ i{
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
+.info-popup {
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: none;
+}
+
+/* Styles for the popup */
+.popup {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+/* bch ki ticklicki el bara yetsaker el popup taa add wala update car */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
 /* ------------------ End of admin_dashboard.php ------------------*/
 
 /* ------------------ User_Profile.php ------------------*/
+.profile-body .container{
+    background-color: rgba(245, 245, 245, 0.843);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 .profile-body .form-control:focus {
     box-shadow: none;
     border-color: #c89568
@@ -782,5 +883,12 @@ i{
     color: #fff;
     cursor: pointer;
     border: solid 1px #c89568
+}
+
+.profile-picture {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 30px;
+    cursor: pointer;
 }
 /* ------------------ End of User_Profile.php ------------------*/

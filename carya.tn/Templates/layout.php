@@ -38,8 +38,7 @@ if (session_status() == PHP_SESSION_NONE) {
                             <a href="#" class="dropdown-toggle">Services</a>
                             <ul class="dropdown-menu">
                                 <li><a class="navbar-dropdown-link" href="http://localhost/Mini-PHP-Project/carya.tn/Templates/rent_car.php">Rent a Car</a></li>
-                                <li><a class="navbar-dropdown-link" href="http://localhost/Mini-PHP-Project/carya.tn/templates/listing.php">List Your Car for Rent</a></li>
-                                <li><a class="navbar-dropdown-link" href="http://localhost/Mini-PHP-Project/carya.tn/Templates/Export_rent_history.php">Export Rent History</a></li>
+                                <li><a class="navbar-dropdown-link" href="http://localhost/Mini-PHP-Project/carya.tn/templates/listing.php">My Cars</a></li>
                             </ul>
                         </li>
                         <li class="navbar-link"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php">Contact</a></li>

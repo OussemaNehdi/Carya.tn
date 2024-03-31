@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $message = $_POST["message"];
     
-    $to = "website@gmail.com"; //this email needs to change to the email you want to receive the contact form submissions
+    $to = "caryatnwebsite@gmail.com"; // password: caryatn123
     
     // Subject of the email
     $subject = "New Contact Form Submission";

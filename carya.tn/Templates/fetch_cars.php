@@ -80,7 +80,10 @@ if (isset($_GET) && !empty($_GET)) {
                     <p><strong>Price:</strong> $<?php echo $car->price; ?></p>
                     <?php if ($user_id !== null): ?>
                         <button id="rentCarButton<?php echo $car->id; ?>">Rent</button>
+                    <?php else: ?>
+                        <button><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php">Login to Rent</a></button>
                     <?php endif; ?>
+
                 </div>
             <?php endforeach; ?>
         </div>

@@ -1,10 +1,11 @@
 <?php
 // Include necessary files
+// Last commit by AgressivePug to add the commands mangment functionnaility
 include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
-
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Command.php';
 // Set title and class
-$title = "List your cars";
+$title = "My Cars";
 $class = "";
 
 // Start output buffering
@@ -28,6 +29,9 @@ if (isset($_GET) && !empty($_GET)) {
 } else {
     $cars = $user->getCarsByOwnerId();
 }
+//AgressivePug : fetching commands
+
+
 ?>
 
 <!DOCTYPE html>
@@ -35,8 +39,7 @@ if (isset($_GET) && !empty($_GET)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="http://localhost/Mini-PHP-Project/carya.tn/script.js"></script>
-    <title>My Car Listings</title>
+    <title>My Cars</title>
     <style>
         /* Style the car listing container */
         .car-listing {
@@ -99,26 +102,32 @@ if (isset($_GET) && !empty($_GET)) {
 <body>
     <h1>My Car Listings</h1>
 
-    <script>
+    <script>// Changed by AgressivePug
         document.addEventListener("DOMContentLoaded", function() {
-            // Add event listener to each "Update Listing" button
-            <?php foreach ($cars as $car): ?>
-            document.getElementById("UpdateCarBtn<?php echo $car->id ?>").addEventListener("click", function() {
-                // Show the corresponding popup and overlay
-                document.getElementById("popup<?php echo $car->id ?>").style.display = "block";
-                document.getElementById("overlay").style.display = "block";
-            });
-            <?php endforeach; ?>
-
-            // Close all popups and overlay when clicking outside the popups
-            document.getElementById("overlay").addEventListener("click", function() {
-                // Hide all popups and overlay
-                <?php foreach ($cars as $car): ?>
-                document.getElementById("popup<?php echo $car->id ?>").style.display = "none";
-                <?php endforeach; ?>
-                document.getElementById("overlay").style.display = "none";
-            });
+    <?php foreach ($cars as $car): ?>
+        // Add event listener for "Update Listing" button
+        document.getElementById("UpdateCarBtn<?php echo $car->id ?>").addEventListener("click", function() {
+            document.getElementById("popup<?php echo $car->id ?>").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
         });
+
+        // Add event listener for "Confirm Commands" button
+        document.getElementById("ConfirmCommandsBtn<?php echo $car->id ?>").addEventListener("click", function() {
+            document.getElementById("commandsPopup<?php echo $car->id ?>").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        });
+
+    <?php endforeach; ?>
+
+    // Add event listener to close popups and overlay when clicking outside popups
+    document.getElementById("overlay").addEventListener("click", function() {
+        <?php foreach ($cars as $car): ?>
+            document.getElementById("popup<?php echo $car->id ?>").style.display = "none";
+            document.getElementById("commandsPopup<?php echo $car->id ?>").style.display = "none";
+        <?php endforeach; ?>
+        document.getElementById("overlay").style.display = "none";
+    });
+});
     </script>
 
     <div class="container">
@@ -149,6 +158,10 @@ if (isset($_GET) && !empty($_GET)) {
                                 <?php endif; ?>
                                 <!-- Button to trigger popup -->
                                 <button id='UpdateCarBtn<?php echo $car->id; ?>'>Update Listing</button>
+                                <!-- Agressive Pug : (i added a button to redirect you to a pop up that will have the commands there )-->
+                                <button id='ConfirmCommandsBtn<?php echo $car->id; ?>'>Confirm Commands</button>
+
+
                             </div>
                         <?php endif; ?>
                     </div>
@@ -176,11 +189,48 @@ if (isset($_GET) && !empty($_GET)) {
                         </form>
                     </div>
                 </div>
+                <!-- AggressivePug : Confirm commands Popup -->            
+                <div id="commandsPopup<?php echo $car->id ?>" class="popup">
+                    <div class="popup-content">
+                    <h2>Confirm Commands</h2>
+                    <ul> <!-- Start of the list -->
+            <?php
+            // Fetch rental commands for this car
+            $commands = Command::getRentalCommandsByCarId($car->id);
+            foreach ($commands as $command) {
+                //todo : backend fix this status thing
+                //$status = $command->confirmed === true ? "Confirmed" : ($command->confirmed === false ? "Refused" : "Unreviewed");
+
+
+                // Display each command as list item
+                echo "<li>User: " . $command->user_id . " | Rental Date: " . $command->rental_date . 
+                " | Start Date: " . $command->start_date . " | End Date: " . $command->end_date . 
+                " | Duration: " . $command->rental_period . " days | Status: todo </li>";
+                            
+                // Add Accept and Refuse buttons
+                echo "<form method='post' action='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/accept_command.php'>";
+                echo "<input type='hidden' name='command_id' value='" . $command->command_id . "'>";
+                echo "<button type='submit' name='accept'>Accept</button>";
+                echo "</form>";
+                
+                echo "<form method='post' action='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/refuse_command.php'>";
+                echo "<input type='hidden' name='command_id' value='" . $command->command_id . "'>";
+                echo "<button type='submit' name='refuse'>Refuse</button>";
+                echo "</form>";
+            }
+            ?>
+        </ul>
+                            
+
+                    </div>
+                </div>
+
+
             <?php endforeach; ?>
         </div>
     </div>
 
-    <button id="addCarBtn">Add Car</button>
+    
 
     <!-- Popup content -->
     <div class="popup" id="addCarPopup">

@@ -9,6 +9,7 @@ Columns:
     role: VARCHAR(30) - Role of the user in the system.
     country: VARCHAR(30) - Country address of the user.
     state: VARCHAR(30) - State address of the user.
+    profile_image: CHAR(255) - Path to the image of the car.
 
 Description: Stores information about cars available for rental.
 Columns:
@@ -31,4 +32,5 @@ Columns:
     start_date: DATE - Start date of the rental period.
     end_date: DATE - End date of the rental period.
     rental_period: INT - Duration of the rental period in days.
+    confirmed : BOOLEAN users will be able to accept their own cars commands and admins will be able to accept any user's command NULL for unreviewd True for confirmed and False for rejected
 

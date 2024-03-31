@@ -24,7 +24,7 @@
         $km = $_POST['km'];
         $owner_id = $_SESSION['user_id'];
         $refferer = parse_url($_POST['refferer'], PHP_URL_PATH);
-        $file_name = handleImageUpload($_FILES['car_image']);
+        $file_name = handleImageUpload($_FILES['car_image'], '/Mini-PHP-Project/carya.tn/Resources/car_images/');
 
         if (strpos($file_name, "Error") !== false) {
             $refferer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
