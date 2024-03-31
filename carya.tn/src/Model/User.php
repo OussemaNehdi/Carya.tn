@@ -13,9 +13,10 @@ class User {
     public $role;
     public $country;
     public $state;
+    public $profile_image;
 
     // Constructor
-    public function __construct($id, $firstName, $lastName, $password, $email, $creation_date, $role, $country, $state) {
+    public function __construct($id, $firstName, $lastName, $password, $email, $creation_date, $role, $country, $state, $profile_image = null) {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -25,6 +26,7 @@ class User {
         $this->role = $role;
         $this->country = $country;
         $this->state = $state;
+        $this->profile_image = $profile_image;
     }
 
     // Method to get a user object from the sql result
@@ -38,7 +40,8 @@ class User {
             $row['creation_date'],
             $row['role'],
             $row['country'],
-            $row['state']
+            $row['state'],
+            $row['profile_image']
         );
     }
 
@@ -240,6 +243,21 @@ class User {
         } catch (PDOException $e) {
             // Log error and rethrow the exception
             error_log("Error updating user's country and state by ID: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    // Method to update a user's profile image by ID
+    public function updateProfileImageById($profileImage) {
+        global $pdo;
+        try {
+            $sql = "UPDATE users SET profile_image = ? WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$profileImage, $this->id]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error updating user's profile image by ID: " . $e->getMessage());
             throw $e;
         }
     }

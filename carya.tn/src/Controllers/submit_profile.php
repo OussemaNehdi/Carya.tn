@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userId = $_SESSION['user_id'];
 
     // Check if the first name is set in the form
-    if (isset($_POST['fname'])) {
+    if (isset($_POST['fname']) && !empty($_POST['fname'])) {
         // Get the first name from the form
         $firstName = htmlspecialchars($_POST['fname']);
         echo $firstName;
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Check if the last name is set in the form
-    if (isset($_POST['lname'])) {
+    if (isset($_POST['lname']) && !empty($_POST['lname'])) {
         // Get the last name from the form
         $lastName = htmlspecialchars($_POST['lname']);
         echo $lastName;
@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         User::updateLastNameById($userId, $lastName);
     }
 
-    if (isset($_POST['country']) && isset($_POST['state'])) {
+    if (isset($_POST['country']) && isset($_POST['state']) && !empty($_POST['country']) && !empty($_POST['state'])){
         // Get the country and state from the form
         $country = htmlspecialchars($_POST['country']);
         $state = htmlspecialchars($_POST['state']);

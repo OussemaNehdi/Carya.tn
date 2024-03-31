@@ -12,9 +12,10 @@ class Car {
     public $km;
     public $price;
     public $owner_id;
+    public $available;
 
     // Constructor
-    public function __construct($id, $brand, $model, $color, $image, $km, $price, $owner_id) {
+    public function __construct($id, $brand, $model, $color, $image, $km, $price, $owner_id, $available) {
         $this->id = $id;
         $this->brand = $brand;
         $this->model = $model;
@@ -23,6 +24,7 @@ class Car {
         $this->km = $km;
         $this->price = $price;
         $this->owner_id = $owner_id;
+        $this->available = $available;
     }
 
     // Get a car object from the sql result
@@ -35,15 +37,16 @@ class Car {
             $row['image'],
             $row['km'],
             $row['price'],
-            $row['owner_id']
+            $row['owner_id'],
+            $row['available']
         );
     }
 
     // Method to get all cars
-    public static function getAllCars($availability = null, $owner = null) {
+    public static function getAllCars($available = null, $owner = null) {
         global $pdo;
         try {
-            if ($availability === 1) {
+            if ($available === 1) {
                 $sql = "SELECT * FROM cars WHERE available = 1";
             } else {
                 $sql = "SELECT * FROM cars WHERE 1";
@@ -301,7 +304,7 @@ class Car {
     
     
 
-    public static function getFilteredCars($filters, $id = null, $availability = null) {
+    public static function getFilteredCars($filters, $id = null, $available = null) {
         global $pdo;
         try {
             // Construct the SQL query to fetch cars with applied filters
@@ -311,7 +314,7 @@ class Car {
                 $sql = "SELECT * FROM cars WHERE owner_id = $id";
             }
 
-            if ($availability === 1) {
+            if ($available === 1) {
                 $sql .= " AND available = 1";
             }
     

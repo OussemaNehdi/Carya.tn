@@ -1043,4 +1043,50 @@ i{
     cursor: pointer;
     border: solid 1px #c89568
 }
+
+.profile-picture {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
 /* ------------------ End of User_Profile.php ------------------*/
+
+
+
+
+
+#hero {
+    padding: 20px 0;
+}
+
+#hero h2 {
+    font-size: 2em;
+    color: #333;
+}
+
+#hero p {
+    font-size: 1.2em;
+    color: #666;
+}
+
+#featured-cars {
+    padding: 20px 0;
+}
+
+.car-card {
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.car-card .btn {
+    background-color: #ba9844ed;
+    color: #fff;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+footer {
+    padding: 10px 0;
+}
+
