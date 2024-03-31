@@ -884,4 +884,11 @@ i{
     cursor: pointer;
     border: solid 1px #c89568
 }
+
+.profile-picture {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 30px;
+    cursor: pointer;
+}
 /* ------------------ End of User_Profile.php ------------------*/

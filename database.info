@@ -9,6 +9,7 @@ Columns:
     role: VARCHAR(30) - Role of the user in the system.
     country: VARCHAR(30) - Country address of the user.
     state: VARCHAR(30) - State address of the user.
+    profile_image: CHAR(255) - Path to the image of the car.
 
 Description: Stores information about cars available for rental.
 Columns:

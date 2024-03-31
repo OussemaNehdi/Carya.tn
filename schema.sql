@@ -8,7 +8,8 @@ CREATE TABLE users (
     creation_date DATE DEFAULT CURRENT_DATE,
     role VARCHAR(30),
     country VARCHAR(30) DEFAULT '',
-    state VARCHAR(30) DEFAULT ''
+    state VARCHAR(30) DEFAULT '',
+    profile_image CHAR(255) DEFAULT null
 );
 
 -- Create cars table

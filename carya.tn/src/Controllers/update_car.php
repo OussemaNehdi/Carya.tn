@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if the image file is uploaded
     if (!empty($_FILES['image']['name'])) {
         // Handle image upload
-        $file_name = handleImageUpload($_FILES['image']);
+        $file_name = handleImageUpload($_FILES['image'], '/Mini-PHP-Project/carya.tn/Resources/car_images/');
         if (strpos($file_name, "Error") !== false) {
             // Redirect with an error message if image upload fails
             $refferer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
