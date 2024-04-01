@@ -68,7 +68,7 @@ if (isset($_GET) && !empty($_GET)) {
 </html>
 
 <?php foreach ($cars as $car): ?>
-    <div id="popup<?php echo $car->id ?>" class="popup">
+    <div id="popup<?php echo $car->id ?>" class="popup-rent-container">
         <h2>Rent Car Form</h2>
         <?php
         // Assume $carDetails contains the details of the selected car
@@ -97,27 +97,28 @@ if (isset($_GET) && !empty($_GET)) {
                 $unavailableDates = ['No unavailable dates'];
             }
             echo "<h3>Unavailable Dates:</h3>";
-            echo "<p>";
             foreach ($unavailableDates as $date) {
-                echo "$date" . "<br>";
+                echo "<p>$date</p>";
             }
-            echo "</p>";
 
             // Display rent form
-            echo "<h3>Rent Car:</h3>";
-            echo "<form action=\"http://localhost/Mini-PHP-Project/carya.tn/src/controllers/rent_car.php\" method=\"post\">";
-            echo "<label for=\"start_date\">Start Date:</label>";
-            echo "<input type=\"date\" id=\"start_date\" name=\"start_date\" min=\"$minDate\" max=\"$maxDate\" required>";
-            echo "<br>";
-            echo "<label for=\"end_date\">End Date:</label>";
-            echo "<input type=\"date\" id=\"end_date\" name=\"end_date\" min=\"$minDate\" max=\"$maxDate\" required>";
-            echo "<br>";
-            echo "<label for=\"password\">Password:</label>";
-            echo "<input type=\"password\" id=\"password\" name=\"password\" required>";
-            echo "<br>";
-            echo "<input type=\"hidden\" name=\"car_id\" value=\"{$car->id}\">";
-            echo "<input type=\"submit\" value=\"Rent\">";
-            echo "</form>";
+            $html = <<<HTML
+            <h3> Rent Car: </h3>
+            <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/rent_car.php" method="post">
+                <label for="start_date">Start Date:</label>
+                <input type="date" id="start_date" name="start_date" min="$minDate" max="$maxDate" required>
+                <br>
+                <label for="end_date">End Date:</label>
+                <input type="date" id="end_date" name="end_date" min="$minDate" max="$maxDate" required>
+                <br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <input type="hidden" name="car_id" value="{$car->id}">
+                <input type="submit" value="Rent">
+            </form>
+            HTML;
+            echo $html;
         } else {
             echo "<p>No car details available.</p>";
         }
