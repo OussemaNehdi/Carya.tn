@@ -152,9 +152,7 @@ if (isset($_GET) && !empty($_GET)) {
                         <p>Color: <?php echo $car->color; ?></p>
                         <p>Price: <?php echo $car->price; ?></p>
                         <p>Kilometers: <?php echo $car->km; ?></p>
-                        <?php if ($car->isCarInUse()): ?>
-                            <p>This car is in use</p>
-                        <?php else: ?>
+                        
                             <div class="action-buttons">
                                 <a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/delete_car.php?id=<?php echo $car->id; ?>'><button>Delete Listing</button></a>
                                 <?php if ($car->isCarMarkedUnavailable()): ?>
@@ -169,7 +167,6 @@ if (isset($_GET) && !empty($_GET)) {
 
 
                             </div>
-                        <?php endif; ?>
                     </div>
                 </div>
 
@@ -205,13 +202,29 @@ if (isset($_GET) && !empty($_GET)) {
             $commands = Command::getRentalCommandsByCarId($car->id);
             foreach ($commands as $command) {
                 //todo : backend fix this status thing
-                //$status = $command->confirmed === true ? "Confirmed" : ($command->confirmed === false ? "Refused" : "Unreviewed");
+
+
+                if ($command->confirmed == 1) { // todo : jozef you can add for confirmed a css of input green color
+                    $status = "Confirmed";
+                    echo "Confirmed";
+                } elseif ($command->confirmed == 0) {
+                    $status = "Refused";
+                    echo "Refused";
+                } elseif ($command->confirmed == null) {
+                    $status = "Unreviewed";
+                    echo "Unreviewed";
+                } else {
+                    $status = "xxxx";
+                    echo "xxxx";
+                }
+
+
 
 
                 // Display each command as list item
                 echo "<li>User: " . $command->user_id . " | Rental Date: " . $command->rental_date . 
                 " | Start Date: " . $command->start_date . " | End Date: " . $command->end_date . 
-                " | Duration: " . $command->rental_period . " days | Status: todo </li>";
+                " | Duration: " . $command->rental_period . " days | Status:  " .$status  ."</li>";
                             
                 // Add Accept and Refuse buttons
                 echo "<form method='post' action='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/accept_command.php'>";
