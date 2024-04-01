@@ -154,6 +154,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     <th>Start Date</th>
                     <th>End Date</th>
                     <th>Price Paid</th>
+                    <th>Confirmation</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -172,8 +173,22 @@ if (session_status() == PHP_SESSION_NONE) {
                         <td><?= $command->start_date ?></td>
                         <td><?= $command->end_date ?></td>
                         <td><?= $price_paid ?></td>
+                        <td><?php echo $command->confirmed == 1 ? 'Accepted' : ($command->confirmed == 0 ? 'Refused' : 'Unreviewed'); ?></td>
                         <td>
+                            <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/accept_command.php" method="POST">
+                                <input type="hidden" name="command_id" value="<?= $command->command_id ?>">
+                                <button type="submit" class="accept-command">Accept Command</button>
+                            </form>
+
+                            <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/refuse_command.php" method="POST">
+                                <input type="hidden" name="command_id" value="<?= $command->command_id ?>">
+                                <button type="submit" class="refuse-command">Refuse Command</button>
+                            </form>
+
+
+                            
                             <a href="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/cancel_command.php?id=<?= $command->command_id ?>" class='unban-link'>Cancel Command</a>
+                            
                         </td>
                     </tr>
                 <?php endforeach; ?>
