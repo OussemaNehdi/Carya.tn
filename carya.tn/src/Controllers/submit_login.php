@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($user->password === $password) {
                 // Check if the user is banned
                 if ($user->role === 'banned') {
-                    header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=You_are_banned&slide=login');
+                    header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?type=error&message=You are banned&slide=login');
                     exit();
                 }
                 // Set the session variables
@@ -35,15 +35,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['user_id'] = $user->id;
                 $_SESSION['role'] = $user->role;
 
-                header('Location: http://localhost/Mini-PHP-Project/carya.tn/index.php');
+                header('Location: http://localhost/Mini-PHP-Project/carya.tn/index.php?type=success&message=Logged in successfully&slide=home');
                 exit();
             } else {
-                header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=Incorrect_password&slide=login');
+                header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?type=error&message=Incorrect_password&slide=login');
                 exit();
             }
         } else {
             echo "User not found";
-            header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=User_not_found&slide=login');
+            header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?type=error&message=User not found&slide=login');
             exit();
         }
     } else {
@@ -54,5 +54,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Close the database connection
-$pdo = null;
 ?>

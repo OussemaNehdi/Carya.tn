@@ -1,14 +1,13 @@
 <?php 
-$title="Login";
+$title = "Login";
 $class = "login-body"; 
 ?>
 
+<?php ob_start(); ?>
+
 <?php
+
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    if (isset($_GET['message'])) {
-        $_message = $_GET['message'];
-        echo "<script>alert('$_message')</script>";
-    }
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
         session_unset();
@@ -17,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 }
 ?>
 
-<?php ob_start(); ?>
+
 <div class="login-container">
     <div class="box">
         <!---------------------------- Login Box ---------------------------->

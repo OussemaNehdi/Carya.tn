@@ -4,6 +4,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/U
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,13 +28,6 @@ if (session_status() == PHP_SESSION_NONE) {
                 <ul>
                     <div class="basics">
                         <li class="navbar-link"><a href="http://localhost/Mini-PHP-Project/carya.tn/index.php">Home</a></li>
-                        <li class="navbar-link"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/about.php">About</a></li>
-                        <?php
-                            // check if the user is an admin
-                            if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
-                                echo '<li class="navbar-link"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/admin_dashboard.php">Admin Dashboard</a></li>';
-                            }
-                        ?>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle">Services</a>
                             <ul class="dropdown-menu">
@@ -41,6 +35,13 @@ if (session_status() == PHP_SESSION_NONE) {
                                 <li><a class="navbar-dropdown-link" href="http://localhost/Mini-PHP-Project/carya.tn/templates/listing.php">My Cars</a></li>
                             </ul>
                         </li>
+                        <?php
+                            // check if the user is an admin
+                            if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin') {
+                                echo '<li class="navbar-link"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/admin_dashboard.php">Admin Dashboard</a></li>';
+                            }
+                        ?>
+                        <li class="navbar-link"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/about.php">About</a></li>
                         <li class="navbar-link"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php">Contact</a></li>
                     </div>
                 </ul>
@@ -61,7 +62,28 @@ if (session_status() == PHP_SESSION_NONE) {
             </div>
         </nav>
         <!-- End of Navbar -->
-
+        <?php
+            // Function to get the appropriate Bootstrap alert class based on the message type
+            function getAlertClass($messageType) {
+                switch ($messageType) {
+                    case 'success':
+                        return 'alert-success';
+                    case 'error':
+                        return 'alert-danger';
+                    default:
+                        return 'alert-info'; // Default to info if no specific type is provided
+                }
+            }
+            if ($_SERVER["REQUEST_METHOD"] == "GET") {
+                if (isset($_GET['message'])) {
+                    $_message = $_GET['message'];
+                    // Determine the alert class based on the message type
+                    $alertClass = getAlertClass($_GET['type']);
+                    // Display the message using Bootstrap's alert class
+                    echo "<div class='alert $alertClass message' role='alert'>$_message</div>";
+                }
+            }
+        ?>
         <?= $content ?>
         <script src="http://localhost/Mini-PHP-Project/carya.tn/script.js"></script>
     </body>

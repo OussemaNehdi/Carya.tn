@@ -13,7 +13,7 @@
         if (!isset($_POST['brand']) || !isset($_POST['model']) || !isset($_POST['color']) || 
             !isset($_POST['price']) || !isset($_POST['km']) || !isset($_FILES['car_image'])) {
                 // Redirect with an error message if any required parameter is missing
-                header("Location: $refferer?message=Missing%20required%20parameters%20for%20adding%20car.");
+                header("Location: $refferer?message=Missing%20required%20parameters%20for%20adding%20car.&type=error");
                 exit();
             }
 
@@ -26,15 +26,15 @@
         $refferer = parse_url($_POST['refferer'], PHP_URL_PATH);
         $file_name = handleImageUpload($_FILES['car_image'], '/Mini-PHP-Project/carya.tn/Resources/car_images/');
 
-        if (strpos($file_name, "Error") !== false) {
+        if (strpos($file_name, "error") !== false) {
             $refferer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
-            header("Location: $refferer?message=$file_name");
+            header("Location: $refferer?$file_name");
             exit();
         } else {
             try {
                 // Add the car to the database
                 Car::addCar($brand, $model, $color, $file_name, $km, $price, $owner_id);
-                header("Location: $refferer?message=Car%20added%20successfully!");
+                header("Location: $refferer?message=Car%20added%20successfully!&type=success");
                 exit();
             } catch (Exception $e) {
                 header("Location: $refferer?error=Error:%20" . urlencode($e->getMessage()));

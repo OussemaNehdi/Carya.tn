@@ -28,13 +28,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $user = User::getUserByEmail($email);
 
         if ($user) {
-            header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=User already exists&slide=register');
+            header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?type=error&message=User already exists&slide=register');
             exit();
         }
 
         // Validate the password
         if (strlen($password) < 8) {
-            header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=Password must be at least 8 characters&slide=register');
+            header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?type=error&message=Password must be at least 8 characters&slide=register');
             exit();
         } else {
             $password = trim($password);
@@ -45,11 +45,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Add the user
         User::addUser($first_name, $last_name, $hashed_password, $email, $role);
-        header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=Account created successfully');
+        header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=Account created successfully&type=success');
         exit();
 
     } else {
-        header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?message=All fields are required&slide=register');
+        header('Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php?type=error&message=All fields are required&slide=register');
         exit();
     }
 } else {

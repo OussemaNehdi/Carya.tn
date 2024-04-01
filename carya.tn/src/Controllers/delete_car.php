@@ -16,7 +16,7 @@ $refferer = isset($_POST['refferer']) ? parse_url($_POST['refferer'], PHP_URL_PA
 // Check if the 'id' parameter is set in the GET request
 if (!isset($_GET['id'])) {
     // Redirect with an error message if the car ID is not set
-    header("Location: $refferer ?error=Error:%20Car%20ID%20not%20set.");
+    header("Location: $refferer ?message=Error:%20Car%20ID%20not%20set.&type=error");
     exit(); // Ensure script execution stops after redirect
 }
 
@@ -29,13 +29,7 @@ try {
 
     // Check if the car exists
     if ($car) {
-        // Check if the car is available
-        if (!$car->isCarAvailable()) {
-            // Redirect with an error message if the car is not available
-            header("Location: $refferer?message=Error:%20Car%20is%20currently%20in%20use%20and%20cannot%20be%20deleted.");
-            exit(); // Ensure script execution stops after redirect
-        }
-
+        
         // Get the owner ID of the car
         $owner_id = $car->owner_id;
 
@@ -49,20 +43,20 @@ try {
         unlink($image_path);
 
         // Redirect with a success message
-        header("Location: $refferer?message=Car%20deleted%20successfully!");
+        header("Location: $refferer?message=Car%20deleted%20successfully!&type=success");
         exit(); // Ensure script execution stops after redirect
     } else {
         // Redirect with an error message if the car does not exist
-        header("Location: $refferer?error=Error:%20Car%20not%20found.");
+        header("Location: $refferer?message=Error:%20Car%20not%20found.&type=error");
         exit(); // Ensure script execution stops after redirect
     }
 } catch (PDOException $e) {
     // Redirect with an error message if a PDO exception occurs
-    header("Location: $refferer?error=Error:%20" . urlencode($e->getMessage()));
+    header("Location: $refferer?type=success&message=Error:%20" . urlencode($e->getMessage()));
     exit(); // Ensure script execution stops after redirect
 } catch (Exception $ex) {
     // Redirect with an error message if any other exception occurs
-    header("Location: $refferer?error=Error:%20" . urlencode($ex->getMessage()));
+    header("Location: $refferer?type=success&message=Error:%20" . urlencode($ex->getMessage()));
     exit(); // Ensure script execution stops after redirect
 }
 ?>

@@ -14,7 +14,7 @@ class Command {
     public $confirmed; //new : Added by AgressivePug 
 
     // Constructor
-    public function __construct($command_id, $car_id, $user_id, $rental_date, $start_date, $end_date, $rental_period) {
+    public function __construct($command_id, $car_id, $user_id, $rental_date, $start_date, $end_date, $rental_period, $confirmed) {
         $this->command_id = $command_id;
         $this->car_id = $car_id;
         $this->user_id = $user_id;
@@ -22,6 +22,7 @@ class Command {
         $this->start_date = $start_date;
         $this->end_date = $end_date;
         $this->rental_period = $rental_period;
+        $this->confirmed = $confirmed; 
     }
 
     // Method to get command object from the sql result
@@ -33,7 +34,8 @@ class Command {
             $row['rental_date'],
             $row['start_date'],
             $row['end_date'],
-            $row['rental_period']
+            $row['rental_period'],
+            $row['confirmed'] //new : Added by AgressivePug
         );
     }
 
@@ -52,6 +54,26 @@ class Command {
         }
     }
 
+    // Get command by ID
+    public static function getCommandById($command_id) {
+        global $pdo;
+        try {
+            $sql = "SELECT * FROM command WHERE command_id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$command_id]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($row) {
+                return Command::getCommandFromRow($row);
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching command by ID: " . $e->getMessage());
+            throw $e;
+        }
+    }
+    
     // Method to get all rental commands
     public static function getAllRentalCommands() {
         global $pdo;

@@ -43,7 +43,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         User::updateUserLocationById($userId, $country, $state);
     }
 
-    header("Location: http://localhost/Mini-PHP-Project/carya.tn/templates/profile.php");
+    //update the user's email
+    if (isset($_POST['email']) && !empty($_POST['email'])) {
+        // Get the email from the form
+        $email = htmlspecialchars($_POST['email']);
+        echo $email;
+
+        // Update the user's email
+        User::updateEmailById($userId, $email);
+    }
+    else {
+        echo "Email is empty";
+    }
+
+    header("Location: http://localhost/Mini-PHP-Project/carya.tn/templates/profile.php?message=Profile%20updated%20successfully&type=success");
 }
 
 

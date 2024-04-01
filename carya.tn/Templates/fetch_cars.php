@@ -8,87 +8,43 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 // Get the filter conditions from the URL
 if (isset($_GET) && !empty($_GET)) {
     $filters = Car::constructFilterQuery($_GET);
-    $cars = Car::getFilteredCars($filters, availability:1);
+    $cars = Car::getFilteredCars($filters, available:1);
 } else {
     if ($user_id === null) {
-        $cars = Car::getAllCars(availability:1);
+        $cars = Car::getAllCars(available:1);
     } else {
-        $cars = Car::getAllCars(availability:1, owner:$user_id);
+        $cars = Car::getAllCars(available:1, owner:$user_id);
     }}
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://localhost/Mini-PHP-Project/CSS/style.css">
-    <title>Rental Car Website</title>
-    <style>
-        .car {
-            width: 30%;
-            margin: 1%;
-            padding: 1%;
-            border: 1px solid #ccc;
-            display: inline-block;
-            vertical-align: top;
-        }
-        .car img {
-            width: 100%;
-            height: auto;
-        }
-        /* Style for the popup */
-        .popup {
-            display: none;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border: 1px solid #ccc;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-
-    </style>
-</head>
-<body class="rent-body">
-    <div class="container">
+<div class="container">
+    <div class="titles">
         <h2>Available Cars</h2>
-        <div class="cars-container">
-            <?php foreach ($cars as $car): ?>
-                <div class="car">
-                    <!-- Adjusted to use object properties -->
-                    <img src="/Mini-PHP-Project/carya.tn/Resources/car_images/<?php echo $car->image; ?>" alt="<?php echo $car->brand . ' ' . $car->model; ?>">
-                    <p><strong><?php echo $car->brand . ' ' . $car->model; ?></strong></p>
-                    <p><strong>Color:</strong> <?php echo $car->color; ?></p>
-                    <p><strong>Kilometers:</strong> <?php echo $car->km; ?> km</p>
-                    <p><strong>Price:</strong> $<?php echo $car->price; ?></p>
-                    <?php if ($user_id !== null): ?>
-                        <button id="rentCarButton<?php echo $car->id; ?>">Rent</button>
-                    <?php else: ?>
-                        <button><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php">Login to Rent</a></button>
-                    <?php endif; ?>
-
-                </div>
-            <?php endforeach; ?>
-        </div>
     </div>
-</body>
+    <div class="cars-container">
+    <?php foreach ($cars as $car): ?>
+        <div class="car">
+            <!-- Adjusted to use object properties -->
+            <img src="/Mini-PHP-Project/carya.tn/Resources/car_images/<?php echo $car->image; ?>" alt="<?php echo $car->brand . ' ' . $car->model; ?>">
+            <p><strong><?php echo $car->brand . ' ' . $car->model; ?></strong></p>
+            <p><strong>Color:</strong> <?php echo $car->color; ?></p>
+            <p><strong>Kilometers:</strong> <?php echo $car->km; ?> km</p>
+            <p><strong>Price:</strong> $<?php echo $car->price; ?></p>
+            <div class="rent-button">
+                <?php if ($user_id !== null): ?>
+                    <button id="rentCarButton<?php echo $car->id; ?>">Rent</button>
+                <?php else: ?>
+                    <button><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php">Login to Rent</a></button>
+                <?php endif; ?>
+            </div>
+
+        </div>
+    <?php endforeach; ?>
+    </div>
+
+</div>
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         <?php foreach ($cars as $car): ?>
@@ -112,8 +68,10 @@ if (isset($_GET) && !empty($_GET)) {
 </html>
 
 <?php foreach ($cars as $car): ?>
-    <div id="popup<?php echo $car->id ?>" class="popup">
-        <h2>Rent Car Form</h2>
+    <div id="popup<?php echo $car->id ?>" class="popup-rent-container">
+        <div class="popup-titles">
+            <h2>Rent Car Form</h2>
+        </div>
         <?php
         // Assume $carDetails contains the details of the selected car
         $car = Car::getCarById($car->id);
@@ -130,38 +88,56 @@ if (isset($_GET) && !empty($_GET)) {
 
         // Check if the car details are available
         if (!empty($car)) {
-            echo "<h3>Car Details:</h3>";
-            echo "<p>Brand: {$car->brand}</p>";
-            echo "<p>Model: {$car->model}</p>";
-            echo "<p>Color: {$car->color}</p>";
-            echo "<p>Price per Day: \${$car->price}</p>";
+            $html1 = <<<HTML
+            <div class="car-details">
+                <h3>Car Details:</h3>
+                <p>Brand: {$car->brand}</p>
+                <p>Model: {$car->model}</p>
+                <p>Color: {$car->color}</p>
+                <p>Price per Day: \${$car->price}</p>
+            </div>
+            HTML;
+
+            echo $html1;
 
             // Display unavailable dates
             if (empty($unavailableDates)) {
                 $unavailableDates = ['No unavailable dates'];
             }
             echo "<h3>Unavailable Dates:</h3>";
-            echo "<p>";
             foreach ($unavailableDates as $date) {
-                echo "$date" . "<br>";
+                echo "<p>$date</p>";
             }
-            echo "</p>";
 
             // Display rent form
-            echo "<h3>Rent Car:</h3>";
-            echo "<form action=\"http://localhost/Mini-PHP-Project/carya.tn/src/controllers/rent_car.php\" method=\"post\">";
-            echo "<label for=\"start_date\">Start Date:</label>";
-            echo "<input type=\"date\" id=\"start_date\" name=\"start_date\" min=\"$minDate\" max=\"$maxDate\" required>";
-            echo "<br>";
-            echo "<label for=\"end_date\">End Date:</label>";
-            echo "<input type=\"date\" id=\"end_date\" name=\"end_date\" min=\"$minDate\" max=\"$maxDate\" required>";
-            echo "<br>";
-            echo "<label for=\"password\">Password:</label>";
-            echo "<input type=\"password\" id=\"password\" name=\"password\" required>";
-            echo "<br>";
-            echo "<input type=\"hidden\" name=\"car_id\" value=\"{$car->id}\">";
-            echo "<input type=\"submit\" value=\"Rent\">";
-            echo "</form>";
+            $html2 = <<<HTML
+            <h3> Rent Car: </h3>
+            <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/rent_car.php?car_id={$car->id}" method="post">
+                <div class="sub-container">
+                    <div class="label-container">
+                        <label for="start_date">Start Date:</label>
+                    </div>
+                    <input type="date" id="start_date" name="start_date" min="$minDate" max="$maxDate" required>
+                </div>
+                <div class="sub-container">
+                    <div class="label-container">
+                        <label for="end_date">End Date:</label>
+                    </div>
+                    <input type="date" id="end_date" name="end_date" min="$minDate" max="$maxDate" required>
+                </div>
+                <div class="sub-container">
+                    <div class="label-container">
+                        <label for="password">Password:</label>
+                    </div>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="submit-container">
+                    <input type="hidden" name="car_id" value="{$car->id}">
+                    <input type="submit" class="submit-popup-button" value="Rent">
+                </div>
+            </form>
+            HTML;
+            echo $html2;
         } else {
             echo "<p>No car details available.</p>";
         }

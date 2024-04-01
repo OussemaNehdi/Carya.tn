@@ -232,6 +232,22 @@ class User {
         }
     }
 
+    // Method to update a user's email  by ID
+    public static function updateEmailById($userId, $email) {
+        global $pdo;
+        try {
+            $sql = "UPDATE users SET email = ? WHERE id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$email, $userId]);
+            return $stmt->rowCount() > 0;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error updating user's email by ID: " . $e->getMessage());
+            throw $e;
+        }
+    }
+
+
     // Method to update a user's country, state by ID
     public static function updateUserLocationById($userId, $country, $state) {
         global $pdo;
