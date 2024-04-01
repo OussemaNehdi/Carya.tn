@@ -26,9 +26,9 @@
         $refferer = parse_url($_POST['refferer'], PHP_URL_PATH);
         $file_name = handleImageUpload($_FILES['car_image'], '/Mini-PHP-Project/carya.tn/Resources/car_images/');
 
-        if (strpos($file_name, "Error") !== false) {
+        if (strpos($file_name, "error") !== false) {
             $refferer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
-            header("Location: $refferer?message=$file_name&type=error");
+            header("Location: $refferer?$file_name");
             exit();
         } else {
             try {

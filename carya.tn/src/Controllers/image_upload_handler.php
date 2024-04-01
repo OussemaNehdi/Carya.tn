@@ -7,22 +7,22 @@ function handleImageUpload($image, $dir) {
     
     // Check file size
     if ($image["size"] > 1000000) {
-        return "Error: File size exceeds the limit"; // File size exceeds the limit
+        return "message= File size exceeds the limit&type=error"; // File size exceeds the limit
     }
     
     // Allow certain file formats
     if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
-        return "Error: Invalid file format"; // Invalid file format
+        return "message= Invalid file format&type=error"; // Invalid file format
     }
 
     // Check if file already exists
     if (file_exists($target_file)) {
-        return "Error: File already exists"; // File already exists
+        return "message= File already exists&type=error"; // File already exists
     }
     
     // Move uploaded file to destination directory
     if (!move_uploaded_file($image["tmp_name"], $target_file)) {
-        return "Error: Failed to move the file"; // Failed to move the file
+        return "message= Failed to move the file&type=error"; // Failed to move the file
     }
 
     return $file_name;

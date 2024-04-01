@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         !isset($_POST['color']) || !isset($_POST['price']) || !isset($_POST['km']) || 
         !isset($_FILES['image'])) {
         // Redirect with an error message if any required variable is missing
-        header("Location: $refferer?message=Missing%20required%20variables%20for%20updating%20car.");
+        header("Location: $refferer?message=Missing%20required%20variables%20for%20updating%20car.&type=error");
         exit(); // Ensure script execution stops after redirect
     }
 
@@ -31,10 +31,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_FILES['image']['name'])) {
         // Handle image upload
         $file_name = handleImageUpload($_FILES['image'], '/Mini-PHP-Project/carya.tn/Resources/car_images/');
-        if (strpos($file_name, "Error") !== false) {
+        if (strpos($file_name, "error") !== false) {
             // Redirect with an error message if image upload fails
             $refferer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
-            header("Location: $refferer?id=$car_id?message=$file_name");
+            header("Location: $refferer?id=$car_id&$file_name");
             exit(); // Ensure script execution stops after redirect
         }
     } else {
