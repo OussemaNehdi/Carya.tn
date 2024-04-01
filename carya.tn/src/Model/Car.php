@@ -304,7 +304,7 @@ class Car {
     
     
 
-    public static function getFilteredCars($filters, $id = null, $availability = null) {
+    public static function getFilteredCars($filters, $id = null, $available = null) {
         global $pdo;
         try {
             // Construct the SQL query to fetch cars with applied filters

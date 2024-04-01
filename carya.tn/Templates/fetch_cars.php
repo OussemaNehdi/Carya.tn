@@ -8,12 +8,12 @@ $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 // Get the filter conditions from the URL
 if (isset($_GET) && !empty($_GET)) {
     $filters = Car::constructFilterQuery($_GET);
-    $cars = Car::getFilteredCars($filters, availability:1);
+    $cars = Car::getFilteredCars($filters, available:1);
 } else {
     if ($user_id === null) {
-        $cars = Car::getAllCars(availability:1);
+        $cars = Car::getAllCars(available:1);
     } else {
-        $cars = Car::getAllCars(availability:1, owner:$user_id);
+        $cars = Car::getAllCars(available:1, owner:$user_id);
     }}
 ?>
 

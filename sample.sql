@@ -1,8 +1,8 @@
 -- Users table
-INSERT INTO users (firstName, lastName, password, email, creation_date, role, state, country)
+INSERT INTO users (firstName, lastName, password, email, creation_date, role, state, country, profile_image)
 VALUES 
-('John', 'Doe', 'password123', 'john@example.com', '2024-03-25', 'customer', 'California', 'United States'),
-('Alice', 'Smith', 'securepass', 'alice@example.com', '2024-03-25', 'admin', 'New York', 'United States'),
+('John', 'Doe', 'password123', 'john@example.com', '2024-03-25', 'customer', 'California', 'United States', 'mezyen.jpg'),
+('Alice', 'Smith', 'securepass', 'alice@example.com', '2024-03-25', 'admin', 'New York', 'United States', 'mezyena.jpg'),
 ('Bob', 'Johnson', 'bobspass', 'bob@example.com', '2024-03-25', 'customer', 'Texas', 'United States'),
 ('Emily', 'Brown', 'emilypass', 'emily@example.com', '2024-03-26', 'seller', 'Florida', 'United States'),
 ('David', 'Wilson', 'davidpass', 'david@example.com', '2024-03-27', 'banned', 'Washington', 'United States'),
