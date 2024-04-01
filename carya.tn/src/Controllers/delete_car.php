@@ -29,13 +29,7 @@ try {
 
     // Check if the car exists
     if ($car) {
-        // Check if the car is available
-        if (!$car->isCarAvailable()) {
-            // Redirect with an error message if the car is not available
-            header("Location: $refferer?message=Error:%20Car%20is%20currently%20in%20use%20and%20cannot%20be%20deleted.");
-            exit(); // Ensure script execution stops after redirect
-        }
-
+        
         // Get the owner ID of the car
         $owner_id = $car->owner_id;
 

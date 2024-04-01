@@ -229,7 +229,7 @@ class Car {
     public function getUnavailableDates() {
         global $pdo;
         try {
-            $sql = "SELECT start_date, end_date FROM command WHERE car_id = ?";
+            $sql = "SELECT start_date, end_date FROM command WHERE car_id = ? AND confirmed = True";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$this->id]);
             $commands = $stmt->fetchAll(PDO::FETCH_ASSOC);

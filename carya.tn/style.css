@@ -276,8 +276,13 @@ ul{
 /* -------------- about.php -----------------*/
 .about-container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 50px auto;
     padding: 20px;
+    background-color: rgba(245, 245, 245, 0.624);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    padding: 50px;
 }
 
 .about-container h2 {
@@ -917,6 +922,18 @@ i{
 /* ------------------ admin_dashboard.php ------------------*/
 /* CSS for admin dashboard */
 
+.user-info,
+.car-image,
+.car-info {
+    cursor: pointer;
+}
+
+.user-info:hover,
+.car-image:hover,
+.car-info:hover {
+    text-decoration: underline;
+}
+
 .admin-dashboard h1 {
     text-align: center;
     font-weight: bold;
@@ -1178,6 +1195,7 @@ i{
     height: 250px;
     margin-bottom: 30px;
     cursor: pointer;
+    overflow: hidden;
 }
 /* ------------------ End of User_Profile.php ------------------*/
 
