@@ -3,10 +3,10 @@ INSERT INTO users (firstName, lastName, password, email, creation_date, role, st
 VALUES 
 ('John', 'Doe', 'password123', 'john@example.com', '2024-03-25', 'customer', 'California', 'United States', 'mezyen.jpg'),
 ('Alice', 'Smith', 'securepass', 'alice@example.com', '2024-03-25', 'admin', 'New York', 'United States', 'mezyena.jpg'),
-('Bob', 'Johnson', 'bobspass', 'bob@example.com', '2024-03-25', 'customer', 'Texas', 'United States'),
-('Emily', 'Brown', 'emilypass', 'emily@example.com', '2024-03-26', 'seller', 'Florida', 'United States'),
-('David', 'Wilson', 'davidpass', 'david@example.com', '2024-03-27', 'banned', 'Washington', 'United States'),
-('Sophia', 'Taylor', 'sophiapass', 'sophia@example.com', '2024-03-27', 'customer', 'California', 'United States');
+('Bob', 'Johnson', 'bobspass', 'bob@example.com', '2024-03-25', 'customer', 'Texas', 'United States', null),
+('Emily', 'Brown', 'emilypass', 'emily@example.com', '2024-03-26', 'seller', 'Florida', 'United States', null),
+('David', 'Wilson', 'davidpass', 'david@example.com', '2024-03-27', 'banned', 'Washington', 'United States', null),
+('Sophia', 'Taylor', 'sophiapass', 'sophia@example.com', '2024-03-27', 'customer', 'California', 'United States', null);
 
 -- Cars table
 INSERT INTO cars (brand, model, color, image, km, price, owner_id, available)
