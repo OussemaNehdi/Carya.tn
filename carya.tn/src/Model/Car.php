@@ -12,9 +12,10 @@ class Car {
     public $km;
     public $price;
     public $owner_id;
+    public $available;
 
     // Constructor
-    public function __construct($id, $brand, $model, $color, $image, $km, $price, $owner_id) {
+    public function __construct($id, $brand, $model, $color, $image, $km, $price, $owner_id, $available) {
         $this->id = $id;
         $this->brand = $brand;
         $this->model = $model;
@@ -23,6 +24,7 @@ class Car {
         $this->km = $km;
         $this->price = $price;
         $this->owner_id = $owner_id;
+        $this->available = $available;
     }
 
     // Get a car object from the sql result
@@ -35,7 +37,8 @@ class Car {
             $row['image'],
             $row['km'],
             $row['price'],
-            $row['owner_id']
+            $row['owner_id'],
+            $row['available']
         );
     }
 
@@ -44,7 +47,7 @@ class Car {
         global $pdo;
         try {
             if ($availability === 1) {
-                $sql = "SELECT * FROM cars WHERE availability = 1";
+                $sql = "SELECT * FROM cars WHERE available = 1";
             } else {
                 $sql = "SELECT * FROM cars WHERE 1";
             }
