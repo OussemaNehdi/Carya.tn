@@ -104,7 +104,7 @@ if (isset($_GET) && !empty($_GET)) {
             // Display rent form
             $html = <<<HTML
             <h3> Rent Car: </h3>
-            <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/rent_car.php?car_id={$car->id}" method="post">
+            <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/rent_car.php?" method="post">
                 <label for="start_date">Start Date:</label>
                 <input type="date" id="start_date" name="start_date" min="$minDate" max="$maxDate" required>
                 <br>
@@ -114,6 +114,7 @@ if (isset($_GET) && !empty($_GET)) {
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
                 <br>
+                <input type="hidden" name="car_id" value="{$car->id}">
                 <input type="submit" value="Rent">
             </form>
             HTML;
