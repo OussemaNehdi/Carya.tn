@@ -895,7 +895,7 @@ i{
 
 
 
-
+/* ------------------ homepage.php -------------------------*/
 
 #hero {
     padding: 20px 0;
@@ -931,3 +931,8 @@ footer {
     padding: 10px 0;
 }
 
+
+.block-text {
+    display: block;
+    max-width: 800px;
+}

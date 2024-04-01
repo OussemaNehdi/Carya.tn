@@ -9,7 +9,7 @@ $class=""
     <section id="hero">
         <div class="container">
             <h2>Find Your Perfect Ride</h2>
-            <p>Explore our wide range of rental cars at affordable prices.
+            <p class="block-text">Explore our wide range of rental cars at affordable prices.
             Discover our extensive selection of rental cars, 
             each one offered at competitive prices.
              Whether you're looking for a compact car for city driving, 
