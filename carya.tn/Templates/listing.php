@@ -202,13 +202,29 @@ if (isset($_GET) && !empty($_GET)) {
             $commands = Command::getRentalCommandsByCarId($car->id);
             foreach ($commands as $command) {
                 //todo : backend fix this status thing
-                //$status = $command->confirmed === true ? "Confirmed" : ($command->confirmed === false ? "Refused" : "Unreviewed");
+
+
+                if ($command->confirmed == 1) { // todo : jozef you can add for confirmed a css of input green color
+                    $status = "Confirmed";
+                    echo "Confirmed";
+                } elseif ($command->confirmed == 0) {
+                    $status = "Refused";
+                    echo "Refused";
+                } elseif ($command->confirmed == null) {
+                    $status = "Unreviewed";
+                    echo "Unreviewed";
+                } else {
+                    $status = "xxxx";
+                    echo "xxxx";
+                }
+
+
 
 
                 // Display each command as list item
                 echo "<li>User: " . $command->user_id . " | Rental Date: " . $command->rental_date . 
                 " | Start Date: " . $command->start_date . " | End Date: " . $command->end_date . 
-                " | Duration: " . $command->rental_period . " days | Status: todo </li>";
+                " | Duration: " . $command->rental_period . " days | Status:  " .$status  ."</li>";
                             
                 // Add Accept and Refuse buttons
                 echo "<form method='post' action='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/accept_command.php'>";

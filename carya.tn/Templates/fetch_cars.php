@@ -17,78 +17,34 @@ if (isset($_GET) && !empty($_GET)) {
     }}
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://localhost/Mini-PHP-Project/CSS/style.css">
-    <title>Rental Car Website</title>
-    <style>
-        .car {
-            width: 30%;
-            margin: 1%;
-            padding: 1%;
-            border: 1px solid #ccc;
-            display: inline-block;
-            vertical-align: top;
-        }
-        .car img {
-            width: 100%;
-            height: auto;
-        }
-        /* Style for the popup */
-        .popup {
-            display: none;
-            position: fixed;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            background-color: white;
-            padding: 20px;
-            border: 1px solid #ccc;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-        }
-
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-        }
-
-    </style>
-</head>
-<body class="rent-body">
-    <div class="container">
+<div class="container">
+    <div class="titles">
         <h2>Available Cars</h2>
-        <div class="cars-container">
-            <?php foreach ($cars as $car): ?>
-                <div class="car">
-                    <!-- Adjusted to use object properties -->
-                    <img src="/Mini-PHP-Project/carya.tn/Resources/car_images/<?php echo $car->image; ?>" alt="<?php echo $car->brand . ' ' . $car->model; ?>">
-                    <p><strong><?php echo $car->brand . ' ' . $car->model; ?></strong></p>
-                    <p><strong>Color:</strong> <?php echo $car->color; ?></p>
-                    <p><strong>Kilometers:</strong> <?php echo $car->km; ?> km</p>
-                    <p><strong>Price:</strong> $<?php echo $car->price; ?></p>
-                    <?php if ($user_id !== null): ?>
-                        <button id="rentCarButton<?php echo $car->id; ?>">Rent</button>
-                    <?php else: ?>
-                        <button><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php">Login to Rent</a></button>
-                    <?php endif; ?>
-
-                </div>
-            <?php endforeach; ?>
-        </div>
     </div>
-</body>
+    <div class="cars-container">
+    <?php foreach ($cars as $car): ?>
+        <div class="car">
+            <!-- Adjusted to use object properties -->
+            <img src="/Mini-PHP-Project/carya.tn/Resources/car_images/<?php echo $car->image; ?>" alt="<?php echo $car->brand . ' ' . $car->model; ?>">
+            <p><strong><?php echo $car->brand . ' ' . $car->model; ?></strong></p>
+            <p><strong>Color:</strong> <?php echo $car->color; ?></p>
+            <p><strong>Kilometers:</strong> <?php echo $car->km; ?> km</p>
+            <p><strong>Price:</strong> $<?php echo $car->price; ?></p>
+            <div class="rent-button">
+                <?php if ($user_id !== null): ?>
+                    <button id="rentCarButton<?php echo $car->id; ?>">Rent</button>
+                <?php else: ?>
+                    <button><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/login.php">Login to Rent</a></button>
+                <?php endif; ?>
+            </div>
+
+        </div>
+    <?php endforeach; ?>
+    </div>
+
+</div>
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         <?php foreach ($cars as $car): ?>

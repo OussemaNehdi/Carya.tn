@@ -6,12 +6,19 @@ include '../Model/Car.php';
 include '../Model/Command.php';
 include '../Model/User.php';
 
-
+// Start session if not already started
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-$user_id = $_SESSION['user_id'];
 
+// Redirect if user is not logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: http://localhost/Mini-PHP-Project/carya.tn/templates/login.php");
+    exit();
+}
+
+// Get user ID from session
+$user_id = $_SESSION['user_id'];
 $rentingHistory = Command::getRentalCommandsByUserId($user_id);
 
 $user=User::getUserById($user_id);   
