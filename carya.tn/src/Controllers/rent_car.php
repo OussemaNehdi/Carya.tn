@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 if (!isset($_POST['car_id']) || empty($_POST['car_id'])) {
-    header('Location: /Mini-PHP-Project/carya.tn/Templates/fetch_cars.php');
+    header('Location: /Mini-PHP-Project/carya.tn/Templates/fetch_cars.php?message=Car%20ID%20is%20required.&type=error');
     exit();
 }
 
@@ -18,7 +18,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: /Mini-PHP-Project/carya.tn/Templates/login.php');
+    header('Location: /Mini-PHP-Project/carya.tn/Templates/login.php?message=You%20need%20to%20login%20first.&type=error');
     exit();
 }
 
@@ -36,13 +36,13 @@ $rental_days = $startDateTime->diff($endDateTime)->days;
 
 $user = User::getUserById($user_id);
 if ($user->password !== $password) {
-    header('Location: ' . $refferrer . '?error=wrong_password');
+    header('Location: ' . $refferrer . '?type=error&message=wrong_password');
     exit();
 }
 
 try {
     Command::addRentalCommand($car_id, $user_id, $start_date, $end_date, $rental_days);
-    header('Location: ' . $refferrer . '?success=rental_command_added');
+    header('Location: ' . $refferrer . '?message=rental_command_added&type=success');
 }
 catch (PDOException $e) {
     echo $e->getMessage();

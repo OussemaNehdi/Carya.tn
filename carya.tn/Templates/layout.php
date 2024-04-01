@@ -4,6 +4,7 @@ include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/U
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +62,28 @@ if (session_status() == PHP_SESSION_NONE) {
             </div>
         </nav>
         <!-- End of Navbar -->
-
+        <?php
+            // Function to get the appropriate Bootstrap alert class based on the message type
+            function getAlertClass($messageType) {
+                switch ($messageType) {
+                    case 'success':
+                        return 'alert-success';
+                    case 'error':
+                        return 'alert-danger';
+                    default:
+                        return 'alert-info'; // Default to info if no specific type is provided
+                }
+            }
+            if ($_SERVER["REQUEST_METHOD"] == "GET") {
+                if (isset($_GET['message'])) {
+                    $_message = $_GET['message'];
+                    // Determine the alert class based on the message type
+                    $alertClass = getAlertClass($_GET['type']);
+                    // Display the message using Bootstrap's alert class
+                    echo "<div class='alert $alertClass message' role='alert'>$_message</div>";
+                }
+            }
+        ?>
         <?= $content ?>
         <script src="http://localhost/Mini-PHP-Project/carya.tn/script.js"></script>
     </body>

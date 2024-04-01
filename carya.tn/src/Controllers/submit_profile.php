@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         echo "Email is empty";
     }
 
-    header("Location: http://localhost/Mini-PHP-Project/carya.tn/templates/profile.php");
+    header("Location: http://localhost/Mini-PHP-Project/carya.tn/templates/profile.php?message=Profile%20updated%20successfully&type=success");
 }
 
 
