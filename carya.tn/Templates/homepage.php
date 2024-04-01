@@ -3,7 +3,16 @@ $title="Carya.tn";
 $class=""
 ?>
 
-<?php ob_start(); ?>
+<?php ob_start(); 
+session_start();
+
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+
+
+?>
 
 
     <section id="hero">
@@ -22,7 +31,17 @@ $class=""
     <section id="featured-cars">
         <div class="container">
             <div class="car-card">
-                <a href="/Mini-PHP-Project/carya.tn/Templates/login.php" class="btn">Rent Now</a>
+                <?php
+                if(isset($_SESSION['user_id'])) {
+                    // User is logged in
+                    // Add your code here for when the user is logged in
+                    echo '<a href="/Mini-PHP-Project/carya.tn/Templates/rent_car.php" class="btn">Rent Now</a>';
+                } else {
+                    // User is not logged in
+                    // Add your code here for when the user is not logged in
+                    echo '<a href="/Mini-PHP-Project/carya.tn/Templates/login.php" class="btn">Rent Now</a>';
+                }
+                ?>
             </div>
         </div>
     </section>

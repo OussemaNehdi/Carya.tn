@@ -88,7 +88,11 @@ $class = "profile-body"
                         <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" name="country" value=""></div>
                         <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" name="state" value="" placeholder="state"></div>
                     </div>
-                    <div class="mt-5 text-center">
+                    <div class="row mt-3">
+                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="enter email" value="" name="email"></div>
+
+                    </div>
+                        <div class="mt-5 text-center">
                         <button class="btn btn-primary profile-save-button" type="submit">Save Profile</button>
                     </div>
                 </form>
