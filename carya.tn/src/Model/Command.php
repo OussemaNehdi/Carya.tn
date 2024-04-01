@@ -54,6 +54,26 @@ class Command {
         }
     }
 
+    // Get command by ID
+    public static function getCommandById($command_id) {
+        global $pdo;
+        try {
+            $sql = "SELECT * FROM command WHERE command_id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$command_id]);
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($row) {
+                return Command::getCommandFromRow($row);
+            } else {
+                return null;
+            }
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error fetching command by ID: " . $e->getMessage());
+            throw $e;
+        }
+    }
+    
     // Method to get all rental commands
     public static function getAllRentalCommands() {
         global $pdo;

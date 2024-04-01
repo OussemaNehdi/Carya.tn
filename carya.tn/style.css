@@ -788,6 +788,18 @@ i{
 /* ------------------ admin_dashboard.php ------------------*/
 /* CSS for admin dashboard */
 
+.user-info,
+.car-image,
+.car-info {
+    cursor: pointer;
+}
+
+.user-info:hover,
+.car-image:hover,
+.car-info:hover {
+    text-decoration: underline;
+}
+
 .admin-dashboard h1 {
     text-align: center;
     font-weight: bold;
@@ -1049,6 +1061,7 @@ i{
     height: 250px;
     margin-bottom: 30px;
     cursor: pointer;
+    overflow: hidden;
 }
 /* ------------------ End of User_Profile.php ------------------*/
 
