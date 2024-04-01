@@ -28,7 +28,7 @@ $refferer = isset($_POST['refferer']) ? parse_url($_POST['refferer'], PHP_URL_PA
 
 // Check if user ID is set in the GET parameters
 if (!isset($_GET['id'])) {
-    header("Location: $refferer?message=Error:%20User%20ID%20not%20set.");
+    header("Location: $refferer?message=Error:%20User%20ID%20not%20set.&type=error");
     exit();
 }
 
@@ -72,17 +72,17 @@ try {
     $pdo->commit();
 
     // Redirect to admin dashboard with success message
-    header("Location: $refferer?message=User%20has%20been%20successfully%20banned.");
+    header("Location: $refferer?message=User%20has%20been%20successfully%20banned.&type=success");
     exit();
 } catch (PDOException $e) {
     // Rollback the transaction and handle PDO exceptions
     $pdo->rollBack();
-    header("Location: $refferer?message=PDO%20Error:%20" . urlencode($e->getMessage()));
+    header("Location: $refferer?type=error&message=PDO%20Error:%20" . urlencode($e->getMessage()));
     exit();
 } catch (Exception $ex) {
     // Rollback the transaction and handle other exceptions
     $pdo->rollBack();
-    header("Location: $refferer?message=" . urlencode($ex->getMessage()));
+    header("Location: $refferer?type=error&message=" . urlencode($ex->getMessage()));
     exit();
 }
 ?>

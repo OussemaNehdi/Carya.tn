@@ -10,7 +10,7 @@ $command_id = $_POST['command_id'];
 
 Command::RefuseCommand($command_id);
 
-header("Location: $refferer?message=Command%20Refused%20.");
+header("Location: $refferer?message=Command%20Refused%20.&type=success");
 
 
 ?>

@@ -47,23 +47,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $car = Car::getCarById($car_id);
     $owner_id = $car->owner_id;
     if ($owner_id != $_SESSION['user_id']) {
-        header("Location: $refferer?message=You%20do%20not%20have%20permission%20to%20update%20this%20car.");
+        header("Location: $refferer?type=error&message=You%20do%20not%20have%20permission%20to%20update%20this%20car.");
         exit(); // Ensure script execution stops after redirect
     }
 
     // Check if the car is available for update
     if (!$car->isCarAvailable()) {
-        header("Location: $refferer?error=Car%20is%20currently%20in%20use%20and%20cannot%20be%20updated.");
+        header("Location: $refferer?type=errormessage=Car%20is%20currently%20in%20use%20and%20cannot%20be%20updated.");
         exit(); // Ensure script execution stops after redirect
     }
 
     try {
         // Update car details
         $car->updateCar($brand, $model, $color, $file_name, $km, $price);
-        header("Location: $refferer?message=Car%20updated%20successfully.");
+        header("Location: $refferer?message=Car%20updated%20successfully.&type=success");
         exit(); // Ensure script execution stops after redirect
     } catch (Exception $e) {
-        header("Location: $refferer?message=" . urlencode($e->getMessage()));
+        header("Location: $refferer?type=error&message=" . urlencode($e->getMessage()));
         exit(); // Ensure script execution stops after redirect
     }
 }

@@ -9,9 +9,6 @@ session_start();
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-
-
-
 ?>
 
 
@@ -39,7 +36,7 @@ if (session_status() == PHP_SESSION_NONE) {
                 } else {
                     // User is not logged in
                     // Add your code here for when the user is not logged in
-                    echo '<a href="/Mini-PHP-Project/carya.tn/Templates/login.php" class="btn">Rent Now</a>';
+                    echo '<a href="/Mini-PHP-Project/carya.tn/Templates/rent_car.php" class="btn">Rent Now</a>';
                 }
                 ?>
             </div>
