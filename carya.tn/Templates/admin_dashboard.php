@@ -116,7 +116,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
                     <!-- Popup For the update car form -->
                     <!-- each car gets a hidden div for its popup but the logic is the same -->
-                    <div id="popup<?php echo $car->id ?>" class="popup">
+                    <div id="popup<?php echo $car->id ?>" class="popup-update-container">
                         <div class="popup-content">
                             <h2>Update Car Listing</h2>
                             <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/update_car.php" method="POST" enctype="multipart/form-data">
@@ -204,7 +204,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <!-- Popup content -->
     <!-- Popup taa el add -->
-    <div class="popup" id="addCarPopup">
+    <div class="popup-add-container" id="addCarPopup">
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/templates/add_car_form.php'; ?>
     </div>
 

@@ -760,7 +760,20 @@ i{
     border: 2px solid #000;
     transition: border-color 0.2s ease-in-out;
 }
-.rent-body .cars-list .popup {
+/* ------------------ End of rent_car.php ------------------*/
+
+/* ============================ Styles for the popup ================================*/
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+.popup-rent-container {
     display: none;
     position: fixed;
     left: 50%;
@@ -772,17 +785,33 @@ i{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 1000;
 }
-.rent-body .cars-list .overlay {
+.popup-add-container{
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
 }
-/* ------------------ End of rent_car.php ------------------*/
+.popup-update-container{
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+
+
 
 
 /* ------------------ admin_dashboard.php ------------------*/
