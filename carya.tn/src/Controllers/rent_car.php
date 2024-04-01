@@ -4,8 +4,9 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-if (!isset($_GET['submit']) || empty($_GET['submit'])) {
-    echo 'Invalid form submission';
+if (!isset($_POST['car_id']) || empty($_POST['car_id'])) {
+    header('Location: /Mini-PHP-Project/carya.tn/Templates/fetch_cars.php');
+    exit();
 }
 
 include_once($_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php');
