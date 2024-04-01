@@ -1308,35 +1308,60 @@ i{
 
 /* ------------------ homepage.php -------------------------*/
 
-#hero {
-    padding: 20px 0;
+.home-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(245, 245, 245, 0.624);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    padding: 50px;
+    display: flex;
+    flex-direction: column; /* Display children elements in a column */
 }
 
-#hero h2 {
+.hero {
+    display: flex;
+    align-items: flex-start; /* Align items to the start (left side) */
+}
+
+.hero .text-content {
+    margin-right: 200px; /* Add some space between text and image */
+}
+
+.hero h2 {
     font-size: 2em;
     color: #333;
-}
-
-#hero p {
-    font-size: 1.2em;
-    color: #666;
-}
-
-#featured-cars {
-    padding: 20px 0;
-}
-
-.car-card {
-    padding: 20px;
     margin-bottom: 20px;
 }
 
-.car-card .btn {
+.hero p {
+    font-size: 1.2em;
+    color: #666;
+    text-align: left;
+}
+
+#home-image {
+    height: 300px;
+    width: 500px;   
+}
+
+.car-card {
+    margin-top: 20px; /* Add margin to create space between text and button */
+}
+
+.btn {
     background-color: #ba9844ed;
     color: #fff;
     padding: 10px 20px;
     text-decoration: none;
 }
+
+footer {    
+    margin-top: 20px; /* Add margin to create space between text and footer */
+}
+
 
 .message {
     padding: 10px;
@@ -1350,11 +1375,6 @@ i{
     animation: fadeOut 3s forwards; /* Animation duration: 3 seconds */
 }
 
-
-.block-text {
-    display: block;
-    max-width: 800px;
-}
 @keyframes fadeOut {
     0% {
         opacity: 0.9;
