@@ -778,43 +778,143 @@ i{
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
+/* Styles for the rent popup */
 .popup-rent-container {
+    all: unset;
+
     display: none;
     position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.822);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 10px 15px 10px 15px;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 1000;
 }
-.popup-add-container{
-    display: none;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
+.popup-rent-container:hover {
+    border: 3px solid #494646;
+    transition: border-color 0.2s ease-in-out;
 }
-.popup-update-container{
-    display: none;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
+.popup-rent-container .popup-titles{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.popup-rent-container .popup-titles h2 {
+    color: black; 
+    font-size: 30px;
+    font-weight: 600;
+}
+.popup-rent-container .car-details{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+}
+.popup-rent-container .car-details p {
+    margin-bottom: 3px;
+}
+.popup-rent-container .sub-container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.popup-rent-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 400;
 }
 
+.popup-rent-container input[type="date"],
+.popup-rent-container input[type="password"]{
+    all: unset;
+
+    background: white;
+    width: 70%;
+    height: 30px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.popup-rent-container input:focus{
+    box-shadow: none;
+    border-color: #c89568;
+}
+.popup-rent-container .label-container{
+    display: flex;
+    justify-content: center;
+}
+.popup-rent-container .label-container label{
+    margin-top: 2px;
+}
+
+.popup-rent-container .submit-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.popup-rent-container .submit-popup-button {
+    background-color: #8f7641e0;
+    color: #fff;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.popup-rent-container .submit-popup-button:hover {
+    background-color: #8f7641;
+}
+
+
+/* Styles for the add car popup */
+.popup-add-container{
+    all: unset;
+
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.822);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+.popup-add-container:hover {
+    border: 3px solid #494646;
+    transition: border-color 0.2s ease-in-out;
+}
+
+/* Styles for the update car popup */
+.popup-update-container{
+    all: unset;
+
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.822);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+.popup-update-container:hover {
+    border: 3px solid #494646;
+    transition: border-color 0.2s ease-in-out;
+}
 
 
 
