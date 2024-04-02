@@ -36,103 +36,33 @@ foreach ($rentingHistory as &$row) {
 unset($row);
 
 ?>
+<div class="export-popup-container">
+    <table>
+        <tr>
+            <th>Rent ID</th>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Rental Date</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Price</th>
+        </tr>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Renting History</title>
-    <link rel="stylesheet" href="http://localhost/Mini-PHP-Project/carya.tn/style.css">
-        <style>
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-
-            th, td {
-                padding: 8px;
-                text-align: left;
-                border-bottom: 1px solid #ddd;
-            }
-
-            th {
-                background-color: #f2f2f2;
-            }
-            .popup {
-                display: none;
-                position: fixed;
-                left: 50%;
-                top: 50%;
-                transform: translate(-50%, -50%);
-                background-color: white;
-                padding: 20px;
-                border: 1px solid #ccc;
-                box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-                z-index: 1000;
-            }
-
-            .overlay {
-                display: none;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-color: rgba(0, 0, 0, 0.5);
-                z-index: 999;
-            }
-
-            .center {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .download-button {
-                background-color: brown;
-                color: white;
-                padding: 10px 20px;
-                border: none;
-                border-radius: 5px;
-                font-size: 16px;
-                cursor: pointer;
-            }
-
-            .download-button:hover {
-                background-color: #8B4513;
-            }
-
-        </style>
-    </head>
-    <body>
-        <table>
+        <?php foreach ($rentingHistory as $row): ?>
             <tr>
-                <th>Rent ID</th>
-                <th>Brand</th>
-                <th>Model</th>
-                <th>Rental Date</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Price</th>
+                <td><?= $row->command_id ?></td>
+                <td><?= $row->car_id ?></td>
+                <td><?= $row->car_model ?></td>
+                <td><?= $row->rental_date ?></td>
+                <td><?= $row->start_date ?></td>
+                <td><?= $row->end_date ?></td>
+                <td><?= $row->car_price ?></td>
             </tr>
+        <?php endforeach; ?>
+    </table>
 
-            <?php foreach ($rentingHistory as $row): ?>
-                <tr>
-                    <td><?= $row->command_id ?></td>
-                    <td><?= $row->car_id ?></td>
-                    <td><?= $row->car_model ?></td>
-                    <td><?= $row->rental_date ?></td>
-                    <td><?= $row->start_date ?></td>
-                    <td><?= $row->end_date ?></td>
-                    <td><?= $row->car_price ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </table>
-
-        <!-- Download button for renting history -->
-        <div class="center">
-            <button class="btn btn-primary profile-save-button  "><a href="http://localhost/Mini-PHP-Project/carya.tn/src/Controllers/Download_Rent_History.php">Download</a></button>
-        </div>
-    </body>
-    </html>
+    <!-- Download button for renting history -->
+    <div class="center">
+        <button><a href="http://localhost/Mini-PHP-Project/carya.tn/src/Controllers/Download_Rent_History.php">Download</a></button>
+    </div>
+</div>
