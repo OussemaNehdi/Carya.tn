@@ -1,10 +1,16 @@
-<?php require_once('../../../Resources/TCPDF-main/tcpdf.php');
+<?php 
+// Include necessary files
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/Resources/TCPDF-main/tcpdf.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Command.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php';
 
-
-require_once('../Lib/connect.php');
-include '../Model/Car.php';
-include '../Model/Command.php';
-include '../Model/User.php';
+// Check if the request method is GET
+if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+    http_response_code(405); // Method Not Allowed
+    exit("Method Not Allowed");
+}
 
 // Start session if not already started
 if (session_status() == PHP_SESSION_NONE) {
@@ -19,27 +25,45 @@ if (!isset($_SESSION['user_id'])) {
 
 // Get user ID from session
 $user_id = $_SESSION['user_id'];
+
+// Get the renting history of the user
 $rentingHistory = Command::getRentalCommandsByUserId($user_id);
 
+if (!$rentingHistory) {
+    header("Location: http://localhost/Mini-PHP-Project/carya.tn/index.php?message=No%20renting%20history%20found.&type=error");
+    exit();
+}
+
+// Get the user details
 $user=User::getUserById($user_id);   
 
+// Check if the user exists
+if (!$user) {
+    header("Location: http://localhost/Mini-PHP-Project/carya.tn/index.php?message=User%20not%20found.&type=error");
+    exit();
+}
 
+// Get the car details for each renting history
 foreach ($rentingHistory as &$row) {
-    
+    // Get the car details by ID
     $carDetails = Car::getCarById($row->car_id);
+
+    // Check if the car exists
+    if (!$carDetails) {
+        header("Location: http://localhost/Mini-PHP-Project/carya.tn/index.php?message=Car%20not%20found.&type=error");
+        exit();
+    }
+
+    // Set the car details
     $row->car_id = $carDetails->brand;
     $row->car_model = $carDetails->model;
     $row->car_price = $carDetails->price;
 }
 
+// Unset the row variable
 unset($row);
 
-
-
-
-
-
-
+// Create a new PDF document
 $pdf = new TCPDF(); 
 
 // Set document information
@@ -85,9 +109,5 @@ foreach ($rentingHistory as $row) {
     $fill = !$fill;
 }
 
-
-
 $pdf->Output('renting_history.pdf', 'D');
-
-
 ?>
