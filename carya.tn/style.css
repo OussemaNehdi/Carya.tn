@@ -545,229 +545,7 @@ i{
 }
 /* End of login.php & signup */
 
-
-/* -------------- fetch_cars.php -----------------*/
-
-/* Still need to change the style to fit the theme of the website */
-/*  DOING A RECONSTRUCTION
-    .car-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.car {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.car img {
-    width: 100%;
-    border-radius: 5px;
-    margin-bottom: 10px;
-}
-
-.car-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.rent-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.rent-button:hover {
-    background-color: #0056b3;
-}
-/* ------------------ End of fetch_cars.php ------------------*/
-
-
-/* ------------------ rent_car.php ------------------*/
-.rent-body .main-container {
-    display: flex;
-    margin: 0;
-    padding: 0;
-}
-.rent-body .filter-menu {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 20%;
-    height: 100vh;
-    overflow-y: auto; /* Enable vertical scrolling */
-
-    padding: 20px 20px 10px 4px;
-    background-color: rgba(0, 0, 0, 0.795);
-    backdrop-filter: blur(5px);
-}
-.rent-body .cars-list {
-    width: 80%;
-    padding: 10px;
-}
-
-/* ============================ filter menu.php ======================== */
-.rent-body .filter-menu .container{
-    padding-left: 10px;
-    padding-right: 0;
-}
-.rent-body .filter-menu .titles{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 5px;
-}
-.rent-body .filter-menu h2 {
-    color: #eebf31ea;
-    margin-bottom: 15px;
-    font-size: 30px;
-    font-weight: 600;
-}
-.rent-body .filter-menu .sub-container{
-    margin-bottom: 20px;
-}
-
-.rent-body .filter-menu h3 {
-    color: #ac881c;
-    font-size: 27px;
-    font-weight: 300;
-}
-.rent-body .filter-menu input[type="checkbox"] {
-    /* Hide the default appearance */
-    -webkit-appearance: none;
-    appearance: none;
-    /* custom checkbox appearance */
-    width: 13px; /* Set the width of the checkbox */
-    height: 13px; /* Set the height of the checkbox */
-    border: 2px solid #000; /* Set the border color */
-    background-color: rgb(56, 52, 52); /* Set the background color */
-    border-radius: 3px; /* Add border-radius for rounded corners */
-    outline: none; /* Remove outline */
-    cursor: pointer; /* Add cursor pointer */
-    margin-right: 10px;
-}
-.rent-body .filter-menu label{
-    cursor: pointer;
-    color: rgba(255, 255, 255, 0.856);
-}
-.rent-body .filter-menu input[type="checkbox"]:checked {
-    background-color: rgb(255, 215, 215);
-}
-.rent-body .filter-menu span, .rent-body .filter-menu p{
-    color: rgba(255, 255, 255, 0.856);
-    font-size: 15px;
-}
-.rent-body .filter-menu .price-range-slider {
-    width: 60%;
-    -webkit-appearance: none;
-    appearance: none;
-    height: 9px;
-    border-radius: 10px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-}
-.rent-body .filter-menu .price-range-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #8f7641e0;
-    cursor: w-resize;
-}
-.rent-body .filter-menu .apply-button{
-    background-color: #8f7641e0;
-    color: #fff;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-.rent-body .filter-menu .apply-button:hover {
-    background-color: #8f7641;
-}
-
-/* ============================ fetch_cars.php ============================*/
-.rent-body .cars-list .container{
-    width: 100%;
-    background-color: rgba(245, 245, 245, 0.74);
-    backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
-}
-.rent-body .cars-list .titles{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 5px;
-}
-.rent-body .cars-list .titles h2{
-    margin-top: 7px;
-    margin-bottom: 5px;
-    font-size: 40px;
-    font-weight: 600;
-}
-.rent-body .cars-list .car {
-    width: 31%;
-    margin: 1%;
-    padding: 1%;
-    border: 1px solid #ccc;
-    display: inline-block;
-    vertical-align: top;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.918);
-    backdrop-filter: blur(10px);
-}
-.rent-body .cars-list .car:hover {
-    border: 1px solid #636363;
-    transition: border-color 0.2s ease-in-out;
-}
-.rent-body .cars-list .car img {
-    border-radius: 10px 10px 0 0;
-    width: 100%;
-    height: 190px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
-}
-.rent-body .cars-list .car p {
-    margin-bottom: 0;
-}
-.rent-body .cars-list .car .rent-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.rent-body .cars-list .car button {
-    all: unset;
-    padding: 2px 6px 2px 6px;
-    background-color: rgba(0, 0, 0, 0.651);
-    font-family: 'Poppins', sans-serif;
-    border: 2px solid transparent;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-}
-.rent-body .cars-list .car button:hover {
-    background-color: rgba(58, 57, 57, 0.651);
-    border: 2px solid #000;
-    transition: border-color 0.2s ease-in-out;
-}
-/* ------------------ End of rent_car.php ------------------*/
-
-/* ============================ Styles for the popup ================================*/
+/* ================================= Styles for the popup ====================================*/
 .overlay {
     display: none;
     position: fixed;
@@ -953,10 +731,6 @@ i{
 .popup-add-container .submit-popup-button:hover {
     background-color: #8f7641;
 }
-
-
-
-
 .popup-add-container .custom-file-upload input[type="file"] {
     display: none;
 }
@@ -993,20 +767,32 @@ i{
 
 /* Styles for the update car popup */
 .update {
-    padding: 25px 50px;
-}
+    all: unset;
 
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.822);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 0 15px 0 15px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+
+    width: 310px;
+}
 .update .sub-container {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
 
 }
-
 .update .sub-container label {
     width: 150px;
 }
-
 .update .file-upload {
     display: flex;
     justify-content: center;
@@ -1014,14 +800,16 @@ i{
     flex-direction: column;
     margin-top: 25px;
 }
-
 .update .submit-popup-button {
     margin: auto;
 }
 
 .update .add-titles {
+    margin-top: 10px;
     margin-bottom: 30px;
 }
+/* ==================================== End of Styles for the popup ====================================*/
+
 
 
 /* ------------------ admin_dashboard.php ------------------*/
@@ -1097,13 +885,13 @@ i{
 
 /* Styling for buttons */
 .admin-dashboard button {
-    background-color: rgb(173, 100, 12); /* Red color for buttons */
+    background-color: rgb(173, 100, 12);
     color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    transition: background-color 0.3s ease;
 }
 
 .admin-dashboard th button {
@@ -1372,7 +1160,7 @@ footer {
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     opacity: 0.7;
-    animation: fadeOut 3s forwards; /* Animation duration: 3 seconds */
+    animation: fadeOut 6s forwards;
 }
 
 @keyframes fadeOut {
@@ -1384,6 +1172,418 @@ footer {
         display: none; /* Hide the message when animation ends */
     }
 }
+
+/* ------------------ rent_car.php ------------------*/
+.rent-body .main-container {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.rent-body .filter-menu {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100vh;
+    overflow-y: auto; /* Enable vertical scrolling */
+
+    padding: 20px 20px 10px 4px;
+    background-color: rgba(0, 0, 0, 0.795);
+    backdrop-filter: blur(5px);
+}
+.rent-body .cars-list {
+    width: 80%;
+    padding: 10px;
+}
+
+/* ============================ filter menu.php ======================== */
+.rent-body .filter-menu .container{
+    padding-left: 10px;
+    padding-right: 0;
+}
+.rent-body .filter-menu .titles{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5px;
+}
+.rent-body .filter-menu h2 {
+    color: #eebf31ea;
+    margin-bottom: 15px;
+    font-size: 30px;
+    font-weight: 600;
+}
+.rent-body .filter-menu .sub-container{
+    margin-bottom: 20px;
+}
+
+.rent-body .filter-menu h3 {
+    color: #ac881c;
+    font-size: 27px;
+    font-weight: 300;
+}
+.rent-body .filter-menu input[type="checkbox"] {
+    /* Hide the default appearance */
+    -webkit-appearance: none;
+    appearance: none;
+    /* custom checkbox appearance */
+    width: 13px; /* Set the width of the checkbox */
+    height: 13px; /* Set the height of the checkbox */
+    border: 2px solid #000; /* Set the border color */
+    background-color: rgb(56, 52, 52); /* Set the background color */
+    border-radius: 3px; /* Add border-radius for rounded corners */
+    outline: none; /* Remove outline */
+    cursor: pointer; /* Add cursor pointer */
+    margin-right: 10px;
+}
+.rent-body .filter-menu label{
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.856);
+}
+.rent-body .filter-menu input[type="checkbox"]:checked {
+    background-color: rgb(255, 215, 215);
+}
+.rent-body .filter-menu span, .rent-body .filter-menu p{
+    color: rgba(255, 255, 255, 0.856);
+    font-size: 15px;
+}
+.rent-body .filter-menu .price-range-slider {
+    width: 60%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 9px;
+    border-radius: 10px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+.rent-body .filter-menu .price-range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #8f7641e0;
+    cursor: w-resize;
+}
+.rent-body .filter-menu .apply-button{
+    background-color: #8f7641e0;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.rent-body .filter-menu .apply-button:hover {
+    background-color: #8f7641;
+}
+
+/* ============================ fetch_cars.php ============================*/
+.rent-body .cars-list .container{
+    width: 100%;
+    background-color: rgba(245, 245, 245, 0.74);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+.rent-body .cars-list .titles{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5px;
+}
+.rent-body .cars-list .titles h2{
+    margin-top: 7px;
+    margin-bottom: 5px;
+    font-size: 40px;
+    font-weight: 600;
+}
+.rent-body .cars-list .car {
+    width: 31%;
+    margin: 1%;
+    padding: 1%;
+    border: 1px solid #ccc;
+    display: inline-block;
+    vertical-align: top;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.918);
+    backdrop-filter: blur(10px);
+}
+.rent-body .cars-list .car:hover {
+    border: 1px solid #636363;
+    transition: border-color 0.2s ease-in-out;
+}
+.rent-body .cars-list .car img {
+    border-radius: 10px 10px 0 0;
+    width: 100%;
+    height: 190px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+.rent-body .cars-list .car p {
+    margin-bottom: 0;
+}
+.rent-body .cars-list .car .rent-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rent-body .cars-list .car button {
+    all: unset;
+    padding: 2px 6px 2px 6px;
+    background-color: rgba(0, 0, 0, 0.651);
+    font-family: 'Poppins', sans-serif;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+.rent-body .cars-list .car button:hover {
+    background-color: rgba(58, 57, 57, 0.651);
+    border: 2px solid #000;
+    transition: border-color 0.2s ease-in-out;
+}
+/* ------------------ End of rent_car.php ------------------*/
+
+
+
+
+
+/* --------------------------- Beginning of LISTING.php ---------------------------*/
+
+.listing-body .main-container {
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+.listing-body .filter-menu {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100vh;
+    overflow-y: auto; /* Enable vertical scrolling */
+
+    padding: 20px 20px 10px 4px;
+    background-color: rgba(0, 0, 0, 0.795);
+    backdrop-filter: blur(5px);
+}
+.listing-body .cars-list {
+    width: 80%;
+    padding: 10px;
+}
+
+
+/* ============================ filter menu.php ======================== */
+.listing-body .filter-menu .container{
+    display: flex;
+    flex-direction: column;
+    padding-left: 10px;
+    padding-right: 0;
+}
+.listing-body .filter-menu .titles{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5px;
+}
+.listing-body .filter-menu h2 {
+    color: #eebf31ea;
+    margin-bottom: 15px;
+    font-size: 30px;
+    font-weight: 600;
+}
+.listing-body .filter-menu .sub-container{
+    margin-bottom: 20px;
+}
+
+.listing-body .filter-menu h3 {
+    color: #ac881c;
+    font-size: 27px;
+    font-weight: 300;
+}
+.listing-body .filter-menu input[type="checkbox"] {
+    /* Hide the default appearance */
+    -webkit-appearance: none;
+    appearance: none;
+    /* custom checkbox appearance */
+    width: 13px; /* Set the width of the checkbox */
+    height: 13px; /* Set the height of the checkbox */
+    border: 2px solid #000; /* Set the border color */
+    background-color: rgb(56, 52, 52); /* Set the background color */
+    border-radius: 3px; /* Add border-radius for rounded corners */
+    outline: none; /* Remove outline */
+    cursor: pointer; /* Add cursor pointer */
+    margin-right: 10px;
+}
+.listing-body .filter-menu label{
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.856);
+}
+.listing-body .filter-menu input[type="checkbox"]:checked {
+    background-color: rgb(255, 215, 215);
+}
+.listing-body .filter-menu span, .listing-body .filter-menu p{
+    color: rgba(255, 255, 255, 0.856);
+    font-size: 15px;
+}
+.listing-body .filter-menu .price-range-slider {
+    width: 60%;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 9px;
+    border-radius: 10px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+.listing-body .filter-menu .price-range-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #8f7641e0;
+    cursor: w-resize;
+}
+.listing-body .filter-menu .apply-button{
+    background-color: #8f7641e0;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.listing-body .filter-menu .apply-button:hover {
+    background-color: #8f7641;
+}
+/* --------------- end of filter_menu.php ----------------*/
+
+/* ====================my_cars_listing.php ====================*/
+.listing-body .cars-list .container{
+    width: 100%;
+    background-color: rgba(245, 245, 245, 0.74);
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+.listing-body .cars-list .header-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5px;
+    margin-bottom: 10px;
+}
+.listing-body .cars-list .header-container h2{
+    margin-top: 7px;
+    margin-bottom: 5px;
+    font-size: 40px;
+    font-weight: 600;
+    transform: translateX(40px);
+}
+.listing-body .cars-list .header-container button {
+    position: relative;
+    background-color: rgb(173, 100, 12);
+    color: #fff;
+    padding: 4px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 25px;
+    transform: translateX(210px);
+}
+.listing-body .cars-list .header-container button:hover {
+    background-color: rgba(202, 131, 45, 0.907);
+}
+.listing-body .cars-list .car-listing-container{
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: rgba(255, 255, 255, 0.637);
+    backdrop-filter: blur(2px);
+    padding: 10px 14px 10px 14px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    width: 100%;
+    border: 2px solid transparent;
+}
+.listing-body .cars-list .car-listing-container:hover {
+    border: 2px solid #333131;
+    transition: border-color 0.2s ease-in-out;
+}
+.listing-body .cars-list .car-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.listing-body .cars-list .car-image img {
+    border-radius: 10px;
+    margin-right: 20px;
+    width: 285px;
+    height: 190px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.listing-body .cars-list .car-details{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+.listing-body .cars-list .car-details h2{
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 0
+}
+.listing-body .cars-list .car-details .car-model{
+    font-size: 20px;
+    color: rgb(133, 132, 132);
+    margin-bottom: 30px;
+}
+.listing-body .cars-list .car-details p:not(.car-model) {
+    margin: 2px;
+}
+.listing-body .cars-list .car-details .paragraphs{
+    margin-bottom: 10px;
+}
+.listing-body .cars-list .car-details .mini-title{
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.listing-body .cars-list .action-buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    width: 30%;
+}
+.listing-body .cars-list .action-buttons button {
+    all: unset;
+
+    padding: 4px 10px 4px 10px;
+    background-color: rgb(179, 133, 48);
+    font-family: 'Poppins', sans-serif;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    width: 150px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+.listing-body .cars-list .action-buttons button:hover{
+    background-color: rgb(206, 158, 70);
+    border: 2px solid rgb(158, 112, 26);
+    transition: border-color 0.2s ease-in-out;
+}
+
 
 .display {
     position: fixed;
