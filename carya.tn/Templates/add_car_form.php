@@ -18,11 +18,11 @@
             </div>
             <div class="sub-container">
                 <label for="price">Car Price:</label>
-                <input type="text" id="price" name="price" required>
+                <input type="text" id="price" pattern="\d+(\.\d+)?" name="price" required>
             </div>
             <div class="sub-container">
                 <label for="km">Car Kilometers:</label>
-                <input type="text" id="km" name="km" required>
+                <input type="text" pattern="\d+(\.\d+)?" id="km" name="km" required>
             </div>
             <div class="sub-container1">
                 <label for="car_image" class="custom-file-upload">

@@ -201,16 +201,16 @@ if (isset($_GET) && !empty($_GET)) {
                                 </div>
                                 <div class="sub-container">
                                     <label for="price">Car Price:</label>
-                                    <input type="text" id="price" name="price" value="<?php echo $car->price; ?>">
+                                    <input type="text" pattern="\d+(\.\d+)?" id="price" name="price" value="<?php echo $car->price; ?>">
                                 </div>
                                 <div class="sub-container">
                                     <label for="km">Car Kilometers:</label>
-                                    <input type="text" id="km" name="km" value="<?php echo $car->km; ?>">
+                                    <input type="text" pattern="\d+(\.\d+)?" id="km" name="km" value="<?php echo $car->km; ?>">
                                 </div>
                                 <div class="sub-container file-upload">
                                     <label for='<?php echo "image$car->id" ?>' class="custom-file-upload">
                                         <span class="upload-icon">Upload Image</span>
-                                        <input type="file" id='<?php echo "image$car->id" ?>' name="image" required onchange='<?php echo "displayFileNameUpdate(this, $car->id)" ?>'>
+                                        <input type="file" id='<?php echo "image$car->id" ?>' name="image" onchange='<?php echo "displayFileNameUpdate(this, $car->id)" ?>'>
                                     </label>
                                     <div class="no-file-name">
                                         <p id='<?php echo "update-name{$car->id}" ?>'>No file chosen</p>
