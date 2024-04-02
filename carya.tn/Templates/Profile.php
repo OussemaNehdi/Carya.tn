@@ -92,7 +92,7 @@ $class = "profile-body"
                         <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" name="state" value="" placeholder="state"></div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="enter email" value="" name="email"></div>
+                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="Enter email" value="" name="email"></div>
 
                     </div>
                         <div class="mt-5 text-center">
@@ -131,7 +131,7 @@ $class = "profile-body"
 </div>
 </div>
 </div>
-<div class="popup" id="popup">
+<div class="export-popup" id="popup">
     <?php include 'Export_rent_history.php'; ?>
 </div>
 <div class="overlay" id="overlay"></div>
