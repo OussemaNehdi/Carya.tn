@@ -73,7 +73,7 @@ ob_start();
 </div>
 
 <?php foreach ($cars as $car): ?>
-<?require('update_form.php'); ?>
+<?php require('update_form.php'); ?>
 <?php $commands = Command::getRentalCommandsByCarId($car->id); ?>
 <?php require('confirm_command_popup.php'); ?>
 <?php endforeach; ?>
