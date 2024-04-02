@@ -356,7 +356,7 @@ ul{
     min-height: 100vh;
 }
 
-.box{
+.login-container .box{
     display: flex;
     flex-direction: row;
     position: relative;
@@ -370,37 +370,37 @@ ul{
     border: 3px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
 }
-.box-login{
+.login-container .box-login{
     position: absolute;
     width: 85%;
     left: 27px;
     transition: .5s ease-in-out;
 }
-.box-register{
+.login-container .box-register{
     position: absolute;
     width: 85%;
     right: -350px;
     transition: .5s ease-in-out;
 }
-.top-header{
+.login-container .top-header{
     text-align: center;
     margin: 30px 0 20px 0;
 }
-.top-header h3{
+.login-container .top-header h3{
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 8px;
 }
-.input-group{
+.login-container .input-group{
      width: 100%;
     
 }
-.input-field{
+.login-container .input-field{
     width: 100%;
     margin: 12px 0;
     position: relative;
 }
-.input-box{
+.login-container .input-box{
     width: 100%;
     height: 50px;
     font-size: 15px;
@@ -412,20 +412,20 @@ ul{
     backdrop-filter: blur(2px);
     outline: none;
 }
-.input-field label{
+.login-container .input-field label{
     position: absolute;
     left: 20px;
     top: 15px;
     font-size: 15px;
     transition: .3s ease-in-out;
 }
-.input-box:focus ~ label,.input-box:valid ~ label{
+.login-container .input-box:focus ~ label,.input-box:valid ~ label{
     top: 2px;
     font-size: 10px;
     color: #c12828;
     font-weight: 500;
 }
-.remember{
+.login-container .remember{
     display: flex;
     align-items: center;
     font-size: 13px;
@@ -433,16 +433,16 @@ ul{
     margin-bottom: 0px;
     color: #000000;
 }
-.check{
+.login-container .check{
     margin-right: 8px;
     width: 14px;
 }
-.radio-buttons{
+.login-container .radio-buttons{
     display: flex;
     align-items: center;
     gap: 20px;
 }
-.input-submit{
+.login-container .input-submit{
     width: 100%;
     height: 50px;
     font-size: 15px;
@@ -455,21 +455,24 @@ ul{
     cursor: pointer;
     transition: .4s;
 }
-.input-submit:hover{
+.login-container .input-submit:hover{
     background:  #f19028e8;
     box-shadow: 0px 4px 20px rgba(62, 9, 9, 0.32);
 }
-.forgot{
+.login-container .forgot{
     text-align: center;
     font-size: 13px;
     font-weight: 500;
     margin-top: 40px;
 }
-.forgot a{
-    text-decoration: none;
+.login-container .forgot a{
     color: #000;
 }
-.switch{
+.login-container .forgot a:hover{
+    color: #5a5555;
+    transition: color .2s ease-in-out;
+}
+.login-container .switch{
     display: flex;
     position: absolute;
     bottom: 30px;
@@ -482,7 +485,7 @@ ul{
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
-.switch a{
+.login-container .switch a{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -495,7 +498,7 @@ ul{
     border-radius: 10px;
     z-index: 10;
 }
-#btn{
+.login-container #btn{
     position: absolute;
     bottom: 0px;   
     left: 0px;
@@ -506,27 +509,27 @@ ul{
     box-shadow: 2px 0px 12px rgba(0, 0, 0, 0.1);
     transition: .5s ease-in-out;
 }
-.eye-area{
+.login-container .eye-area{
     position: absolute;
     top: 25px;
     right: 25px;
 }
-.eye-box{
+.login-container .eye-box{
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     
 }
-i{
+.login-container i{
     position: absolute;
     color: #444444;
     cursor: pointer;
 }
-#eye,#eye-2{
+.login-container #eye,#eye-2{
     opacity: 1;
 }
-#eye-slash,#eye-slash-2{
+.login-container #eye-slash,#eye-slash-2{
     opacity: 0;}
 @media only screen and (max-width: 576px){
     .box{
