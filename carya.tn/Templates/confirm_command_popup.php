@@ -1,8 +1,10 @@
-<div id="commandsPopup<?= $car->id ?>" class="popup-add-container update">
-    <div>
-        <h2>Confirm Commands</h2>
-        <ul> <!-- Start of the list -->
-            <?php foreach ($commands as $command): ?>
+<div id="commandsPopup<?= $car->id ?>" class="command-popup">
+    <div class="main-container">
+        <div class="titles">
+            <h2>Commands</h2>
+        </div>
+        <?php foreach ($commands as $command): ?>
+            <div class="sub-container">
                 <?php
                 // Setting command status
                 $status = "Unreviewed";
@@ -10,19 +12,36 @@
                     $status = $command->confirmed ? "accepted" : "refused";
                 }
                 ?>
-                <li>User: <?= $command->user_id ?> | Rental Date: <?= $command->rental_date ?>
-                    | Start Date: <?= $command->start_date ?> | End Date: <?= $command->end_date ?>
-                    | Duration: <?= $command->rental_period ?> days | Status: <?= $status ?></li>
+                <div class="details">
+                    <div class="mini-titles">
+                        <span>User:</span>
+                        <span>Rental Date:</span>
+                        <span>Start Date:</span>
+                        <span>End Date:</span>
+                        <span>Duration:</span>
+                        <span>Status:</span> 
+                    </div>
+                    <div class="mini-details">
+                        <p><?= $command->user_id ?></p>
+                        <p><?= $command->rental_date ?></p>
+                        <p><?= $command->start_date ?></p>
+                        <p><?= $command->end_date ?></p>
+                        <p><?= $command->rental_period ?> days</p>
+                        <p><?= $status ?></p>
+                    </div>
+                </div>
                 <!-- Accept and Refuse buttons -->
-                <form method="post" action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/accept_command.php">
-                    <input type="hidden" name="command_id" value="<?= $command->command_id ?>">
-                    <button type="submit" name="accept">Accept</button>
-                </form>
-                <form method="post" action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/refuse_command.php">
-                    <input type="hidden" name="command_id" value="<?= $command->command_id ?>">
-                    <button type="submit" name="refuse">Refuse</button>
-                </form>
-            <?php endforeach; ?>
-        </ul>
+                <div class="action-buttons">
+                    <form method="post" action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/accept_command.php">
+                        <input type="hidden" name="command_id" value="<?= $command->command_id ?>">
+                        <button type="submit" name="accept" class="button-accept">Accept</button>
+                    </form>
+                    <form method="post" action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/refuse_command.php">
+                        <input type="hidden" name="command_id" value="<?= $command->command_id ?>">
+                        <button type="submit" name="refuse" class="button-deny">Refuse</button>
+                    </form>
+                </div>
+            </div>
+        <?php endforeach; ?>
     </div>
 </div>
