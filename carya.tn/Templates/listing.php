@@ -1,6 +1,6 @@
 <?php
 // Include necessary files
-// Last commit by AgressivePug to add the commands mangment functionnaility
+// Last commit by AgressivePug to add the commands management functionality
 include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
 include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Command.php';
@@ -68,10 +68,10 @@ ob_start();
                         <button id='ConfirmCommandsBtn<?php echo $car->id; ?>'>Confirm Commands</button>
                     </div>
                 </div>
-
+        </div>
                 <!-- Popup For the update car form -->
                 <!-- each car gets a hidden div for its popup but the logic is the same -->
-                <div id="popup<?php echo $car->id ?>" class="popup-add-container update">
+                <div id="popup<?php echo $car->id ?>" class="popup-add-container">
                     <div class="add-titles">
                         <h2>Update Car Listing</h2>
                     </div>
@@ -124,32 +124,32 @@ ob_start();
                             foreach ($commands as $command) {
                                 //a : backend fix this status thing
 
-                if (!isset($command->confirmed)) {
-                    $status = "Unreviewed";
-                } elseif ($command->confirmed == true) {
-                    $status = "accepted";
-                } elseif ($command->confirmed == false) {
-                    $status = "refused";
-                }
+                                if (!isset($command->confirmed)) {
+                                    $status = "Unreviewed";
+                                } elseif ($command->confirmed == true) {
+                                    $status = "accepted";
+                                } elseif ($command->confirmed == false) {
+                                    $status = "refused";
+                                }
 
-                // Display each command as list item
-                echo "<li>User: " . $command->user_id . " | Rental Date: " . $command->rental_date . 
-                " | Start Date: " . $command->start_date . " | End Date: " . $command->end_date . 
-                " | Duration: " . $command->rental_period . " days | Status:  " .$status  ."</li>";
-                            
-                // Add Accept and Refuse buttons
-                echo "<form method='post' action='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/accept_command.php'>";
-                echo "<input type='hidden' name='command_id' value='" . $command->command_id . "'>";
-                echo "<button type='submit' name='accept'>Accept</button>";
-                echo "</form>";
-                
-                echo "<form method='post' action='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/refuse_command.php'>";
-                echo "<input type='hidden' name='command_id' value='" . $command->command_id . "'>";
-                echo "<button type='submit' name='refuse'>Refuse</button>";
-                echo "</form>";
-            }
-            ?>
-        </ul>
+                                // Display each command as list item
+                                echo "<li>User: " . $command->user_id . " | Rental Date: " . $command->rental_date . 
+                                " | Start Date: " . $command->start_date . " | End Date: " . $command->end_date . 
+                                " | Duration: " . $command->rental_period . " days | Status:  " .$status  ."</li>";
+                                
+                                // Add Accept and Refuse buttons
+                                echo "<form method='post' action='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/accept_command.php'>";
+                                echo "<input type='hidden' name='command_id' value='" . $command->command_id . "'>";
+                                echo "<button type='submit' name='accept'>Accept</button>";
+                                echo "</form>";
+                                
+                                echo "<form method='post' action='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/refuse_command.php'>";
+                                echo "<input type='hidden' name='command_id' value='" . $command->command_id . "'>";
+                                echo "<button type='submit' name='refuse'>Refuse</button>";
+                                echo "</form>";
+                            }
+                            ?>
+                        </ul>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -185,6 +185,7 @@ ob_start();
             document.getElementById("UpdateCarBtn<?php echo $car->id ?>").addEventListener("click", function() {
                 document.getElementById("popup<?php echo $car->id ?>").style.display = "block";
                 document.getElementById("overlay").style.display = "block";
+
             });
 
             // Add event listener for "Confirm Commands" button
