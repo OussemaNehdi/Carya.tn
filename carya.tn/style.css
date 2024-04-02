@@ -384,7 +384,7 @@ ul{
 }
 .top-header{
     text-align: center;
-    margin: 30px 0;
+    margin: 30px 0 20px 0;
 }
 .top-header h3{
     font-size: 22px;
@@ -433,9 +433,6 @@ ul{
     margin-bottom: 0px;
     color: #000000;
 }
-.remember label{
-    margin-top: 11px;
-}
 .check{
     margin-right: 8px;
     width: 14px;
@@ -445,9 +442,6 @@ ul{
     align-items: center;
     gap: 20px;
 }
-.radio-buttons label{
-    margin-top: 11px;
-}
 .input-submit{
     width: 100%;
     height: 50px;
@@ -455,14 +449,14 @@ ul{
     font-weight: 500;
     border: none;
     border-radius: 10px;
-    background: #bc6202;
+    background: #db7b13e8;
     color: #fff;
     box-shadow: 0px 4px 20px rgba(62, 9, 9, 0.144);
     cursor: pointer;
     transition: .4s;
 }
 .input-submit:hover{
-    background:  #db3e00;
+    background:  #f19028e8;
     box-shadow: 0px 4px 20px rgba(62, 9, 9, 0.32);
 }
 .forgot{
@@ -1151,7 +1145,7 @@ footer {
 }
 
 
-.message {
+.display {
     padding: 10px;
     margin: 10px 0;
     border-radius: 20px;
@@ -1160,9 +1154,13 @@ footer {
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     opacity: 0.7;
-    animation: fadeOut 6s forwards;
+    animation: fadeOut 7s forwards;
+    position: fixed;
+    z-index: 1000;
+    top: 50px;
+    right: 100px;
+    left: 100px;
 }
-
 @keyframes fadeOut {
     0% {
         opacity: 0.9;
@@ -1334,17 +1332,24 @@ footer {
 }
 .rent-body .cars-list .car button {
     all: unset;
+    
     padding: 2px 6px 2px 6px;
-    background-color: rgba(0, 0, 0, 0.651);
+    background-color: rgba(231, 142, 70, 0.925);
     font-family: 'Poppins', sans-serif;
     border: 2px solid transparent;
     border-radius: 10px;
-    color: white;
     cursor: pointer;
+    margin-top: 10px;
+    color:white;
+}
+.rent-body .cars-list .car a {
+    all: unset;
+
+    color: white;
 }
 .rent-body .cars-list .car button:hover {
-    background-color: rgba(58, 57, 57, 0.651);
-    border: 2px solid #000;
+    background-color: rgba(247, 173, 112, 0.836);
+    border: 2px solid #f08725;
     transition: border-color 0.2s ease-in-out;
 }
 /* ------------------ End of rent_car.php ------------------*/
@@ -1584,11 +1589,3 @@ footer {
     transition: border-color 0.2s ease-in-out;
 }
 
-
-.display {
-    position: fixed;
-    z-index: 1000;
-    top: 50px;
-    right: 100px;
-    left: 100px;
-}
