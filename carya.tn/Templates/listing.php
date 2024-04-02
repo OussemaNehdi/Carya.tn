@@ -63,9 +63,9 @@ ob_start();
                             <a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/mark_car_unavailable.php?id=<?php echo $car->id; ?>'><button>Mark Unavailable</button></a>
                         <?php endif; ?>
                         <!-- Button to trigger popup -->
-                        <button id='UpdateCarBtn<?php echo $car->id; ?>'>Update Listing</button>
+                        <a href="#"><button id='UpdateCarBtn<?php echo $car->id; ?>'>Update Listing</button></a>
                         <!-- Agressive Pug : (i added a button to redirect you to a pop up that will have the commands there )-->
-                        <button id='ConfirmCommandsBtn<?php echo $car->id; ?>'>Confirm Commands</button>
+                        <a href="#"><button id='ConfirmCommandsBtn<?php echo $car->id; ?>'>Confirm Commands</button></a>
                     </div>
                 </div>
             <?php endforeach; ?>                
