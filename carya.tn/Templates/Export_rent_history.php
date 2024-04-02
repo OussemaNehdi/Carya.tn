@@ -134,9 +134,8 @@ unset($row);
             <?php endforeach; ?>
         </table>
 
-        <!-- Download button for renting history -->
-        <div class="center">
-            <button class="btn btn-primary profile-save-button  "><a href="http://localhost/Mini-PHP-Project/carya.tn/src/Controllers/Download_Rent_History.php">Download</a></button>
-        </div>
-    </body>
-    </html>
+    <!-- Download button for renting history -->
+    <div class="center">
+        <button><a href="http://localhost/Mini-PHP-Project/carya.tn/src/Controllers/Download_Rent_History.php">Download</a></button>
+    </div>
+</div>

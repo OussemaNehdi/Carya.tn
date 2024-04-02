@@ -44,6 +44,7 @@ ul{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 1000;
 }
 
 .navbar-logo a {
@@ -543,6 +544,92 @@ ul{
 /* End of login.php & signup */
 
 /* ================================= Styles for the popup ====================================*/
+/* Styles for the export popup */
+.export-popup {
+    all: unset;
+
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.822);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 10px 15px 10px 15px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+
+    width: 70%;
+}
+.export-popup:hover {
+    border: 3px solid #494646;
+    transition: border-color 0.2s ease-in-out;
+}
+.export-popup-container{
+    border-radius: 10px;
+    padding: 13px;
+    background-color: white;
+}
+.export-popup-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.export-popup-container th, .export-popup-container td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.export-popup-container th {
+    background-color: #dd823ce4;
+    color: #fff;
+    backdrop-filter: blur(10px);
+    width: 300px;
+}
+
+.export-popup-container td {
+    color: #555;
+}
+
+.export-popup-container tbody tr:nth-child(even) {
+    background-color: #f8f9fa; /* Light gray background for even rows */
+}
+
+.export-popup-container th:first-child, .export-popup-container td:first-child {
+    padding-left: 20px;
+}
+
+.export-popup-container th:last-child, .export-popup-container td:last-child {
+    padding-right: 20px;
+}
+
+/* Styling for buttons */
+.export-popup-container button {
+    background-color: rgb(207, 129, 34);
+    padding: 7px 17px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.export-popup-container button:hover {
+    background-color: rgb(235, 156, 59);
+    border: 2px solid rgb(207, 129, 34);
+    transition: all 0.3s ease-in-out;
+}
+.export-popup-container .center {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.export-popup-container .center a{
+    color: white;
+}
+/* ------------ end of export popup ------------ */
 .overlay {
     display: none;
     position: fixed;
@@ -553,6 +640,8 @@ ul{
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
+
+
 /* Styles for the rent popup */
 .popup-rent-container {
     all: unset;
@@ -986,19 +1075,6 @@ ul{
     display: none;
 }
 
-/* Styles for the popup */
-.popup {
-    display: none;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-}
 /* bch ki ticklicki el bara yetsaker el popup taa add wala update car */
 .overlay {
     display: none;
@@ -1157,9 +1233,9 @@ footer {
     text-align: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     opacity: 0.7;
-    animation: fadeOut 7s forwards;
+    animation: fadeOut 6s forwards;
     position: fixed;
-    z-index: 1000;
+    z-index: 999;
     top: 50px;
     right: 100px;
     left: 100px;
@@ -1188,7 +1264,7 @@ footer {
     height: 100vh;
     overflow-y: auto; /* Enable vertical scrolling */
 
-    padding: 20px 20px 10px 4px;
+    padding: 20px 14px 10px 4px;
     background-color: rgba(0, 0, 0, 0.795);
     backdrop-filter: blur(5px);
 }
@@ -1474,7 +1550,7 @@ footer {
 }
 /* --------------- end of filter_menu.php ----------------*/
 
-/* ====================my_cars_listing.php ====================*/
+/* ==================== my_cars_listing.php ====================*/
 .listing-body .cars-list .container{
     width: 100%;
     background-color: rgba(245, 245, 245, 0.74);
@@ -1489,13 +1565,14 @@ footer {
     align-items: center;
     padding-top: 5px;
     margin-bottom: 10px;
+    width: 100%;
 }
 .listing-body .cars-list .header-container h2{
     margin-top: 7px;
     margin-bottom: 5px;
     font-size: 40px;
     font-weight: 600;
-    transform: translateX(40px);
+    width: 500px;
 }
 .listing-body .cars-list .header-container button {
     position: relative;
@@ -1507,7 +1584,7 @@ footer {
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: 25px;
-    transform: translateX(210px);
+    margin-left: 26%;
 }
 .listing-body .cars-list .header-container button:hover {
     background-color: rgba(202, 131, 45, 0.907);
@@ -1572,6 +1649,12 @@ footer {
     margin-top: 10px;
     width: 30%;
 }
+.listing-body .cars-list .action-buttons a{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .listing-body .cars-list .action-buttons button {
     all: unset;
 
@@ -1582,7 +1665,7 @@ footer {
     border-radius: 10px;
     color: white;
     cursor: pointer;
-    width: 150px;
+    width: 80%;
     margin-bottom: 10px;
     text-align: center;
 }
