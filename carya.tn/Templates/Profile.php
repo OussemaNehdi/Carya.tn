@@ -115,7 +115,7 @@ $class = "profile-body"
                         <h2>Active Renting Cars</h2>
                         <ul>
                             <?php foreach ($activeRentingCars as $car) : ?>
-                                <li><?php echo $car->car_id . ' ' . $car->model . ' | ' . "Remaining Days: " . date_diff(date_create($currentDate), date_create($car->end_date))->format('%a'); ?></li>
+                                <li><?php echo $car->car_id . ' ' . $car->car_model . ' | ' . "Remaining Days: " . date_diff(date_create($currentDate), date_create($car->end_date))->format('%a'); ?></li>
 
                                 <!-- Add more car details as needed -->
                             <?php endforeach; ?>
