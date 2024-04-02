@@ -53,7 +53,7 @@ if ($user) {
         $_SESSION['user_id'] = $user->id;
         $_SESSION['role'] = $user->role;
 
-        header("Location: $refferer?type=success&message=Logged in successfully&slide=home");
+        header("Location: http://localhost/Mini-PHP-Project/carya.tn/index.php?type=success&message=Logged in successfully&slide=home");
         exit();
     } else {
         header("Location: $refferer?type=error&message=Incorrect_password&slide=login");

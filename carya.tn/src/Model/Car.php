@@ -371,7 +371,21 @@ class Car {
         }
     }
     
-    
+    // Method to check if the car is rented on the dates specified
+    public static function isCarRented($car_id, $start_date, $end_date) {
+        global $pdo;
+        try {
+            $sql = "SELECT * FROM command WHERE car_id = ? AND ((start_date <= ? AND end_date >= ?) OR (start_date <= ? AND end_date >= ?))";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$car_id, $start_date, $start_date, $end_date, $end_date]);
+            $car_commanded = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return count($car_commanded) > 0;
+        } catch (PDOException $e) {
+            // Log error and rethrow the exception
+            error_log("Error checking if car is rented: " . $e->getMessage());
+            throw $e;
+        }
+    }
 
     /////////////// END SERVICES RENT A CAR SECTION
 }

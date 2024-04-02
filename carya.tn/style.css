@@ -1384,3 +1384,11 @@ footer {
         display: none; /* Hide the message when animation ends */
     }
 }
+
+.display {
+    position: fixed;
+    z-index: 1000;
+    top: 50px;
+    right: 100px;
+    left: 100px;
+}

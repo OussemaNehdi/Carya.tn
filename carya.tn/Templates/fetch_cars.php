@@ -6,7 +6,6 @@ session_start();
 
 $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 // Get the filter conditions from the URL
-$user_id = $_SESSION['user_id'];
 if (isset($_GET) && !empty($_GET)) {
     $filters = Car::constructFilterQuery($_GET);
     $cars = Car::getFilteredCars($filters, available:1);

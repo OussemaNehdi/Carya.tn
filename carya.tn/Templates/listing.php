@@ -234,23 +234,13 @@ if (isset($_GET) && !empty($_GET)) {
             foreach ($commands as $command) {
                 //todo : backend fix this status thing
 
-
-                if ($command->confirmed == 1) { // todo : jozef you can add for confirmed a css of input green color
-                    $status = "Confirmed";
-                    echo "Confirmed";
-                } elseif ($command->confirmed == 0) {
-                    $status = "Refused";
-                    echo "Refused";
-                } elseif ($command->confirmed == null) {
+                if (!isset($command->confirmed)) {
                     $status = "Unreviewed";
-                    echo "Unreviewed";
-                } else {
-                    $status = "xxxx";
-                    echo "xxxx";
+                } elseif ($command->confirmed == true) {
+                    $status = "accepted";
+                } elseif ($command->confirmed == false) {
+                    $status = "refused";
                 }
-
-
-
 
                 // Display each command as list item
                 echo "<li>User: " . $command->user_id . " | Rental Date: " . $command->rental_date . 
@@ -270,8 +260,6 @@ if (isset($_GET) && !empty($_GET)) {
             }
             ?>
         </ul>
-                            
-
                     </div>
                 </div>
 
