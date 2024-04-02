@@ -30,13 +30,9 @@ if (session_status() == PHP_SESSION_NONE) {
 
     <div class="car-card">
         <?php
-        if (isset($_SESSION['user_id'])) {
-            // User is logged in
-            echo '<a href="/Mini-PHP-Project/carya.tn/Templates/rent_car.php" class="btn">Rent Now</a>';
-        } else {
-            // User is not logged in
-            echo '<a href="/Mini-PHP-Project/carya.tn/Templates/rent_car.php" class="btn">Rent Now</a>';
-        }
+
+        echo '<a href="/Mini-PHP-Project/carya.tn/Templates/rent_car.php" class="btn">Rent Now</a>';
+
         ?>
     </div>
 
@@ -44,9 +40,6 @@ if (session_status() == PHP_SESSION_NONE) {
         <p> 2024 Rent-a-Car. All rights reserved.</p>
     </footer>
 </div>
-
-
-
 
 
 <?php $content = ob_get_clean(); ?>
