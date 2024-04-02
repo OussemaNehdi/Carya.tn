@@ -32,6 +32,7 @@ foreach ($rentingHistory as &$row) {
     $row->car_id = $carDetails->brand;
     $row->car_model = $carDetails->model;
     $row->car_price = $carDetails->price;
+    $row->confirmed = $row->confirmed == 1 ? "Confirmed" : "Not Confirmed";
 }
 unset($row);
 
@@ -114,7 +115,9 @@ unset($row);
                 <th>Rental Date</th>
                 <th>Start Date</th>
                 <th>End Date</th>
+                <th>Status</th>
                 <th>Price</th>
+                
             </tr>
 
             <?php foreach ($rentingHistory as $row): ?>
@@ -125,6 +128,7 @@ unset($row);
                     <td><?= $row->rental_date ?></td>
                     <td><?= $row->start_date ?></td>
                     <td><?= $row->end_date ?></td>
+                    <td><?= $row->confirmed ?></td>
                     <td><?= $row->car_price ?></td>
                 </tr>
             <?php endforeach; ?>
