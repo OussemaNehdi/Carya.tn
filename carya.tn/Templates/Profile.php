@@ -33,6 +33,9 @@ $activeRentingCars = array_filter($activeRentingCars, function ($car) use ($curr
     return $currentDate >= $car->start_date && $currentDate <= $car->end_date;
 });
 
+$activeRentingCars = array_filter($activeRentingCars, function ($car)  {
+    return $car->confirmed=="1";
+});
 ?>
 <?php
 $title = "User Profile";

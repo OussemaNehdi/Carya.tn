@@ -1,6 +1,6 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Command.php';
-
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php';
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -25,10 +25,7 @@ $command = Command::getCommandById($command_id);
 
 $car = Car::getCarById($command->car_id);
 
-if ($car->owner_id != $user_id) {
-    header("Location: $refferer?message=You%20are%20not%20authorized%20to%20accept%20this%20command.");
-    exit();
-}
+
 
 Command::AcceptCommand($command_id);
 
