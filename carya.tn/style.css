@@ -162,14 +162,14 @@ ul{
 }
 .nav-user .login-button {
     margin-left: 120px;
-    background-color: #b88d21;
+    background-color: #4caf4fc3;
     border-radius: 5px;
     padding: 7px 20px;
     color: white;
     text-decoration: none;
 }
 .nav-user .login-button:hover {
-    background-color: #c9a23f;
+    background-color: #48ac43;
 }
 
 .nav-user .profile-button {
@@ -276,14 +276,41 @@ ul{
 /* -------------- about.php -----------------*/
 .about-container {
     max-width: 1200px;
-    margin: 50px auto;
+    margin: 0 auto;
     padding: 20px;
-    background-color: rgba(245, 245, 245, 0.624);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(5px);
-    padding: 50px;
 }
+.about-container h2 {
+    margin-bottom: 20px;
+    color: white;
+}
+
+/* Author styles */
+.author {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.author img {
+    width: 100px; 
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+
+.author-info {
+    flex: 1;
+}
+
+.author-info h3 {
+    margin-top: 0;
+    color: white;
+}
+.author-info p {
+    margin-top: 0;
+    color: rgb(255, 255, 255);
+}
+
+
 
 .about-container h2 {
     margin-bottom: 20px;
@@ -319,10 +346,12 @@ ul{
 
 }
 
+
 .about-paragraph2 {
     margin-top: 50px;
     text-align: justify;
     line-height: 1.6;
+    color :#ffffff
 }
 
 /* Responsive styles */
@@ -591,453 +620,48 @@ i{
 }
 /* ------------------ End of fetch_cars.php ------------------*/
 
-
 /* ------------------ rent_car.php ------------------*/
-.rent-body .main-container {
+/* .rent-body .container {
     display: flex;
-    margin: 0;
-    padding: 0;
 }
+
 .rent-body .filter-menu {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 20%;
-    height: 100vh;
-    overflow-y: auto; /* Enable vertical scrolling */
-
-    padding: 20px 20px 10px 4px;
-    background-color: rgba(0, 0, 0, 0.795);
-    backdrop-filter: blur(5px);
-}
-.rent-body .cars-list {
-    width: 80%;
-    padding: 10px;
+    flex: 2;
+    width: 30%;
+    padding: 20px;
+    background-color: #f2f2f2;
 }
 
-/* ============================ filter menu.php ======================== */
-.rent-body .filter-menu .container{
-    padding-left: 10px;
-    padding-right: 0;
-}
-.rent-body .filter-menu .titles{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 5px;
-}
-.rent-body .filter-menu h2 {
-    color: #eebf31ea;
-    margin-bottom: 15px;
-    font-size: 30px;
-    font-weight: 600;
-}
-.rent-body .filter-menu .sub-container{
-    margin-bottom: 20px;
+.rent-body .car-display {
+    flex: 2;
+    width: 70%;
+    padding: 20px;
 }
 
-.rent-body .filter-menu h3 {
-    color: #ac881c;
-    font-size: 27px;
-    font-weight: 300;
-}
-.rent-body .filter-menu input[type="checkbox"] {
-    /* Hide the default appearance */
-    -webkit-appearance: none;
-    appearance: none;
-    /* custom checkbox appearance */
-    width: 13px; /* Set the width of the checkbox */
-    height: 13px; /* Set the height of the checkbox */
-    border: 2px solid #000; /* Set the border color */
-    background-color: rgb(56, 52, 52); /* Set the background color */
-    border-radius: 3px; /* Add border-radius for rounded corners */
-    outline: none; /* Remove outline */
-    cursor: pointer; /* Add cursor pointer */
-    margin-right: 10px;
-}
-.rent-body .filter-menu label{
-    cursor: pointer;
-    color: rgba(255, 255, 255, 0.856);
-}
-.rent-body .filter-menu input[type="checkbox"]:checked {
-    background-color: rgb(255, 215, 215);
-}
-.rent-body .filter-menu span, .rent-body .filter-menu p{
-    color: rgba(255, 255, 255, 0.856);
-    font-size: 15px;
-}
-.rent-body .filter-menu .price-range-slider {
-    width: 60%;
-    -webkit-appearance: none;
-    appearance: none;
-    height: 9px;
-    border-radius: 10px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
-}
-.rent-body .filter-menu .price-range-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #8f7641e0;
-    cursor: w-resize;
-}
-.rent-body .filter-menu .apply-button{
-    background-color: #8f7641e0;
-    color: #fff;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-.rent-body .filter-menu .apply-button:hover {
-    background-color: #8f7641;
+.rent-body h2 {
+    margin-top: 0;
 }
 
-/* ============================ fetch_cars.php ============================*/
-.rent-body .cars-list .container{
-    width: 100%;
-    background-color: rgba(245, 245, 245, 0.74);
-    backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
-}
-.rent-body .cars-list .titles{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 5px;
-}
-.rent-body .cars-list .titles h2{
-    margin-top: 7px;
+.rent-body h3 {
     margin-bottom: 5px;
-    font-size: 40px;
-    font-weight: 600;
 }
-.rent-body .cars-list .car {
-    width: 31%;
-    margin: 1%;
-    padding: 1%;
-    border: 1px solid #ccc;
-    display: inline-block;
-    vertical-align: top;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.918);
-    backdrop-filter: blur(10px);
+
+.rent-body input[type="checkbox"] {
+    margin-right: 5px;
 }
-.rent-body .cars-list .car:hover {
-    border: 1px solid #636363;
-    transition: border-color 0.2s ease-in-out;
-}
-.rent-body .cars-list .car img {
-    border-radius: 10px 10px 0 0;
+
+.rent-body input[type="range"] {
     width: 100%;
-    height: 190px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
 }
-.rent-body .cars-list .car p {
-    margin-bottom: 0;
-}
-.rent-body .cars-list .car .rent-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.rent-body .cars-list .car button {
-    all: unset;
-    padding: 2px 6px 2px 6px;
-    background-color: rgba(0, 0, 0, 0.651);
-    font-family: 'Poppins', sans-serif;
-    border: 2px solid transparent;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-}
-.rent-body .cars-list .car button:hover {
-    background-color: rgba(58, 57, 57, 0.651);
-    border: 2px solid #000;
-    transition: border-color 0.2s ease-in-out;
+
+.rent-body span.value {
+    font-weight: bold;
 }
 /* ------------------ End of rent_car.php ------------------*/
 
-/* ============================ Styles for the popup ================================*/
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-}
-/* Styles for the rent popup */
-.popup-rent-container {
-    all: unset;
-
-    display: none;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.822);
-    backdrop-filter: blur(8px);
-    border-radius: 10px;
-    padding: 10px 15px 10px 15px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-}
-.popup-rent-container:hover {
-    border: 3px solid #494646;
-    transition: border-color 0.2s ease-in-out;
-}
-.popup-rent-container .popup-titles{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.popup-rent-container .popup-titles h2 {
-    color: black; 
-    font-size: 30px;
-    font-weight: 600;
-}
-.popup-rent-container .car-details{
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    margin-bottom: 10px;
-
-}
-.popup-rent-container .car-details p {
-    margin-bottom: 3px;
-}
-.popup-rent-container .sub-container{
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-.popup-rent-container label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: 400;
-}
-
-.popup-rent-container input[type="date"],
-.popup-rent-container input[type="password"]{
-    all: unset;
-
-    background: white;
-    width: 70%;
-    height: 30px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-.popup-rent-container input:focus{
-    box-shadow: none;
-    border-color: #c89568;
-}
-.popup-rent-container .label-container{
-    display: flex;
-    justify-content: center;
-}
-.popup-rent-container .label-container label{
-    margin-top: 2px;
-}
-
-.popup-rent-container .submit-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.popup-rent-container .submit-popup-button {
-    background-color: #8f7641e0;
-    color: #fff;
-    padding: 6px 14px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.popup-rent-container .submit-popup-button:hover {
-    background-color: #8f7641;
-}
-
-
-/* Styles for the add car popup */
-.popup-add-container{
-    all: unset;
-
-    display: none;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.822);
-    backdrop-filter: blur(8px);
-    border-radius: 10px;
-    padding: 0 15px 0 15px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-
-    width: 330px;
-}
-.popup-add-container:hover {
-    border: 3px solid #494646;
-    transition: border-color 0.2s ease-in-out;
-}
-.popup-add-container .main-container{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-.popup-add-container .main-container .add-titles{
-    margin-top: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 8px;
-
-}
-.popup-add-container .main-container .add-titles h2{
-    all: unset;
-
-    color: black; 
-    font-size: 30px;
-    font-weight: 600;
-}
-.popup-add-container .main-container .form-container{
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-.popup-add-container .main-container .form-container .sub-container{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-.popup-add-container .main-container .form-container label{
-    width: 150px;
-}
-
-.popup-add-container .main-container .submit-add-popup{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-.popup-add-container .submit-popup-button {
-    background-color: hsla(41, 38%, 41%, 0.878);
-    color: #fff;
-    padding: 6px 14px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.popup-add-container .submit-popup-button:hover {
-    background-color: #8f7641;
-}
-
-
-
-
-.popup-add-container .custom-file-upload input[type="file"] {
-    display: none;
-}
-.popup-add-container .sub-container1 {
-    width:100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-.popup-add-container .upload-icon {
-    display: inline-block;
-    padding: 10px 20px; /* Adjust padding as needed */
-    width: 200px;
-    text-align: center;
-    background-color: #907741e0; 
-    color: #fff; /* Adjust text color as needed */
-    border-radius: 5px; /* Adjust border radius as needed */
-    cursor: pointer;
-    transform: translate(-24px, 0);
-}
-
-.popup-add-container .upload-icon::before {
-    content: '\f093'; /* Unicode for upload icon */
-    font-family: FontAwesome; /* Font Awesome for the icon */
-    margin-right: 5px; /* Adjust margin as needed */
-}
-.no-file-name {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-
-/* Styles for the update car popup */
-.update {
-    padding: 25px 50px;
-}
-
-.update .sub-container {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-
-}
-
-.update .sub-container label {
-    width: 150px;
-}
-
-.update .file-upload {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 25px;
-}
-
-.update .submit-popup-button {
-    margin: auto;
-}
-
-.update .add-titles {
-    margin-bottom: 30px;
-}
-
-
 /* ------------------ admin_dashboard.php ------------------*/
 /* CSS for admin dashboard */
-
-.user-info,
-.car-image,
-.car-info {
-    cursor: pointer;
-}
-
-.user-info:hover,
-.car-image:hover,
-.car-info:hover {
-    text-decoration: underline;
-}
 
 .admin-dashboard h1 {
     text-align: center;
@@ -1300,87 +924,5 @@ i{
     height: 250px;
     margin-bottom: 30px;
     cursor: pointer;
-    overflow: hidden;
 }
 /* ------------------ End of User_Profile.php ------------------*/
-
-
-
-/* ------------------ homepage.php -------------------------*/
-
-.home-container {
-    max-width: 1200px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: rgba(245, 245, 245, 0.624);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(5px);
-    padding: 50px;
-    display: flex;
-    flex-direction: column; /* Display children elements in a column */
-}
-
-.hero {
-    display: flex;
-    align-items: flex-start; /* Align items to the start (left side) */
-}
-
-.hero .text-content {
-    margin-right: 200px; /* Add some space between text and image */
-}
-
-.hero h2 {
-    font-size: 2em;
-    color: #333;
-    margin-bottom: 20px;
-}
-
-.hero p {
-    font-size: 1.2em;
-    color: #666;
-    text-align: left;
-}
-
-#home-image {
-    height: 300px;
-    width: 500px;   
-}
-
-.car-card {
-    margin-top: 20px; /* Add margin to create space between text and button */
-}
-
-.btn {
-    background-color: #ba9844ed;
-    color: #fff;
-    padding: 10px 20px;
-    text-decoration: none;
-}
-
-footer {    
-    margin-top: 20px; /* Add margin to create space between text and footer */
-}
-
-
-.message {
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 20px;
-    width: 50%;
-    margin: 20px auto;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    opacity: 0.7;
-    animation: fadeOut 3s forwards; /* Animation duration: 3 seconds */
-}
-
-@keyframes fadeOut {
-    0% {
-        opacity: 0.9;
-    }
-    100% {
-        opacity: 0;
-        display: none; /* Hide the message when animation ends */
-    }
-}

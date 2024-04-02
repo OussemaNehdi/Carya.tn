@@ -244,7 +244,7 @@ class User {
             // Log error and rethrow the exception
             error_log("Error updating user's email by ID: " . $e->getMessage());
             throw $e;
-        }
+        }   
     }
 
 
