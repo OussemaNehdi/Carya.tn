@@ -301,6 +301,7 @@ ul{
     height: 100px;
     border-radius: 50%;
     margin-right: 20px;
+    object-fit: cover;
 }
 
 .author-info {
@@ -336,6 +337,7 @@ ul{
     .author img {
         margin-right: 10px;
         margin-bottom: 0;
+        object-fit: cover;
     }
 }
 /* End of about.php */
@@ -1514,6 +1516,7 @@ footer {
     height: 190px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
+    object-fit: cover;
 }
 .rent-body .cars-list .car p {
     margin-bottom: 0;
@@ -1729,6 +1732,7 @@ footer {
     width: 285px;
     height: 190px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
 }
 .listing-body .cars-list .car-details{
     display: flex;
