@@ -80,7 +80,7 @@ if (session_status() == PHP_SESSION_NONE) {
                     // Determine the alert class based on the message type
                     $alertClass = getAlertClass($_GET['type']);
                     // Display the message using Bootstrap's alert class
-                    echo "<div class='alert $alertClass message display' role='alert'>$_message</div>";
+                    echo "<div class='alert $alertClass display' role='alert'>$_message</div>";
                 }
             }
         ?>
