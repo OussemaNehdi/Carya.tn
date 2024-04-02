@@ -1550,7 +1550,7 @@ footer {
 }
 /* --------------- end of filter_menu.php ----------------*/
 
-/* ====================my_cars_listing.php ====================*/
+/* ==================== my_cars_listing.php ====================*/
 .listing-body .cars-list .container{
     width: 100%;
     background-color: rgba(245, 245, 245, 0.74);
@@ -1565,13 +1565,14 @@ footer {
     align-items: center;
     padding-top: 5px;
     margin-bottom: 10px;
+    width: 100%;
 }
 .listing-body .cars-list .header-container h2{
     margin-top: 7px;
     margin-bottom: 5px;
     font-size: 40px;
     font-weight: 600;
-    transform: translateX(40px);
+    width: 500px;
 }
 .listing-body .cars-list .header-container button {
     position: relative;
@@ -1583,7 +1584,7 @@ footer {
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-size: 25px;
-    transform: translateX(210px);
+    margin-left: 26%;
 }
 .listing-body .cars-list .header-container button:hover {
     background-color: rgba(202, 131, 45, 0.907);
@@ -1648,6 +1649,12 @@ footer {
     margin-top: 10px;
     width: 30%;
 }
+.listing-body .cars-list .action-buttons a{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .listing-body .cars-list .action-buttons button {
     all: unset;
 
@@ -1658,7 +1665,7 @@ footer {
     border-radius: 10px;
     color: white;
     cursor: pointer;
-    width: 150px;
+    width: 80%;
     margin-bottom: 10px;
     text-align: center;
 }
