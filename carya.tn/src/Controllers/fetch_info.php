@@ -49,7 +49,7 @@
                 $output .= "<p>Brand: " . $car->brand . "</p>";
                 $output .= "<p>Model: " . $car->model . "</p>";
             } else if ($type == 'image') {
-                $output = "<img id=\"car-image-{$id}\" class=\"car-image\" src=\"http://localhost/Mini-PHP-Project/carya.tn/Resources/car_images/{$car->image}\" alt=\"Car Image\">";
+                $output = "<img id=\"car-image-{$id}\" class=\"car-image-displayed\" src=\"http://localhost/Mini-PHP-Project/carya.tn/Resources/car_images/{$car->image}\" alt=\"Car Image\">";
             }
         } else {
             $output = "Car not found!";
