@@ -4,11 +4,11 @@ include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.ph
 $refferer = isset($_POST['refferer']) ? parse_url($_POST['refferer'], PHP_URL_PATH) : (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'http://localhost/Mini-PHP-Project/carya.tn/index.php');
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
-    header("Location: $refferer?message=Invalid%20request%20method");
+    header("Location: $refferer?message=Invalid%20request%20method&error=405%20Method%20Not%20Allowed");
     exit();
 }
 if (!isset($_GET['id'])) {
-    header("Location: $refferer?message=Missing%20required%20parameters%20for%20marking%20car%20as%20available");
+    header("Location: $refferer?message=Missing%20required%20parameters%20for%20marking%20car%20as%20available&type=error");
     exit();
 }
 
@@ -21,21 +21,21 @@ $owner_id = $_SESSION['user_id'];
 
 $car = Car::getCarById($car_id);
 if ($car->owner_id != $owner_id) {
-    header("Location: $refferer?message=You%20are%20not%20the%20owner%20of%20this%20car");
+    header("Location: $refferer?message=You%20are%20not%20the%20owner%20of%20this%20car&type=error");
     exit();
 }
 
 if ($car->isCarInUse()) {
-    header("Location: $refferer?message=Car%20is%20already%20in%20use");
+    header("Location: $refferer?message=Car%20is%20already%20in%20use&type=error");
     exit();
 }
 
 try {
     $car->markCarAvailable();
-    header("Location: $refferer?message=Car%20marked%20as%20available%20successfully!");
+    header("Location: $refferer?message=Car%20marked%20as%20available%20successfully!&type=success");
     exit();
 } catch (Exception $e) {
-    header("Location: $refferer?error=Error:%20" . urlencode($e->getMessage()));
+    header("Location: $refferer?type=error&message=Error:%20" . urlencode($e->getMessage()));
     exit();
 }
 ?>

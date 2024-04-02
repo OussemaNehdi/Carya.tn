@@ -7,12 +7,12 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: http://localhost/Mini-PHP-Project/carya.tn/index.php?message=You%20need%20to%20login%20first.");
+    header("Location: http://localhost/Mini-PHP-Project/carya.tn/index.php?message=You%20need%20to%20login%20first.&type=error");
     exit();
 }
 
 if (!isset($_POST['command_id'])) {
-    header("Location: http://localhost/Mini-PHP-Project/carya.tn/index.php?message=Command%20ID%20is%20required.");
+    header("Location: http://localhost/Mini-PHP-Project/carya.tn/index.php?message=Command%20ID%20is%20required.&type=error");
     exit();
 }
 
@@ -29,7 +29,7 @@ $car = Car::getCarById($command->car_id);
 
 Command::AcceptCommand($command_id);
 
-header("Location: $refferer?message=Command%20Accepted%20.");
+header("Location: $refferer?message=Command%20Accepted%20.&type=success");
 
 
 ?>

@@ -778,45 +778,250 @@ i{
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
+/* Styles for the rent popup */
 .popup-rent-container {
+    all: unset;
+
     display: none;
     position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.822);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 10px 15px 10px 15px;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 1000;
 }
+.popup-rent-container:hover {
+    border: 3px solid #494646;
+    transition: border-color 0.2s ease-in-out;
+}
+.popup-rent-container .popup-titles{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.popup-rent-container .popup-titles h2 {
+    color: black; 
+    font-size: 30px;
+    font-weight: 600;
+}
+.popup-rent-container .car-details{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: 10px;
+
+}
+.popup-rent-container .car-details p {
+    margin-bottom: 3px;
+}
+.popup-rent-container .sub-container{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.popup-rent-container label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+
+.popup-rent-container input[type="date"],
+.popup-rent-container input[type="password"]{
+    all: unset;
+
+    background: white;
+    width: 70%;
+    height: 30px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.popup-rent-container input:focus{
+    box-shadow: none;
+    border-color: #c89568;
+}
+.popup-rent-container .label-container{
+    display: flex;
+    justify-content: center;
+}
+.popup-rent-container .label-container label{
+    margin-top: 2px;
+}
+
+.popup-rent-container .submit-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.popup-rent-container .submit-popup-button {
+    background-color: #8f7641e0;
+    color: #fff;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.popup-rent-container .submit-popup-button:hover {
+    background-color: #8f7641;
+}
+
+
+/* Styles for the add car popup */
 .popup-add-container{
+    all: unset;
+
     display: none;
     position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.822);
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 0 15px 0 15px;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 1000;
+
+    width: 330px;
 }
-.popup-update-container{
+.popup-add-container:hover {
+    border: 3px solid #494646;
+    transition: border-color 0.2s ease-in-out;
+}
+.popup-add-container .main-container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.popup-add-container .main-container .add-titles{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+
+}
+.popup-add-container .main-container .add-titles h2{
+    all: unset;
+
+    color: black; 
+    font-size: 30px;
+    font-weight: 600;
+}
+.popup-add-container .main-container .form-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.popup-add-container .main-container .form-container .sub-container{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.popup-add-container .main-container .form-container label{
+    width: 150px;
+}
+
+.popup-add-container .main-container .submit-add-popup{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.popup-add-container .submit-popup-button {
+    background-color: hsla(41, 38%, 41%, 0.878);
+    color: #fff;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.popup-add-container .submit-popup-button:hover {
+    background-color: #8f7641;
+}
+
+
+
+
+.popup-add-container .custom-file-upload input[type="file"] {
     display: none;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    border: 1px solid #ccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
+}
+.popup-add-container .sub-container1 {
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.popup-add-container .upload-icon {
+    display: inline-block;
+    padding: 10px 20px; /* Adjust padding as needed */
+    width: 200px;
+    text-align: center;
+    background-color: #907741e0; 
+    color: #fff; /* Adjust text color as needed */
+    border-radius: 5px; /* Adjust border radius as needed */
+    cursor: pointer;
+    transform: translate(-24px, 0);
+}
+
+.popup-add-container .upload-icon::before {
+    content: '\f093'; /* Unicode for upload icon */
+    font-family: FontAwesome; /* Font Awesome for the icon */
+    margin-right: 5px; /* Adjust margin as needed */
+}
+.no-file-name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 
+/* Styles for the update car popup */
+.update {
+    padding: 25px 50px;
+}
 
+.update .sub-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+
+}
+
+.update .sub-container label {
+    width: 150px;
+}
+
+.update .file-upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 25px;
+}
+
+.update .submit-popup-button {
+    margin: auto;
+}
+
+.update .add-titles {
+    margin-bottom: 30px;
+}
 
 
 /* ------------------ admin_dashboard.php ------------------*/
@@ -1101,39 +1306,81 @@ i{
 
 
 
+/* ------------------ homepage.php -------------------------*/
 
-
-#hero {
-    padding: 20px 0;
+.home-container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(245, 245, 245, 0.624);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    padding: 50px;
+    display: flex;
+    flex-direction: column; /* Display children elements in a column */
 }
 
-#hero h2 {
+.hero {
+    display: flex;
+    align-items: flex-start; /* Align items to the start (left side) */
+}
+
+.hero .text-content {
+    margin-right: 200px; /* Add some space between text and image */
+}
+
+.hero h2 {
     font-size: 2em;
     color: #333;
-}
-
-#hero p {
-    font-size: 1.2em;
-    color: #666;
-}
-
-#featured-cars {
-    padding: 20px 0;
-}
-
-.car-card {
-    padding: 20px;
     margin-bottom: 20px;
 }
 
-.car-card .btn {
+.hero p {
+    font-size: 1.2em;
+    color: #666;
+    text-align: left;
+}
+
+#home-image {
+    height: 300px;
+    width: 500px;   
+}
+
+.car-card {
+    margin-top: 20px; /* Add margin to create space between text and button */
+}
+
+.btn {
     background-color: #ba9844ed;
     color: #fff;
     padding: 10px 20px;
     text-decoration: none;
 }
 
-footer {
-    padding: 10px 0;
+footer {    
+    margin-top: 20px; /* Add margin to create space between text and footer */
 }
 
+
+.message {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 20px;
+    width: 50%;
+    margin: 20px auto;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    opacity: 0.7;
+    animation: fadeOut 3s forwards; /* Animation duration: 3 seconds */
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 0.9;
+    }
+    100% {
+        opacity: 0;
+        display: none; /* Hide the message when animation ends */
+    }
+}

@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         !isset($_POST['color']) || !isset($_POST['price']) || !isset($_POST['km']) || 
         !isset($_FILES['image'])) {
         // Redirect with an error message if any required variable is missing
-        header("Location: $refferer?message=Missing%20required%20variables%20for%20updating%20car.");
+        header("Location: $refferer?message=Missing%20required%20variables%20for%20updating%20car.&type=error");
         exit(); // Ensure script execution stops after redirect
     }
 
@@ -31,10 +31,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!empty($_FILES['image']['name'])) {
         // Handle image upload
         $file_name = handleImageUpload($_FILES['image'], '/Mini-PHP-Project/carya.tn/Resources/car_images/');
-        if (strpos($file_name, "Error") !== false) {
+        if (strpos($file_name, "error") !== false) {
             // Redirect with an error message if image upload fails
             $refferer = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
-            header("Location: $refferer?id=$car_id?message=$file_name");
+            header("Location: $refferer?id=$car_id&$file_name");
             exit(); // Ensure script execution stops after redirect
         }
     } else {
@@ -47,23 +47,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $car = Car::getCarById($car_id);
     $owner_id = $car->owner_id;
     if ($owner_id != $_SESSION['user_id']) {
-        header("Location: $refferer?message=You%20do%20not%20have%20permission%20to%20update%20this%20car.");
+        header("Location: $refferer?type=error&message=You%20do%20not%20have%20permission%20to%20update%20this%20car.");
         exit(); // Ensure script execution stops after redirect
     }
 
     // Check if the car is available for update
     if (!$car->isCarAvailable()) {
-        header("Location: $refferer?error=Car%20is%20currently%20in%20use%20and%20cannot%20be%20updated.");
+        header("Location: $refferer?type=errormessage=Car%20is%20currently%20in%20use%20and%20cannot%20be%20updated.");
         exit(); // Ensure script execution stops after redirect
     }
 
     try {
         // Update car details
         $car->updateCar($brand, $model, $color, $file_name, $km, $price);
-        header("Location: $refferer?message=Car%20updated%20successfully.");
+        header("Location: $refferer?message=Car%20updated%20successfully.&type=success");
         exit(); // Ensure script execution stops after redirect
     } catch (Exception $e) {
-        header("Location: $refferer?message=" . urlencode($e->getMessage()));
+        header("Location: $refferer?type=error&message=" . urlencode($e->getMessage()));
         exit(); // Ensure script execution stops after redirect
     }
 }

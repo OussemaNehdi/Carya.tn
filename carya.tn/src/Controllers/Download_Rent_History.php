@@ -13,7 +13,7 @@ if (session_status() == PHP_SESSION_NONE) {
 
 // Redirect if user is not logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: http://localhost/Mini-PHP-Project/carya.tn/templates/login.php");
+    header("Location: http://localhost/Mini-PHP-Project/carya.tn/templates/login.php?message=You%20need%20to%20login%20first.&type=error");
     exit();
 }
 

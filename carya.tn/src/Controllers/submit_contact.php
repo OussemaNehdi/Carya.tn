@@ -20,11 +20,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Send email
     if (mail($to, $subject, $email_content, $headers)) {
         // Email sent successfully
-        header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?success=true");
+        header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?message=success&type=success");
         exit();
     } else {
         // Error sending email
-        header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?success=false");
+        header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?message=error&type=error");
         exit();
     }
 }

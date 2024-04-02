@@ -18,20 +18,20 @@
             $user_to_unban->unbanUserById();
             
             // Redirect with a success message
-            header("Location:$refferer?message=User%20unbanned%20successfully.");
+            header("Location:$refferer?message=User%20unbanned%20successfully.&type=success");
             exit(); // Ensure script execution stops after redirect
         } catch (PDOException $e) {
             // Redirect with an error message if a PDO exception occurs
-            header("$refferer?error=Error:%20" . urlencode($e->getMessage()));
+            header("$refferer?type=error&message=Error:%20" . urlencode($e->getMessage()));
             exit(); // Ensure script execution stops after redirect
         } catch (Exception $ex) {
             // Redirect with an error message if any other exception occurs
-            header("Location: $refferer?error=Error:%20" . urlencode($ex->getMessage()));
+            header("Location: $refferer?type=error&message=Error:%20" . urlencode($ex->getMessage()));
             exit(); // Ensure script execution stops after redirect
         }
     } else {
         // Redirect with an error message if the request is invalid
-        header("$refferer?error=Invalid%20request.");
+        header("$refferer?type=error&message=Invalid%20request.");
         exit(); // Ensure script execution stops after redirect
     }
 ?>

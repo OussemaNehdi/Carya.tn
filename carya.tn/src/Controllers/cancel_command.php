@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
 // Check if the 'id' parameter is set in the GET request
 if (!isset($_GET['id'])) {
     // Redirect with an error message if the command ID is not set
-    header("Location: $refferer?error=Error:%20Command%20ID%20not%20set.");
+    header("Location: $refferer?message=Error:%20Command%20ID%20not%20set.&type=error");
     exit(); // Ensure script execution stops after redirect
 }
 
@@ -33,15 +33,15 @@ try {
     $command->deleteRentalCommandById();
 
     // Redirect with a success message
-    header("Location: $refferer?message=Command%20canceled%20successfully!");
+    header("Location: $refferer?message=Command%20canceled%20successfully!&type=success");
     exit(); // Ensure script execution stops after redirect
 } catch (PDOException $e) {
     // Redirect with an error message if a PDO exception occurs
-    header("Location: $refferer?error=Error:%20Canceling%20command:%20PDO%20Error");
+    header("Location: $refferer?message=Error:%20Canceling%20command:%20PDO%20Error&type=error");
     exit(); // Ensure script execution stops after redirect
 } catch (Exception $ex) {
     // Redirect with an error message if any other exception occurs
-    header("Location: $refferer?error=Error:%20Canceling%20command:%20" . urlencode($ex->getMessage()));
+    header("Location: $refferer?type=error&message=Error:%20Canceling%20command:%20" . urlencode($ex->getMessage()));
     exit(); // Ensure script execution stops after redirect
 }
 ?>

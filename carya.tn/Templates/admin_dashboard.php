@@ -99,7 +99,7 @@ if (session_status() == PHP_SESSION_NONE) {
                             // Show delete and update buttons based on the car's availability and ownership
 
                             if ($car->isCarAvailable()) {
-                                echo "<a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/delete_car.php?id={$car->id}'>Delete</a>";
+                                echo "<a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/delete_car.php?id={$car->id}' class='unban-link'>Delete</a>";
                                 
                             ?>
                         </td>
@@ -116,26 +116,47 @@ if (session_status() == PHP_SESSION_NONE) {
 
                     <!-- Popup For the update car form -->
                     <!-- each car gets a hidden div for its popup but the logic is the same -->
-                    <div id="popup<?php echo $car->id ?>" class="popup-update-container">
-                        <div class="popup-content">
+                    <div id="popup<?php echo $car->id ?>" class="popup-add-container update">
+                        <div class="add-titles">
                             <h2>Update Car Listing</h2>
-                            <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/update_car.php" method="POST" enctype="multipart/form-data">
-                                <label for="brand">Car Brand:</label><br>
-                                <input type="text" id="brand" name="brand" value="<?php echo $car->brand; ?>"><br>
-                                <label for="model">Car Model:</label><br>
-                                <input type="text" id="model" name="model" value="<?php echo $car->model; ?>"><br>
-                                <label for="color">Car Color:</label><br>
-                                <input type="text" id="color" name="color" value="<?php echo $car->color; ?>"><br>
-                                <label for="price">Car Price:</label><br>
-                                <input type="text" id="price" name="price" value="<?php echo $car->price; ?>"><br>
-                                <label for="km">Car Kilometers:</label><br>
-                                <input type="text" id="km" name="km" value="<?php echo $car->km; ?>"><br>
-                                <label for="image">Upload New Car Image:</label><br>
-                                <input type="file" id="image" name="image"><br>
-                                <input type="hidden" id="car_id" name="car_id" value="<?php echo $car->id; ?>">
-                                <input type="submit" value="Update Car">
-                            </form>
                         </div>
+                        <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/update_car.php" method="POST" enctype="multipart/form-data">
+                            <div class="form-container">
+                                <div class="sub-container">
+                                    <label for="brand">Car Brand:</label>
+                                    <input type="text" id="brand" name="brand" value="<?php echo $car->brand; ?>">
+                                </div>
+                                <div class="sub-container">
+                                    <label for="model">Car Model:</label>
+                                    <input type="text" id="model" name="model" value="<?php echo $car->model; ?>">
+                                </div>
+                                <div class="sub-container">
+                                    <label for="color">Car Color:</label>
+                                    <input type="text" id="color" name="color" value="<?php echo $car->color; ?>">
+                                </div>
+                                <div class="sub-container">
+                                    <label for="price">Car Price:</label>
+                                    <input type="text" id="price" name="price" value="<?php echo $car->price; ?>">
+                                </div>
+                                <div class="sub-container">
+                                    <label for="km">Car Kilometers:</label>
+                                    <input type="text" id="km" name="km" value="<?php echo $car->km; ?>">
+                                </div>
+                                <div class="sub-container file-upload">
+                                    <label for='<?php echo "image$car->id" ?>' class="custom-file-upload">
+                                        <span class="upload-icon">Upload Image</span>
+                                        <input type="file" id='<?php echo "image$car->id" ?>' name="image" required onchange='<?php echo "displayFileNameUpdate(this, $car->id)" ?>'>
+                                    </label>
+                                    <div class="no-file-name">
+                                        <p id='<?php echo "update-name{$car->id}" ?>'>No file chosen</p>
+                                    </div>
+                                </div>
+                                <div class="sub-container">
+                                    <input type="hidden" id="car_id" name="car_id" value="<?php echo $car->id; ?>">
+                                    <input type="submit" class="submit-popup-button" value="Update Car">
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 <?php endforeach; ?>
             </tbody>
@@ -155,7 +176,9 @@ if (session_status() == PHP_SESSION_NONE) {
                     <th>End Date</th>
                     <th>Price Paid</th>
                     <th>Confirmation</th>
+                    <th></th>
                     <th>Actions</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -177,18 +200,21 @@ if (session_status() == PHP_SESSION_NONE) {
                         <td>
                             <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/accept_command.php" method="POST">
                                 <input type="hidden" name="command_id" value="<?= $command->command_id ?>">
-                                <button type="submit" class="accept-command">Accept Command</button>
+                                <button type="submit" class="accept-command">Accept</button>
                             </form>
-
+                        </td>
+                        <td>
                             <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/refuse_command.php" method="POST">
                                 <input type="hidden" name="command_id" value="<?= $command->command_id ?>">
-                                <button type="submit" class="refuse-command">Refuse Command</button>
+                                <button type="submit" class="refuse-command">Refuse</button>
                             </form>
-
-
-                            
-                            <a href="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/cancel_command.php?id=<?= $command->command_id ?>" class='unban-link'>Cancel Command</a>
-                            
+                        </td>
+                        <td>
+                            <a href="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/cancel_command.php?id=<?= $command->command_id ?>">
+                                <button type="submit" class="refuse-command">
+                                    Cancel
+                                </button>
+                            </a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -275,6 +301,26 @@ document.body.addEventListener('click', event => {
                 document.getElementById("overlay").style.display = "none";
             });
         });
+        function displayFileName(input) {
+            var fileName = input.files[0].name;
+            var fileNameElement = document.getElementById("file-name");
+            
+            if (fileName.length > 20) {
+                fileName = fileName.substring(0, 20) + "..."; // Truncate if over 20 characters
+            }
+            
+            fileNameElement.textContent = fileName;
+        }
+
+        function displayFileNameUpdate(input, id) {
+            
+            var fileName = input.files[0].name;
+            var fileNameElement = document.getElementById('update-name' + id);
+            if (fileName.length > 20) {
+                fileName = fileName.substring(0, 20) + "..."; // Truncate if over 20 characters
+            }
+            fileNameElement.textContent = fileName;
+        }
     </script>
 <?php $content = ob_get_clean(); ?>
 <?php require('layout.php') ?>
