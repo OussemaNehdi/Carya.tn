@@ -1,12 +1,7 @@
 <?php
 // Include the necessary files
 include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Command.php';
-
-// Check if the request method is POST
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    exit("Method Not Allowed");
-}
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/Car.php';
 
 // Check if the session is started
 if (session_status() == PHP_SESSION_NONE) {
@@ -43,12 +38,6 @@ if (!$command) {
 // Get the car
 $car = Car::getCarById($command->car_id);
 
-if (!$car) {
-    header("Location: $refferer?message=Car%20not%20found.&type=error");
-    exit();
-}
-
-// Check if the user is the owner of the car
 if ($car->owner_id != $user_id) {
     header("Location: $refferer?message=You%20are%20not%20authorized%20to%20accept%20this%20command.&type=error");
     exit();

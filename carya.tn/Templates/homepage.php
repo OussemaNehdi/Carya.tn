@@ -25,9 +25,9 @@ if (session_status() == PHP_SESSION_NONE) {
                 we have the perfect vehicle to meet your needs and fit your budget.
             </p>
         </div>
-        <img src="/Mini-PHP-Project/carya.tn/Resources/car_images/bg-light.jpg" alt="car" id="home-image">
+        <img src="/Mini-PHP-Project/carya.tn/Resources/car_images/m2.jpg" alt="car" id="home-image">
     </div>
-    
+
     <div class="car-card">
         <?php
         if (isset($_SESSION['user_id'])) {
@@ -41,9 +41,13 @@ if (session_status() == PHP_SESSION_NONE) {
     </div>
 
     <footer>
-        <p>  2024 Rent-a-Car. All rights reserved.</p>
+        <p> 2024 Rent-a-Car. All rights reserved.</p>
     </footer>
 </div>
+
+
+
+
 
 <?php $content = ob_get_clean(); ?>
 
