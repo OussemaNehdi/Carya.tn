@@ -23,7 +23,6 @@ if (isset($_GET) && !empty($_GET)) {
 } else {
     $cars = $user->getCarsByOwnerId();
 }
-//AgressivePug : fetching commands
 
 // Set title and class
 $title = "My Cars";
@@ -74,89 +73,9 @@ ob_start();
 </div>
 
 <?php foreach ($cars as $car): ?>
-<!-- Popup For the update car form -->
-<!-- each car gets a hidden div for its popup but the logic is the same -->
-<div id="popup<?php echo $car->id ?>" class="popup-add-container update">
-    <div class="add-titles">
-        <h2>Update Car Listing</h2>
-    </div>
-    <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/update_car.php" method="POST" enctype="multipart/form-data">
-        <div class="form-container">
-            <div class="sub-container">
-                <label for="brand">Car Brand:</label>
-                <input type="text" id="brand" name="brand" value="<?php echo $car->brand; ?>">
-            </div>
-            <div class="sub-container">
-                <label for="model">Car Model:</label>
-                <input type="text" id="model" name="model" value="<?php echo $car->model; ?>">
-            </div>
-            <div class="sub-container">
-                <label for="color">Car Color:</label>
-                <input type="text" id="color" name="color" value="<?php echo $car->color; ?>">
-            </div>
-            <div class="sub-container">
-                <label for="price">Car Price:</label>
-                <input type="text" id="price" name="price" value="<?php echo $car->price; ?>">
-            </div>
-            <div class="sub-container">
-                <label for="km">Car Kilometers:</label>
-                <input type="text" id="km" name="km" value="<?php echo $car->km; ?>">
-            </div>
-            <div class="sub-container file-upload">
-                <label for='<?php echo "image$car->id" ?>' class="custom-file-upload">
-                    <span class="upload-icon">Upload Image</span>
-                    <input type="file" id='<?php echo "image$car->id" ?>' name="image" required onchange='<?php echo "displayFileNameUpdate(this, $car->id)" ?>'>
-                </label>
-                <div class="no-file-name">
-                    <p id='<?php echo "update-name{$car->id}" ?>'>No file chosen</p>
-                </div>
-            </div>
-            <div class="sub-container">
-                <input type="hidden" id="car_id" name="car_id" value="<?php echo $car->id; ?>">
-                <input type="submit" class="submit-popup-button" value="Update Car">
-            </div>
-        </div>
-    </form>
-</div>
-<!-- AggressivePug : Confirm commands Popup -->            
-<div id="commandsPopup<?php echo $car->id ?>" class="popup-add-container update">
-    <div>
-        <h2>Confirm Commands</h2>
-        <ul> <!-- Start of the list -->
-            <?php
-            // Fetch rental commands for this car
-            $commands = Command::getRentalCommandsByCarId($car->id);
-            foreach ($commands as $command) {
-                //a : backend fix this status thing
-
-                if (!isset($command->confirmed)) {
-                    $status = "Unreviewed";
-                } elseif ($command->confirmed == true) {
-                    $status = "accepted";
-                } elseif ($command->confirmed == false) {
-                    $status = "refused";
-                }
-
-                // Display each command as list item
-                echo "<li>User: " . $command->user_id . " | Rental Date: " . $command->rental_date . 
-                " | Start Date: " . $command->start_date . " | End Date: " . $command->end_date . 
-                " | Duration: " . $command->rental_period . " days | Status:  " .$status  ."</li>";
-                
-                // Add Accept and Refuse buttons
-                echo "<form method='post' action='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/accept_command.php'>";
-                echo "<input type='hidden' name='command_id' value='" . $command->command_id . "'>";
-                echo "<button type='submit' name='accept'>Accept</button>";
-                echo "</form>";
-                
-                echo "<form method='post' action='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/refuse_command.php'>";
-                echo "<input type='hidden' name='command_id' value='" . $command->command_id . "'>";
-                echo "<button type='submit' name='refuse'>Refuse</button>";
-                echo "</form>";
-            }
-            ?>
-        </ul>
-    </div>
-</div>
+<?php require('update_form.php'); ?>
+<?php $commands = Command::getRentalCommandsByCarId($car->id); ?>
+<?php require('confirm_command_popup.php'); ?>
 <?php endforeach; ?>
 
 <!-- Popup content -->

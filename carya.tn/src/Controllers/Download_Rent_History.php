@@ -58,6 +58,7 @@ foreach ($rentingHistory as &$row) {
     $row->car_id = $carDetails->brand;
     $row->car_model = $carDetails->model;
     $row->car_price = $carDetails->price;
+    $row->confirmed=  $row->confirmed==1 ? "Confirmed" : "Not Confirmed";
 }
 
 // Unset the row variable
@@ -77,37 +78,66 @@ $pdf->AddPage();
 
 // Set font
 $pdf->SetFont('helvetica', '', 12);
+// Create a new PDF document
+
+
+// Set border style
+$pdf->SetLineStyle(array('width' => 0.5, 'color' => array(0, 0, 0)));
+
+// Add a border around the page
+$pdf->Rect(5, 5, $pdf->getPageWidth() - 10, $pdf->getPageHeight() - 10);
+
+// Set font
+$pdf->SetFont('helvetica', '', 12);
+
+// Rest of the code...
 
 // Add a title
-$pdf->Cell(0, 10, 'Renting History', 0, 1, 'C');
-$pdf->Cell(0, 10, 'for :'.$user->firstName .' '. $user->lastName, 0, 1, 'C');
+$pdf->SetFont('helvetica', 'B', 18);
+$pdf->Cell(0, 20, 'Renting History', 0, 1, 'C');
+$pdf->SetFont('helvetica', '', 12);
+$pdf->Cell(0, 10, 'for: ' . $user->firstName . ' ' . $user->lastName, 0, 1, 'C');
+$pdf->Cell(0, 10, 'Email: ' . $user->email, 0, 1, 'C');
+$pdf->Ln(10);
 
 // Add a table with the renting history data
-$header = array('Rent ID', 'Brand',  'Rental Date', 'Start Date', 'End Date', 'Price');
+$header = array('Rent ID', 'Brand', 'Rental Date', 'Start Date', 'End Date', 'Price');
 $pdf->SetFillColor(255, 255, 255);
 $pdf->SetTextColor(0);
 $pdf->SetDrawColor(0, 0, 0);
 $pdf->SetLineWidth(0.3);
-$pdf->SetFont('', 'B');
-foreach ($header as $column) {
-    $pdf->Cell(30, 7, $column, 1, 0, 'C', 1);
-}
+$pdf->SetFont('helvetica', 'B');
+
+
+$pdf->Cell(20, 7, 'Rent ID', 1, 0, 'C', 1);
+$pdf->Cell(40, 7, 'Brand', 1, 0, 'C', 1);
+$pdf->Cell(25, 7, 'Rental Date', 1, 0, 'C', 1);
+$pdf->Cell(25, 7, 'Start Date', 1, 0, 'C', 1);
+$pdf->Cell(25, 7, 'End Date', 1, 0, 'C', 1);
+$pdf->Cell(25, 7, 'Status', 1, 0, 'C', 1);
+$pdf->Cell(25, 7, 'Price', 1, 0, 'C', 1);
+
+
 $pdf->Ln();
-$pdf->SetFont('');
+$pdf->SetFont('helvetica', '');
 $pdf->SetFillColor(224, 235, 255);
 $pdf->SetTextColor(0);
 $pdf->SetFont('');
 $fill = false;
 foreach ($rentingHistory as $row) {
-    $pdf->Cell(30, 6, $row->command_id, 'LR', 0, 'C', $fill);
-    $pdf->Cell(30, 6, $row->car_id ."-".$row->car_model , 'LR', 0, 'C', $fill);
-    $pdf->Cell(30, 6, $row->rental_date, 'LR', 0, 'C', $fill);
-    $pdf->Cell(30, 6, $row->start_date, 'LR', 0, 'C', $fill);
-    $pdf->Cell(30, 6, $row->end_date, 'LR', 0, 'C', $fill);
-    $pdf->Cell(30, 6, $row->car_price, 'LR', 0, 'C', $fill);
+    $pdf->Cell(20, 10, $row->command_id, 'LR', 0, 'C', $fill);
+    $pdf->Cell(40, 10, $row->car_id . "-" . $row->car_model, 'LR', 0, 'C', $fill);
+    $pdf->Cell(25, 10, $row->rental_date, 'LR', 0, 'C', $fill);
+    $pdf->Cell(25, 10, $row->start_date, 'LR', 0, 'C', $fill);
+    $pdf->Cell(25, 10, $row->end_date, 'LR', 0, 'C', $fill);
+    $pdf->Cell(25, 10, $row->confirmed, 'LR', 0, 'C', $fill);
+    $pdf->Cell(25, 10, $row->car_price, 'LR', 0, 'C', $fill);
     $pdf->Ln();
     $fill = !$fill;
 }
-
+   
+$pdf->SetFont('helvetica', 'I', 10);
+$pdf->Cell(0, 15, 'Thank you for trusting us', 0, 1, 'C');
+$pdf->Cell(0, 15, '© Carya.tn', 0, 1, 'C');
 $pdf->Output('renting_history.pdf', 'D');
 ?>

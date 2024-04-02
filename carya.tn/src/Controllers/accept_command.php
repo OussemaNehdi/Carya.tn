@@ -38,10 +38,7 @@ if (!$command) {
 // Get the car
 $car = Car::getCarById($command->car_id);
 
-if ($car->owner_id != $user_id) {
-    header("Location: $refferer?message=You%20are%20not%20authorized%20to%20accept%20this%20command.&type=error");
-    exit();
-}
+
 
 // Accept the command
 Command::AcceptCommand($command_id);
