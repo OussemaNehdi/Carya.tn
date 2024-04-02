@@ -1,5 +1,8 @@
 <?php 
+// this file will handle the image upload
+// it will be called from the add_car.php file or any other file that needs to upload an image
 function handleImageUpload($image, $dir) {
+    // Prepare the target directory and file name
     $target_dir = $_SERVER['DOCUMENT_ROOT'] . $dir;
     $file_name = basename($image["name"]);
     $target_file = $target_dir . $file_name;

@@ -1,20 +1,28 @@
 <?php
+// Include the database connection
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php';
+// Include the User model
+include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
 
 // Check if the session is not started
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-// Include the database connection
-include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php';
-// Include the User model
-include $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Model/User.php';
+// Check if the request method is POST
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    http_response_code(405); // Method Not Allowed
+    exit("Method Not Allowed");
+}
 
-// Check if the form is submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the user ID from the session or any other source
-    $userId = $_SESSION['user_id'];
+// Get the user ID from the session or any other source
+$userId = $_SESSION['user_id'];
 
+// The refferer is the page that redirected the user to this page
+$refferer = isset($_POST['refferer']) ? parse_url($_POST['refferer'], PHP_URL_PATH) : (isset($_SERVER['HTTP_REFERER']) ? parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH) : 'http://localhost/Mini-PHP-Project/carya.tn/templates/profile.php');
+
+// Update logic
+try {
     // Check if the first name is set in the form
     if (isset($_POST['fname']) && !empty($_POST['fname'])) {
         // Get the first name from the form
@@ -47,19 +55,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['email']) && !empty($_POST['email'])) {
         // Get the email from the form
         $email = htmlspecialchars($_POST['email']);
-        echo $email;
 
         // Update the user's email
         User::updateEmailById($userId, $email);
     }
-    else {
-        echo "Email is empty";
-    }
-
-    header("Location: http://localhost/Mini-PHP-Project/carya.tn/templates/profile.php?message=Profile%20updated%20successfully&type=success");
+} catch (Exception $e) {
+    header("Location: $refferer?message=Error:%20" . urlencode($e->getMessage()) . "&type=error");
+    exit();
 }
 
-
-
-
+header("Location: $refferer?message=Profile%20updated%20successfully.&type=success")
 ?>

@@ -97,10 +97,7 @@ if (session_status() == PHP_SESSION_NONE) {
                         <td>
                             <?php
                             // Show delete and update buttons based on the car's availability and ownership
-
-                            if ($car->isCarAvailable()) {
-                                echo "<a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/delete_car.php?id={$car->id}' class='unban-link'>Delete</a>";
-                                
+                            echo "<a href='http://localhost/Mini-PHP-Project/carya.tn/src/controllers/delete_car.php?id={$car->id}' class='unban-link'>Delete</a>";
                             ?>
                         </td>
                         <td>
@@ -108,7 +105,6 @@ if (session_status() == PHP_SESSION_NONE) {
                                 if ($car->owner_id == $_SESSION['user_id']) {
                                     echo "<button id='UpdateCarBtn{$car->id}'>Update Listing</button>";
                                 }
-                            }
                             ?>
                             <!-- 3raftch chna3mel bech e tableau ykoun kemel khtr kn challa9t el add button hatitou f th donc lzm td zeyda uwu -->
                         </td>
@@ -136,16 +132,16 @@ if (session_status() == PHP_SESSION_NONE) {
                                 </div>
                                 <div class="sub-container">
                                     <label for="price">Car Price:</label>
-                                    <input type="text" id="price" name="price" value="<?php echo $car->price; ?>">
+                                    <input type="text" pattern="\d+(\.\d+)?" id="price" name="price" value="<?php echo $car->price; ?>">
                                 </div>
                                 <div class="sub-container">
                                     <label for="km">Car Kilometers:</label>
-                                    <input type="text" id="km" name="km" value="<?php echo $car->km; ?>">
+                                    <input type="text" pattern="\d+(\.\d+)?" id="km" name="km" value="<?php echo $car->km; ?>">
                                 </div>
                                 <div class="sub-container file-upload">
                                     <label for='<?php echo "image$car->id" ?>' class="custom-file-upload">
                                         <span class="upload-icon">Upload Image</span>
-                                        <input type="file" id='<?php echo "image$car->id" ?>' name="image" required onchange='<?php echo "displayFileNameUpdate(this, $car->id)" ?>'>
+                                        <input type="file" id='<?php echo "image$car->id" ?>' name="image" onchange='<?php echo "displayFileNameUpdate(this, $car->id)" ?>'>
                                     </label>
                                     <div class="no-file-name">
                                         <p id='<?php echo "update-name{$car->id}" ?>'>No file chosen</p>

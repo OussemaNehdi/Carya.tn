@@ -33,6 +33,9 @@ $activeRentingCars = array_filter($activeRentingCars, function ($car) use ($curr
     return $currentDate >= $car->start_date && $currentDate <= $car->end_date;
 });
 
+$activeRentingCars = array_filter($activeRentingCars, function ($car)  {
+    return $car->confirmed=="1";
+});
 ?>
 <?php
 $title = "User Profile";
@@ -89,7 +92,7 @@ $class = "profile-body"
                         <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" name="state" value="" placeholder="state"></div>
                     </div>
                     <div class="row mt-3">
-                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="enter email" value="" name="email"></div>
+                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="Enter email" value="" name="email"></div>
 
                     </div>
                         <div class="mt-5 text-center">
@@ -112,7 +115,7 @@ $class = "profile-body"
                         <h2>Active Renting Cars</h2>
                         <ul>
                             <?php foreach ($activeRentingCars as $car) : ?>
-                                <li><?php echo $car->car_id . ' ' . $car->model . ' | ' . "Remaining Days: " . date_diff(date_create($currentDate), date_create($car->end_date))->format('%a'); ?></li>
+                                <li><?php echo $car->car_id . ' ' . $car->car_model . ' | ' . "Remaining Days: " . date_diff(date_create($currentDate), date_create($car->end_date))->format('%a'); ?></li>
 
                                 <!-- Add more car details as needed -->
                             <?php endforeach; ?>
@@ -128,7 +131,7 @@ $class = "profile-body"
 </div>
 </div>
 </div>
-<div class="popup" id="popup">
+<div class="export-popup" id="popup">
     <?php include 'Export_rent_history.php'; ?>
 </div>
 <div class="overlay" id="overlay"></div>
