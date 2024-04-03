@@ -375,7 +375,7 @@ class Car {
     public static function isCarRented($car_id, $start_date, $end_date) {
         global $pdo;
         try {
-            $sql = "SELECT * FROM command WHERE car_id = ? AND ((start_date <= ? AND end_date >= ?) OR (start_date <= ? AND end_date >= ?))";
+            $sql = "SELECT * FROM command WHERE car_id = ? AND ((start_date <= ? AND end_date >= ?) OR (start_date <= ? AND end_date >= ?)) AND confirmed = True";
             $stmt = $pdo->prepare($sql);
             $stmt->execute([$car_id, $start_date, $start_date, $end_date, $end_date]);
             $car_commanded = $stmt->fetchAll(PDO::FETCH_ASSOC);

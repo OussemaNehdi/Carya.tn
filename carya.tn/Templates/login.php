@@ -16,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 }
 ?>
 
-
 <div class="login-container">
     <div class="box">
         <!---------------------------- Login Box ---------------------------->

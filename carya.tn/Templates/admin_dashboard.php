@@ -151,6 +151,8 @@ if (session_status() == PHP_SESSION_NONE) {
                         <td><?= $command->end_date ?></td>
                         <td><?= $price_paid ?></td>
                         <td><?php echo $command->confirmed == 1 ? 'Accepted' : ($command->confirmed == 0 ? 'Refused' : 'Unreviewed'); ?></td>
+                        
+                        <?php if (isset($command->confirmed)) : ?>
                         <td>
                             <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/accept_command.php" method="POST">
                                 <input type="hidden" name="command_id" value="<?= $command->command_id ?>">
@@ -170,6 +172,17 @@ if (session_status() == PHP_SESSION_NONE) {
                                 </button>
                             </a>
                         </td>
+                        <?php else : ?>
+                        <td></td>
+                        <td>
+                            <a href="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/cancel_command.php?id=<?= $command->command_id ?>">
+                                <button type="submit" class="refuse-command">
+                                    Cancel
+                                </button>
+                            </a>
+                        </td>
+                        <td></td>
+                        <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
