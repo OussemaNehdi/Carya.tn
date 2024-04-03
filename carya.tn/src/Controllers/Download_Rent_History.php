@@ -63,7 +63,7 @@ foreach ($rentingHistory as &$row) {
 
 // Unset the row variable
 unset($row);
-$imageFile="../../Resources/Logo1.png";
+$imageFile="../../Resources/Logo2.png";
 // Create a new PDF document
 $pdf = new TCPDF(); 
 
