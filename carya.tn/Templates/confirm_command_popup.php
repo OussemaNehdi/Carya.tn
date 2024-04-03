@@ -34,6 +34,7 @@
                     </div>
                 </div>
                 <!-- Accept and Refuse buttons -->
+                <?php if (!isset($command->confirmed)) : ?>
                 <div class="action-buttons">
                     <form method="post" action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/accept_command.php">
                         <input type="hidden" name="command_id" value="<?= $command->command_id ?>">
@@ -44,6 +45,7 @@
                         <button type="submit" name="refuse" class="button-deny">Refuse</button>
                     </form>
                 </div>
+                <?php endif; ?>
             </div>
         <?php endforeach; ?>
     </div>
