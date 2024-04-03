@@ -56,7 +56,7 @@ if ($user) {
         header("Location: http://localhost/Mini-PHP-Project/carya.tn/index.php?type=success&message=Logged in successfully&slide=home");
         exit();
     } else {
-        header("Location: $refferer?type=error&message=Incorrect_password&slide=login");
+        header("Location: $refferer?type=error&message=Incorrect password&slide=login");
         exit();
     }
 } else {
