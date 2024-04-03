@@ -1025,6 +1025,12 @@ ul{
     cursor: pointer;
 }
 
+.car-image-displayed {
+    width: 250px;
+    height: 150px;
+    object-fit: cover;
+}
+
 .user-info:hover,
 .car-image:hover,
 .car-info:hover {
