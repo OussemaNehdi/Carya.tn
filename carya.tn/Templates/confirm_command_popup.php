@@ -1,4 +1,4 @@
-<div id="commandsPopup<?= $car->id ?>" class="command-popup">
+<div id="commandsPopup<?= $car->id ?>" class="command-popup popup-add-container">
     <div class="main-container">
         <div class="titles">
             <h2>Commands</h2>
