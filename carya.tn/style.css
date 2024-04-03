@@ -40,7 +40,7 @@ ul{
 .navbar {
     background-color: black;
     color: #fff;
-    padding: 10px 0;
+    padding: 10px 10px 0 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -53,6 +53,13 @@ ul{
     color: lightblue;
     font-size: 24px;
     text-decoration: none;
+    width: 30%;
+}
+.navbar-logo img{
+    width: 40%;
+    object-fit:fill;
+    transform: translateY(4px);
+
 }
 
 .navbar-menu ul {
@@ -355,7 +362,6 @@ ul{
 .login-container {
     display: flex;
     justify-content: center;
-    align-items: center;
     min-height: 100vh;
 }
 
@@ -372,6 +378,7 @@ ul{
     backdrop-filter: blur(15px);
     border: 3px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
+    margin-top: 30px;
 }
 .login-container .box-login{
     position: absolute;

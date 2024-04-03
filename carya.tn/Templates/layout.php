@@ -22,7 +22,7 @@ if (session_status() == PHP_SESSION_NONE) {
         <!-- Start of Navbar -->
         <nav class="navbar">
             <div class="navbar-logo">
-                <a href="http://localhost/Mini-PHP-Project/carya.tn/index.php">Carya.tn Logo</a>
+                <a href="http://localhost/Mini-PHP-Project/carya.tn/index.php"><img src="http://localhost/Mini-PHP-Project/carya.tn/Resources/Logo1.png"></a>
             </div>
             <div class="navbar-menu">
                 <ul>
