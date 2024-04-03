@@ -63,7 +63,7 @@ foreach ($rentingHistory as &$row) {
 
 // Unset the row variable
 unset($row);
-
+$imageFile="../../Resources/Logo1.png";
 // Create a new PDF document
 $pdf = new TCPDF(); 
 
@@ -79,7 +79,7 @@ $pdf->AddPage();
 // Set font
 $pdf->SetFont('helvetica', '', 12);
 // Create a new PDF document
-
+$pdf->Image($imageFile, 20, 20, 30, 10, '', '', '', false, 150, '', false, false, 1, false, false, false);
 
 // Set border style
 $pdf->SetLineStyle(array('width' => 0.5, 'color' => array(0, 0, 0)));
