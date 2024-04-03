@@ -150,9 +150,9 @@ if (session_status() == PHP_SESSION_NONE) {
                         <td><?= $command->start_date ?></td>
                         <td><?= $command->end_date ?></td>
                         <td><?= $price_paid ?></td>
-                        <td><?php echo $command->confirmed == 1 ? 'Accepted' : ($command->confirmed == 0 ? 'Refused' : 'Unreviewed'); ?></td>
+                        <td><?php echo isset($command->confirmed) ? ($command->confirmed == 1 ? 'Accepted' : 'Refused') : 'Unreviewed'; ?></td>
                         
-                        <?php if (isset($command->confirmed)) : ?>
+                        <?php if (!isset($command->confirmed)) : ?>
                         <td>
                             <form action="http://localhost/Mini-PHP-Project/carya.tn/src/controllers/accept_command.php" method="POST">
                                 <input type="hidden" name="command_id" value="<?= $command->command_id ?>">
