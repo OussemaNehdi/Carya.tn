@@ -3,6 +3,9 @@
         <div class="titles">
             <h2>Commands</h2>
         </div>
+        <?php if (empty($commands)): ?>
+            <p>No commands available</p>
+        <?php endif; ?>
         <?php foreach ($commands as $command): ?>
             <div class="sub-container">
                 <?php

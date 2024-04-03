@@ -40,7 +40,7 @@ ul{
 .navbar {
     background-color: black;
     color: #fff;
-    padding: 10px 0;
+    padding: 10px 10px 0 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -53,6 +53,13 @@ ul{
     color: lightblue;
     font-size: 24px;
     text-decoration: none;
+    width: 30%;
+}
+.navbar-logo img{
+    width: 40%;
+    object-fit:fill;
+    transform: translateY(4px);
+
 }
 
 .navbar-menu ul {
@@ -301,6 +308,7 @@ ul{
     height: 100px;
     border-radius: 50%;
     margin-right: 20px;
+    object-fit: cover;
 }
 
 .author-info {
@@ -336,6 +344,7 @@ ul{
     .author img {
         margin-right: 10px;
         margin-bottom: 0;
+        object-fit: cover;
     }
 }
 /* End of about.php */
@@ -353,7 +362,6 @@ ul{
 .login-container {
     display: flex;
     justify-content: center;
-    align-items: center;
     min-height: 100vh;
 }
 
@@ -370,6 +378,7 @@ ul{
     backdrop-filter: blur(15px);
     border: 3px solid rgba(255, 255, 255, 0.2);
     overflow: hidden;
+    margin-top: 30px;
 }
 .login-container .box-login{
     position: absolute;
@@ -1400,6 +1409,7 @@ footer {
     height: 190px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
+    object-fit: cover;
 }
 .rent-body .cars-list .car p {
     margin-bottom: 0;
@@ -1615,6 +1625,7 @@ footer {
     width: 285px;
     height: 190px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
 }
 .listing-body .cars-list .car-details{
     display: flex;
