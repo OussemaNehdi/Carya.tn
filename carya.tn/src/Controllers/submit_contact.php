@@ -17,23 +17,23 @@ $name = $_POST["name"];
 $email = $_POST["email"];
 $message = $_POST["message"];
 
+// Load Composer's autoloader
 require $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/vendor/autoload.php';
 
+// Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
 
 try {
     // Server settings
-    $mail = new PHPMailer(true);
-    //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+    $mail = new PHPMailer();
     $mail->isSMTP();
     $mail->SMTPAuth = true;
-    $mail->Host = "smtp.gmail.com"; // Replace with your SMTP host
+    $mail->Host = "sandbox.smtp.mailtrap.io";
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587;
-    $mail->Username = "caryatnwebsite@gmail.com";
-    $mail->Password = "caryatn123";
+    $mail->Port = 2525;
+    $mail->Username = "6927bce30c0b5f";
+    $mail->Password = "5e96cdabb2c21e";
 
     // Sender and recipient settings
     $mail->setFrom($email, $name);
@@ -47,13 +47,10 @@ try {
 
     // Send email
     $mail->send();
-    echo "Email sent successfully.";
-    //header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?message=success&type=success");
+    header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?message=success&type=success");
     exit();
 } catch (Exception $e) {
-    // Handle errors
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-    //header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?message=error&type=error");
+    header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?message=error&type=error");
     exit();
 }
 ?>
