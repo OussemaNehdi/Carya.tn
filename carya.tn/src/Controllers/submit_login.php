@@ -40,9 +40,8 @@ $user = User::getUserByEmail($email);
 
 // If the user exists
 if ($user) {
-    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     // Check if the password is correct
-    if ($user->password === $password) {
+    if (password_verify($password, $user->password)) {
         // Check if the user is banned
         if ($user->role === 'banned') {
             header("Location: $refferer?type=error&message=You are banned&slide=login");
@@ -63,4 +62,5 @@ if ($user) {
     header("Location: $refferer?type=error&message=User not found&slide=login");
     exit();
 }
+
 ?>
