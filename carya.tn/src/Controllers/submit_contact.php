@@ -17,26 +17,41 @@ $name = $_POST["name"];
 $email = $_POST["email"];
 $message = $_POST["message"];
 
-$to = "caryatnwebsite@gmail.com"; // password: caryatn123
+require $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/vendor/autoload.php';
 
-// Subject of the email
-$subject = "New Contact Form Submission";
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
-// Email content
-$email_content = "Name: $name\n";
-$email_content .= "Email: $email\n\n";
-$email_content .= "Message:\n$message\n";
+try {
+    // Server settings
+    $mail = new PHPMailer(true);
+    //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+    $mail->isSMTP();
+    $mail->SMTPAuth = true;
+    $mail->Host = "smtp.gmail.com"; 
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;
+    $mail->Username = "caryatnwebsite@gmail.com";
+    $mail->Password = "caryatn123";
 
-$headers = "From: $name <$email>";
+    // Sender and recipient settings
+    $mail->setFrom($email, $name);
+    $mail->addAddress("caryatnwebsite@gmail.com", "Mehdi");
 
-// Send email
-if (mail($to, $subject, $email_content, $headers)) {
-    // Email sent successfully
-    header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?message=success&type=success");
-    exit();
-} else {
-    // Error sending email
-    header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?message=error&type=error");
-    exit();
+    // Set email subject
+    $mail->Subject = "Subject of your email";
+
+    // Set email body content
+    $mail->Body = "Hello $name,\n\nThank you for your message:\n$message\n\nBest regards,\nYour Name";
+
+    // Send email
+    $mail->send();
+    echo "Email sent successfully.";
+} catch (Exception $e) {
+    // Handle errors
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
+
+
 ?>
