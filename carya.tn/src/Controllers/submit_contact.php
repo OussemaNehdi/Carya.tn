@@ -29,7 +29,7 @@ try {
     //$mail->SMTPDebug = SMTP::DEBUG_SERVER;
     $mail->isSMTP();
     $mail->SMTPAuth = true;
-    $mail->Host = "smtp.gmail.com"; 
+    $mail->Host = "smtp.gmail.com"; // Replace with your SMTP host
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
     $mail->Username = "caryatnwebsite@gmail.com";
@@ -48,10 +48,12 @@ try {
     // Send email
     $mail->send();
     echo "Email sent successfully.";
+    //header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?message=success&type=success");
+    exit();
 } catch (Exception $e) {
     // Handle errors
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    //header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?message=error&type=error");
+    exit();
 }
-
-
 ?>
