@@ -74,7 +74,12 @@ ob_start();
 
 <?php foreach ($cars as $car): ?>
 <?php require('update_form.php'); ?>
-<?php $commands = Command::getRentalCommandsByCarId($car->id); ?>
+<?php 
+$commands = Command::getRentalCommandsByCarId($car->id); 
+if (!empty($commands)) {
+    $user = User::getUserById($commands[0]->user_id);
+}
+?>
 <?php require('confirm_command_popup.php'); ?>
 <?php endforeach; ?>
 

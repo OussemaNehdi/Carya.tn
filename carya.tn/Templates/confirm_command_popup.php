@@ -25,7 +25,7 @@
                         <span>Status:</span> 
                     </div>
                     <div class="mini-details">
-                        <p><?= $command->user_id ?></p>
+                        <p><?= $user->firstName . " " . $user->lastName?></p>
                         <p><?= $command->rental_date ?></p>
                         <p><?= $command->start_date ?></p>
                         <p><?= $command->end_date ?></p>
