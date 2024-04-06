@@ -1,12 +1,12 @@
 -- Users table
 INSERT INTO users (firstName, lastName, password, email, creation_date, role, state, country, profile_image)
 VALUES 
-('John', 'Doe', 'password123', 'john@example.com', '2024-03-25', 'customer', 'California', 'United States', 'mezyen.jpg'),
-('Alice', 'Smith', 'securepass', 'alice@example.com', '2024-03-25', 'admin', 'New York', 'United States', 'mezyena.jpg'),
-('Bob', 'Johnson', 'bobspass', 'bob@example.com', '2024-03-25', 'customer', 'Texas', 'United States', null),
-('Emily', 'Brown', 'emilypass', 'emily@example.com', '2024-03-26', 'seller', 'Florida', 'United States', null),
-('David', 'Wilson', 'davidpass', 'david@example.com', '2024-03-27', 'banned', 'Washington', 'United States', null),
-('Sophia', 'Taylor', 'sophiapass', 'sophia@example.com', '2024-03-27', 'customer', 'California', 'United States', null);
+('John', 'Doe', '$2y$10$XmlB4fnBhkyj5GfebEmnAudokyMGub.wwY8ITtmiIp1TvxgsUubui', 'john@example.com', '2024-03-25', 'customer', 'California', 'United States', 'mezyen.jpg'),
+('Alice', 'Smith', '$2y$10$/ZTHJRJsHG5lirB1JjaRpOXHOOF1KC6y7ZanpbgVUye6KRAIKhYGa', 'alice@example.com', '2024-03-25', 'admin', 'New York', 'United States', 'mezyena.jpg'),
+('Bob', 'Johnson', '$2y$10$4YbFe/Uuyyd1WODpO0jTpOFFeGsumfTkpU6HO50/pe0pIUowkOw7m', 'bob@example.com', '2024-03-25', 'customer', 'Texas', 'United States', null),
+('Emily', 'Brown', '$2y$10$4GEXhqzPZxhzy.keNOIEIuLaFFZ8/o0KJsZSv2fG58t7mE6MZEIEq', 'emily@example.com', '2024-03-26', 'seller', 'Florida', 'United States', null),
+('David', 'Wilson', '$2y$10$n1m.W.Hmme3QKayqqHqTPuMj1W9DjPNwUnRc3vHZ.L1Tqez9ZwFIe', 'david@example.com', '2024-03-27', 'banned', 'Washington', 'United States', null),
+('Sophia', 'Taylor', '$2y$10$8XkhXG1wzDHwJ0feOea40uIzfqjYVFSUc5QIyD9O0tariD0j.CY/2', 'sophia@example.com', '2024-03-27', 'customer', 'California', 'United States', null);
 
 -- Cars table
 INSERT INTO cars (brand, model, color, image, km, price, owner_id, available)

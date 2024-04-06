@@ -1,0 +1,6 @@
+John Doe        :   password123 :   john@example.com
+Alice Smith     :   securepass  :    alice@example.com --> Admin
+Bob Johnson     :   bobspass    :      bob@example.com
+Emily Brown     :   emilypass   :     emily@example.com
+David Wilson    :   davidpass   :     david@example.com
+Sophia Taylor   :   sophiapass  :    sophia@example.com
