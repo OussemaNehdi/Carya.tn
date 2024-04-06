@@ -47,13 +47,17 @@ $class = "profile-body"
     <div class="row">
         <div class="col-md-3 border-right">
             <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                <?php
-                // Check if the user has a profile image
-                if ($userInfo->profile_image) {
-                    echo '<img id="profile-img" class="rounded-circle mt-5 profile-picture" src="http://localhost/Mini-PHP-Project/carya.tn/Resources/profile_images/' . $userInfo->profile_image . '" onclick="document.getElementById(\'upload-profile-img\').click();">';                } else {
-                    echo '<img id="profile-img" class="rounded-circle mt-5 profile-picture" src="https://www.w3schools.com/howto/img_avatar2.png" onclick="document.getElementById(\'upload-profile-img\').click();">';
-                }
-                ?>
+                <div class="profile-pic-container">
+                    <?php
+                    // Check if the user has a profile image
+                    if ($userInfo->profile_image) {
+                        echo '<img id="profile-img" class="profile-pic" src="http://localhost/Mini-PHP-Project/carya.tn/Resources/profile_images/' . $userInfo->profile_image . '" onclick="document.getElementById(\'upload-profile-img\').click();">';                
+                    } else {
+                        echo '<img id="profile-img" class="profile-pic" src="https://www.w3schools.com/howto/img_avatar2.png" onclick="document.getElementById(\'upload-profile-img\').click();">';
+                    }
+                    ?>
+                    <i class="fas fa-edit fa-2x edit-icon"></i>
+                </div>
                 <span class="font-weight-bold"><?php echo $userInfo->firstName . ' ' . $userInfo->lastName; ?></span>
                 <span class="text-black-50"><?php echo $userInfo->email; ?></span>
                 <span class="text-black-50"><?php echo $userInfo->country . "/" . $userInfo->state; ?></span>

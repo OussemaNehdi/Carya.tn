@@ -1,16 +1,16 @@
 <?php
 $title = "Carya.tn";
-$class = ""
-    ?>
+$class = "";
 
-<?php ob_start();
+
 session_start();
 
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-?>
 
+ob_start();
+?>
 <div class="home-container">
     <div class="hero">
         <div class="text-content">
@@ -29,19 +29,11 @@ if (session_status() == PHP_SESSION_NONE) {
     </div>
 
     <div class="car-card">
-        <?php
-
-        echo '<a href="/Mini-PHP-Project/carya.tn/Templates/rent_car.php" class="btn">Rent Now</a>';
-
-        ?>
+        <a href="/Mini-PHP-Project/carya.tn/Templates/rent_car.php" class="rent-btn">Rent Now</a>
     </div>
 
-    <footer>
-        <p> 2024 Rent-a-Car. All rights reserved.</p>
-    </footer>
+    <p class="copyright"> © 2024 Carya.tn. All rights reserved.</p>
 </div>
-
-
 <?php $content = ob_get_clean(); ?>
 
 <?php require ('layout.php') ?>

@@ -40,7 +40,7 @@ ul{
 .navbar {
     background-color: black;
     color: #fff;
-    padding: 10px 10px 0 10px;
+    padding: 10px 10px 5px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1057,7 +1057,7 @@ ul{
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 10px;
-    max-width: 1010px;
+    max-width: 1100px;
 }
 
 .admin-dashboard table {
@@ -1082,7 +1082,7 @@ ul{
 }
 
 .admin-dashboard tbody tr:nth-child(even) {
-    background-color: #f8f9fa; /* Light gray background for even rows */
+    background-color: #f8f9fa;
 }
 
 .admin-dashboard th:first-child, .admin-dashboard td:first-child {
@@ -1271,21 +1271,46 @@ ul{
 .profile-body .export-button .link:hover{
     color: black;
 }
-.profile-body .export-button:hover {
+.profile-body .export-button:hover{
     transition: background 0.2s ease-in-out;
-    text-decoration: none;
     background: #c89568;
-    color: #fff;
     cursor: pointer;
-    border: solid 1px #c89568
+    border: solid 1px #a35613
 }
-
-.profile-picture {
-    width: 250px;
-    height: 250px;
-    margin-bottom: 30px;
+.profile-body .export-button:hover .fas, .profile-body .export-button:hover .link{
+    filter: invert(100%);
+    transition: 0.1s ease-in-out;
+}
+/* Profile picture */
+.profile-pic-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.profile-pic {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+}
+.edit-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+/* Hover effect */
+.profile-pic-container:hover .profile-pic {
+    transition: 0.3s ease;
+    border: 3px solid black;
+    opacity: 0.8;
     cursor: pointer;
-    overflow: hidden;
+}
+.profile-pic-container:hover .edit-icon {
+    opacity: 0.8;
+    cursor: pointer;
 }
 /* ------------------ End of User_Profile.php ------------------*/
 
@@ -1296,57 +1321,62 @@ ul{
 .home-container {
     max-width: 1200px;
     margin: 50px auto;
-    padding: 20px;
     background-color: rgba(245, 245, 245, 0.624);
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(5px);
-    padding: 50px;
+    padding: 40px;
     display: flex;
     flex-direction: column; /* Display children elements in a column */
 }
-
-.hero {
+.home-container .hero {
     display: flex;
     align-items: flex-start; /* Align items to the start (left side) */
 }
-
-.hero .text-content {
+.home-container .hero .text-content {
     margin-right: 200px; /* Add some space between text and image */
 }
-
-.hero h2 {
+.home-container .hero h2 {
     font-size: 2em;
     color: #333;
     margin-bottom: 20px;
 }
-
-.hero p {
+.home-container .hero p {
     font-size: 1.2em;
     color: #666;
     text-align: left;
 }
-
-#home-image {
+.home-container #home-image {
     height: 300px;
     width: 500px;   
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
-
-.car-card {
-    margin-top: 20px; /* Add margin to create space between text and button */
+.home-container .car-card {
+    margin-top: 20px;
+    margin-bottom: 40px;
 }
-
-.btn {
-    background-color: #ba9844ed;
+.home-container .car-card .rent-btn {
+    background-color: #bb763b;
     color: #fff;
     padding: 10px 20px;
-    text-decoration: none;
+    border-radius: 5px;
+    border: 2px solid transparent;
 }
+.home-container .car-card .rent-btn:hover {
+    transition: 0.3s ease;
+    background-color: #da9152;
+    border: 2px solid #a7652b;
+}
+.home-container .copyright{
+    margin: 0;
+    color: rgb(95, 95, 95);
+    font-size: 15px;
+}
+/* end of homepage.php */
 
 footer {    
     margin-top: 20px; /* Add margin to create space between text and footer */
 }
-
 
 .display {
     padding: 10px;
