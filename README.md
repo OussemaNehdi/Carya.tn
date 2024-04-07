@@ -2,6 +2,8 @@
 
 Welcome to the Mini PHP Project! This website aims to provide a robust authentication system with both public and private sections accessible through a login page. Users can have one or multiple roles assigned to them.
 
+> For best UI/UX use Edge Browser and 125% zoom on the page
+
 ## Features
 
 - **Authentication System**: The website includes a secure login page that allows users to access the private section based on their assigned roles.

@@ -816,7 +816,7 @@ ul{
     margin-bottom: 10px;
 }
 .popup-add-container .submit-popup-button {
-    background-color: hsla(41, 38%, 41%, 0.878);
+    background-color: #b87926e0;
     color: #fff;
     padding: 6px 14px;
     border: none;
@@ -824,7 +824,8 @@ ul{
     cursor: pointer;
 }
 .popup-add-container .submit-popup-button:hover {
-    background-color: #8f7641;
+    transition: all 0.3s ease-in-out;
+    background-color: #db9b46e0;
 }
 .popup-add-container .custom-file-upload input[type="file"] {
     display: none;
@@ -841,19 +842,23 @@ ul{
     padding: 10px 20px; /* Adjust padding as needed */
     width: 200px;
     text-align: center;
-    background-color: #907741e0; 
+    background-color: #b87926e0; 
     color: #fff; /* Adjust text color as needed */
     border-radius: 5px; /* Adjust border radius as needed */
     cursor: pointer;
     transform: translate(-24px, 0);
 }
-
+.popup-add-container .upload-icon:hover{
+    background-color: #db9b46e0;
+    transition: all 0.3s ease-in-out;
+}
 .popup-add-container .upload-icon::before {
     content: '\f093'; /* Unicode for upload icon */
     font-family: FontAwesome; /* Font Awesome for the icon */
     margin-right: 5px; /* Adjust margin as needed */
 }
 .no-file-name {
+    margin-top: 10px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

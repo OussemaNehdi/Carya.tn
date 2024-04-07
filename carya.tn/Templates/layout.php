@@ -42,7 +42,7 @@ if (session_status() == PHP_SESSION_NONE) {
                             }
                         ?>
                         <li class="navbar-link"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/about.php">About</a></li>
-                        <li class="navbar-link"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php">Contact</a></li>
+                        <li class="navbar-link"><a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php">Contact Us</a></li>
                     </div>
                 </ul>
             </div>
