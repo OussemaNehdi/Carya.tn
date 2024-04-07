@@ -40,10 +40,10 @@ try {
     $mail->addAddress("caryatnwebsite@gmail.com", "Mehdi");
 
     // Set email subject
-    $mail->Subject = "Subject of your email";
+    $mail->Subject = "Contact form submission";
 
     // Set email body content
-    $mail->Body = "Hello $name,\n\nThank you for your message:\n$message\n\nBest regards,\nYour Name";
+    $mail->Body = "Hello Carya.tn,\n\n$message\n\nBest regards,\n$name";
 
     // Send email
     $mail->send();
