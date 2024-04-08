@@ -37,20 +37,20 @@ try {
 
     // Sender and recipient settings
     $mail->setFrom($email, $name);
-    $mail->addAddress("caryatnwebsite@gmail.com", "Mehdi");
+    $mail->addAddress("caryatnwebsite@gmail.com", "CARYA.TN SUPPORT");
 
     // Set email subject
     $mail->Subject = "Contact form submission";
 
     // Set email body content
-    $mail->Body = "Hello Carya.tn,\n\n$message\n\nBest regards,\n$name";
+    $mail->Body = "$message\n\nSent By:\n$name";
 
     // Send email
     $mail->send();
-    header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?message=success&type=success");
+    header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?message=Success&type=success");
     exit();
 } catch (Exception $e) {
-    header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?message=error&type=error");
+    header("Location: http://localhost/Mini-PHP-Project/carya.tn/Templates/contact.php?message=Error!&type=error");
     exit();
 }
 ?>

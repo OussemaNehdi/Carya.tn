@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     <input type="submit" class="input-submit" value="Sign In" required>
                 </div>
                 <div class="forgot">
-                    <a href="#">Forgot password?</a>
+                    <a href="http://localhost/Mini-PHP-Project/carya.tn/Templates/forgot_password.php">Forgot password?</a>
                 </div>
             </div>
         </form>
