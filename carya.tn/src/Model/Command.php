@@ -1,17 +1,19 @@
 <?php
+// This PHP file defines a class 'Command' and related methods to manage rental commands in a database.
+
 // Include necessary files
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php';
 
 class Command {
     // Properties
-    public $command_id;
-    public $car_id;
-    public $user_id;
-    public $rental_date;
-    public $start_date;
-    public $end_date;
-    public $rental_period;
-    public $confirmed; //new : Added by AgressivePug 
+    public $command_id;     // The ID of the rental command.
+    public $car_id;         // The ID of the car associated with the rental command.
+    public $user_id;        // The ID of the user who made the rental command.
+    public $rental_date;    // The date when the rental command was made.
+    public $start_date;     // The start date of the rental period.
+    public $end_date;       // The end date of the rental period.
+    public $rental_period;  // The duration of the rental period.
+    public $confirmed;      // Indicates whether the rental command is confirmed.
 
     // Constructor
     public function __construct($command_id, $car_id, $user_id, $rental_date, $start_date, $end_date, $rental_period, $confirmed) {
@@ -165,6 +167,8 @@ class Command {
             throw $e;
         }
     }
+
+    // Method to get rental commands by car ID
     public static function getRentalCommandsByCarId($car_id) {
         global $pdo;
         try {
@@ -183,9 +187,10 @@ class Command {
             throw $e;
         }
     }
+
+    // Method to accept a rental command
     public static function AcceptCommand($command_id)
     {
-        
         $command = self::getRentalCommandById($command_id);
 
         if ($command) {
@@ -209,9 +214,10 @@ class Command {
             $stmt->execute();
         }
     }
+
+    // Method to refuse a rental command
     public static function RefuseCommand($command_id)
     {
-        
         $command = self::getRentalCommandById($command_id);
 
         if ($command) {
@@ -235,12 +241,5 @@ class Command {
             $stmt->execute();
         }
     }
-
-
-
-
-
-
-
 }
 ?>

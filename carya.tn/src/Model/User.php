@@ -1,19 +1,21 @@
 <?php
+// This PHP file defines a class 'User' and related methods to manage user data in a database.
+
 // Include necessary files
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php';
 
 class User {
     // Properties
-    public $id;
-    public $firstName;
-    public $lastName;
-    public $password;
-    public $email;
-    public $creation_date;
-    public $role;
-    public $country;
-    public $state;
-    public $profile_image;
+    public $id;               // The ID of the user.
+    public $firstName;        // The first name of the user.
+    public $lastName;         // The last name of the user.
+    public $password;         // The password of the user.
+    public $email;            // The email address of the user.
+    public $creation_date;    // The date when the user account was created.
+    public $role;             // The role of the user (e.g., admin, customer, banned).
+    public $country;          // The country of the user.
+    public $state;            // The state of the user.
+    public $profile_image;    // The profile image of the user.
 
     // Constructor
     public function __construct($id, $firstName, $lastName, $password, $email, $creation_date, $role, $country, $state, $profile_image = null) {

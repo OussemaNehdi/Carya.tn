@@ -1,18 +1,20 @@
 <?php
+// This PHP file defines a class 'Car' and related methods to manage car data in a database.
+
 // Include necessary files
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php';
 
 class Car {
     // Properties
-    public $id;
-    public $brand;
-    public $model;
-    public $color;
-    public $image;
-    public $km;
-    public $price;
-    public $owner_id;
-    public $available;
+    public $id;          // The ID of the car.
+    public $brand;       // The brand of the car.
+    public $model;       // The model of the car.
+    public $color;       // The color of the car.
+    public $image;       // The image URL of the car.
+    public $km;          // The kilometers traveled by the car.
+    public $price;       // The price of the car.
+    public $owner_id;    // The ID of the owner of the car.
+    public $available;   // Indicates whether the car is available for rent.
 
     // Constructor
     public function __construct($id, $brand, $model, $color, $image, $km, $price, $owner_id, $available) {
@@ -247,8 +249,8 @@ class Car {
             throw $e;
         }
     }
-    /////////// SERVICES : RENT A CAR SECTION
 
+    // These methosd are for the filter menu 
     // Static method to get the maximum value of a column from the cars table
     public static function getMaxValue($column) {
         global $pdo;
@@ -263,6 +265,7 @@ class Car {
             throw $e;
         }
     }
+
     // Static method to get distinct values from the cars table
     public static function getDistinctValues($column) {
         global $pdo;
@@ -302,8 +305,6 @@ class Car {
         return $params;
     }
     
-    
-
     public static function getFilteredCars($filters, $id = null, $available = null) {
         global $pdo;
         try {
@@ -386,7 +387,5 @@ class Car {
             throw $e;
         }
     }
-
-    /////////////// END SERVICES RENT A CAR SECTION
 }
 ?>
