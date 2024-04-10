@@ -4,19 +4,86 @@
 // Include necessary files
 include_once $_SERVER['DOCUMENT_ROOT'] . '/Mini-PHP-Project/carya.tn/src/Lib/connect.php';
 
+/**
+ * Represents a car object with properties and methods to manage car data in a database.
+ */
 class Car {
-    // Properties
-    public $id;          // The ID of the car.
-    public $brand;       // The brand of the car.
-    public $model;       // The model of the car.
-    public $color;       // The color of the car.
-    public $image;       // The image URL of the car.
-    public $km;          // The kilometers traveled by the car.
-    public $price;       // The price of the car.
-    public $owner_id;    // The ID of the owner of the car.
-    public $available;   // Indicates whether the car is available for rent.
+    /**
+     * The ID of the car.
+     *
+     * @var int
+     */
+    public $id;
 
-    // Constructor
+    /**
+     * The brand of the car.
+     *
+     * @var string
+     */
+    public $brand;
+
+    /**
+     * The model of the car.
+     *
+     * @var string
+     */
+    public $model;
+
+    /**
+     * The color of the car.
+     *
+     * @var string
+     */
+    public $color;
+
+    /**
+     * The image URL of the car.
+     *
+     * @var string
+     */
+    public $image;
+
+    /**
+     * The kilometers traveled by the car.
+     *
+     * @var int
+     */
+    public $km;
+
+    /**
+     * The price of the car.
+     *
+     * @var float
+     */
+    public $price;
+
+    /**
+     * The ID of the owner of the car.
+     *
+     * @var int
+     */
+    public $owner_id;
+
+    /**
+     * Indicates whether the car is available for rent.
+     *
+     * @var bool
+     */
+    public $available;
+
+    /**
+     * Constructor to initialize a Car object.
+     *
+     * @param int $id The ID of the car.
+     * @param string $brand The brand of the car.
+     * @param string $model The model of the car.
+     * @param string $color The color of the car.
+     * @param string $image The image URL of the car.
+     * @param float $km The kilometers traveled by the car.
+     * @param float $price The price of the car.
+     * @param int $owner_id The ID of the owner of the car.
+     * @param bool $available Indicates whether the car is available for rent.
+     */
     public function __construct($id, $brand, $model, $color, $image, $km, $price, $owner_id, $available) {
         $this->id = $id;
         $this->brand = $brand;
@@ -29,7 +96,12 @@ class Car {
         $this->available = $available;
     }
 
-    // Get a car object from the sql result
+    /**
+     * Static method to create a Car object from a database row.
+     *
+     * @param array $row The database row containing car data.
+     * @return Car A Car object created from the database row.
+     */
     public static function getCarFromRow($row) {
         return new Car(
             $row['id'],
@@ -44,7 +116,14 @@ class Car {
         );
     }
 
-    // Method to get all cars
+    /**
+     * Retrieves all cars from the database.
+     *
+     * @param bool|null $available Filters cars by availability. If set to true, retrieves only available cars.
+     * @param int|null $owner Filters cars by owner ID.
+     * @return array An array of Car objects representing the retrieved cars.
+     * @throws PDOException if an error occurs while querying the database.
+     */
     public static function getAllCars($available = null, $owner = null) {
         global $pdo;
         try {
@@ -72,7 +151,12 @@ class Car {
         }
     }
     
-    // Method to delete a car by ID
+    /**
+     * Deletes a car from the database by its ID.
+     *
+     * @return bool True if the car was successfully deleted, false otherwise.
+     * @throws PDOException if an error occurs while executing the database query.
+     */
     public function deleteCarById() {
         $carId = $this->id;
         global $pdo;
@@ -88,7 +172,13 @@ class Car {
         }
     }
 
-    // Method to get a car by ID
+    /**
+     * Retrieves a car from the database by its ID.
+     *
+     * @param int $car_id The ID of the car to retrieve.
+     * @return Car|null A Car object representing the retrieved car, or null if the car with the specified ID does not exist.
+     * @throws PDOException if an error occurs while executing the database query.
+     */
     public static function getCarById($car_id) {
         global $pdo;
         try {
@@ -109,7 +199,18 @@ class Car {
         }
     }
     
-    // Method to update car details
+    /**
+     * Updates the details of a car in the database.
+     *
+     * @param string $brand The new brand of the car.
+     * @param string $model The new model of the car.
+     * @param string $color The new color of the car.
+     * @param string $image The new image URL of the car.
+     * @param float $km The new kilometers traveled by the car.
+     * @param float $price The new price of the car.
+     * @return void
+     * @throws PDOException if an error occurs while executing the database query.
+     */
     public function updateCar($brand, $model, $color, $image, $km, $price) {
         global $pdo;
         try {
@@ -123,7 +224,19 @@ class Car {
         }
     }
     
-    // Method to add a new car
+    /**
+     * Adds a new car to the database.
+     *
+     * @param string $brand The brand of the new car.
+     * @param string $model The model of the new car.
+     * @param string $color The color of the new car.
+     * @param string $image The image URL of the new car.
+     * @param float $km The kilometers traveled by the new car.
+     * @param float $price The price of the new car.
+     * @param int $owner_id The ID of the owner of the new car.
+     * @return void
+     * @throws PDOException if an error occurs while executing the database query.
+     */
     public static function addCar($brand, $model, $color, $image, $km, $price, $owner_id) {
         global $pdo;
         try {
@@ -137,7 +250,12 @@ class Car {
         }
     }
 
-    // Method to check if car is marked unavailable by owner
+    /**
+     * Checks if the car is marked as unavailable by the owner.
+     *
+     * @return bool True if the car is marked as unavailable by the owner, false otherwise.
+     * @throws PDOException if an error occurs while executing the database query.
+     */
     public function isCarMarkedUnavailable() {
         global $pdo;
         try {
@@ -153,7 +271,12 @@ class Car {
         }
     }
 
-    // Method to check if car is in use
+    /**
+     * Checks if the car is currently in use.
+     *
+     * @return bool True if the car is currently in use, false otherwise.
+     * @throws PDOException if an error occurs while executing the database query.
+     */
     public function isCarInUse() {
         global $pdo;
         try {
@@ -170,7 +293,12 @@ class Car {
         }
     }
     
-    // Method to check if the car is available for renting
+    /**
+     * Checks if the car is available for renting.
+     *
+     * @return bool True if the car is available for renting, false otherwise.
+     * @throws PDOException if an error occurs while checking car availability.
+     */
     public function isCarAvailable() {
         try {
             return !$this->isCarMarkedUnavailable() && !$this->isCarInUse();
@@ -181,7 +309,12 @@ class Car {
         }
     }
 
-    // Method to display car availability actions
+    /**
+     * Displays car availability actions based on its availability status.
+     *
+     * @return void
+     * @throws Exception if an error occurs while displaying car availability actions.
+     */
     public function displayCarAvailabilityActions() {
         try {
             if ($this->isCarAvailable()) {
@@ -199,7 +332,12 @@ class Car {
         }
     }
 
-    // Mark the car as unavailable
+    /**
+     * Marks the car as unavailable.
+     *
+     * @return void
+     * @throws PDOException if an error occurs while marking the car as unavailable.
+     */
     public function markCarUnavailable() {
         global $pdo;
         try {
@@ -213,7 +351,12 @@ class Car {
         }
     }
 
-    // Mark the car as available
+    /**
+     * Marks the car as available.
+     *
+     * @return void
+     * @throws PDOException if an error occurs while marking the car as unavailable.
+     */
     public function markCarAvailable() {
         global $pdo;
         try {
@@ -227,7 +370,12 @@ class Car {
         }
     }
 
-    // Method to get the unavailable start and end dates of the car
+    /**
+     * Gets the unavailable start and end dates of the car.
+     *
+     * @return array An array containing strings representing the unavailable dates in the format "start_date --> end_date".
+     * @throws PDOException if an error occurs while fetching unavailable dates.
+     */
     public function getUnavailableDates() {
         global $pdo;
         try {
@@ -250,8 +398,14 @@ class Car {
         }
     }
 
-    // These methosd are for the filter menu 
-    // Static method to get the maximum value of a column from the cars table
+    // ========================== These methods are for the filter menu ==================================== 
+    /**
+     * Static method to get the maximum value of a column from the cars table.
+     *
+     * @param string $column The column name for which to find the maximum value.
+     * @return mixed The maximum value of the specified column.
+     * @throws PDOException if an error occurs while fetching the maximum value.
+     */
     public static function getMaxValue($column) {
         global $pdo;
         try {
@@ -266,7 +420,13 @@ class Car {
         }
     }
 
-    // Static method to get distinct values from the cars table
+    /**
+     * Static method to get distinct values from the cars table.
+     *
+     * @param string $column The column name for which to retrieve distinct values.
+     * @return array An array containing distinct values of the specified column.
+     * @throws PDOException if an error occurs while fetching distinct values.
+     */
     public static function getDistinctValues($column) {
         global $pdo;
         try {
@@ -284,6 +444,13 @@ class Car {
         }
     }
 
+    /**
+     * Constructs filter parameters from provided filters.
+     *
+     * @param array $filters The array containing filter parameters.
+     * @return array The constructed filter parameters.
+     * @throws InvalidArgumentException if the provided filters are not in the expected format.
+     */
     public static function constructFilterQuery($filters) {
         // Check if $filters is an array
         if (!is_array($filters)) {
@@ -305,6 +472,15 @@ class Car {
         return $params;
     }
     
+    /**
+     * Retrieves filtered cars based on provided filter parameters.
+     *
+     * @param array $filters The array containing filter parameters.
+     * @param int|null $id The ID of the car owner for filtering cars. Default is null.
+     * @param int|null $available Flag indicating car availability for filtering. Default is null.
+     * @return array An array containing filtered cars.
+     * @throws PDOException if an error occurs while fetching filtered cars.
+     */
     public static function getFilteredCars($filters, $id = null, $available = null) {
         global $pdo;
         try {
@@ -372,7 +548,15 @@ class Car {
         }
     }
     
-    // Method to check if the car is rented on the dates specified
+    /**
+     * Static method to check if the car is rented on the specified dates.
+     *
+     * @param int $car_id The ID of the car to check for rental status.
+     * @param string $start_date The start date of the rental period.
+     * @param string $end_date The end date of the rental period.
+     * @return bool True if the car is rented during the specified period, false otherwise.
+     * @throws PDOException if an error occurs while checking rental status.
+     */
     public static function isCarRented($car_id, $start_date, $end_date) {
         global $pdo;
         try {

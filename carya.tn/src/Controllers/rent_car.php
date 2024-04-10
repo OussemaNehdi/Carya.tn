@@ -53,7 +53,7 @@ if (!$user) {
 }
 
 // Check if the password is correct
-if ($user->password !== $password) {
+if (!password_verify($password, $user->password)) {
     header('Location: ' . $refferrer . '?type=error&message=wrong%20password');
     exit();
 }

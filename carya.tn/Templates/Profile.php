@@ -26,7 +26,7 @@ foreach ($activeRentingCars as &$row) {
 
 unset($row);
 
-// Filter the active renting cars by dates
+// Filter the active renting cars by dates (Only show the cars that are currently being rented and that are confirmed!!!!)
 $currentDate = date('Y-m-d');
 
 $activeRentingCars = array_filter($activeRentingCars, function ($car) use ($currentDate) {
@@ -119,13 +119,15 @@ $class = "profile-body"
                         <h2>Active Renting Cars</h2>
                         <ul>
                             <?php foreach ($activeRentingCars as $car) : ?>
+                                <!-- (Only show the cars that are currently being rented and that their command is confirmed by the car owner !!!!) --> 
                                 <li><?php echo isset($car->car_model) ? $car->car_id . ' ' . $car->car_model . ' | ' . "Remaining Days: " . date_diff(date_create($currentDate), date_create($car->end_date))->format('%a') : ''; ?></li>
-
-                                <!-- Add more car details as needed -->
                             <?php endforeach; ?>
                         </ul>
                     <?php else : ?>
-                        <p>No active renting cars at the moment.</p>
+                        <div class="comments">
+                        <p>No active renting at the moment.</p>
+                        <p class="comment1">(Not confirmed by the owner or Not rent at all)</p>
+                        </div>
                     <?php endif; ?>
                 </div>
                 <br>
