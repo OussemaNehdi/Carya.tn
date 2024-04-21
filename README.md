@@ -6,7 +6,7 @@
 
 Welcome to Carya.tn, a car rental platform designed to make your car rental experience seamless and enjoyable. 
 > For best User interface use Edge Browser and 125% zoom on the page
-Developed by Youssef Hamdani, Mehdi Lahouimel, Oussema Nehdi, Rayen Hamza, and Youssef Charfeddin, Carya.tn offers a range of features to meet your car rental needs.
+Developed by Youssef Hamdani, Mehdi Lahouimel, Oussema Nehdi (AgressivePug), Rayen Hamza, and Youssef Charfeddin, Carya.tn offers a range of features to meet your car rental needs.
 
 ## About the website
 
