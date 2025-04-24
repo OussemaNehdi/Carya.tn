@@ -62,7 +62,7 @@ Thanks to [ChatGPT](https://chat.openai.com/chat) and [CoPilot](https://github.c
     <td><a href="https://github.com/Rayen-Hamza">Rayen Hamza</a></td>
     <td><a href="https://github.com/youssefnoob003">Youssef Charfeddin</a></td>
     <td><a href="https://github.com/Mehdi4070">Mehdi Lahouimel</a></td>
-    <td><a href="https://github.com/OussemaNehdi">Oussema Nehdi</a></td>
+    <td><a href="https://github.com/OussemaNehdi">Oussema Nehdi (AggressivePug)</a></td>
   </tr>
 </table>
 
